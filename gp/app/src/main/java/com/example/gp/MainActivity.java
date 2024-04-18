@@ -24,11 +24,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == binding.btnLogin) {
-            // login
-            String username = binding.etUsername.getText().toString();
+            login();
         } else if(v == binding.btnCreateAccount) {
-            // create account
-
+            createAccount();
         }
     }
+
+    private void login(){
+        String username = binding.etUsername.getText().toString();
+    }
+
+    // Jump to the sign up page
+    private void createAccount() {
+        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+
 }
