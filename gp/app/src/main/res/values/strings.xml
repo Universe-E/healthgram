@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">gp</string>
+    <string name="login">login</string>
+    <string name="without_account_disc">If you do not have an account, sign up now</string>
+    <string name="create_account">Create Account</string>
+    <string name="enter_username">Enter username</string>
+    <string name="enter_password">Enter password</string>
+    <string name="forget_password_disc">Forget your password?</string>
+    <string name="super_token">super token</string>
+
+
+</resources>
