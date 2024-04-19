@@ -47,4 +47,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.75.0")
+    implementation("com.amazonaws:aws-android-sdk-core:2.75.0")
 }
