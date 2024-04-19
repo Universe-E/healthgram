@@ -145,7 +145,8 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textAllCaps="false"
-                        android:text="@string/create_account" />
+                        android:text="@string/create_account"
+                        android:onClick="createAccount"/>
 
                     <TextView
                         android:id="@+id/tv_login_forget"
