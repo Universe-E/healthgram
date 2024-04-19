@@ -17,4 +17,5 @@ Please refer to the `assignment specification` for detailed instructions.
   - root user: Han
     - If you need access to AWS please feel free to contact me!
     - How to use AWS within jetBrain products: [Doc](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
+    - How to set up AWS environment: [Doc](https://aws.amazon.com/getting-started/guides/setup-environment/?ref=gsrchandson)
   - cognito: for sign up and sign in
