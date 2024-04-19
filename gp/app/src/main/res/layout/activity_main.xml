@@ -65,7 +65,7 @@
                     android:textSize="14sp"
                     tools:text="@string/without_account_disc" />
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -75,7 +75,7 @@
 
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="20dp"
                         android:hint="@string/enter_username"
                         android:background="@android:color/transparent"
                         />
@@ -85,19 +85,20 @@
                         android:layout_height="1dp"
                         android:layout_gravity="bottom"
                         android:background="#0D000000" />
-                </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginRight="20dp">
+                    android:layout_marginRight="20dp"
+                    app:passwordToggleEnabled="true" >
 
                     <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="20dp"
                         android:inputType="textPassword"
                         android:hint="@string/enter_password"
                         android:background="@android:color/transparent"/>
@@ -107,7 +108,7 @@
                         android:layout_height="1dp"
                         android:layout_gravity="bottom"
                         android:background="#0D000000" />
-                </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/login"
