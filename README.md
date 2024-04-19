@@ -10,3 +10,11 @@ Please refer to the `assignment specification` for detailed instructions.
 - you are encouraged to update [report.md](./items/report.md) incrementally as the project progress. 
 - You may also use [checklist.md](./items/checklist.md) for a Quick check.
 - You must ensure the link to your repo is correct on the `Wattle Group Registration Page`.
+
+# Notice
+## Third-party usage
+- Amazon AWS
+  - root user: Han
+    - If you need access to AWS please feel free to contact me!
+    - How to use AWS within jetBrain products: [Doc](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
+  - cognito: for sign up and sign in
