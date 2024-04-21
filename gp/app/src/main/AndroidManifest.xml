@@ -36,6 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SearchActivity"
+            android:theme="@style/Theme.MyApplication"
+            android:exported="true"/>
     </application>
 
 </manifest>
