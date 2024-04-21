@@ -14,15 +14,11 @@ public class UserData {
     private static final String TAG = "userData";
 
     // signed in status
+    // Mutable variable used inside the data layer
     private static MutableLiveData<Boolean> _isSignedIn = new MutableLiveData<>(false);
-    public static LiveData<Boolean> isSignedIn = _isSignedIn;
 
-    public static void setSignedIn (Boolean newValue) {
-        // use postValue() to make the assignation on the main (UI) thread
-        _isSignedIn.postValue(newValue);
-    }
-
-    // the notes
+    // Notes
+    // the notes used inside the data layer
     private static MutableLiveData<ArrayList<Note>> _notes = new MutableLiveData<>(new ArrayList<Note>());
 
     private static <T> void notifyObserver(MutableLiveData<T> liveData) {
@@ -32,9 +28,23 @@ public class UserData {
         notifyObserver(_notes);
     }
 
+    /*********** API ************/
+
+    // An immutable variable sent to UI layer
+    public static LiveData<Boolean> isSignedIn = _isSignedIn;
+
+    // Set sign in status
+    public static void setSignedIn (Boolean newValue) {
+        // use postValue() to make the assignation on the main (UI) thread
+        _isSignedIn.postValue(newValue);
+    }
+
+    // An immutable variable sent to UI layer
     public static LiveData<ArrayList<Note>> notes() {
         return _notes;
     }
+
+    // Used by upper layer
     public static void addNote(Note note) {
         List<Note> notes = _notes.getValue();
         if (notes != null) {
@@ -54,6 +64,8 @@ public class UserData {
         }
         return null;
     }
+
+    /*********** END of API ************/
 
     // a note data class
     public static class Note {
