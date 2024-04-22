@@ -11,6 +11,12 @@ Please refer to the `assignment specification` for detailed instructions.
 - You may also use [checklist.md](./items/checklist.md) for a Quick check.
 - You must ensure the link to your repo is correct on the `Wattle Group Registration Page`.
 
+# Sample process of functions
+
+## Search function as an example
+
+![Search](./items/media/_examples/Search.png)
+
 # Change Log
 
 ## 2024.04.21
@@ -32,7 +38,21 @@ Please refer to the `assignment specification` for detailed instructions.
 
 ---
 
+## 2024.04.22
+
+---
+
+### Han
+
+- Drafted structures for data layer
+
+  More details are in the [README.md](./gp/app/src/main/java/com/example/gp/data/README.md) in the data package.
+
+---
+
 # TODO
+
+- Come up a TODO list for the whole project and assign specific tasks to team members.
 
 # Notice
 ## Third-party usage
@@ -44,4 +64,4 @@ Please refer to the `assignment specification` for detailed instructions.
   - cognito: for sign up and sign in
 
 - Material 3
-  - Enrached 
+  - Enrached UI
