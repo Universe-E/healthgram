@@ -286,8 +286,8 @@ Feature Category: Firebase Integration <br>
 * Your meetings should also have a reasonable date spanning across Week 6 to 11.*
 
 
-- *[Team Meeting 1](meeting-template.md)*
-- ...
+- *[Team Meeting 1](meeting1.md)*
+- *[Team Meeting 2](meeting2.md)*
 - ...
 - [Team Meeting 4](link_to_md_file.md)
 - ... (Add any descriptions if needed) ...
