@@ -65,3 +65,9 @@ Please refer to the `assignment specification` for detailed instructions.
 
 - Material 3
   - Enrached UI
+
+# Questions
+
+- Can we use LiveData? or we need to implement our own Observer base class?
+
+- Can we use interface to simulate the network API or we need to implement some network policies to prevent lose marks?
