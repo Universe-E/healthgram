@@ -19,11 +19,23 @@ Please refer to the `assignment specification` for detailed instructions.
 
 # Change Log
 
+## 2024.04.22
+
+---
+
+### Han Bao
+
+- Drafted structures for data layer
+
+  More details are in the [README.md](./gp/app/src/main/java/com/example/gp/data/README.md) in the data package.
+
+---
+
 ## 2024.04.21
 
 ---
 
-### Han
+### Han Bao
 
 - New Main Activity
 
@@ -38,21 +50,34 @@ Please refer to the `assignment specification` for detailed instructions.
 
 ---
 
-## 2024.04.22
+## 2024.04.18
 
 ---
 
-### Han
+### Yulong Chen
 
-- Drafted structures for data layer
+- Add environment and dependency
+- Add login activity
 
-  More details are in the [README.md](./gp/app/src/main/java/com/example/gp/data/README.md) in the data package.
+---
+
+## 2024.04.15
+
+---
+
+### Zehua Kong
+
+- Add structures: 
+  - Data Item
+  - Database management: SQLite Database
+  - B-Tree structure for data storage
 
 ---
 
 # TODO
 
 - Come up a TODO list for the whole project and assign specific tasks to team members.
+- More detail about back-end implementations
 
 # Notice
 ## Third-party usage
