@@ -8,37 +8,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.databinding.ActivityMainBinding;
 
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private com.example.gp.databinding.ActivityMainBinding binding;
+public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 使用 View Binding 加载布局
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        binding.btnLogin.setOnClickListener(this);
-        binding.btnCreateAccount.setOnClickListener(this);
+
+        // 将布局的根视图设置为当前活动的内容视图
+        setContentView(binding.getRoot());
 
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v == binding.btnLogin) {
-            login();
-        } else if(v == binding.btnCreateAccount) {
-            createAccount();
-        }
-    }
-
-    private void login(){
-        String username = binding.etUsername.getText().toString();
-    }
-
-    // Jump to the sign up page
-    private void createAccount() {
-        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+    public void createAccount(View view) {
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
-
-
 }
