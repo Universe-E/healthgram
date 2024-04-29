@@ -16,6 +16,10 @@
         android:theme="@style/Theme.Gp"
         tools:targetApi="31">
         <activity
+            android:name=".home.Fragment_home"
+            android:exported="true"
+            android:label="@string/title_activity_fragment_home" />
+        <activity
             android:name=".NewMainActivity"
             android:exported="true">
             <intent-filter>
@@ -36,9 +40,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity"
-            android:theme="@style/Theme.MyApplication"
-            android:exported="true"/>
+        <activity
+            android:name=".SearchActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MyApplication" />
     </application>
 
 </manifest>
