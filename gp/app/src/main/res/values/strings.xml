@@ -10,6 +10,10 @@
     <string name="signup">create account</string>
     <string name="repeat_password">Repeat password</string>
     <string name="enter_email">Enter Email</string>
+    <string name="title_activity_fragment_home">Fragment_home</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Friends</string>
+    <string name="title_notifications">Notifications</string>
 
 
 </resources>
