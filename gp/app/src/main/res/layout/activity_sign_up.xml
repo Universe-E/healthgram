@@ -66,6 +66,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/user_name_text"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:background="@android:color/transparent"
@@ -87,6 +88,7 @@
                     android:orientation="vertical">
 
                     <EditText
+                        android:id="@+id/email_text"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:background="@android:color/transparent"
@@ -110,6 +112,7 @@
                     app:passwordToggleEnabled="true">
 
                     <EditText
+                        android:id="@+id/pwd_text"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:background="@android:color/transparent"
@@ -133,6 +136,7 @@
                     app:passwordToggleEnabled="true">
 
                     <EditText
+                        android:id="@+id/repeat_pwd_text"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:background="@android:color/transparent"
