@@ -16,7 +16,7 @@ import com.example.gp.databinding.ActivityFragmentHomeBinding;
 public class Fragment_home extends AppCompatActivity {
 
     private ActivityFragmentHomeBinding binding;
-
+    /*通过点击下方图标跳转到不同的其他界面: home notification friends(dashboard)*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
