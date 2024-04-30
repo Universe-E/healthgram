@@ -74,6 +74,7 @@
                     android:layout_marginRight="20dp">
 
                     <EditText
+                        android:id="@+id/username_input_field"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:hint="@string/enter_username"
@@ -97,6 +98,7 @@
                     app:passwordToggleEnabled="true" >
 
                     <EditText
+                        android:id="@+id/password_input_field"
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:inputType="textPassword"
@@ -131,7 +133,8 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textAllCaps="false"
-                        android:text="@string/login" />
+                        android:text="@string/login"
+                        android:onClick="login"/>
                     <Button
                         android:id="@+id/tv_create_account"
                         android:layout_width="match_parent"
