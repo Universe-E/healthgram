@@ -22,7 +22,7 @@ public class SettingActivity extends BaseActivity {
         binding = ActivitySettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setUpTitleBar(R.layout.activity_setting);
+        setUpTitleBar(R.layout.activity_setting, "");
 
         // Change the value of the top_nav text
         binding.tbTopNavigationBar.tvActivityName.setText(activityName);

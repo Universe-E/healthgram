@@ -6,14 +6,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.databinding.ActivityMainBinding;
 import com.example.gp.home.Fragment_home;
 import com.example.gp.setting.SettingActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
         // set the content view
         setContentView(binding.getRoot());
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -40,25 +49,22 @@ public class MainActivity extends AppCompatActivity {
         String username = usernameInputField.getText().toString();
         String password = passwordInputField.getText().toString();
 
-        boolean correct = false;
-
         // check if the username and password are correct
         // TODO: pass the username and password to the server to check if they are correct
-        // for now, we will use a hardcoded username and password
-        if (username.equals("123") && password.equals("123")) {
-            correct = true;
-        }
+        // Sign in with email and password
+        mAuth.signInWithEmailAndPassword(username, password)
+            .addOnCompleteListener(this, task -> {
+                if (task.isSuccessful()) {
+                    // Sign in success, go to the main page
+                    Intent intent = new Intent(MainActivity.this, Fragment_home.class);
+                    startActivity(intent);
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(MainActivity.this,
+                            "Authentication failed, please check your email or password",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
 
-        if (correct) {
-            // if correct, go to the main page
-            Intent intent = new Intent(this, Fragment_home.class);
-            startActivity(intent);
-        } else {
-            // if not correct, show a toast
-            Toast.makeText(this, "Username or password is incorrect", Toast.LENGTH_SHORT).show();
-
-            // show text for debug
-            // Toast.makeText(this, "Username: " + username + " Password: " + password, Toast.LENGTH_SHORT).show();
-        }
     }
 }
