@@ -1,5 +1,6 @@
 package com.example.gp.setting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -22,16 +23,46 @@ public class SettingActivity extends BaseActivity {
         binding = ActivitySettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setUpTitleBar(R.layout.activity_setting);
+        // Set up title bar
+        setUpTitleBar(R.layout.activity_setting,activityName);
+        // example
+        // toggleRightIcon();
+        // toggleLeftIcon();
 
-        // Change the value of the top_nav text
-        binding.tbTopNavigationBar.tvActivityName.setText(activityName);
-
-        // FIXME: debug
-//        toggleRightIcon();
-        toggleLeftIcon();
-
+        // 4 changes
+        binding.llSettingChangeAvatarLayout.setOnClickListener(this);
+        binding.llSettingNickNameLayout.setOnClickListener(this);
+        binding.llSettingChangePhoneNumberLayout.setOnClickListener(this);
+        binding.llSettingChangePasswordLayout.setOnClickListener(this);
+        // 3 privacy
+        binding.llSettingRequestLayout.setOnClickListener(this);
+        binding.llSettingVisibilityLayout.setOnClickListener(this);
+        binding.llSettingFriendPermissionLayout.setOnClickListener(this);
 
     }
 
+    /**
+     * Jump to the certain setting pages
+     * @param v which button is clicked
+     */
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        if(v == binding.llSettingChangeAvatarLayout) {
+//            Intent intent = new Intent(this,ChangeAvatarActivity.class);
+        } else if(v == binding.llSettingNickNameLayout) {
+
+        } else if(v == binding.llSettingChangePhoneNumberLayout) {
+
+        } else if(v == binding.llSettingChangePasswordLayout) {
+
+        } else if(v == binding.llSettingRequestLayout) {
+            Intent intent = new Intent(this, RequestActivity.class);
+            startActivity(intent);
+        } else if(v == binding.llSettingVisibilityLayout) {
+
+        } else if(v == binding.llSettingFriendPermissionLayout) {
+
+        }
+    }
 }

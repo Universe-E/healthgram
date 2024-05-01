@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void createAccount(View view) {
         Intent intent = new Intent();
-        intent.setClass(MainActivity.this, SettingActivity.class);
+        intent.setClass(MainActivity.this, SignUpActivity.class);
         startActivity(intent);
     }
 

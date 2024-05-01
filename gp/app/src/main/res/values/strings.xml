@@ -15,6 +15,14 @@
     <string name="title_dashboard">Friends</string>
     <string name="title_notifications">Notifications</string>
     <string name="default_activity_name">Activity Name</string>
+    <string name="setting_change_phone_number">Change phone number</string>
+    <string name="setting_change_avatar">Change avatar</string>
+    <string name="setting_change_nick_name">Change nick name</string>
+    <string name="setting_change_password">Change password</string>
+    <string name="setting_privacy">Privacy settings</string>
+    <string name="setting_request">Request</string>
+    <string name="setting_visibility">Visibility</string>
+    <string name="setting_friend_permission">Friend permission</string>
 
 
 </resources>
