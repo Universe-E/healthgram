@@ -14,8 +14,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Friends</string>
     <string name="title_notifications">Notifications</string>
-    <string name="default_activity_name">Activity Name</string>
-    <string name="setting_activity_name">Setting</string>
 
 
 </resources>
