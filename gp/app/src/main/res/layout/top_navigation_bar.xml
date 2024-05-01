@@ -19,7 +19,7 @@
             android:layout_height="25dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/navbar_black_back_icon" />
+            android:src="@mipmap/navbar_black_back_icon" />
 
         <TextView
             android:id="@+id/tv_activity_name"
@@ -37,7 +37,7 @@
             android:layout_height="25dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/navbar_black_back_icon"/>
+            android:src="@mipmap/navbar_black_more_icon"/>
 
     </RelativeLayout>
 
