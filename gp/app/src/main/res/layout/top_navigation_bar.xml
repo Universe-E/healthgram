@@ -5,7 +5,8 @@
     android:id="@+id/tb_top_navigation_bar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="?attr/colorPrimary">
+    android:background="?attr/colorPrimary"
+    android:layout_marginTop="20dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,7 +37,7 @@
             android:layout_height="25dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src=""/>
+            android:src="@drawable/navbar_black_back_icon"/>
 
     </RelativeLayout>
 

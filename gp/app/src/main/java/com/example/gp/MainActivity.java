@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.databinding.ActivityMainBinding;
 import com.example.gp.home.Fragment_home;
+import com.example.gp.setting.SettingActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createAccount(View view) {
-        Intent intent = new Intent(this, SignUpActivity.class);
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, SettingActivity.class);
         startActivity(intent);
     }
 
