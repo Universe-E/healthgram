@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView iv_back;
+    private ImageView iv_more;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +48,11 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             onBackPressed();
         }
     }
-    public void hideRightIcon(){
-
-    }
+//    public void toggleLeftIcon(){
+//        iv_back.setVisibility(View.GONE);
+//    }
+//
+//    public void toggleRightIcon() {
+//        iv_more.setVisibility(View.GONE);
+//    }
 }
