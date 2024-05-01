@@ -27,8 +27,9 @@ public class SettingActivity extends BaseActivity {
         // Change the value of the top_nav text
         binding.tbTopNavigationBar.tvActivityName.setText(activityName);
 
-//        hideRightIcon();
-////        hideLeftIcon();
+        // FIXME: debug
+        toggleRightIcon();
+        toggleLeftIcon();
 
 
     }
