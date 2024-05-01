@@ -28,7 +28,7 @@ public class SettingActivity extends BaseActivity {
         binding.tbTopNavigationBar.tvActivityName.setText(activityName);
 
         // FIXME: debug
-        toggleRightIcon();
+//        toggleRightIcon();
         toggleLeftIcon();
 
 

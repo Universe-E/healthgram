@@ -13,8 +13,7 @@ import androidx.appcompat.widget.Toolbar;
  * Please extend this class instead of AppCompatActivity
  * if you want to set up the title bar for activities with top navigation bar.
  * ADD any code you find common in the activity
- * eg. Change the activity name
- * Author: Yulong Chen
+ * Author: Yulong Chen, Tianci Li
  * Date: 2024-04-30
  */
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
@@ -57,8 +56,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if(v == iv_back){
-            // onBackPressed();
-            toggleRightIcon();
+            onBackPressed();
         }
         else if(v == iv_more){
             // Do something
