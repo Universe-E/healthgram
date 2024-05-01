@@ -46,7 +46,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             setSupportActionBar(top_nav_bar);
 
             // Set the title of the activity
-            getSupportActionBar().setTitle("Title");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Title");
 
             // Set the back icon, default is visible
             iv_back = findViewById(R.id.iv_back);
@@ -63,6 +63,14 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * On click listener for the back and more icon
+     * <p>
+     * - Click back icon can return to the previous activity
+     * - Click more icon can do something more
+     *
+     * @param v which button is clicked
+     */
     @Override
     public void onClick(View v) {
         if(v == iv_back){
@@ -74,9 +82,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*
+    /**
     * Toggle the left 'back' icon. Default is visible.
-     */
+    */
     public void toggleLeftIcon(){
         if(iv_back.getVisibility() == View.VISIBLE){
             iv_back.setVisibility(View.GONE);
@@ -85,8 +93,8 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*
-    * Toggle the right 'more' icon. Default is invisible.
+    /**
+     * Toggle the right 'more' icon. Default is visible.
      */
     public void toggleRightIcon(){
         if(iv_more.getVisibility() == View.VISIBLE){
