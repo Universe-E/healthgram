@@ -43,46 +43,41 @@ public class SignUpActivity extends AppCompatActivity {
         reapeatPwdEditText = findViewById(R.id.repeat_pwd_text);
         createAccountButton = findViewById(R.id.tv_create_account);
 
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString().trim();
-                String email = emailEditText.getText().toString().trim();
-                String password = pwdEditText.getText().toString().trim();
-                String repeat_password = reapeatPwdEditText.getText().toString().trim();
-                if (password.equals(repeat_password)) {
-                    createUserAccount(username, email, password);
-                }
-                else {
-                    //password and repeat password are not match
-                    Toast.makeText(SignUpActivity.this, "Repeat password doesn't match",
-                            Toast.LENGTH_SHORT).show();
-                }
+        createAccountButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString().trim();
+            String email = emailEditText.getText().toString().trim();
+            String password = pwdEditText.getText().toString().trim();
+            String repeat_password = reapeatPwdEditText.getText().toString().trim();
+            if (password.equals(repeat_password)) {
+                createUserAccount(username, email, password);
+            }
+            else {
+                //password and repeat password are not match
+                Toast.makeText(SignUpActivity.this, "Repeat password doesn't match",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void createUserAccount(String username, String email, String password) {
+        //user email as the unique user id
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // User account created successfully
-                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            saveUserData(userId, username, email);
-                            // Redirect to Main Activity after successful create
-                            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                            startActivity(intent);
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    // User account created successfully
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    saveUserData(userId, username, email);
+                    // Redirect to Main Activity after successful create
+                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    startActivity(intent);
 
 
-                        } else {
-                            // Account creation failed
-                            Toast.makeText(SignUpActivity.this, "Sign Up Failed: " + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                } else {
+                    // Account creation failed
+                    Toast.makeText(SignUpActivity.this, "Sign Up Failed: " + task.getException().getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     private void saveUserData(String userId, String username, String email) {
@@ -91,20 +86,10 @@ public class SignUpActivity extends AppCompatActivity {
         user.put("email", email);
 
         FirebaseFirestore.getInstance().collection("users").document(userId)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(SignUpActivity.this, "Sigun up success", Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SignUpActivity.this, "Save data failed: " + e.getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
+            .set(user).addOnSuccessListener(
+                    aVoid -> Toast.makeText(SignUpActivity.this, "Sigun up success", Toast.LENGTH_SHORT).show())
+            .addOnFailureListener(
+                    e -> Toast.makeText(SignUpActivity.this, "Save data failed: " + e.getMessage(),
+                    Toast.LENGTH_SHORT).show());
     }
 }
