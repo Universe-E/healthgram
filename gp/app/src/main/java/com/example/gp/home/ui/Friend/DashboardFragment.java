@@ -31,15 +31,6 @@ public class DashboardFragment extends Fragment {
 
         EditText searchBox = view.findViewById(R.id.search_box);
         ImageButton searchButton = view.findViewById(R.id.search_button);
-//        DashboardViewModel dashboardViewModel =
-//                new ViewModelProvider(this).get(DashboardViewModel.class);
-//
-//        binding = FragmentDashboardBinding.inflate(inflater, container, false);
-//        View root = binding.getRoot();
-//
-//        final TextView textView = binding.textDashboard;
-//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-//        return root;
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
