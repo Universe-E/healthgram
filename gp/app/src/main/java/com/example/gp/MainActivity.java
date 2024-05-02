@@ -67,4 +67,10 @@ public class MainActivity extends AppCompatActivity {
             });
 
     }
+
+    // Debug
+    public void superToken(View v){
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
+    }
 }

@@ -39,7 +39,6 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
      * @param layoutResId certain activity
      */
     protected void setUpTitleBar(int layoutResId, String title) {
-        setContentView(layoutResId);
         Toolbar top_nav_bar = findViewById(R.id.tb_top_navigation_bar);
         if (top_nav_bar != null) {
             // Set the top navigation bar as the action bar

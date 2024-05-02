@@ -184,13 +184,12 @@
                         android:id="@+id/tv_super_token"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical"
                         android:text="@string/super_token"
-
                         android:textColor="#B3000000"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:onClick="superToken"/>
                 </FrameLayout>
             </FrameLayout>
         </LinearLayout>

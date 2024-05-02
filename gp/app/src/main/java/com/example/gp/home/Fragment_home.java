@@ -36,8 +36,10 @@ public class Fragment_home extends BaseActivity {
         binding = ActivityFragmentHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Toolbar toolbar = findViewById(R.id.tb_top_navigation_bar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.tb_top_navigation_bar);
+//        setSupportActionBar(toolbar);
+        setUpTitleBar(R.layout.activity_fragment_home,activityName);
+        toggleLeftIcon();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
