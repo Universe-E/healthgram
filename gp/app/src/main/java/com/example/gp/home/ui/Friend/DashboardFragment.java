@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.gp.R;
 import com.example.gp.databinding.FragmentDashboardBinding;
@@ -21,12 +20,9 @@ import com.example.gp.databinding.FragmentDashboardBinding;
 * */
 public class DashboardFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         EditText searchBox = view.findViewById(R.id.search_box);
