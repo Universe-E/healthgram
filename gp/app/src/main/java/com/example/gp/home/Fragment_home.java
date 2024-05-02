@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
+import com.example.gp.databinding.ActivitySettingBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import com.example.gp.databinding.ActivityFragmentHomeBinding;
  * Author: Xingchen Zhang
  * Date: 2024-05-01
  */
-public class Fragment_home extends AppCompatActivity {
+public class Fragment_home extends BaseActivity {
     private final String activityName = "GP community";
 
     private ActivityFragmentHomeBinding binding;
@@ -30,14 +31,13 @@ public class Fragment_home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_home);
+
+        // 使用 View Binding 设置布局
+        binding = ActivityFragmentHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Toolbar toolbar = findViewById(R.id.tb_top_navigation_bar);
         setSupportActionBar(toolbar);
-
-        // 设置导航栏的标题
-        TextView activityTitle = findViewById(R.id.tv_activity_name);
-        activityTitle.setText(activityName);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
