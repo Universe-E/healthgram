@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Gp"
         tools:targetApi="31">
         <activity
+            android:name=".setting.RequestActivity"
+            android:exported="false" />
+        <activity
             android:name=".home.Fragment_home"
             android:exported="true"
             android:label="@string/title_activity_fragment_home" />

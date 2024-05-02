@@ -35,6 +35,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * The basic setting for the top navigation bar
      * Click back icon can return to the previous activity
+     * eg. setUpTitleBar(activity_layout, title_name)
      * @param layoutResId certain activity
      */
     protected void setUpTitleBar(int layoutResId, String title) {
