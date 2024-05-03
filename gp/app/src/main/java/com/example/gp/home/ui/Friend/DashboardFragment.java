@@ -1,46 +1,52 @@
 package com.example.gp.home.ui.Friend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.gp.R;
-import com.example.gp.databinding.FragmentDashboardBinding;
-/*
-* 登录成功跳转的主界面
-* 显示:头像 好友列表
-*
-* */
+import com.example.gp.SearchActivity;
+import com.google.android.material.search.SearchBar;
+
+/**
+ * 登录成功跳转的主界面
+ * 显示:头像 好友列表
+ */
 public class DashboardFragment extends Fragment {
+
+    private SearchBar searchBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        // 加载 fragment_dashboard.xml 布局
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        EditText searchBox = view.findViewById(R.id.search_box);
-        ImageButton searchButton = view.findViewById(R.id.search_button);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String searchText = searchBox.getText().toString().trim();
-                performSearch(searchText);
-            }
-        });
+        // 在包含的 activity_search.xml 中找到 SearchBar
+        View searchLayout = view.findViewById(R.id.search_layout);
+        searchBar = searchLayout.findViewById(R.id.search_bar);
+
+        // 检查 searchBar 是否成功找到
+        if (searchBar != null) {
+            Log.d("DashboardFragment", "成功加载 SearchBar");
+            searchBar.setOnClickListener(v -> openSearchActivity());
+        } else {
+            Log.e("DashboardFragment", "未找到 SearchBar");
+        }
 
         return view;
     }
 
-    private void performSearch(String query) {
-        // Implement search logic here:
-        // For example, update a list or query a database or a API
-        Log.d("SearchQuery", "Searching for: " + query);
+    private void openSearchActivity() {
+        Intent searchIntent = new Intent(getContext(), SearchActivity.class);
+        if (searchBar != null) {
+            String initialQuery = searchBar.getText().toString(); // 从搜索栏获取文本
+            searchIntent.putExtra("QUERY", initialQuery);
+        }
+        startActivity(searchIntent);
     }
 }

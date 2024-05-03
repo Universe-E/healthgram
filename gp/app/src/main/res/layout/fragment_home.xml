@@ -1,3 +1,4 @@
+<!-- Example usage in a ConstraintLayout -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,14 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".home.ui.home.HomeFragment">
 
-    <!-- Search box layout -->
+    <!-- Include Search Bar -->
     <include
         android:id="@+id/search_layout"
-        layout="@layout/search_input_layout"
+        layout="@layout/activity_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -21,7 +25,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_layout"
-    />
+        app:layout_constraintTop_toBottomOf="@id/search_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

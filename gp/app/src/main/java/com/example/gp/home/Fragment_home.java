@@ -1,13 +1,9 @@
 package com.example.gp.home;
 
 import android.os.Bundle;
-import android.widget.TextView;
-
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
-import com.example.gp.databinding.ActivitySettingBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +23,7 @@ public class Fragment_home extends BaseActivity {
     private final String activityName = "GP community";
 
     private ActivityFragmentHomeBinding binding;
-    /*通过点击下方图标跳转到不同的其他界面: home notification friends(dashboard)*/
+    /*home notification friends(dashboard)*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

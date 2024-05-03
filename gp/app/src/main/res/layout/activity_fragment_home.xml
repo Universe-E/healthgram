@@ -6,30 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 顶部导航栏 -->
-    <include
-        android:id="@+id/tb_top_navigation_bar"
-        layout="@layout/top_navigation_bar" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!-- top navigation bar -->
+        <include
+            android:id="@+id/tb_top_navigation_bar"
+            layout="@layout/top_navigation_bar" />
+        <!-- bottom navigation -->
 
-        <!-- 搜索框 -->
-
-        <!-- 导航 Fragment -->
-
-        <!-- 底部导航栏 -->
         <fragment
             android:id="@+id/nav_host_fragment_activity_fragment_home"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="540dp"
+            android:layout_height="780dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/nav_view"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:navGraph="@navigation/mobile_navigation" />
@@ -41,6 +37,5 @@
             android:background="?android:attr/windowBackground"
             app:menu="@menu/bottom_nav_menu"
             app:layout_constraintBottom_toBottomOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

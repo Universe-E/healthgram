@@ -44,6 +44,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         return notes.size();
     }
 
+//    public javax.imageio.spi.ServiceRegistry.Filter getFilter() {
+//
+//
+//    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView description;
