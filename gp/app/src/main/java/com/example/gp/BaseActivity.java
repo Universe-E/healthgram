@@ -51,6 +51,7 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             // Set the back icon, default is visible
             iv_back = findViewById(R.id.iv_back);
             iv_back.setOnClickListener(this);
+            iv_back.setVisibility(View.VISIBLE);
 
             // Set the more icon, default is invisible
             iv_more = findViewById(R.id.iv_more);
