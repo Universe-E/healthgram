@@ -3,6 +3,7 @@ package com.example.gp.home;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.gp.BaseActivity;
 import com.example.gp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,7 +20,7 @@ import com.example.gp.databinding.ActivityFragmentHomeBinding;
  * Author: Xingchen Zhang
  * Date: 2024-05-01
  */
-public class Fragment_home extends AppCompatActivity {
+public class Fragment_home extends BaseActivity {
 
     private ActivityFragmentHomeBinding binding;
     /*通过点击下方图标跳转到不同的其他界面: home notification friends(dashboard)*/

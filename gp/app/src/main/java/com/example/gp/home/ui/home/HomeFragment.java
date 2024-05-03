@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void performSearch(String query) {
-        // Implement search logic here:
+        // TODO: Implement search logic here:
         // For example, update a list or query a database or a API
         Log.d("SearchQuery", "Searching for: " + query);
     }
