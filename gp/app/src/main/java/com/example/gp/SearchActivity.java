@@ -1,38 +1,60 @@
-package com.example.gp;
-
-
+package com.example.gp;// SearchActivity.java
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.example.gp.R;
+import com.google.android.material.search.SearchBar;
+import com.google.android.material.search.SearchView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 
 public class SearchActivity extends AppCompatActivity {
+    private static final String TAG = "SearchActivity";
+    private SearchBar searchBar;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_activity_layout);
+        setContentView(R.layout.activity_search);
 
-        TextInputEditText editText = findViewById(R.id.searchTextInputEditText);
-        TextInputLayout textInputLayout = findViewById(R.id.searchTextInputLayout);
+        searchBar = findViewById(R.id.search_bar);
+        searchView = findViewById(R.id.search_view);
 
-        // 设置清除图标的点击监听器来执行搜索
-        textInputLayout.setEndIconOnClickListener(view -> {
-            performSearch(editText.getText().toString());
+        // 从 Intent 获取初始查询
+        String initialQuery = getIntent().getStringExtra("QUERY");
+        if (initialQuery != null && !initialQuery.isEmpty()) {
+            searchBar.setText(initialQuery);
+            performSearch(initialQuery);
+        }
+
+        setupSearchListeners();
+    }
+
+    private void setupSearchListeners() {
+        searchView.addTransitionListener((view, previousState, newState) -> {
+            if (newState == SearchView.TransitionState.HIDDEN) {
+                searchBar.setText("");
+            }
+        });
+
+        searchView.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                performSearch(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
     }
 
     private void performSearch(String query) {
-        // 这里处理搜索逻辑，`query` 是用户输入的搜索关键词
-        // 例如，你可以打印出来或者将其用于查询数据库、调用搜索API等
-        System.out.println("Searching for: " + query);
-        // 在实际应用中，你可能需要做更复杂的操作，如更新UI、调用API等
+        // 打印搜索内容
+        Log.d(TAG, "Searching for: " + query);
     }
-
 }

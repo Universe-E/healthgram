@@ -23,6 +23,7 @@
     <string name="setting_request">Request</string>
     <string name="setting_visibility">Visibility</string>
     <string name="setting_friend_permission">Friend permission</string>
+    <string name="searchbar_hint">Search what you want</string>
 
 
 </resources>

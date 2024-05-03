@@ -57,7 +57,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.android.material:material:1.6.0") // 使用最新的版本号
+    implementation("com.google.android.material:material:1.8.0") // material 1.6
     implementation ("androidx.core:core:1.9.0")
 
     implementation("com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.75.0")
@@ -72,8 +72,10 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-firestore")
-
-
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
+
+
+
+
 }
