@@ -2,8 +2,10 @@ package com.example.gp.data;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -12,36 +14,38 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
 import com.example.gp.databinding.ActivitySettingBinding;
+import com.example.gp.databinding.ActivitySharePageBinding;
 
 public class SharePageActivity extends BaseActivity {
 
     private final String activityName = "Share with...";
-    private ActivitySettingBinding binding;
+    private ActivitySharePageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        EdgeToEdge.enable(this);
-//        setContentView(R.layout.activity_share_page);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivitySettingBinding.inflate(getLayoutInflater());
+        binding = ActivitySharePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // initialize top bar
         setUpTitleBar(R.layout.activity_share_page, activityName);
     }
 
-    @Override
-    public void onClick(View v) {
-        super.onClick(v);
-        if (v == binding.llSettingChangeAvatarLayout) {
+    /**
+     * Send the share message to the user from the input field
+     * @param view the current view
+     */
+    public void sendTheShareMessage(View view) {
+        // TODO: find the user by ID
+        // do something
 
-        }
+        // TODO: send the message to the user
+        // do something
+
+        Toast.makeText(SharePageActivity.this, "Yay, message sent!", Toast.LENGTH_SHORT).show();
+
+        // back to the previous activity
+        onBackPressed();
     }
 }
