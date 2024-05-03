@@ -1,10 +1,13 @@
 package com.example.gp.home;
 
 import android.os.Bundle;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
+import com.example.gp.databinding.ActivitySettingBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,16 +24,20 @@ import com.example.gp.databinding.ActivityFragmentHomeBinding;
  * Date: 2024-05-01
  */
 public class Fragment_home extends BaseActivity {
+    private final String activityName = "GP community";
 
     private ActivityFragmentHomeBinding binding;
     /*通过点击下方图标跳转到不同的其他界面: home notification friends(dashboard)*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment_home);
-        // temporarily change to toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        // 使用 View Binding 设置布局
+        binding = ActivityFragmentHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setUpTitleBar(R.layout.activity_fragment_home,activityName);
+        toggleLeftIcon();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
