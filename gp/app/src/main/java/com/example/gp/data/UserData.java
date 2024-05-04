@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +30,42 @@ public class UserData {
         notifyObserver(_notes);
     }
 
+    private static MutableLiveData<String> _username = new MutableLiveData<>();
+
+    private static MutableLiveData<String> _email = new MutableLiveData<>();
+
+    private static MutableLiveData<String> _userId = new MutableLiveData<>();
+
     /*********** API ************/
 
-    // An immutable variable sent to UI layer
+    // Immutable variables sent to UI layer
     public static LiveData<Boolean> isSignedIn = _isSignedIn;
+
+    public static LiveData<String> username = _username;
+
+    public static LiveData<String> email = _email;
+
+    public static LiveData<String> userId = _userId;
 
     // Set sign in status
     public static void setSignedIn (Boolean newValue) {
         // use postValue() to make the assignation on the main (UI) thread
         _isSignedIn.postValue(newValue);
+    }
+
+    // Set username
+    public static void setUsername (String newValue) {
+        _username.postValue(newValue);
+    }
+
+    // Set email
+    public static void setEmail (String newValue) {
+        _email.postValue(newValue);
+    }
+
+    // Set userId
+    public static void setUserId (String newValue) {
+        _userId.postValue(newValue);
     }
 
     // An immutable variable sent to UI layer

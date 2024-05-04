@@ -14,6 +14,12 @@ import com.example.gp.data.UserData;
 public class NewMainActivity extends AppCompatActivity {
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (Boolean.FALSE.equals(UserData.isSignedIn.getValue())) {
             Intent intent = new Intent(this, MainActivity.class);
