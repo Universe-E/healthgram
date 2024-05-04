@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.Utils.AuthUtils;
+import com.example.gp.Utils.AuthUtil;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                 // TODO: Update UI with user information
                                 // TODO: Save user information to Firestore
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -83,16 +84,16 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (password.length() < 6) {
             // Password is too short
             ToastUtil.showLong(this, "Password must be at least 6 characters");
-        } else if (!AuthUtils.isValidEmail(email)) {
+        } else if (!AuthUtil.isValidEmail(email)) {
             // Email is invalid
             ToastUtil.showLong(this, "Invalid email address");
-        } else if (AuthUtils.isUsernameTaken(username)) {
+        } else if (AuthUtil.isUsernameTaken(username)) {
             // Username is already taken
             ToastUtil.showLong(this, "Username already taken");
-        } else if (AuthUtils.isEmailTaken(email)) {
+        } else if (AuthUtil.isEmailTaken(email)) {
             // Email is already taken
             ToastUtil.showLong(this, "Email already taken");
-        } else if (!AuthUtils.isValidUsername(username)) {
+        } else if (!AuthUtil.isValidUsername(username)) {
             // Username is invalid
             ToastUtil.showLong(this, "Invalid username");
         } else {

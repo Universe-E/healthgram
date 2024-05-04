@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import org.jetbrains.annotations.Contract;
 
 
-public class AuthUtils {
+public class AuthUtil {
 
     private static final String TAG = "Authorization";
 
