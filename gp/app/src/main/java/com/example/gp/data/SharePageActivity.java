@@ -33,14 +33,14 @@ public class SharePageActivity extends BaseActivity {
     }
 
     /**
-     * Send the share message to the user from the input field
+     * Send the share message to the User from the input field
      * @param view the current view
      */
     public void sendTheShareMessage(View view) {
-        // TODO: find the user by ID
+        // TODO: find the User by ID
         // do something
 
-        // TODO: send the message to the user
+        // TODO: send the message to the User
         // do something
 
         Toast.makeText(SharePageActivity.this, "Yay, message sent!", Toast.LENGTH_SHORT).show();

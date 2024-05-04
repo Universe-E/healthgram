@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +20,9 @@ public class Database {
 
     private static final String TAG = "Database";
 
-    public static class user {
+    public static class User {
         public static boolean saveUserData(String userId, String username, String email) {
-            // save user data to firestore
+            // save User data to firestore
             AtomicBoolean isSaved = new AtomicBoolean(false);
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -44,8 +46,8 @@ public class Database {
         }
 
         @Nullable
-        public static String getUserEmailByUsername(String username) {
-            // Get user email by username
+        public static String getEmailByUsername(String username) {
+            // Get User email by username
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
             AtomicReference<String> email = new AtomicReference<>();
@@ -67,5 +69,41 @@ public class Database {
 
             return email.get();
         }
+
+        public static boolean isUsernameExist(String username) {
+            // Check if username exist
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            AtomicBoolean isExist = new AtomicBoolean(false);
+
+            DocumentReference docRef = db.collection("users").document(username);
+            docRef.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    isExist.set(document.exists());
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            });
+
+            return isExist.get();
+        }
+
+        public static boolean isEmailExist(String email) {
+            // Check if email exist
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            AtomicBoolean isExist = new AtomicBoolean(true);
+
+            Query query = db.collection("users").whereEqualTo("email", email);
+            query.get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    isExist.set(!task.getResult().isEmpty());
+                }
+            });
+
+            return isExist.get();
+        }
     }
+
 }

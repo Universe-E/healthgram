@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, Fragment_home.class);
                     startActivity(intent);
                 } else {
-                    // If sign in fails, display a message to the user.
+                    // If sign in fails, display a message to the User.
                     Toast.makeText(MainActivity.this,
                             "Authentication failed, please check your email or password",
                             Toast.LENGTH_SHORT).show();

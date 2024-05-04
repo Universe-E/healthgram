@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 import java.util.List;
 
-// a singleton to hold user data
+// a singleton to hold User data
 public class UserData {
 
     private static final String TAG = "userData";

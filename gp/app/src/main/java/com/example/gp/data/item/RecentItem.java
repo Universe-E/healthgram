@@ -21,9 +21,9 @@ public class RecentItem implements Comparable<RecentItem> {
     /**
      * 
      * @param messageType message type
-     * @param userId user id
-     * @param headImg user head icon
-     * @param name user name
+     * @param userId User id
+     * @param headImg User head icon
+     * @param name User name
      * @param message message content
      * @param newNum new message amount
      * @param time message time
