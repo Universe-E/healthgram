@@ -2,6 +2,7 @@ package com.example.gp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -10,12 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityMainBinding;
 import com.example.gp.home.Fragment_home;
 import com.example.gp.setting.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+
     private ActivityMainBinding binding;
     private FirebaseAuth mAuth;
 
@@ -52,29 +58,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (validateForm(username, password)) {
             // authenticate the user
-            if (!AuthUtil.isEmail(username)) {
-                // if the username is not an email, try to get the email from the username
-                username = AuthUtil.getEmailByUsername(username);
-                if (username == null) {
-                    ToastUtil.showLong(this, "Username not found");
-                    return;
-                }
-            }
-
-            mAuth.signInWithEmailAndPassword(username, password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            // Sign in success, go to the main page
-                            Intent intent = new Intent(MainActivity.this, Fragment_home.class);
-                            startActivity(intent);
-                        } else {
-                            // If sign in fails, display a message to the User.
-                            Toast.makeText(MainActivity.this,
-                                    "Authentication failed, please check your email or password",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            Database.User.signIn(username, password, this, "updateUI");
         }
+    }
+
+    public void updateUI() {
+        Intent intent = new Intent(MainActivity.this, Fragment_home.class);
+        startActivity(intent);
     }
 
     private boolean validateForm(String usernameOrEmail, String password) {
