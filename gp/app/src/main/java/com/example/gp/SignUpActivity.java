@@ -89,7 +89,7 @@ public class SignUpActivity extends AppCompatActivity {
             ToastUtil.showLong(this, "Password must be at least 6 characters");
         } else if (!AuthUtil.isValidEmail(email)) {
             // Email is invalid
-            ToastUtil.showLong(this, "Invalid email address");
+            ToastUtil.showLong(this, "Invalid email address, eg: ABCabc123@example.com");
         } else if (AuthUtil.isUsernameTaken(username)) {
             // Username is already taken
             ToastUtil.showLong(this, "Username already taken");
@@ -98,7 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
             ToastUtil.showLong(this, "Email already taken");
         } else if (!AuthUtil.isValidUsername(username)) {
             // Username is invalid
-            ToastUtil.showLong(this, "Invalid username");
+            ToastUtil.showLong(this, "Invalid username: contains space, or length > 18");
         } else {
             // All fields are valid
             return true;
