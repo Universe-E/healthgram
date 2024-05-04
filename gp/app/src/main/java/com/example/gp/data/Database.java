@@ -2,7 +2,6 @@ package com.example.gp.data;
 
 import android.util.Log;
 
-import com.google.android.gms.common.internal.FallbackServiceBroker;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
