@@ -6,7 +6,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gp.BaseActivity;
 import com.example.gp.R;
+import com.example.gp.databinding.ActivityNoteDetailBinding;
 
 /**
  * 跳转到帖子具体界面
@@ -14,12 +16,21 @@ import com.example.gp.R;
  * Date: 2024-05-04
  */
 
-public class Activity_note_detail extends AppCompatActivity {
+public class Activity_note_detail extends BaseActivity {
+    private final String activityName = "Note Detail Page";
+
+    private ActivityNoteDetailBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note_detail);
+        binding = ActivityNoteDetailBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setUpTitleBar(R.layout.activity_note_detail,activityName);
+//        toggleLeftIcon();
+        toggleRightIcon();
 
         TextView titleView = findViewById(R.id.title);
         TextView descriptionView = findViewById(R.id.description);

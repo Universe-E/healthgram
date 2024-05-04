@@ -14,7 +14,6 @@ import com.example.gp.data.UserData;
 import com.example.gp.data.UserData.Note;
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
 import com.google.android.material.search.SearchBar;
-
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -38,6 +37,7 @@ public class HomeFragment extends Fragment {
         } else {
             Log.e("HomeFragment", "未找到 SearchBar");
         }
+
 
         // 初始化 RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);

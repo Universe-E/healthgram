@@ -1,10 +1,16 @@
-<!-- activity_detail.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- 顶部导航栏布局 -->
+    <include
+        android:id="@+id/tb_top_navigation_bar"
+        layout="@layout/top_navigation_bar" />
+
+    <!-- 标题文本 -->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -13,6 +19,7 @@
         android:textStyle="bold"
         android:text="Title" />
 
+    <!-- 图片视图 -->
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
@@ -20,6 +27,7 @@
         android:scaleType="centerCrop"
         android:layout_marginTop="16dp"/>
 
+    <!-- 描述文本 -->
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
