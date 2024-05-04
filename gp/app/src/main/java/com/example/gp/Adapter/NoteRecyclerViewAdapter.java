@@ -16,7 +16,7 @@ import java.util.List;
 
 public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.ViewHolder> {
 
-    private List<UserData.Note> values;
+    public List<UserData.Note> values;
 
     public NoteRecyclerViewAdapter(List<UserData.Note> values) {
         this.values = values;
@@ -35,21 +35,37 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // Get the data model based on position
         UserData.Note item = values.get(position);
 
-        // Set item views based on the views and data model
+        // 将数据绑定到视图
         holder.nameView.setText(item.name);
         holder.descriptionView.setText(item.description);
 
         if (item.image != null) {
             holder.imageView.setImageBitmap(item.image);
         }
+
+        // 设置点击监听器
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(item);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return values.size();
+    }
+    // 在 NoteRecyclerViewAdapter 中定义接口和方法
+    public interface OnItemClickListener {
+        void onItemClick(UserData.Note note);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

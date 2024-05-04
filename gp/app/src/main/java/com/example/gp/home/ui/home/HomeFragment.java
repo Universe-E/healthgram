@@ -1,89 +1,85 @@
-package com.example.gp.home.ui.home;
-
-
+package com.example.gp.home.ui.home;// HomeFragment.java
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
-
+import android.util.Log;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.gp.R;
-import com.example.gp.data.Note;
-import com.example.gp.data.NotesAdapter;
-import com.example.gp.databinding.FragmentHomeBinding;
-import com.example.gp.data.NotesAdapter;
+import com.example.gp.data.Activity_note_detail;
+import com.example.gp.data.UserData;
+import com.example.gp.data.UserData.Note;
+import com.example.gp.Adapter.NoteRecyclerViewAdapter;
 import com.google.android.material.search.SearchBar;
-import com.example.gp.SearchActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
-    private  NotesAdapter adapter;
+    private NoteRecyclerViewAdapter adapter;
     private SearchBar searchBar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false); // 确保引用正确的布局文件
-        // 在包含的 activity_search.xml 中找到 SearchBar
+        // 加载 fragment_home 布局
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // 初始化 SearchBar
         View searchLayout = view.findViewById(R.id.search_layout);
         searchBar = searchLayout.findViewById(R.id.search_bar);
 
         // 检查 searchBar 是否成功找到
         if (searchBar != null) {
-            Log.d("DashboardFragment", "成功加载 SearchBar");
+            Log.d("HomeFragment", "成功加载 SearchBar");
             searchBar.setOnClickListener(v -> openSearchActivity());
         } else {
-            Log.e("DashboardFragment", "未找到 SearchBar");
+            Log.e("HomeFragment", "未找到 SearchBar");
         }
-//        // 初始化笔记列表content_note
-//        List<Note> notes = new ArrayList<>();
-//        notes.add(new Note("Note 1", "Description 1", R.drawable.ic_launcher_background));
-//        notes.add(new Note("Note 2", "Description XXXX", R.drawable.ic_launcher_background));
-//
-//        // 初始化 RecyclerView
-//        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-//        if (recyclerView == null) {
-//            Log.e("HomeFragment", "RecyclerView not found");
-//        }
-//
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        adapter = new NotesAdapter(notes);
-//        recyclerView.setAdapter(adapter);
-//
-//        // 初始化 SearchView
-//        SearchView searchView = view.findViewById(R.id.search_view);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                performSearch(query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-////                adapter.getFilter().filter(newText); // 确保适配器有实现过滤功能
-//                return false;
-//            }
-//        });
+
+        // 初始化 RecyclerView
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // 设置适配器并初始化为空列表
+        adapter = new NoteRecyclerViewAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+        // 设置点击监听器来跳转到详情页面
+        adapter.setOnItemClickListener(note -> openDetailActivity(note));
+
+        // 在此处直接添加一些数据
+        addInitialNotes();
+
+        // 观察 UserData 中的笔记
+        UserData.notes().observe(getViewLifecycleOwner(), notes -> {
+            adapter.values = notes;
+            adapter.notifyDataSetChanged();
+        });
 
         return view;
     }
 
-    private void openSearchActivity() {
-
+    // add some example data
+    private void addInitialNotes() {
+        UserData.addNote(new Note("1", "Note 1", "Sport News"));
+        UserData.addNote(new Note("2", "Note 2", "WOW Game Strategy"));
+        UserData.addNote(new Note("3", "Note 3", "Description XXXX"));
+        UserData.addNote(new Note("4", "Note 4", "Description YYYY"));
     }
 
+    private void openSearchActivity() {
+        // 实现打开 SearchActivity 的逻辑
+    }
 
-    private void performSearch(String query) {
-        // TODO: Implement search logic here:
-        // For example, update a list or query a database or a API
-        Log.d("SearchQuery", "Searching for: " + query);
+    private void openDetailActivity(Note note) {
+        Intent intent = new Intent(getContext(), Activity_note_detail.class);
+        intent.putExtra("title", note.name);
+        intent.putExtra("description", note.description);
+        // 假设图片是资源 ID
+        intent.putExtra("imageResId", note.imageName);
+        startActivity(intent);
     }
 }
