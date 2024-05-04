@@ -57,7 +57,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.android.material:material:1.8.0") // material 1.6
+    implementation("com.google.android.material:material:1.6.0") // material 1.6
     implementation ("androidx.core:core:1.9.0")
 
     implementation("com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.75.0")
