@@ -4,11 +4,11 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +21,9 @@ public class Database {
     private static final String TAG = "Database";
 
     public static class User {
+
+        private static final String TAG = "Database.User";
+
         public static boolean saveUserData(String userId, String username, String email) {
             // save User data to firestore
             AtomicBoolean isSaved = new AtomicBoolean(false);
@@ -106,4 +109,20 @@ public class Database {
         }
     }
 
+    public static class Post {
+        // Note
+
+        private static String TAG = "Database.Post";
+
+        public static void addPost(String post) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.getCurrentUser();
+
+            if (mAuth.getCurrentUser() != null) {
+                Log.d(TAG, "Current user: " + mAuth.getCurrentUser().getEmail());
+            } else {
+                Log.d(TAG, "No current user");
+            }
+        }
+    }
 }
