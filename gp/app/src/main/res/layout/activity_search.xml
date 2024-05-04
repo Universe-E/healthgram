@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:theme="@style/Theme.Material3.DayNight.NoActionBar"
+    >
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -21,7 +24,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter text to search"
-                android:visibility="visible"
                 android:layout_marginTop="20dp"
                 tools:visibility="visible" />
         </com.google.android.material.appbar.AppBarLayout>
@@ -31,8 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Search..."
-            android:theme="@style/Theme.SearchBar"
-            android:visibility="visible"
             app:layout_anchor="@id/search_bar"
             tools:visibility="visible" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

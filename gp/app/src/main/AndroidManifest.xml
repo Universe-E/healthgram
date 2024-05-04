@@ -54,10 +54,10 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MyApplication" />
-        <activity android:name=".home.ui.Friend.DashboardFragment" />
+            android:exported="true" />
+<!--        <activity android:name=".home.ui.Friend.DashboardFragment" />-->
 
     </application>
+
 
 </manifest>
