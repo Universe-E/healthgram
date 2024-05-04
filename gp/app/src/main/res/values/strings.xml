@@ -21,9 +21,11 @@
     <string name="setting_change_password">Change password</string>
     <string name="setting_privacy">Privacy settings</string>
     <string name="setting_request">Request</string>
-    <string name="setting_visibility">Visibility</string>
+    <string name="setting_visibility">Post visibility</string>
     <string name="setting_friend_permission">Friend permission</string>
     <string name="searchbar_hint">Search what you want</string>
+    <string name="setting_public_visibility">Public posts</string>
+    <string name="setting_private_visibility">Private posts</string>
 
 
 </resources>

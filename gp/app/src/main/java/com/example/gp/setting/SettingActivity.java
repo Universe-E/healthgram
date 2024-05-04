@@ -60,7 +60,8 @@ public class SettingActivity extends BaseActivity {
             Intent intent = new Intent(this, RequestActivity.class);
             startActivity(intent);
         } else if(v == binding.llSettingVisibilityLayout) {
-
+            Intent intent = new Intent(this, PostVisibilityActivity.class);
+            startActivity(intent);
         } else if(v == binding.llSettingFriendPermissionLayout) {
 
         }

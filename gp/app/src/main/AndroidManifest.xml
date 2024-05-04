@@ -16,10 +16,16 @@
         android:theme="@style/Theme.Gp"
         tools:targetApi="31">
         <activity
+            android:name=".setting.PublicPostActivity"
+            android:exported="false" />
+        <activity
             android:name=".data.Activity_note_detail"
             android:exported="true" />
         <activity
             android:name=".data.SharePageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".setting.PostVisibilityActivity"
             android:exported="true" />
         <activity
             android:name=".setting.RequestActivity"
@@ -55,9 +61,6 @@
         <activity
             android:name=".SearchActivity"
             android:exported="true" />
-<!--        <activity android:name=".home.ui.Friend.DashboardFragment" />-->
-
     </application>
-
 
 </manifest>
