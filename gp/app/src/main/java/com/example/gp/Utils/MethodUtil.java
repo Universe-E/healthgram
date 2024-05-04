@@ -17,4 +17,14 @@ public class MethodUtil {
         }
         return null;
     }
+
+    public static Method getMethod(Object obj, String methodName, Object... args) throws NoSuchMethodException {
+        // Get args type
+        Class[] argsType = new Class[args.length];
+        for (int i = 0; i < args.length; i++) {
+            argsType[i] = args[i].getClass();
+        }
+
+        return obj.getClass().getMethod(methodName, argsType);
+    }
 }

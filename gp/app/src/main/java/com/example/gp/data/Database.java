@@ -78,10 +78,12 @@ public class Database {
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 try {
-                                    MethodUtil.getMethod(object, methodName).invoke(object, args);
+                                    MethodUtil.getMethod(object, methodName, args).invoke(object, args);
                                 } catch (Exception e) {
-                                    throw new RuntimeException(e);
+                                    Log.e(TAG, "Error: " + e.getMessage());
                                 }
+                            } else {
+                                ToastUtil.showLong((Context) object, "Wrong password or email");
                             }
                         });
             } else {
@@ -89,7 +91,8 @@ public class Database {
             }
         }
 
-        public static void signInWithUsername(String username, String password, Object object, String methodName, Object... args) {
+        private static void signInWithUsername(String username, String password, Object object, String methodName, Object... args) {
+            // Using username to find user email and sign in with email
             FirebaseFirestore.getInstance()
                     .collection("users")
                     .document(username)
@@ -101,13 +104,13 @@ public class Database {
                             if (document.exists()) {
                                 Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                                 if (document.getData().get("email") != null)
+                                    // Sign in with email
                                     FirebaseAuth.getInstance().signInWithEmailAndPassword((String) document.getData().get("email"), password)
                                             .addOnCompleteListener(task1 -> {
                                                 if (task1.isSuccessful()) {
                                                     try {
-                                                        Log.d(TAG, "Method: " + methodName + " Args: ");
-                                                        Method method = MethodUtil.getMethod(object, methodName);
-                                                        Log.d(TAG, "Method: " + method.getName());
+                                                        Log.d(TAG, "Method: " + methodName);
+                                                        Method method = MethodUtil.getMethod(object, methodName, args);
                                                         method.invoke(object, args);
                                                     } catch (Exception e) {
                                                         ToastUtil.showLong((Context) object, e.getMessage());
@@ -121,7 +124,7 @@ public class Database {
                                 ToastUtil.showLong((Context) object, "Username does not exist");
                             }
                         } else {
-                            ToastUtil.showLong((Context) object, "Username does not exist");
+                            ToastUtil.showLong((Context) object, task.getException().getMessage());
                         }
                     });
         }
@@ -202,6 +205,7 @@ public class Database {
         }
 
         private void setUsername(String username) {
+            // Set username for using inside async method
             User.username = username;
         }
 
