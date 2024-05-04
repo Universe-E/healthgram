@@ -2,8 +2,16 @@ package com.example.gp.data;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,7 +33,7 @@ public class Database {
             user.put("username", username);
             user.put("email", email);
 
-            db.collection("users").document(userId).set(user)
+            db.collection("users").document(username).set(user)
                     .addOnSuccessListener(aVoid -> {
                         isSaved.set(true);
                         Log.d(TAG, "UserData successfully written!");
@@ -36,6 +44,37 @@ public class Database {
                     });
 
             return isSaved.get();
+        }
+
+        @Nullable
+        public static String getUserEmailByUsername(String username) {
+            // Get user email by username
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            ArrayList<String> email = new ArrayList<>();
+
+            DocumentReference docRef = db.collection("users").document(username);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            email.add(document.getString("email"));
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
+            if (!email.isEmpty()) {
+                return email.get(0);
+            }
+            return null;
         }
     }
 }
