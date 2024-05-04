@@ -169,6 +169,7 @@
                         android:paddingTop="12dp"
                         android:paddingBottom="12dp"
                         android:text="@string/create_account"
+                        android:onClick="createUserAccount"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="18sp"
