@@ -1,7 +1,7 @@
 package com.example.gp.data.item;
 
 /**
- * @desc Received message data
+ * Received message data
  * @author Zehua Kong
  */
 public class RecentItem implements Comparable<RecentItem> {
@@ -120,7 +120,8 @@ public class RecentItem implements Comparable<RecentItem> {
             return false;
         if (o == this)
             return true;
-        if (o instanceof RecentItem item) {
+        if (o instanceof RecentItem) {
+            RecentItem item = (RecentItem) o;
             return item.userId.equals(this.userId);
         }
         return false;

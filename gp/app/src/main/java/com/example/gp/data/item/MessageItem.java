@@ -1,7 +1,7 @@
 package com.example.gp.data.item;
 
 /**
- * @desc Send message instance
+ * Send message instance
  * @author Zehua Kong
  */
 public class MessageItem{
@@ -25,7 +25,7 @@ public class MessageItem{
     private int voiceTime;
 
     public MessageItem() {
-        // TODO Auto-generated constructor stub
+
     }
 
     /**
