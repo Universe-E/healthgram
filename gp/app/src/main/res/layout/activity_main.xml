@@ -37,7 +37,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp">
+                        android:layout_marginStart="8dp">
 
                         <TextView
                             android:id="@+id/tv_login_label"
@@ -76,10 +76,13 @@
                     <EditText
                         android:id="@+id/username_input_field"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:hint="@string/enter_username"
+                        android:layout_height="48dp"
+                        android:autofillHints=""
                         android:background="@android:color/transparent"
-                        />
+                        android:hint="@string/enter_username"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress|text"
+                        android:singleLine="true" />
 
                     <View
                         android:layout_width="match_parent"
@@ -100,10 +103,13 @@
                     <EditText
                         android:id="@+id/password_input_field"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:inputType="textPassword"
+                        android:layout_height="48dp"
+                        android:autofillHints=""
+                        android:background="@android:color/transparent"
                         android:hint="@string/enter_password"
-                        android:background="@android:color/transparent"/>
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
 
                     <View
                         android:layout_width="match_parent"
