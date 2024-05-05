@@ -16,21 +16,23 @@ public class Parser {
     }
 
     public boolean isMentioningSomeone(String text) {
-        // Split the string by spaces to check each part separately
-        String[] parts = text.split("\\s+");
-        for (String part : parts) {
-            // Check each part for '@' followed by non-space characters without a space in between
-            int atIndex = part.indexOf('@');
-            while (atIndex != -1) {
-                // Check if '@' is followed directly by non-space characters
-                if (atIndex + 1 < part.length() && !Character.isWhitespace(part.charAt(atIndex + 1))) {
-                    return true;
-                }
-                // Look for the next '@' in the current part
-                atIndex = part.indexOf('@', atIndex + 1);
+        int flag = 0;
+
+        // Iterate through each character in the string
+        for (int i = 0; i < text.length(); i++) {
+            char ch = text.charAt(i);
+            // Increment flag if the character is '@'
+            if (ch == '@') {
+                flag++;
+            }
+            // Decrement flag if the character is a space
+            if (ch == ' ') {
+                flag--;
             }
         }
-        return false;
+
+        // Return true if flag is not zero after processing the whole string
+        return flag != 0;
     }
 
     // Parse the text to implement '@' mention functionality
