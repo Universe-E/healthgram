@@ -314,6 +314,12 @@ public class Database {
                 });
         }
 
+        public static void getUserPost(int limit, Object object, String methodName, Object... args) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            getPostsByAuthorId(userId, object, methodName, args);
+        }
+
         //Get a list of posts by author id
         public static void getPostsByAuthorId(String authorId, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance().collection("posts")
