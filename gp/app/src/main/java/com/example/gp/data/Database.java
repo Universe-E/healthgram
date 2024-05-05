@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.ToastUtil;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -19,6 +20,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Database {
@@ -169,39 +171,34 @@ public class Database {
             return null;
         }
 
-        public static boolean isUsernameExist(String username) {
+        public static Task<Boolean> isUsernameExist(String username) {
             // Check if username exist
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            AtomicBoolean isExist = new AtomicBoolean(false);
-
             DocumentReference docRef = db.collection("users").document(username);
-            docRef.get().addOnCompleteListener(task -> {
+            return docRef.get().continueWith(task -> {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    isExist.set(document.exists());
+                    return document.exists();
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());
+                    throw Objects.requireNonNull(task.getException());
                 }
             });
-
-            return isExist.get();
         }
 
-        public static boolean isEmailExist(String email) {
+        public static Task<Boolean> isEmailExist(String email) {
             // Check if email exist
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            AtomicBoolean isExist = new AtomicBoolean(true);
-
             Query query = db.collection("users").whereEqualTo("email", email);
-            query.get().addOnCompleteListener(task -> {
+            return query.get().continueWith(task -> {
                 if (task.isSuccessful()) {
-                    isExist.set(!task.getResult().isEmpty());
+                    return !task.getResult().isEmpty();
+                } else {
+                    throw Objects.requireNonNull(task.getException());
                 }
             });
-
-            return isExist.get();
         }
 
         private void setUsername(String username) {

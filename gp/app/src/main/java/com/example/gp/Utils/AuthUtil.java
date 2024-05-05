@@ -4,6 +4,7 @@ package com.example.gp.Utils;
 import androidx.annotation.Nullable;
 
 import com.example.gp.data.Database;
+import com.google.android.gms.tasks.Task;
 
 import org.jetbrains.annotations.Contract;
 
@@ -22,12 +23,12 @@ public class AuthUtil {
         return email.matches(emailPattern);
     }
 
-    public static boolean isUsernameTaken(String username) {
+    public static Task<Boolean> isUsernameTaken(String username) {
         // Check if the username is already in the database
         return Database.User.isUsernameExist(username);
     }
 
-    public static boolean isEmailTaken(String email) {
+    public static Task<Boolean> isEmailTaken(String email) {
         // Check if the email is already in the database
         return Database.User.isEmailExist(email);
     }

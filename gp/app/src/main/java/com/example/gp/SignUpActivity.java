@@ -1,5 +1,6 @@
 package com.example.gp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.example.gp.data.Database;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Utils.AuthUtil;
 
+import com.example.gp.home.Fragment_home;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -43,29 +45,60 @@ public class SignUpActivity extends AppCompatActivity {
         String password = pwdEditText.getText().toString().trim();
         String repeat_password = reapeatPwdEditText.getText().toString().trim();
 
-        if (validateForm(username, email, password, repeat_password)) {
-            // Create account
-            mAuth = FirebaseAuth.getInstance();
+        if (!validateForm(username, email, password, repeat_password))
+            return;
+        // Check if username is taken
+        AuthUtil.isUsernameTaken(username).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                boolean isUsernameTaken = task.getResult();
+                if (isUsernameTaken) {
+                    ToastUtil.showLong(this, "Username already taken");
+                } else {
+                    // Check if email is taken
+                    AuthUtil.isEmailTaken(email).addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            boolean isEmailTaken = task1.getResult();
+                            if (isEmailTaken) {
+                                ToastUtil.showLong(this, "Email already taken");
+                            } else {
+                                // Create account
+                                mAuth = FirebaseAuth.getInstance();
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in User's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                                mAuth.createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(this, task2 -> {
+                                    if (task2.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in User's information
+                                        Log.d(TAG, "createUserWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
 
-                            String userId = user.getUid();
+                                        assert user != null;
+                                        String userId = user.getUid();
 
-                            Database.User.saveUserData(userId, username, email);
+                                        Database.User.saveUserData(userId, username, email);
 
-                            // TODO: Update UI with User information
+                                        //Redirect to login page.
+                                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                        startActivity(intent);
+
+                                        // TODO: Update UI with User information
+                                    } else {
+                                        // If sign in fails, display a message to the User.
+                                        Log.w(TAG, "createUserWithEmail:failure", task2.getException());
+                                        ToastUtil.showLong(SignUpActivity.this, "Authentication failed: " + Objects.requireNonNull(task2.getException()).getMessage());
+                                    }
+                                });
+                            }
                         } else {
-                            // If sign in fails, display a message to the User.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            ToastUtil.showLong(SignUpActivity.this, "Authentication failed: " + Objects.requireNonNull(task.getException()).getMessage());
+                            Log.e(TAG, "Error checking email existence", task1.getException());
+                            ToastUtil.showLong(this, "Error checking email existence");
                         }
                     });
-        }
+                }
+            } else {
+                Log.e(TAG, "Error checking username existence", task.getException());
+                ToastUtil.showLong(this, "Error checking username existence");
+            }
+        });
 
     }
 
@@ -86,12 +119,6 @@ public class SignUpActivity extends AppCompatActivity {
         } else if (!AuthUtil.isValidUsername(username)) {
             // Username is already taken
             ToastUtil.showLong(this, "Invalid username: contains space, or length not range from 3 to 18");
-        } else if (AuthUtil.isUsernameTaken(username)) {
-            // Username is invalid
-            ToastUtil.showLong(this, "Username already taken");
-        } else if (AuthUtil.isEmailTaken(email)) {
-            // Email is already taken
-            ToastUtil.showLong(this, "Email already taken");
         } else {
             // All fields are valid
             return true;
