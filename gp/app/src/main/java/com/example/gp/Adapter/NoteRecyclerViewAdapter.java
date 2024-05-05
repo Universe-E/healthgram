@@ -53,6 +53,12 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
         });
     }
 
+    // 在 NoteRecyclerViewAdapter 中添加更新数据的方法
+    public void updateNotes(List<UserData.Note> newNotes) {
+        this.values = newNotes;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return values.size();

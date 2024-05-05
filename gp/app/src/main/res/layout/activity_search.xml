@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter text to search"
                 android:layout_marginTop="20dp"
+                android:fitsSystemWindows="true"
                 tools:visibility="visible" />
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -34,6 +35,7 @@
             android:layout_height="match_parent"
             android:hint="Search..."
             app:layout_anchor="@id/search_bar"
+            app:autoShowKeyboard="true"
             tools:visibility="visible" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
