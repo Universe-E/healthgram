@@ -3,11 +3,9 @@ package com.example.gp.Utils;
 import android.util.Log;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
 
 public class MethodUtil {
-    public static Method getMethod(Object obj, String methodName) throws NoSuchMethodException {
+    private static Method getMethod(Object obj, String methodName) {
         Method[] methods = obj.getClass().getMethods();
         for (Method method : methods) {
             Log.d("MethodUtil", "method name: " + method.getName());
@@ -25,6 +23,18 @@ public class MethodUtil {
             argsType[i] = args[i].getClass();
         }
 
-        return obj.getClass().getMethod(methodName, argsType);
+        // When there are args left out for further filling in
+        try {
+            // Get the method if args is all the method's need
+            return obj.getClass().getMethod(methodName, argsType);
+        } catch (Exception e) {
+            // When there are args left out for further filling in
+            if (e.getClass().getName().equals("java.lang.NoSuchMethodException")) {
+                // try use less efficient way to get method
+                return getMethod(obj, methodName);
+            }
+        }
+
+        throw new NoSuchMethodException();
     }
 }
