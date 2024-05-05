@@ -37,12 +37,22 @@ public class Parser {
 
     // Parse the text to implement '@' mention functionality
     public String parseUserName(String text) {
-        // get the text between '@' and the next space
-        int start = text.indexOf("@");
-        int end = text.indexOf(" ", start);
-        if (end == -1) {
-            end = text.length();
+        // get the text between the last '@' and the next space
+        // Find the index of the last '@' character
+        int atIndex = text.lastIndexOf('@');
+        if (atIndex == -1) {
+            // Return null or empty if no '@' is found
+            return "";
         }
-        return text.substring(start, end);
+
+        // Find the index of the next space after the last '@'
+        int spaceIndex = text.indexOf(' ', atIndex);
+        if (spaceIndex == -1) {
+            // If there is no space, return the substring from '@' to the end of the string
+            return text.substring(atIndex + 1);
+        } else {
+            // Return the substring between the last '@' and the next space
+            return text.substring(atIndex + 1, spaceIndex);
+        }
     }
 }

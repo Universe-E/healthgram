@@ -49,4 +49,35 @@ public class ParserTest {
         Parser parser = Parser.getInstance();
         assertFalse(parser.isMentioningSomeone("@user1 @user2 "));
     }
+
+    @Test
+    public void parseUserName_returnsEmpty_whenNoAtSymbol() {
+        Parser parser = Parser.getInstance();
+        assertEquals("", parser.parseUserName("user"));
+    }
+
+    @Test
+    public void parseUserName_returnsSubstring_whenAtSymbolIsLast() {
+        Parser parser = Parser.getInstance();
+        assertEquals("user", parser.parseUserName("hello@user"));
+    }
+
+    @Test
+    public void parseUserName_returnsSubstring_whenAtSymbolFollowedBySpace() {
+        Parser parser = Parser.getInstance();
+        assertEquals("user", parser.parseUserName("hello@user moretext"));
+    }
+
+    @Test
+    public void parseUserName_returnsSubstring_whenMultipleAtSymbols() {
+        Parser parser = Parser.getInstance();
+        assertEquals("user2", parser.parseUserName("hello@user1 moretext@user2"));
+    }
+
+    @Test
+    public void parseUserName_returnsSubstring_whenMultipleAtSymbolsFollowedBySpace() {
+        Parser parser = Parser.getInstance();
+        assertEquals("user2", parser.parseUserName("hello@user1 moretext@user2 moretext"));
+    }
+
 }
