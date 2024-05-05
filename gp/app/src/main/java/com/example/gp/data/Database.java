@@ -21,9 +21,9 @@ import com.google.type.DateTime;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Database {
     // User
@@ -44,17 +44,17 @@ public class Database {
                 User.userId = user.getUid();
                 User.email = user.getEmail();
                 FirebaseFirestore.getInstance().collection("users")
-                        .whereEqualTo("email", User.email)
-                        .get()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                if (task.getResult().isEmpty()) {
-                                    Log.d(TAG, "No such document");
-                                } else {
-                                    setUsername((String) task.getResult().getDocuments().get(0).get("username"));
-                                }
+                    .whereEqualTo("email", User.email)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().isEmpty()) {
+                                Log.d(TAG, "No such document");
+                            } else {
+                                setUsername((String) task.getResult().getDocuments().get(0).get("username"));
                             }
-                        });
+                        }
+                    });
             }
         }
 
@@ -68,38 +68,38 @@ public class Database {
 
         public static void signUp(String username, String email, String password, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance()
-                    .collection("users")
-                    .document(username).get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                ToastUtil.showLong((Context) object, "Username already exist");
-                            } else {
-                                FirebaseAuth.getInstance()
-                                        .createUserWithEmailAndPassword(email, password)
-                                        .addOnCompleteListener(task1 -> {
-                                            if (task1.isSuccessful()) {
-                                                // Sign in success, update UI with the signed-in user's information
-                                                FirebaseUser user = task1.getResult().getUser();
-                                                String userId = user.getUid();
-                                                saveUserData(userId, username, email);
-                                                ToastUtil.showLong((Context) object, "Create account successfully");
-                                                try {
-                                                    MethodUtil.getMethod(object, methodName, args).invoke(object, args);
-                                                } catch (Exception e) {
-                                                    Log.e(TAG, "Error: " + e.getMessage());
-                                                }
-                                            } else {
-                                                // If sign in fails, display a message to the user.
-                                                Exception e = task1.getException();
-                                                Log.e(TAG, "Error: " + e);
-                                                ToastUtil.showLong((Context) object, "Create account failed: " + e.getMessage());
-                                            }
-                                        });
-                            }
+                .collection("users")
+                .document(username).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            ToastUtil.showLong((Context) object, "Username already exist");
+                        } else {
+                            FirebaseAuth.getInstance()
+                                .createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        FirebaseUser user = task1.getResult().getUser();
+                                        String userId = user.getUid();
+                                        saveUserData(userId, username, email);
+                                        ToastUtil.showLong((Context) object, "Create account successfully");
+                                        try {
+                                            MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+                                        } catch (Exception e) {
+                                            Log.e(TAG, "Error: " + e.getMessage());
+                                        }
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Exception e = task1.getException();
+                                        Log.e(TAG, "Error: " + e);
+                                        ToastUtil.showLong((Context) object, "Create account failed: " + e.getMessage());
+                                    }
+                                });
                         }
-                    });
+                    }
+                });
         }
 
         public static void getEmailByUsername(String username, Object object, Method method) {
@@ -107,24 +107,24 @@ public class Database {
             Log.d(TAG, "Method: " + method.getName());
 
             FirebaseFirestore.getInstance()
-                    .collection("users")
-                    .document(username)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                       if (task.isSuccessful()) {
-                           DocumentSnapshot document = task.getResult();
-                           if (document.exists()) {
-                               Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                               try {
-                                   method.invoke(object, document.getData().get("email"));
-                               } catch (Exception e) {
-                                   Log.e(TAG, "Error: " + e.getMessage());
-                               }
-                           } else {
-                               Log.d(TAG, "No such document");
+                .collection("users")
+                .document(username)
+                .get()
+                .addOnCompleteListener(task -> {
+                   if (task.isSuccessful()) {
+                       DocumentSnapshot document = task.getResult();
+                       if (document.exists()) {
+                           Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                           try {
+                               method.invoke(object, document.getData().get("email"));
+                           } catch (Exception e) {
+                               Log.e(TAG, "Error: " + e.getMessage());
                            }
+                       } else {
+                           Log.d(TAG, "No such document");
                        }
-                    });
+                   }
+                });
         }
 
         @Nullable
@@ -187,12 +187,12 @@ public class Database {
             user.put("email", email);
 
             db.collection("users").document(username).set(user)
-                    .addOnSuccessListener(aVoid -> {
-                        Log.d(TAG, "UserData successfully written!");
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.w(TAG, "Error writing userData", e);
-                    });
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "UserData successfully written!");
+                })
+                .addOnFailureListener(e -> {
+                    Log.w(TAG, "Error writing userData", e);
+                });
         }
 
         private static void signInWithEmail(String email, String password, Object object, String methodName, Object... args) {
@@ -200,17 +200,17 @@ public class Database {
 
             // Firebase Auth
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            try {
-                                MethodUtil.getMethod(object, methodName, args).invoke(object, args);
-                            } catch (Exception e) {
-                                Log.e(TAG, "Error: " + e.getMessage());
-                            }
-                        } else {
-                            ToastUtil.showLong((Context) object, "Login failed, please check your email or username and password");
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        try {
+                            MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error: " + e.getMessage());
                         }
-                    });
+                    } else {
+                        ToastUtil.showLong((Context) object, "Login failed, please check your email or username and password");
+                    }
+                });
         }
 
         private static void signInWithUsername(String username, String password, Object object, String methodName, Object... args) {
@@ -218,31 +218,31 @@ public class Database {
 
             // Firebase Auth
             FirebaseFirestore.getInstance()
-                    .collection("users")
-                    .document(username)
-                    .get()
-                    // Check if username exist
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            // Query successful
-                            Log.d(TAG, "Check if username exist");
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                // Document found in firebase so username exist
-                                Map<String, Object> userData = document.getData();
-                                Log.d(TAG, "DocumentSnapshot data: " + userData);
-                                String email = (String) userData.get("email");
-                                if (email != null)
-                                    // Sign in with email
-                                    signInWithEmail(email, password, object, methodName, args);
-                            } else {
-                                Log.d(TAG, "Username does not exist");
-                                ToastUtil.showLong((Context) object, "Username does not exist");
-                            }
+                .collection("users")
+                .document(username)
+                .get()
+                // Check if username exist
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Query successful
+                        Log.d(TAG, "Check if username exist");
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // Document found in firebase so username exist
+                            Map<String, Object> userData = document.getData();
+                            Log.d(TAG, "DocumentSnapshot data: " + userData);
+                            String email = (String) userData.get("email");
+                            if (email != null)
+                                // Sign in with email
+                                signInWithEmail(email, password, object, methodName, args);
                         } else {
-                            ToastUtil.showLong((Context) object, task.getException().getMessage());
+                            Log.d(TAG, "Username does not exist");
+                            ToastUtil.showLong((Context) object, "Username does not exist");
                         }
-                    });
+                    } else {
+                        ToastUtil.showLong((Context) object, task.getException().getMessage());
+                    }
+                });
         }
 
         public String getUsername() {
@@ -255,25 +255,87 @@ public class Database {
 
         private static String TAG = "Database.Post";
 
-        public static void addPost(String post) {
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            mAuth.getCurrentUser();
+        //Save post data to firestore
+        public static void savePostData(String authorId, String content, DateTime dateTime) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            if (mAuth.getCurrentUser() != null) {
-                Log.d(TAG, "Current user: " + mAuth.getCurrentUser().getEmail());
-            } else {
-                Log.d(TAG, "No current user");
-            }
+            Map<String, Object> post = new HashMap<>();
+            post.put("authorId", authorId);
+            post.put("content", content);
+            post.put("dateTime", dateTime);
+
+            db.collection("posts").add(post)
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "Post added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w(TAG, "Error adding post", e));
         }
 
+        //Get a list of posts by date time, descending sorted by dateTime
         public static void getPostsByDateTime(DateTime datetime, int limit, Object object, Method method, Object... args) {
-            // Get posts by date time (latest first) limit number of posts
-
-            CollectionReference postRef = FirebaseFirestore.getInstance()
-                    .collection("posts");
-            postRef.orderBy("dateTime", Query.Direction.DESCENDING).limit(10);
-
-            // TODO: read this https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
+            CollectionReference postRef = FirebaseFirestore.getInstance().collection("posts");
+            postRef.whereLessThan("dateTime", datetime)
+                .orderBy("dateTime", Query.Direction.DESCENDING)
+                .limit(limit).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                        List<Map<String, Object>> posts = new ArrayList<>();
+                        for (DocumentSnapshot document : documents) {
+                            posts.add(document.getData());
+                        }
+                        try {
+                            method.invoke(object, posts);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error: " + e.getMessage());
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
         }
+
+        //Get post by postId, note that postId is unique
+        public static void getPostByPostId(String postId, Object object, Method method, Object... args) {
+            FirebaseFirestore.getInstance().collection("posts").document(postId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            try {
+                                method.invoke(object, document.getData());
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error: " + e.getMessage());
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                });
+        }
+
+        //Get a list of posts by author id
+        public static void getPostsByAuthorId(String authorId, Object object, Method method, Object... args) {
+            FirebaseFirestore.getInstance().collection("posts")
+                    .whereEqualTo("authorId", authorId)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            List<Map<String, Object>> posts = new ArrayList<>();
+                            for (DocumentSnapshot document : documents) {
+                                posts.add(document.getData());
+                            }
+                            try {
+                                method.invoke(object, posts);
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error: " + e.getMessage());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    });
+        }
+
     }
 }
