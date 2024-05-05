@@ -37,7 +37,7 @@ public class AuthUtil {
         // i.e. check if the username is spam
         // i.e. check if the username is offensive
         return !username.isEmpty() && !username.contains(" ")
-                && !(username.length() <= 18);
+                && username.length() >= 3 && username.length() <= 18;
     }
 
     public static boolean isEmail(String input) {
