@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(note -> openDetailActivity(note));
 
         // 在此处直接添加一些数据
-        addInitialNotes();
+        loadInitialContents();
 
         // 观察 UserData 中的笔记
         UserData.notes().observe(getViewLifecycleOwner(), notes -> {
@@ -63,7 +63,12 @@ public class HomeFragment extends Fragment {
     }
 
     // add some example data
-    private void addInitialNotes() {
+    private void loadInitialContents() {
+
+        // TODO: load posts from local storage
+
+        // for each post, load its condensed information and display it.
+
         UserData.addNote(new Note("1", "Note 1", "Sport News"));
         UserData.addNote(new Note("2", "Note 2", "WOW Game Strategy"));
         UserData.addNote(new Note("3", "Note 3", "Description XXXX"));
@@ -71,7 +76,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void openSearchActivity() {
-        // 实现打开 SearchActivity 的逻辑
+        // TODO: 实现打开 SearchActivity 的逻辑
     }
 
     private void openDetailActivity(Note note) {

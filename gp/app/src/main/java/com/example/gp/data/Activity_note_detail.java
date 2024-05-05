@@ -30,7 +30,7 @@ public class Activity_note_detail extends BaseActivity {
 
         setUpTitleBar(R.layout.activity_note_detail,activityName);
 //        toggleLeftIcon();
-        toggleRightIcon();
+//        toggleRightIcon();
 
         TextView titleView = findViewById(R.id.title);
         TextView descriptionView = findViewById(R.id.description);
@@ -42,6 +42,8 @@ public class Activity_note_detail extends BaseActivity {
         int imageResId = getIntent().getIntExtra("imageResId", -1);
 
         // 将数据设置到视图组件中
+
+        // parse the text first
         titleView.setText(title);
         descriptionView.setText(description);
         if (imageResId != -1) {
