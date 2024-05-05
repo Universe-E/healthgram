@@ -85,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
             ToastUtil.showLong(this, "Invalid email address, eg: ABCabc123@example.com");
         } else if (!AuthUtil.isValidUsername(username)) {
             // Username is already taken
-            ToastUtil.showLong(this, "Invalid username: contains space, or length > 18");
+            ToastUtil.showLong(this, "Invalid username: contains space, or length not range from 3 to 18");
         } else if (AuthUtil.isUsernameTaken(username)) {
             // Username is invalid
             ToastUtil.showLong(this, "Username already taken");
