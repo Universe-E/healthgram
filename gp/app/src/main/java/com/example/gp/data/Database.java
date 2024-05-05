@@ -270,7 +270,7 @@ public class Database {
         }
 
         //Get a list of posts by date time, descending sorted by dateTime
-        public static void getPostsByDateTime(DateTime datetime, int limit, Object object, Method method, Object... args) {
+        public static void getPostsByDateTime(DateTime datetime, int limit, Object object, String methodName, Object... args) {
             CollectionReference postRef = FirebaseFirestore.getInstance().collection("posts");
             postRef.whereLessThan("dateTime", datetime)
                 .orderBy("dateTime", Query.Direction.DESCENDING)
@@ -283,7 +283,7 @@ public class Database {
                             posts.add(document.getData());
                         }
                         try {
-                            method.invoke(object, posts);
+                            MethodUtil.getMethod(object, methodName, args).invoke(object, posts);
                         } catch (Exception e) {
                             Log.e(TAG, "Error: " + e.getMessage());
                         }
@@ -294,14 +294,14 @@ public class Database {
         }
 
         //Get post by postId, note that postId is unique
-        public static void getPostByPostId(String postId, Object object, Method method, Object... args) {
+        public static void getPostByPostId(String postId, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance().collection("posts").document(postId).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             try {
-                                method.invoke(object, document.getData());
+                                MethodUtil.getMethod(object, methodName, args).invoke(object, document.getData());
                             } catch (Exception e) {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
@@ -315,7 +315,7 @@ public class Database {
         }
 
         //Get a list of posts by author id
-        public static void getPostsByAuthorId(String authorId, Object object, Method method, Object... args) {
+        public static void getPostsByAuthorId(String authorId, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance().collection("posts")
                     .whereEqualTo("authorId", authorId)
                     .get()
@@ -327,7 +327,7 @@ public class Database {
                                 posts.add(document.getData());
                             }
                             try {
-                                method.invoke(object, posts);
+                                MethodUtil.getMethod(object, methodName, args).invoke(object, posts);
                             } catch (Exception e) {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
