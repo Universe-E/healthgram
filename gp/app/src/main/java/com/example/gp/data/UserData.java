@@ -4,9 +4,11 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 // a singleton to hold User data
@@ -93,25 +95,65 @@ public class UserData {
         return null;
     }
 
+    public static List<Note> getNotes() {
+        List<Note> notes = _notes.getValue();
+        if (notes != null) {
+            return Collections.unmodifiableList(notes); // 返回不可修改的列表
+        } else {
+            return Collections.emptyList(); // 返回空列表
+        }
+    }
+
     /*********** END of API ************/
 
     // a note data class
-    public static class Note {
+    public static class Note implements Parcelable {
         public String id;
         public String name;
         public String description;
         public String imageName;
         public Bitmap image;
 
+        // 构造函数
         public Note(String id, String name, String description) {
             this.id = id;
             this.name = name;
             this.description = description;
         }
 
-        @Override
-        public String toString() {
-            return name;
+        // Parcelable 构造函数
+        protected Note(Parcel in) {
+            id = in.readString();
+            name = in.readString();
+            description = in.readString();
+            imageName = in.readString();
+            // 由于 Bitmap 复杂，可以省略读取图片数据
         }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(id);
+            dest.writeString(name);
+            dest.writeString(description);
+            dest.writeString(imageName);
+            // 由于 Bitmap 复杂，可以省略写入图片数据
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<Note> CREATOR = new Creator<Note>() {
+            @Override
+            public Note createFromParcel(Parcel in) {
+                return new Note(in);
+            }
+
+            @Override
+            public Note[] newArray(int size) {
+                return new Note[size];
+            }
+        };
     }
 }
