@@ -92,7 +92,7 @@ public class SimpleTestActivity extends AppCompatActivity {
             Log.d(TAG, "User is signed in");
         }
         Database.User user = new Database.User();
-        Database.User.getEmailByUsername("123", this, this.getClass().getMethod("toastUsername", String.class));
+//        Database.User.getEmailByUsername("123", this, this.getClass().getMethod("toastUsername", String.class));
 //        Database.User.getEmailByUsername("123", this, "toastUsername");
     }
 

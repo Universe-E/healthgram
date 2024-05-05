@@ -20,6 +20,7 @@ import com.google.type.DateTime;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,7 +103,7 @@ public class Database {
                 });
         }
 
-        public static void getEmailByUsername(String username, Object object, Method method) {
+        private static void getEmailByUsername(String username, Object object, Method method) {
             // Get User email by username
             Log.d(TAG, "Method: " + method.getName());
 
@@ -256,7 +257,7 @@ public class Database {
         private static String TAG = "Database.Post";
 
         //Save post data to firestore
-        public static void savePostData(String authorId, String content, DateTime dateTime) {
+        public static void savePostData(String authorId, String content, DateTime dateTime, Object... args) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
             Map<String, Object> post = new HashMap<>();
@@ -265,15 +266,31 @@ public class Database {
             post.put("dateTime", dateTime);
 
             db.collection("posts").add(post)
-                .addOnSuccessListener(documentReference -> Log.d(TAG, "Post added with ID: " + documentReference.getId()))
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding post", e));
+                .addOnSuccessListener(documentReference -> {
+                    if (args.length >= 2) {
+                        // args[0] is object, args[1] is method name
+                        try {
+                            Object[] slicedArgs = Arrays.copyOfRange(args, 2, args.length);
+                            MethodUtil.getMethod(args[0], (String) args[1], slicedArgs).invoke(args[0], documentReference.getId());
+                        } catch (Exception e) {
+                            Log.d(TAG, "Error: " + e.getMessage());
+                        }
+                    }
+                    Log.d(TAG, "Post added with ID: " + documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+                    if (args.length > 0 && args[0] != null) {
+                        ToastUtil.showLong((Context) args[0], "Error adding post");
+                    }
+                    Log.w(TAG, "Error adding post", e);
+                });
         }
 
         //Get a list of posts by date time, descending sorted by dateTime
         public static void getPostsByDateTime(DateTime datetime, int limit, Object object, String methodName, Object... args) {
             CollectionReference postRef = FirebaseFirestore.getInstance().collection("posts");
-            postRef.whereLessThan("dateTime", datetime)
-                .orderBy("dateTime", Query.Direction.DESCENDING)
+            postRef.orderBy("dateTime", Query.Direction.DESCENDING)
+                .whereLessThan("dateTime", datetime)
                 .limit(limit).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -315,17 +332,19 @@ public class Database {
         }
 
         // get current user's post
-        public static void getUserPost(int limit, Object object, String methodName, Object... args) {
+        public static void getUserPost(DateTime datetime, int limit, Object object, String methodName, Object... args) {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-            getPostsByAuthorId(userId, object, methodName, args);
+            getPostsByAuthorId(datetime, limit, userId, object, methodName, args);
         }
 
         //Get a list of posts by author id
-        public static void getPostsByAuthorId(String authorId, Object object, String methodName, Object... args) {
+        public static void getPostsByAuthorId(DateTime datetime, int limit,String authorId, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance().collection("posts")
                     .whereEqualTo("authorId", authorId)
-                    .get()
+                    .orderBy("dateTime", Query.Direction.DESCENDING)
+                    .whereLessThan("dateTime", datetime)
+                    .limit(limit).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             List<DocumentSnapshot> documents = task.getResult().getDocuments();
