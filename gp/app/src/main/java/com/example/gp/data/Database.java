@@ -11,10 +11,12 @@ import com.example.gp.Utils.ToastUtil;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.type.DateTime;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -262,6 +264,16 @@ public class Database {
             } else {
                 Log.d(TAG, "No current user");
             }
+        }
+
+        public static void getPostsByDateTime(DateTime datetime, int limit, Object object, Method method, Object... args) {
+            // Get posts by date time (latest first) limit number of posts
+
+            CollectionReference postRef = FirebaseFirestore.getInstance()
+                    .collection("posts");
+            postRef.orderBy("dateTime", Query.Direction.DESCENDING).limit(10);
+
+            // TODO: read this https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
         }
     }
 }
