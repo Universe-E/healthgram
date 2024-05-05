@@ -29,6 +29,11 @@ public class Post {
         this.isPublic = true;
     }
 
+    public void setPublic(boolean isPublic){
+        this.isPublic = isPublic;
+    }
+
+
     @Override
     public String toString() {
         return "Post{" +

@@ -16,8 +16,11 @@
         android:theme="@style/Theme.Gp"
         tools:targetApi="31">
         <activity
+            android:name=".setting.FriendPermissionActivity"
+            android:exported="false" />
+        <activity
             android:name=".setting.PostVisibilityActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".SimpleTestActivity"
             android:exported="true" />

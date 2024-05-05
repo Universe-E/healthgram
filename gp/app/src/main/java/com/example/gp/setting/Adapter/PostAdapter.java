@@ -1,15 +1,24 @@
 package com.example.gp.setting.Adapter;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.R;
+import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Post;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +27,7 @@ import java.util.List;
  * Date: 2024-05-04
  */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-    private List<Post> posts;
+    private static List<Post> posts;
 
     public PostAdapter(List<Post> posts) {
         this.posts = posts;
@@ -43,18 +52,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
 
-    public static class PostViewHolder extends RecyclerView.ViewHolder {
+    public static class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private TextView tv_is_public;
         private TextView tv_post_title;
         private TextView tv_post_content;
+        private Button btn_change_state;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_is_public = itemView.findViewById(R.id.tv_is_public);
             tv_post_title = itemView.findViewById(R.id.tv_post_title);
             tv_post_content = itemView.findViewById(R.id.tv_post_content);
+            btn_change_state = itemView.findViewById(R.id.btn_change_state);
+            btn_change_state.setOnClickListener(this);
         }
-
         /**
          * Method to bind a Post object to the views in the ViewHolder.
          * @param post The Post object to bind.
@@ -62,13 +74,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public void bind(Post post) {
             tv_post_title.setText(post.title);
             tv_post_content.setText(post.mContent);
-            if(post.isPublic){
-               tv_is_public.setText("public");
-               tv_is_public.setTextColor(itemView.getContext().getColor(R.color.green));
-            } else{
-                tv_is_public.setText("private");
-                tv_is_public.setTextColor(itemView.getContext().getColor(R.color.red));
+            updateIsPublicTextView(post.isPublic);
+        }
+        @Override
+        public void onClick(View v) {
+            Log.d("ClickListener", "Success");
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Post post = posts.get(position);
+                // Change the state
+                post.setPublic(!post.isPublic);
+                // update the UI
+                updateIsPublicTextView(post.isPublic);
             }
+        }
+        private void updateIsPublicTextView(boolean isPublic) {
+            tv_is_public.setText(isPublic ? "Public" : "Private");
+            tv_is_public.setTextColor(isPublic ? Color.GREEN : Color.RED);
         }
     }
 }
