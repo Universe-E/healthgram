@@ -56,77 +56,46 @@ public class Database {
             }
         }
 
-        public static void saveUserData(String userId, String username, String email) {
-            // save User data to firestore
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            Map<String, Object> user = new HashMap<>();
-            user.put("userId", userId);
-            user.put("username", username);
-            user.put("email", email);
-
-            db.collection("users").document(username).set(user)
-                    .addOnSuccessListener(aVoid -> {
-                        Log.d(TAG, "UserData successfully written!");
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.w(TAG, "Error writing userData", e);
-                    });
-        }
-
         public static void signIn(String input, String password, Object object, String methodName, Object... args) {
             if (AuthUtil.isEmail(input)) {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(input, password)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                try {
-                                    MethodUtil.getMethod(object, methodName, args).invoke(object, args);
-                                } catch (Exception e) {
-                                    Log.e(TAG, "Error: " + e.getMessage());
-                                }
-                            } else {
-                                ToastUtil.showLong((Context) object, "Wrong password or email");
-                            }
-                        });
+                signInWithEmail(input, password, object, methodName, args);
             } else {
                 signInWithUsername(input, password, object, methodName, args);
             }
         }
 
-        private static void signInWithUsername(String username, String password, Object object, String methodName, Object... args) {
-            // Using username to find user email and sign in with email
+        public static void signUp(String username, String email, String password, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance()
                     .collection("users")
-                    .document(username)
-                    .get()
+                    .document(username).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "Check if username exist");
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                if (document.getData().get("email") != null)
-                                    // Sign in with email
-                                    FirebaseAuth.getInstance().signInWithEmailAndPassword((String) document.getData().get("email"), password)
-                                            .addOnCompleteListener(task1 -> {
-                                                if (task1.isSuccessful()) {
-                                                    try {
-                                                        Log.d(TAG, "Method: " + methodName);
-                                                        Method method = MethodUtil.getMethod(object, methodName, args);
-                                                        method.invoke(object, args);
-                                                    } catch (Exception e) {
-                                                        ToastUtil.showLong((Context) object, e.getMessage());
-                                                    }
-                                                } else {
-                                                    ToastUtil.showLong((Context) object, "Wrong password");
-                                                }
-                                            });
+                                ToastUtil.showLong((Context) object, "Username already exist");
                             } else {
-                                Log.d(TAG, "Username does not exist");
-                                ToastUtil.showLong((Context) object, "Username does not exist");
+                                FirebaseAuth.getInstance()
+                                        .createUserWithEmailAndPassword(email, password)
+                                        .addOnCompleteListener(task1 -> {
+                                            if (task1.isSuccessful()) {
+                                                // Sign in success, update UI with the signed-in user's information
+                                                FirebaseUser user = task1.getResult().getUser();
+                                                String userId = user.getUid();
+                                                saveUserData(userId, username, email);
+                                                ToastUtil.showLong((Context) object, "Create account successfully");
+                                                try {
+                                                    MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+                                                } catch (Exception e) {
+                                                    Log.e(TAG, "Error: " + e.getMessage());
+                                                }
+                                            } else {
+                                                // If sign in fails, display a message to the user.
+                                                Exception e = task1.getException();
+                                                Log.e(TAG, "Error: " + e);
+                                                ToastUtil.showLong((Context) object, "Create account failed: " + e.getMessage());
+                                            }
+                                        });
                             }
-                        } else {
-                            ToastUtil.showLong((Context) object, task.getException().getMessage());
                         }
                     });
         }
@@ -204,6 +173,74 @@ public class Database {
         private void setUsername(String username) {
             // Set username for using inside async method
             User.username = username;
+        }
+
+        private static void saveUserData(String userId, String username, String email) {
+            // save User data to firestore
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            Map<String, Object> user = new HashMap<>();
+            user.put("userId", userId);
+            user.put("username", username);
+            user.put("email", email);
+
+            db.collection("users").document(username).set(user)
+                    .addOnSuccessListener(aVoid -> {
+                        Log.d(TAG, "UserData successfully written!");
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.w(TAG, "Error writing userData", e);
+                    });
+        }
+
+        private static void signInWithEmail(String email, String password, Object object, String methodName, Object... args) {
+            // Sign in with email
+
+            // Firebase Auth
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            try {
+                                MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error: " + e.getMessage());
+                            }
+                        } else {
+                            ToastUtil.showLong((Context) object, "Login failed, please check your email or username and password");
+                        }
+                    });
+        }
+
+        private static void signInWithUsername(String username, String password, Object object, String methodName, Object... args) {
+            // Using username to find user email and sign in with email
+
+            // Firebase Auth
+            FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(username)
+                    .get()
+                    // Check if username exist
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Query successful
+                            Log.d(TAG, "Check if username exist");
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                // Document found in firebase so username exist
+                                Map<String, Object> userData = document.getData();
+                                Log.d(TAG, "DocumentSnapshot data: " + userData);
+                                String email = (String) userData.get("email");
+                                if (email != null)
+                                    // Sign in with email
+                                    signInWithEmail(email, password, object, methodName, args);
+                            } else {
+                                Log.d(TAG, "Username does not exist");
+                                ToastUtil.showLong((Context) object, "Username does not exist");
+                            }
+                        } else {
+                            ToastUtil.showLong((Context) object, task.getException().getMessage());
+                        }
+                    });
         }
 
         public String getUsername() {
