@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
 import com.example.gp.Items.Post;
+import com.example.gp.Utils.TimeUtil;
+import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityPostVisibilityBinding;
 import com.example.gp.setting.Adapter.PostAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PostVisibilityActivity extends BaseActivity {
     private static String TAG = "PVA";
@@ -39,7 +43,8 @@ public class PostVisibilityActivity extends BaseActivity {
         posts = new ArrayList<>();
         updateUI(posts);
         // TODO: get all post created or managed by this user
-//        Database.Post.getUserPost(DateTime);
+        Date time = TimeUtil.getCurDate();
+        Database.PostDB.getUserPost(time,10,this,"updateUI");
 
         // Set post adapter
         mPostAdapter = new PostAdapter(posts);

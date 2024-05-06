@@ -6,8 +6,8 @@ import com.google.firebase.Timestamp;
  * Post class
  * Each post has a unique identifier (postId), an author identifier (authorId),
  * content, title, and a flag indicating whether the post is public or private.
- * Author: Yulong Chen
- * Date: 2024-05-05
+ * @author : Yulong Chen
+ * @since : 2024-05-05
  */
 public class Post {
     public String postId;
@@ -16,6 +16,19 @@ public class Post {
     public String title;
     public boolean isPublic;
     public Timestamp timestamp;
+
+    /**
+     * Please use this constructor when creating a new post.
+     * @author Han Bao
+     * @param mContent
+     * @param title
+     * @param isPublic
+     */
+    public Post(String mContent, String title, boolean isPublic) {
+        this.mContent = mContent;
+        this.title = title;
+        this.isPublic = isPublic;
+    }
 
     public Post(String postId, String authorId, String content, String title, boolean isPublic) {
         this.postId = postId;

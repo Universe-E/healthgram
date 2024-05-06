@@ -6,8 +6,8 @@ import android.widget.Toast;
 /**
  * It is a util class for toasting information on the screen
  * eg. ToastUtil.show(context, "message")
- * Author: Yulong Chen
- * Date: 2024-04-30
+ * @author : Yulong Chen
+ * @since : 2024-04-30
  */
 public class ToastUtil {
 

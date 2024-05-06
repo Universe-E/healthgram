@@ -16,8 +16,9 @@ import java.util.Objects;
  * Please extend this class instead of AppCompatActivity
  * if you want to set up the title bar for activities with top navigation bar.
  * ADD any code you find common in the activity
- * Author: Yulong Chen, Tianci Li
- * Date: 2024-04-30
+ * @author : Yulong Chen
+ * {@code @editor} : Tianci Li
+ * @since : 2024-04-30
  */
 public class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
