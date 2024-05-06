@@ -1,5 +1,5 @@
 # [G04]
-## Team Meeting 2- Week 7 - 2024-04-21 (20:00 - 21:00)
+## Team Meeting 2 - Week 7 - 2024-04-21 (20:00 - 21:00)
 **Attend:** Zehua Kong, Yulong Chen, Han Bao, Tianci Li, Xingchen Zhang
 
 **Absent:** None

@@ -1,5 +1,5 @@
 # [G04]
-## Team Meeting 3- Week 8 - 2024-04-28 (21:00 - 22:00)
+## Team Meeting 3 - Week 8 - 2024-04-28 (21:00 - 22:00)
 **Attend:** Zehua Kong, Yulong Chen, Han Bao, Tianci Li, Xingchen Zhang
 
 **Absent:** None
