@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.gp.Items.Friend;
+import com.example.gp.Items.Post;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.ToastUtil;
@@ -32,6 +34,7 @@ public class Database {
 
     private static final String TAG = "Database";
 
+    // Design pattern Singleton
     public static class UserDB {
         // User data
         private static final String TAG = "Database.User";
@@ -46,14 +49,15 @@ public class Database {
                 UserDB.userId = user.getUid();
                 UserDB.email = user.getEmail();
                 FirebaseFirestore.getInstance().collection("users")
-                    .whereEqualTo("email", UserDB.email)
+                    .document(userId)
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            if (task.getResult().isEmpty()) {
-                                Log.d(TAG, "No such document");
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                setUsername((String) document.get("username"));
                             } else {
-                                setUsername((String) task.getResult().getDocuments().get(0).get("username"));
+                                Log.d(TAG, "No such document");
                             }
                         }
                     });
@@ -71,12 +75,15 @@ public class Database {
         public static void signUp(String username, String email, String password, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance()
                 .collection("users")
-                .document(username).get()
+                .whereEqualTo("username", username)
+                .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            ToastUtil.showLong((Context) object, "Username already exist");
+                        if (!task.getResult().isEmpty()) {
+                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                            if (document.exists()) {
+                                ToastUtil.showLong((Context) object, "Username already exist");
+                            }
                         } else {
                             FirebaseAuth.getInstance()
                                 .createUserWithEmailAndPassword(email, password)
@@ -84,7 +91,7 @@ public class Database {
                                     if (task1.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         FirebaseUser user = task1.getResult().getUser();
-                                        String userId = user.getUid();
+                                        String userId = Objects.requireNonNull(user).getUid();
                                         saveUserData(userId, username, email);
                                         ToastUtil.showLong((Context) object, "Create account successfully");
                                         try {
@@ -149,22 +156,22 @@ public class Database {
             });
         }
 
-        public static void getFriendMap(String nickname, int limit, Object object, String methodName, Object ...args) {
+        public static void getFriendList(String nickname, int limit, Object object, String methodName, Object ...args) {
             Log.d(TAG, "Method: " + methodName);
 
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             FirebaseFirestore.getInstance().document(userId)
                 .collection("friendMap")
-                .orderBy("id", Query.Direction.ASCENDING)
+                .orderBy("nickname", Query.Direction.ASCENDING)
                 .whereGreaterThan("nickname", nickname)
                 .limit(limit).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                        List<Map<String, Object>> friends = new ArrayList<>();
+                        List<Friend> friends = new ArrayList<>();
                         for (DocumentSnapshot document : documents) {
-                            friends.add(document.getData());
+                            friends.add(new Friend((String) document.get("id"), (String) document.get("nickname"), (int) document.get("avatar")));
                         }
                         try {
                             MethodUtil.getMethod(object, methodName, args).invoke(object, friends);
@@ -175,6 +182,32 @@ public class Database {
                         Log.d(TAG, "Error getting documents: ", task.getException());
                     }
                 });
+        }
+
+        public static void signOut(Object object, String methodName, Object... args) {
+            FirebaseAuth.getInstance().signOut();
+
+            try {
+                MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+            } catch (Exception e) {
+                Log.e(TAG, "Error: " + e.getMessage());
+            }
+        }
+
+        public static void checkSignedIn(Object object, String methodName, Object... args) {
+            // Check if user is signed in
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (user == null) {
+                Log.d(TAG, "checkSignedIn: User does not sign in yet");
+                return;
+            }
+
+            try {
+                MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+            } catch (Exception e) {
+                Log.e(TAG, "Error: " + e.getMessage());
+            }
         }
 
         private static void getEmailByUsername(String username, Object object, Method method) {
@@ -249,14 +282,18 @@ public class Database {
             // Firebase Auth
             FirebaseFirestore.getInstance()
                 .collection("users")
-                .document(username)
+                .whereEqualTo("username", username)
                 .get()
                 // Check if username exist
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Query successful
                         Log.d(TAG, "Check if username exist");
-                        DocumentSnapshot document = task.getResult();
+                        if (task.getResult().isEmpty()) {
+                            ToastUtil.showLong((Context) object, "Username does not exist");
+                            return;
+                        }
+                        // Query successful
+                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
                         if (document.exists()) {
                             // Document found in firebase so username exist
                             Map<String, Object> userData = document.getData();
@@ -382,10 +419,15 @@ public class Database {
                     .limit(limit).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+                            if (task.getResult().isEmpty()) {
+                                Log.d(TAG, "No post");
+                                return;
+                            }
                             List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                            List<Map<String, Object>> posts = new ArrayList<>();
+                            List<Post> posts = new ArrayList<>();
                             for (DocumentSnapshot document : documents) {
-                                posts.add(document.getData());
+                                Post post = new Post(document.getId(), (String) document.get("authorId"), (String) document.get("mContent"), (String) document.get("title"), (Boolean) document.get("isPublic"));
+                                posts.add(post);
                             }
                             try {
                                 MethodUtil.getMethod(object, methodName, args).invoke(object, posts);

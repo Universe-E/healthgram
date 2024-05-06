@@ -21,8 +21,18 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        Database.UserDB.checkSignedIn(this, "updateUI");
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check if user is already signed in
+        Database.UserDB.checkSignedIn(this, "updateUI");
 
         // load the layout using view binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
