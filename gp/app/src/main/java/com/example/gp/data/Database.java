@@ -342,7 +342,7 @@ public class Database {
             docRef.set(post)
                     .addOnSuccessListener(dRef -> {
                         try {
-                            MethodUtil.getMethod(object, methodName, args).invoke(object, post);
+                            MethodUtil.getMethod(object, methodName, args).invoke(object, args);
                         } catch (Exception e) {
                             Log.e(TAG, "Error: " + e.getMessage());
                         }

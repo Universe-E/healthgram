@@ -17,6 +17,13 @@ public class Post {
     public boolean isPublic;
     public Timestamp timestamp;
 
+    /**
+     * Please use this constructor when creating a new post.
+     * @author Han Bao
+     * @param mContent
+     * @param title
+     * @param isPublic
+     */
     public Post(String mContent, String title, boolean isPublic) {
         this.mContent = mContent;
         this.title = title;
