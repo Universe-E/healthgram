@@ -59,8 +59,10 @@ private void updateUI(boolean isSuccess, Object... args) {
         // Use theObject0Needed for UI update
         ...
     } else {
-        String errorMsg = (String) args[0];
-        // Handle error message
-        ...
+        if (args[0] != null) {
+            String errorMsg = (String) args[0];
+            // Handle error message
+            ...
+        }
     }
 }
