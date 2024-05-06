@@ -3,6 +3,7 @@ package com.example.gp.Utils;
 import android.util.Log;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 public class MethodUtil {
     private static Method getMethod(Object obj, String methodName) {
@@ -36,5 +37,12 @@ public class MethodUtil {
         }
 
         throw new NoSuchMethodException();
+    }
+
+    public static void invokeMethod(Object obj, String methodName, Object... args) throws Exception {
+        if (obj == null) {
+            return;
+        }
+        Objects.requireNonNull(getMethod(obj, methodName)).invoke(obj, args);
     }
 }

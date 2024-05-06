@@ -15,7 +15,8 @@ public class Post {
     public String mContent;
     public String title;
     public boolean isPublic;
-    public Timestamp timestamp;
+    public Timestamp postTimestamp;
+    public Timestamp lastEditTimestamp;
 
     /**
      * Please use this constructor when creating a new post.
@@ -93,12 +94,20 @@ public class Post {
         return isPublic;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Timestamp getPostTimestamp() {
+        return postTimestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setPostTimestamp(Timestamp postTimestamp) {
+        this.postTimestamp = postTimestamp;
+    }
+
+    public void setLastEditTimestamp(Timestamp lastEditTimestamp) {
+        this.lastEditTimestamp = lastEditTimestamp;
+    }
+
+    public Timestamp getLastEditTimestamp() {
+        return lastEditTimestamp;
     }
 
 

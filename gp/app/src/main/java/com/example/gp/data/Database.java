@@ -342,13 +342,15 @@ public class Database {
             docRef.set(post)
                     .addOnSuccessListener(dRef -> {
                         try {
-                            MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+                            MethodUtil.invokeMethod(object, methodName, args);
                         } catch (Exception e) {
                             Log.e(TAG, "Error: " + e.getMessage());
                         }
                     })
                     .addOnFailureListener(e -> {
-                        ToastUtil.showLong((Context) object, "Error adding post: " + e.getMessage());
+                        if (object != null) {
+                            ToastUtil.showLong((Context) object, "Error adding post: " + e.getMessage());
+                        }
                         Log.e(TAG, "Error: " + e.getMessage());
                     });
         }
