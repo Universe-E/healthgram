@@ -339,7 +339,7 @@ public class Database {
         }
 
         //Get a list of posts by author id
-        public static void getPostsByAuthorId(DateTime datetime, int limit,String authorId, Object object, String methodName, Object... args) {
+        private static void getPostsByAuthorId(DateTime datetime, int limit,String authorId, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance().collection("posts")
                     .whereEqualTo("authorId", authorId)
                     .orderBy("dateTime", Query.Direction.DESCENDING)

@@ -1,14 +1,9 @@
 package com.example.gp.setting;
 
+
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostVisibilityActivity extends BaseActivity {
-    private static String TAG = "POST.CLICK";
+    private static String TAG = "PVA";
     private com.example.gp.databinding.ActivityPostVisibilityBinding binding;
     private RecyclerView recyclerView;
     private PostAdapter mPostAdapter;
@@ -43,19 +38,23 @@ public class PostVisibilityActivity extends BaseActivity {
         recyclerView = binding.recyclerViewPosts;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Test Code
-        Post post_test1 = new Post("01", "02", "This is test01", "Test01", true);
-        Post post_test2 = new Post("02", "02", "This is test02", "Test02", false);
 
-
-        // TODO: get all post created or managed by this user
         posts = new ArrayList<>();
-        posts.add(post_test1);
-        posts.add(post_test2);
+        updateUI(posts);
+        // TODO: get all post created or managed by this user
+//        Database.Post.getUserPost(DateTime);
 
         // Set post adapter
         mPostAdapter = new PostAdapter(posts);
         recyclerView.setAdapter(mPostAdapter);
 
     }
+    public void updateUI(List<Post> posts){
+        // Test Code
+        Post post_test1 = new Post("01", "02", "This is test01", "Test01", true);
+        Post post_test2 = new Post("02", "02", "This is test02", "Test02", false);
+        posts.add(post_test1);
+        posts.add(post_test2);
+    }
 }
+
