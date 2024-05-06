@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.gp.MainActivity;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.ToastUtil;
@@ -32,6 +33,7 @@ public class Database {
 
     private static final String TAG = "Database";
 
+    // Design pattern Singleton
     public static class UserDB {
         // User data
         private static final String TAG = "Database.User";
@@ -177,6 +179,16 @@ public class Database {
                 });
         }
 
+        public static void signOut(Object object, String methodName, Object... args) {
+            FirebaseAuth.getInstance().signOut();
+
+            try {
+                MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+            } catch (Exception e) {
+                Log.e(TAG, "Error: " + e.getMessage());
+            }
+        }
+
         private static void getEmailByUsername(String username, Object object, Method method) {
             // Get User email by username
             Log.d(TAG, "Method: " + method.getName());
@@ -200,6 +212,21 @@ public class Database {
                         }
                     }
                 });
+        }
+
+        public static void checkSignedIn(Object object, String methodName, Object... args) {
+            // Check if user is signed in
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (user == null) {
+                return;
+            }
+
+            try {
+                MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+            } catch (Exception e) {
+                Log.e(TAG, "Error: " + e.getMessage());
+            }
         }
 
         private void setUsername(String username) {

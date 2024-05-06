@@ -106,6 +106,7 @@ public class UserData {
 
     /*********** END of API ************/
 
+    // Design pattern observer
     // a note data class
     public static class Note implements Parcelable {
         public String id;
