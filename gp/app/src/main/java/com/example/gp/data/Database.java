@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.gp.MainActivity;
+import com.example.gp.Items.Friend;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.ToastUtil;
@@ -48,14 +48,15 @@ public class Database {
                 UserDB.userId = user.getUid();
                 UserDB.email = user.getEmail();
                 FirebaseFirestore.getInstance().collection("users")
-                    .whereEqualTo("email", UserDB.email)
+                    .document(userId)
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            if (task.getResult().isEmpty()) {
-                                Log.d(TAG, "No such document");
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                setUsername((String) document.get("username"));
                             } else {
-                                setUsername((String) task.getResult().getDocuments().get(0).get("username"));
+                                Log.d(TAG, "No such document");
                             }
                         }
                     });
@@ -73,10 +74,11 @@ public class Database {
         public static void signUp(String username, String email, String password, Object object, String methodName, Object... args) {
             FirebaseFirestore.getInstance()
                 .collection("users")
-                .document(username).get()
+                .whereEqualTo("username", username)
+                .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
+                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
                         if (document.exists()) {
                             ToastUtil.showLong((Context) object, "Username already exist");
                         } else {
@@ -86,7 +88,7 @@ public class Database {
                                     if (task1.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         FirebaseUser user = task1.getResult().getUser();
-                                        String userId = user.getUid();
+                                        String userId = Objects.requireNonNull(user).getUid();
                                         saveUserData(userId, username, email);
                                         ToastUtil.showLong((Context) object, "Create account successfully");
                                         try {
@@ -151,7 +153,7 @@ public class Database {
             });
         }
 
-        public static void getFriendMap(String nickname, int limit, Object object, String methodName, Object ...args) {
+        public static void getFriendList(String nickname, int limit, Object object, String methodName, Object ...args) {
             Log.d(TAG, "Method: " + methodName);
 
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -164,9 +166,9 @@ public class Database {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                        List<Map<String, Object>> friends = new ArrayList<>();
+                        List<Friend> friends = new ArrayList<>();
                         for (DocumentSnapshot document : documents) {
-                            friends.add(document.getData());
+//                            friends.add(new Friend(document.getId(), (String) document.get("nickname"), (String) document.get("email")));
                         }
                         try {
                             MethodUtil.getMethod(object, methodName, args).invoke(object, friends);
