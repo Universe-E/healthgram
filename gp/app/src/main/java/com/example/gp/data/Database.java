@@ -437,7 +437,7 @@ public class Database {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
                         } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Log.e(TAG, "Error getting documents: ", task.getException());
                         }
                     });
         }
