@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gp.Adapter.FriendsRecyclerViewAdapter;
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
 import com.example.gp.R;
 import com.example.gp.SearchActivity;
@@ -31,7 +32,7 @@ public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
     private SearchBar searchBar;
-    private NoteRecyclerViewAdapter adapter;
+    private FriendsRecyclerViewAdapter adapter;
     private ArrayList<Friend> friends;
 
     @Override
@@ -49,33 +50,18 @@ public class DashboardFragment extends Fragment {
         if (searchBar != null) {
             Log.d("DashboardFragment", "成功加载 SearchBar");
             searchBar.setOnClickListener(v -> openSearchActivity());
-            Toast.makeText(getContext(), "mamba in", Toast.LENGTH_SHORT).show();
         } else {
             Log.e("DashboardFragment", "未找到 SearchBar");
-            Toast.makeText(getContext(), "mamba out", Toast.LENGTH_SHORT).show();
         }
 
-//        // Initialize RecyclerView
-//        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        // Load friends
+        loadFriends();
+
+        // Initialize RecyclerView
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        adapter = new NoteRecyclerViewAdapter(new ArrayList<>());
-//        recyclerView.setAdapter(adapter);
-//
-//        // TODO: Set click listener to navigate to friend detail page
-//        adapter.setOnItemClickListener(friend -> {
-//            // open friend detail page
-//        });
-//
-//        // TODO: get friends list from database
-//        loadFriends();
-
-        // TODO: Observe friends in UserData
-//        UserData.friends().observe(getViewLifecycleOwner(), friends -> {
-//            adapter.updateFriends(friends); // Update adapter with new data
-//        });
-
-
-
+        adapter = new FriendsRecyclerViewAdapter(friends);
+        recyclerView.setAdapter(adapter);
 
         return view;
     }
@@ -90,7 +76,8 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadFriends() {
-        friends.add(new Friend("user1", "Alice", "avatar1"));
-        friends.add(new Friend("user2", "Bob", "avatar2"));
+        friends = new ArrayList<>();
+        friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
+        friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
     }
 }
