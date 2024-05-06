@@ -5,6 +5,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * NotificationRecycleView Adapter Class
+ * The class to handle with data adapter and refresh on layout
+ * Author: Xingchen Zhang
+ * Date: 2024-05-06
+ */
+
 public class NotificationRecycleViewAdapter  extends RecyclerView.Adapter<NoteRecyclerViewAdapter.ViewHolder> {
 
 

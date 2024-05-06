@@ -25,6 +25,9 @@
             android:name=".SimpleTestActivity"
             android:exported="true" />
         <activity
+            android:name=".interaction.PostEditing"
+            android:exported="true" />
+        <activity
             android:name=".Activity_note_detail"
             android:exported="true" />
         <activity

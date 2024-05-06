@@ -55,6 +55,9 @@ public class HomeFragment extends Fragment {
         // Setup SearchView listener
         setupSearchViewListener();
 
+        // Find the FloatingActionButton and set its click listener
+//        FloatingActionButton fabAddNote = view.findViewById(R.id.fab_add_note);
+//        fabAddNote.setOnClickListener(v -> openAddNoteActivity());
         return view;
     }
 
@@ -102,6 +105,11 @@ public class HomeFragment extends Fragment {
         intent.putExtra("description", note.description);
         intent.putExtra("imageResId", note.imageName);
         startActivity(intent);
+    }
+    // Open Add Note Activity
+    private void openAddNoteActivity() {
+//        Intent intent = new Intent(getContext(), AddNoteActivity.class); // 替换为你要跳转的 Activity
+//        startActivity(intent);
     }
 }
 

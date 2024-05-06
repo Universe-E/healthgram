@@ -124,12 +124,13 @@ public class Database {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                            List<Friend> friends = new ArrayList<>();
+                            List<Map<String, Object>> friends = new ArrayList<>();
                             for (DocumentSnapshot document : documents) {
-                                friends.add(new Friend((String) document.get("id"), (String) document.get("nickname"), (int) document.get("avatar")));
+                                // will return a list of friendMap which is a map of <String userId, Friend friend>
+                                friends.add(Map.of(document.getId(), document.toObject(Friend.class)));
                             }
                             try {
-                                MethodUtil.getMethod(object, methodName, args).invoke(object, friends);
+                                MethodUtil.invokeMethod(object, methodName, args, friends);
                             } catch (Exception e) {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
@@ -342,13 +343,15 @@ public class Database {
             docRef.set(post)
                     .addOnSuccessListener(dRef -> {
                         try {
-                            MethodUtil.getMethod(object, methodName, args).invoke(object, args);
+                            MethodUtil.invokeMethod(object, methodName, args);
                         } catch (Exception e) {
                             Log.e(TAG, "Error: " + e.getMessage());
                         }
                     })
                     .addOnFailureListener(e -> {
-                        ToastUtil.showLong((Context) object, "Error adding post: " + e.getMessage());
+                        if (object != null) {
+                            ToastUtil.showLong((Context) object, "Error adding post: " + e.getMessage());
+                        }
                         Log.e(TAG, "Error: " + e.getMessage());
                     });
         }
