@@ -11,6 +11,7 @@ import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -412,12 +413,12 @@ public class Database {
 
         //Get a list of posts by author id
         public static void getPostsByAuthorId(Date time, int limit,String authorId, Object object, String methodName, Object... args) {
-            long timestamp = time.getTime();
+            Timestamp timestamp = Timestamp.now();
 
             FirebaseFirestore.getInstance().collection("posts")
                     .whereEqualTo("authorId", authorId)
-                    .orderBy("createTimestamp", Query.Direction.DESCENDING)
-                    .whereLessThan("createTimestamp", timestamp)
+                    .orderBy("postTimestamp", Query.Direction.DESCENDING)
+                    .whereLessThan("postTimestamp", timestamp)
                     .limit(limit).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -426,13 +427,12 @@ public class Database {
                                 return;
                             }
                             List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                            List<Post> posts = new ArrayList<>();
+                            List<Map<String, Object>> posts = new ArrayList<>();
                             for (DocumentSnapshot document : documents) {
-                                Post post = new Post(document.getId(), (String) document.get("authorId"), (String) document.get("mContent"), (String) document.get("title"), (Boolean) document.get("isPublic"));
-                                posts.add(post);
+                                posts.add(Map.of(document.getId(), document.toObject(Post.class)));
                             }
                             try {
-                                MethodUtil.getMethod(object, methodName, args).invoke(object, posts);
+                                MethodUtil.invokeMethod(object, methodName, posts);
                             } catch (Exception e) {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
