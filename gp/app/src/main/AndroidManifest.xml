@@ -28,9 +28,6 @@
             android:name=".Activity_note_detail"
             android:exported="true" />
         <activity
-            android:name=".SharePageActivity"
-            android:exported="true" />
-        <activity
             android:name=".setting.RequestActivity"
             android:exported="false" />
         <activity
