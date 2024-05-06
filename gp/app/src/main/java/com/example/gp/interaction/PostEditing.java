@@ -1,4 +1,4 @@
-package com.example.gp;
+package com.example.gp.interaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 
+import com.example.gp.BaseActivity;
+import com.example.gp.R;
 import com.example.gp.databinding.ActivitySharePageBinding;
 
 public class PostEditing extends BaseActivity {
