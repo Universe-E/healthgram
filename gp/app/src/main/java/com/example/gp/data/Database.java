@@ -426,9 +426,7 @@ public class Database {
                             List<DocumentSnapshot> documents = task.getResult().getDocuments();
                             List<Post> posts = new ArrayList<>();
                             for (DocumentSnapshot document : documents) {
-                                Date date = new Date();
-                                date.setTime((long) document.get("createTimestamp"));
-                                Post post = new Post(document.getId(), (String) document.get("authorId"), (String) document.get("mContent"), (String) document.get("title"), (Boolean) document.get("isPublic"), date);
+                                Post post = new Post(document.getId(), (String) document.get("authorId"), (String) document.get("mContent"), (String) document.get("title"), (Boolean) document.get("isPublic"));
                                 posts.add(post);
                             }
                             try {
