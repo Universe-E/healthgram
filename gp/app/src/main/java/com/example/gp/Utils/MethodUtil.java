@@ -1,11 +1,14 @@
 package com.example.gp.Utils;
 
+import android.nfc.Tag;
 import android.util.Log;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
 
 public class MethodUtil {
+    private static final String TAG = "MethodUtil";
+
     private static Method getMethod(Object obj, String methodName) {
         Method[] methods = obj.getClass().getMethods();
         for (Method method : methods) {
@@ -39,10 +42,14 @@ public class MethodUtil {
         throw new NoSuchMethodException();
     }
 
-    public static void invokeMethod(Object obj, String methodName, Object... args) throws Exception {
+    public static void invokeMethod(Object obj, String methodName, Object... args) {
         if (obj == null) {
             return;
         }
-        Objects.requireNonNull(getMethod(obj, methodName)).invoke(obj, args);
+        try {
+            Objects.requireNonNull(getMethod(obj, methodName)).invoke(obj, args);
+        } catch (Exception e) {
+            Log.e(TAG, "invoke method error: " + e.getMessage());
+        }
     }
 }

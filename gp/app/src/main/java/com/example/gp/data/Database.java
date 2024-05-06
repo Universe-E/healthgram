@@ -406,6 +406,7 @@ public class Database {
 
         // get current user's post
         public static void getUserPost(Date time, int limit, Object object, String methodName, Object... args) {
+            Log.d(TAG, "Method: " + methodName);
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             getPostsByAuthorId(time, limit, userId, object, methodName, args);
@@ -414,6 +415,7 @@ public class Database {
         //Get a list of posts by author id
         public static void getPostsByAuthorId(Date time, int limit,String authorId, Object object, String methodName, Object... args) {
             Timestamp timestamp = Timestamp.now();
+            Log.d(TAG, "Method: " + methodName);
 
             FirebaseFirestore.getInstance().collection("posts")
                     .whereEqualTo("authorId", authorId)
@@ -424,18 +426,14 @@ public class Database {
                         if (task.isSuccessful()) {
                             if (task.getResult().isEmpty()) {
                                 Log.d(TAG, "No post");
-                                return;
+                                MethodUtil.invokeMethod(object, methodName, (Object) null);
                             }
                             List<DocumentSnapshot> documents = task.getResult().getDocuments();
                             List<Map<String, Object>> posts = new ArrayList<>();
                             for (DocumentSnapshot document : documents) {
                                 posts.add(Map.of(document.getId(), document.toObject(Post.class)));
                             }
-                            try {
-                                MethodUtil.invokeMethod(object, methodName, posts);
-                            } catch (Exception e) {
-                                Log.e(TAG, "Error: " + e.getMessage());
-                            }
+                            MethodUtil.invokeMethod(object, methodName, posts);
                         } else {
                             Log.e(TAG, "Error getting documents: ", task.getException());
                         }
