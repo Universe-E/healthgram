@@ -1,5 +1,6 @@
 package com.example.gp.home.ui.Friend;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,9 +21,11 @@ import com.example.gp.R;
 import com.example.gp.SearchActivity;
 import com.example.gp.Items.Friend;
 import com.example.gp.databinding.FragmentDashboardBinding;
+import com.example.gp.home.Fragment_home;
 import com.google.android.material.search.SearchBar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * 登录成功跳转的主界面
@@ -33,7 +37,7 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private SearchBar searchBar;
     private FriendsRecyclerViewAdapter adapter;
-    private ArrayList<Friend> friends;
+    private List<Friend> friends;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,7 +63,7 @@ public class DashboardFragment extends Fragment {
 
         // Initialize RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new FriendsRecyclerViewAdapter(friends);
         recyclerView.setAdapter(adapter);
 
