@@ -1,9 +1,9 @@
 package com.example.gp.Adapter;
 
 import android.content.Context;
-import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,56 +16,38 @@ import java.util.List;
 
 public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.ViewHolder> {
 
-    public List<UserData.Note> values;
+    private List<UserData.Note> notes;
 
-    public NoteRecyclerViewAdapter(List<UserData.Note> values) {
-        this.values = values;
+    public NoteRecyclerViewAdapter(List<UserData.Note> notes) {
+        this.notes = notes;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        // Inflate the custom layout
-        View view = inflater.inflate(R.layout.content_note, parent, false);
-
-        return new ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View noteView = inflater.inflate(R.layout.content_note, parent, false);
+        return new ViewHolder(noteView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        UserData.Note item = values.get(position);
-
-        // 将数据绑定到视图
-        holder.nameView.setText(item.name);
-        holder.descriptionView.setText(item.description);
-
-        if (item.image != null) {
-            holder.imageView.setImageBitmap(item.image);
-        }
-
-        // 设置点击监听器
+        UserData.Note note = notes.get(position);
+        holder.bind(note);
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onItemClick(item);
+                listener.onItemClick(note);
             }
         });
     }
 
-    // 在 NoteRecyclerViewAdapter 中添加更新数据的方法
     public void updateNotes(List<UserData.Note> newNotes) {
-        this.values = newNotes;
+        notes = newNotes;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return values.size();
-    }
-    // 在 NoteRecyclerViewAdapter 中定义接口和方法
-    public interface OnItemClickListener {
-        void onItemClick(UserData.Note note);
+        return notes.size();
     }
 
     private OnItemClickListener listener;
@@ -74,17 +56,28 @@ public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerVi
         this.listener = listener;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView nameView;
-        TextView descriptionView;
+    public interface OnItemClickListener {
+        void onItemClick(UserData.Note note);
+    }
 
-        public ViewHolder (View itemView) {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imageView;
+        private TextView nameView;
+        private TextView descriptionView;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-            // ViewHolder should contain references to all of the views, so they can be accessed easily
             imageView = itemView.findViewById(R.id.image);
             nameView = itemView.findViewById(R.id.name);
             descriptionView = itemView.findViewById(R.id.description);
+        }
+
+        public void bind(UserData.Note note) {
+            nameView.setText(note.name);
+            descriptionView.setText(note.description);
+            if (note.image != null) {
+                imageView.setImageBitmap(note.image);
+            }
         }
     }
 }
