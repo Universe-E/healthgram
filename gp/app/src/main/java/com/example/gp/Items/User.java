@@ -11,12 +11,14 @@ public class User {
     private String avatar;
     private Map<String, Friend> friendMap;
     private Map<String, Post> postMap;
+    private Map<String, Notification> notificationMap;
 
     /**
      * Constructor with full parameter
      */
     public User(String userid, String username, String email, String description,
-                String avatar, Map<String, Friend> friendMap, Map<String, Post> postMap) {
+                String avatar, Map<String, Friend> friendMap, Map<String, Post> postMap,
+                Map<String, Notification> notificationMap) {
         this.userid = userid;
         this.username = username;
         this.email = email;
@@ -24,6 +26,7 @@ public class User {
         this.avatar = avatar;
         this.friendMap = friendMap;
         this.postMap = postMap;
+        this.notificationMap = notificationMap;
     }
 
     /**
@@ -37,6 +40,7 @@ public class User {
         this.avatar = "set avatar";
         this.friendMap = new HashMap<>();
         this.postMap = new HashMap<>();
+        this.notificationMap = new HashMap<>();
     }
 
     public String getUserid() {
@@ -93,5 +97,13 @@ public class User {
 
     public void setPostMap(Map<String, Post> postMap) {
         this.postMap = postMap;
+    }
+
+    public Map<String, Notification> getNotificationMap() {
+        return notificationMap;
+    }
+
+    public void setNotificationMap(Map<String, Notification> notificationMap) {
+        this.notificationMap = notificationMap;
     }
 }
