@@ -48,7 +48,7 @@ public class AuthUtil {
     @Contract(pure = true)
     public static String getEmailByUsername(String username) {
         // Get email by username from the database
-        return Database.User.getEmailByUsername(username);
+        return Database.UserDB.getEmailByUsername(username);
     }
 
     /********** END API **********/

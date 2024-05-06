@@ -32,7 +32,7 @@ public class Database {
 
     private static final String TAG = "Database";
 
-    public static class User {
+    public static class UserDB {
         // User data
         private static final String TAG = "Database.User";
 
@@ -40,13 +40,13 @@ public class Database {
         private static String username;
         private static String email;
 
-        public User() {
+        public UserDB() {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
-                User.userId = user.getUid();
-                User.email = user.getEmail();
+                UserDB.userId = user.getUid();
+                UserDB.email = user.getEmail();
                 FirebaseFirestore.getInstance().collection("users")
-                    .whereEqualTo("email", User.email)
+                    .whereEqualTo("email", UserDB.email)
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -104,31 +104,6 @@ public class Database {
                 });
         }
 
-        private static void getEmailByUsername(String username, Object object, Method method) {
-            // Get User email by username
-            Log.d(TAG, "Method: " + method.getName());
-
-            FirebaseFirestore.getInstance()
-                .collection("users")
-                .document(username)
-                .get()
-                .addOnCompleteListener(task -> {
-                   if (task.isSuccessful()) {
-                       DocumentSnapshot document = task.getResult();
-                       if (document.exists()) {
-                           Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                           try {
-                               method.invoke(object, document.getData().get("email"));
-                           } catch (Exception e) {
-                               Log.e(TAG, "Error: " + e.getMessage());
-                           }
-                       } else {
-                           Log.d(TAG, "No such document");
-                       }
-                   }
-                });
-        }
-
         @Nullable
         public static String getEmailByUsername(String username) {
             // Get User email by username
@@ -174,9 +149,62 @@ public class Database {
             });
         }
 
+        public static void getFriendMap(String nickname, int limit, Object object, String methodName, Object ...args) {
+            Log.d(TAG, "Method: " + methodName);
+
+            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+            FirebaseFirestore.getInstance().document(userId)
+                .collection("friendMap")
+                .orderBy("id", Query.Direction.ASCENDING)
+                .whereGreaterThan("nickname", nickname)
+                .limit(limit).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                        List<Map<String, Object>> friends = new ArrayList<>();
+                        for (DocumentSnapshot document : documents) {
+                            friends.add(document.getData());
+                        }
+                        try {
+                            MethodUtil.getMethod(object, methodName, args).invoke(object, friends);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error: " + e.getMessage());
+                        }
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                });
+        }
+
+        private static void getEmailByUsername(String username, Object object, Method method) {
+            // Get User email by username
+            Log.d(TAG, "Method: " + method.getName());
+
+            FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            try {
+                                method.invoke(object, document.getData().get("email"));
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error: " + e.getMessage());
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    }
+                });
+        }
+
         private void setUsername(String username) {
             // Set username for using inside async method
-            User.username = username;
+            UserDB.username = username;
         }
 
         private static void saveUserData(String userId, String username, String email) {
@@ -188,7 +216,7 @@ public class Database {
             user.put("username", username);
             user.put("email", email);
 
-            db.collection("users").document(username).set(user)
+            db.collection("users").document(userId).set(user)
                 .addOnSuccessListener(aVoid -> {
                     Log.d(TAG, "UserData successfully written!");
                 })
@@ -248,11 +276,11 @@ public class Database {
         }
 
         public String getUsername() {
-            return User.username;
+            return UserDB.username;
         }
     }
 
-    public static class Post {
+    public static class PostDB {
         // Note
 
         private static String TAG = "Database.Post";
@@ -338,7 +366,7 @@ public class Database {
 
         // get current user's post
         public static void getUserPost(Date time, int limit, Object object, String methodName, Object... args) {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             getPostsByAuthorId(time, limit, userId, object, methodName, args);
         }
