@@ -55,19 +55,19 @@ public class DashboardFragment extends Fragment {
             Toast.makeText(getContext(), "mamba out", Toast.LENGTH_SHORT).show();
         }
 
-        // Initialize RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new NoteRecyclerViewAdapter(new ArrayList<>());
-        recyclerView.setAdapter(adapter);
-
-        // TODO: Set click listener to navigate to friend detail page
-        adapter.setOnItemClickListener(friend -> {
-            // open friend detail page
-        });
-
-        // TODO: get friends list from database
-        loadFriends();
+//        // Initialize RecyclerView
+//        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        adapter = new NoteRecyclerViewAdapter(new ArrayList<>());
+//        recyclerView.setAdapter(adapter);
+//
+//        // TODO: Set click listener to navigate to friend detail page
+//        adapter.setOnItemClickListener(friend -> {
+//            // open friend detail page
+//        });
+//
+//        // TODO: get friends list from database
+//        loadFriends();
 
         // TODO: Observe friends in UserData
 //        UserData.friends().observe(getViewLifecycleOwner(), friends -> {
