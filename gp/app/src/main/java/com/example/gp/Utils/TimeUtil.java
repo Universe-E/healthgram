@@ -5,6 +5,6 @@ import java.util.Date;
 
 public class TimeUtil {
     public static Date getCurDate() {
-        Date date = Calendar.getInstance().getTime();
+        return Calendar.getInstance().getTime();
     }
 }
