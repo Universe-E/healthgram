@@ -8,13 +8,11 @@
     tools:context=".home.ui.home.HomeFragment">
 
 
-
-
-
+    <!-- Include Search Bar -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="670dp"
         android:layout_marginTop="100dp"
         android:onClick="test"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +23,6 @@
         app:layout_constraintVertical_bias="0.592"
         tools:listitem="@layout/content_main" />
 
-    <!-- Include Search Bar -->
     <include
         android:id="@+id/search_layout"
         layout="@layout/activity_search"

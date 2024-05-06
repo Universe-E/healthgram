@@ -22,7 +22,7 @@
             <com.google.android.material.search.SearchBar
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="Enter text to search"
                 android:layout_marginTop="20dp"
                 android:fitsSystemWindows="true"
@@ -31,11 +31,11 @@
 
         <com.google.android.material.search.SearchView
             android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:hint="Search..."
-            app:layout_anchor="@id/search_bar"
             app:autoShowKeyboard="true"
+            app:layout_anchor="@id/search_bar"
             tools:visibility="visible" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
