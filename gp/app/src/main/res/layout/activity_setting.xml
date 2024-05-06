@@ -257,35 +257,6 @@
 
 
                     </LinearLayout>
-
-                    <!-- Friend permission -->
-
-                    <LinearLayout
-                        android:id="@+id/ll_setting_friend_permission_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="0dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal"
-                        android:padding="15dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="15dp"
-                            android:text="@string/setting_friend_permission"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_middle_size" />
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:src="@mipmap/perfect_user_more"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="15dp"/>
-
-                    </LinearLayout>
                 </LinearLayout>
             </ScrollView>
         </RelativeLayout>

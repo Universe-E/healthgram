@@ -3,8 +3,15 @@ package com.example.gp.Items;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class User
+ * @author Zehua Kong
+ * {@code @editor} Han Bao
+ * @version 1.1
+ * @since 2024-05-06
+ */
 public class User {
-    private String userid;
+    private String userId;
     private String username;
     private String email;
     private String description;
@@ -15,11 +22,20 @@ public class User {
 
     /**
      * Constructor with full parameter
+     *
+     * @param userId          user id
+     * @param username        user name
+     * @param email           user email
+     * @param description     user description
+     * @param avatar          user avatar
+     * @param friendMap       user friend map
+     * @param postMap         user post map
+     * @param notificationMap user notification map
      */
-    public User(String userid, String username, String email, String description,
+    public User(String userId, String username, String email, String description,
                 String avatar, Map<String, Friend> friendMap, Map<String, Post> postMap,
                 Map<String, Notification> notificationMap) {
-        this.userid = userid;
+        this.userId = userId;
         this.username = username;
         this.email = email;
         this.description = description;
@@ -32,8 +48,8 @@ public class User {
     /**
      * Constructor with required parameter
      */
-    public User(String userid, String username, String email) {
-        this.userid = userid;
+    public User(String userId, String username, String email) {
+        this.userId = userId;
         this.username = username;
         this.email = email;
         this.description = "set description";
@@ -43,12 +59,15 @@ public class User {
         this.notificationMap = new HashMap<>();
     }
 
-    public String getUserid() {
-        return userid;
+    public User() {
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

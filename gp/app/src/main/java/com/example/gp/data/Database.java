@@ -111,77 +111,33 @@ public class Database {
                 });
         }
 
-        @Nullable
-        public static String getEmailByUsername(String username) {
-            // Get User email by username
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            Log.d(TAG, "Username: " + username);
-
-            ArrayList<String> email = new ArrayList<>();
-
-            DocumentReference docRef = db.collection("users").document(username);
-            Log.d(TAG, "DocumentRef: " + docRef);
-
-            return null;
-        }
-
-        public static Task<Boolean> isUsernameExist(String username) {
-            // Check if username exist
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            DocumentReference docRef = db.collection("users").document(username);
-            return docRef.get().continueWith(task -> {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    return document.exists();
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                    throw Objects.requireNonNull(task.getException());
-                }
-            });
-        }
-
-        public static Task<Boolean> isEmailExist(String email) {
-            // Check if email exist
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            Query query = db.collection("users").whereEqualTo("email", email);
-            return query.get().continueWith(task -> {
-                if (task.isSuccessful()) {
-                    return !task.getResult().isEmpty();
-                } else {
-                    throw Objects.requireNonNull(task.getException());
-                }
-            });
-        }
-
         public static void getFriendList(String nickname, int limit, Object object, String methodName, Object ...args) {
             Log.d(TAG, "Method: " + methodName);
 
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             FirebaseFirestore.getInstance().document(userId)
-                .collection("friendMap")
-                .orderBy("nickname", Query.Direction.ASCENDING)
-                .whereGreaterThan("nickname", nickname)
-                .limit(limit).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                        List<Friend> friends = new ArrayList<>();
-                        for (DocumentSnapshot document : documents) {
-                            friends.add(new Friend((String) document.get("id"), (String) document.get("nickname"), (int) document.get("avatar")));
+                    .collection("friendMap")
+                    .orderBy("nickname", Query.Direction.ASCENDING)
+                    .whereGreaterThan("nickname", nickname)
+                    .limit(limit).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            List<Map<String, Object>> friends = new ArrayList<>();
+                            for (DocumentSnapshot document : documents) {
+                                // will return a list of friendMap which is a map of <String userId, Friend friend>
+                                friends.add(Map.of(document.getId(), document.toObject(Friend.class)));
+                            }
+                            try {
+                                MethodUtil.invokeMethod(object, methodName, args, friends);
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error: " + e.getMessage());
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-                        try {
-                            MethodUtil.getMethod(object, methodName, args).invoke(object, friends);
-                        } catch (Exception e) {
-                            Log.e(TAG, "Error: " + e.getMessage());
-                        }
-                    } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
-                    }
-                });
+                    });
         }
 
         public static void signOut(Object object, String methodName, Object... args) {
@@ -208,6 +164,63 @@ public class Database {
             } catch (Exception e) {
                 Log.e(TAG, "Error: " + e.getMessage());
             }
+        }
+
+        public String getUsername() {
+            return UserDB.username;
+        }
+
+        public String getEmail() {
+            return UserDB.email;
+        }
+
+        public String getUserId() {
+            return UserDB.userId;
+        }
+
+        @Nullable
+        private static String getEmailByUsername(String username) {
+            // Get User email by username
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            Log.d(TAG, "Username: " + username);
+
+            ArrayList<String> email = new ArrayList<>();
+
+            DocumentReference docRef = db.collection("users").document(username);
+            Log.d(TAG, "DocumentRef: " + docRef);
+
+            return null;
+        }
+
+        private static Task<Boolean> isUsernameExist(String username) {
+            // Check if username exist
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            DocumentReference docRef = db.collection("users").document(username);
+            return docRef.get().continueWith(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    return document.exists();
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                    throw Objects.requireNonNull(task.getException());
+                }
+            });
+        }
+
+        private static Task<Boolean> isEmailExist(String email) {
+            // Check if email exist
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            Query query = db.collection("users").whereEqualTo("email", email);
+            return query.get().continueWith(task -> {
+                if (task.isSuccessful()) {
+                    return !task.getResult().isEmpty();
+                } else {
+                    throw Objects.requireNonNull(task.getException());
+                }
+            });
         }
 
         private static void getEmailByUsername(String username, Object object, Method method) {
@@ -311,47 +324,36 @@ public class Database {
                     }
                 });
         }
-
-        public String getUsername() {
-            return UserDB.username;
-        }
     }
 
     public static class PostDB {
-        // Note
-
-        private static String TAG = "Database.Post";
+        // Aka Note's complete version
+        private static final String TAG = "Database.Post";
 
         //Save post data to firestore
-        public static void savePostData(String authorId, String content, Object... args) {
+        public static void savePostData(Post post, Object object, String methodName, Object... args) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            long timestamp = Calendar.getInstance().getTimeInMillis();
+            post.setAuthorId(UserDB.userId);
 
-            Map<String, Object> post = new HashMap<>();
-            post.put("authorId", authorId);
-            post.put("content", content);
-            post.put("createTimestamp", timestamp);
+            DocumentReference docRef = db.collection("posts").document();
 
-            db.collection("posts").add(post)
-                .addOnSuccessListener(documentReference -> {
-                    if (args.length >= 2) {
-                        // args[0] is object, args[1] is method name
+            post.setPostId(docRef.getId());
+
+            docRef.set(post)
+                    .addOnSuccessListener(dRef -> {
                         try {
-                            Object[] slicedArgs = Arrays.copyOfRange(args, 2, args.length);
-                            MethodUtil.getMethod(args[0], (String) args[1], slicedArgs).invoke(args[0], documentReference.getId());
+                            MethodUtil.invokeMethod(object, methodName, args);
                         } catch (Exception e) {
-                            Log.d(TAG, "Error: " + e.getMessage());
+                            Log.e(TAG, "Error: " + e.getMessage());
                         }
-                    }
-                    Log.d(TAG, "Post added with ID: " + documentReference.getId());
-                })
-                .addOnFailureListener(e -> {
-                    if (args.length > 0 && args[0] != null) {
-                        ToastUtil.showLong((Context) args[0], "Error adding post");
-                    }
-                    Log.w(TAG, "Error adding post", e);
-                });
+                    })
+                    .addOnFailureListener(e -> {
+                        if (object != null) {
+                            ToastUtil.showLong((Context) object, "Error adding post: " + e.getMessage());
+                        }
+                        Log.e(TAG, "Error: " + e.getMessage());
+                    });
         }
 
         //Get a list of posts by create timestamp, descending sorted by create timestamp

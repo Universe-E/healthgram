@@ -7,14 +7,23 @@
     android:layout_height="match_parent"
     tools:context=".home.ui.home.HomeFragment">
 
+    <!-- 替换为实际的加号图标 -->
     <!-- Include Search Bar -->
-
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="100dp"
+        android:contentDescription="Add Note"
+        android:src="@drawable/baseline_add_circle_24" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="570dp"
+        android:layout_height="670dp"
         android:layout_marginTop="100dp"
         android:onClick="test"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +31,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_layout"
-        app:layout_constraintVertical_bias="0.592" />
+        app:layout_constraintVertical_bias="0.592"
+        tools:listitem="@layout/content_main" />
 
     <include
         android:id="@+id/search_layout"
