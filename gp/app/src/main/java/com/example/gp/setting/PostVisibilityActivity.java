@@ -39,12 +39,11 @@ public class PostVisibilityActivity extends BaseActivity {
         recyclerView = binding.recyclerViewPosts;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
         posts = new ArrayList<>();
         updateUI(posts);
-        // TODO: get all post created or managed by this user
         Date time = TimeUtil.getCurDate();
         Database.PostDB.getUserPost(time,10,this,"updateUI");
+
 
         // Set post adapter
         mPostAdapter = new PostAdapter(posts);
@@ -52,6 +51,7 @@ public class PostVisibilityActivity extends BaseActivity {
 
     }
     public void updateUI(List<Post> posts){
+        this.posts = posts;
         // Test Code
         Post post_test1 = new Post("01", "02", "This is test01", "Test01", true);
         Post post_test2 = new Post("02", "02", "This is test02", "Test02", false);
