@@ -18,8 +18,8 @@ import java.util.List;
 
 /**
  * Adapter class to populate a RecyclerView with a list of Post objects.
- * Author: Yulong Chen
- * Date: 2024-05-04
+ * @author : Yulong Chen
+ * @since : 2024-05-04
  */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private static List<Post> posts;
@@ -73,7 +73,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
         @Override
         public void onClick(View v) {
-            Log.d("ClickListener", "Success");
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Post post = posts.get(position);

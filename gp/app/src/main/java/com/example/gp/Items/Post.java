@@ -6,8 +6,8 @@ import com.google.firebase.Timestamp;
  * Post class
  * Each post has a unique identifier (postId), an author identifier (authorId),
  * content, title, and a flag indicating whether the post is public or private.
- * Author: Yulong Chen
- * Date: 2024-05-05
+ * @author : Yulong Chen
+ * @since : 2024-05-05
  */
 public class Post {
     public String postId;
