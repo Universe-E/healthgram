@@ -62,7 +62,45 @@ private void updateUI(boolean isSuccess, Object... args) {
         if (args[0] != null) {
             String errorMsg = (String) args[0];
             // Handle error message
-            ...
+            ... 
         }
     }
 }
+```
+
+### Example of using callback to update UI
+
+```java
+    public void createUserAccount(View view) {
+        // Initialize views
+        EditText usernameEditText = findViewById(R.id.user_name_text);
+        EditText emailEditText = findViewById(R.id.email_text);
+        EditText pwdEditText = findViewById(R.id.pwd_text);
+        EditText reapeatPwdEditText = findViewById(R.id.repeat_pwd_text);
+
+        String username = usernameEditText.getText().toString().trim();
+        String email = emailEditText.getText().toString().trim();
+        String password = pwdEditText.getText().toString().trim();
+        String repeat_password = reapeatPwdEditText.getText().toString().trim();
+
+        if (validateForm(username, email, password, repeat_password)) {
+            // Create account
+            Database.UserDB.signUp(username, email, password, this, "updateUI");
+        }
+
+    }
+
+    public void updateUI(Boolean isSuccess, Object... args) {
+        if (isSuccess) {
+            Intent intent = new Intent(this, Fragment_home.class);
+            startActivity(intent);
+        } else {
+            if (args[0] != null) {
+                String errorMsg = (String) args[0];
+                ToastUtil.showLong(this, "Create account failed: " + errorMsg);
+            } else {
+                ToastUtil.showLong(this, "Create account failed");
+            }
+        }
+    }
+```
