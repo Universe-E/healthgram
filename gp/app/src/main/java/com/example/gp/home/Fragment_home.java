@@ -1,6 +1,9 @@
 package com.example.gp.home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -8,6 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
 import com.example.gp.databinding.ActivitySettingBinding;
+import com.example.gp.setting.SettingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +31,8 @@ public class Fragment_home extends BaseActivity {
     private final String activityName = "GP community";
 
     private ActivityFragmentHomeBinding binding;
+    private ImageView iv_back;
+
     /*通过点击下方图标跳转到不同的其他界面: home notification friends(dashboard)*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +43,9 @@ public class Fragment_home extends BaseActivity {
         setContentView(binding.getRoot());
 
         setUpTitleBar(R.layout.activity_fragment_home,activityName);
-        toggleLeftIcon();
+        setLeftIcon(R.drawable.user_avatar);
 
+        iv_back = findViewById(R.id.iv_back);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
@@ -48,4 +55,11 @@ public class Fragment_home extends BaseActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v == iv_back) {
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
+        }
+    }
 }

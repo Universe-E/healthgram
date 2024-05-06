@@ -17,6 +17,8 @@ import com.example.gp.Activity_note_detail;
 import com.example.gp.data.UserData;
 import com.example.gp.data.UserData.Note;
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
+import com.example.gp.interaction.PostEditing;
+import com.example.gp.setting.SettingActivity;
 import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         // Set click listener to navigate to detail page
-        adapter.setOnItemClickListener(note -> openDetailActivity(note));
+        adapter.setOnItemClickListener(this::openDetailActivity);
 
         // Add initial data
         addInitialNotes();

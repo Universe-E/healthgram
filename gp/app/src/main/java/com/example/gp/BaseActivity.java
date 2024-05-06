@@ -82,6 +82,9 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "More", Toast.LENGTH_SHORT).show();
         }
     }
+    public void setLeftIcon(int resourceId){
+        iv_back.setImageResource(resourceId);
+    }
 
     /**
     * Toggle the left 'back' icon. Default is visible.

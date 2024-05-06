@@ -37,7 +37,6 @@ public class SettingActivity extends BaseActivity {
         // 3 privacy
         binding.llSettingRequestLayout.setOnClickListener(this);
         binding.llSettingVisibilityLayout.setOnClickListener(this);
-//        binding.llSettingFriendPermissionLayout.setOnClickListener(this);
 
     }
 
@@ -62,9 +61,6 @@ public class SettingActivity extends BaseActivity {
         } else if(v == binding.llSettingVisibilityLayout) {
             Intent intent = new Intent(this, PostVisibilityActivity.class);
             startActivity(intent);
-//        } else if(v == binding.llSettingFriendPermissionLayout) {
-//            Intent intent = new Intent(this, FriendDetailActivity.class);
-//            startActivity(intent);
         }
     }
 }
