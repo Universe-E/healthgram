@@ -2,7 +2,6 @@ package com.example.gp;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +14,7 @@ import com.example.gp.data.Database;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class SimpleTestActivity extends AppCompatActivity {
     private static final String TAG = "SimpleTestActivity";
@@ -91,7 +88,7 @@ public class SimpleTestActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "User is signed in");
         }
-        Database.User user = new Database.User();
+        Database.UserDB userDB = new Database.UserDB();
 //        Database.User.getEmailByUsername("123", this, this.getClass().getMethod("toastUsername", String.class));
 //        Database.User.getEmailByUsername("123", this, "toastUsername");
     }

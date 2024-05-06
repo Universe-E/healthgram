@@ -13,7 +13,6 @@ import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Utils.AuthUtil;
 
 import com.example.gp.home.Fragment_home;
-import com.google.firebase.auth.FirebaseAuth;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -41,7 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (validateForm(username, email, password, repeat_password)) {
             // Create account
-            Database.User.signUp(username, email, password, this, "updateUI");
+            Database.UserDB.signUp(username, email, password, this, "updateUI");
         }
 
     }

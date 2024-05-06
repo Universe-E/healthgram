@@ -2,22 +2,17 @@ package com.example.gp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityMainBinding;
 import com.example.gp.home.Fragment_home;
 import com.example.gp.setting.SettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -58,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (validateForm(username, password)) {
             // authenticate the user
-            Database.User.signIn(username, password, this, "updateUI");
+            Database.UserDB.signIn(username, password, this, "updateUI");
         }
     }
 
