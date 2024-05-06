@@ -53,7 +53,7 @@ If a parameter is already available in the class, it can be directly accessed th
 ### Example of UpdateUI Method
 
 ```java
-private void updateUI(Boolean isSuccess, Object... args) {
+private void updateUI(boolean isSuccess, Object... args) {
     if (isSuccess) {
         T theObject0Needed = (T) args[0];
         // Use theObject0Needed for UI update
