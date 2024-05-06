@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
 import com.example.gp.R;
-import com.example.gp.data.UserData;
 import com.example.gp.SearchActivity;
-import com.example.gp.data.Friend;
+import com.example.gp.Items.Friend;
 import com.example.gp.databinding.FragmentDashboardBinding;
 import com.google.android.material.search.SearchBar;
 

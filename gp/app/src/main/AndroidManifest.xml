@@ -25,10 +25,10 @@
             android:name=".SimpleTestActivity"
             android:exported="true" />
         <activity
-            android:name=".data.Activity_note_detail"
+            android:name=".Activity_note_detail"
             android:exported="true" />
         <activity
-            android:name=".data.SharePageActivity"
+            android:name=".SharePageActivity"
             android:exported="true" />
         <activity
             android:name=".setting.RequestActivity"

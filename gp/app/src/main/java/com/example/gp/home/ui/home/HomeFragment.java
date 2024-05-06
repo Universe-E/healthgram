@@ -1,6 +1,5 @@
 package com.example.gp.home.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,19 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.R;
-import com.example.gp.data.Activity_note_detail;
+import com.example.gp.Activity_note_detail;
 import com.example.gp.data.UserData;
 import com.example.gp.data.UserData.Note;
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
-import com.example.gp.SearchActivity;
-import com.google.android.material.search.SearchBar;
 import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
