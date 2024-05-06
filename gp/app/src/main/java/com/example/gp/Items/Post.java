@@ -17,6 +17,12 @@ public class Post {
     public boolean isPublic;
     public Timestamp timestamp;
 
+    public Post(String mContent, String title, boolean isPublic) {
+        this.mContent = mContent;
+        this.title = title;
+        this.isPublic = isPublic;
+    }
+
     public Post(String postId, String authorId, String content, String title, boolean isPublic) {
         this.postId = postId;
         this.authorId = authorId;
