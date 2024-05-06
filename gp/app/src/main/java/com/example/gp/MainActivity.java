@@ -12,13 +12,11 @@ import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityMainBinding;
 import com.example.gp.home.Fragment_home;
 import com.example.gp.setting.SettingActivity;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private ActivityMainBinding binding;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onStart() {
@@ -39,10 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         // set the content view
         setContentView(binding.getRoot());
-
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-
     }
 
     public void createAccount(View view) {
