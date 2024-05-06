@@ -1,4 +1,4 @@
-package com.example.gp.data;
+package com.example.gp;
 
 import android.os.Bundle;
 import android.widget.ImageView;

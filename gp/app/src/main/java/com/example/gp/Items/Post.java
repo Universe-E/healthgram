@@ -1,4 +1,4 @@
-package com.example.gp.data;
+package com.example.gp.Items;
 
 /**
  * Post class

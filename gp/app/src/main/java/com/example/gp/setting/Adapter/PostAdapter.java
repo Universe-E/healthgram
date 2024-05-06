@@ -1,24 +1,19 @@
 package com.example.gp.setting.Adapter;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.R;
-import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.Post;
+import com.example.gp.Items.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

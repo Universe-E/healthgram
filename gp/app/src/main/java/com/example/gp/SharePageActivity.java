@@ -1,19 +1,11 @@
-package com.example.gp.data;
+package com.example.gp;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.gp.BaseActivity;
-import com.example.gp.R;
-import com.example.gp.databinding.ActivitySettingBinding;
 import com.example.gp.databinding.ActivitySharePageBinding;
 
 public class SharePageActivity extends BaseActivity {

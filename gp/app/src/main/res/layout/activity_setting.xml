@@ -258,7 +258,7 @@
 
                     </LinearLayout>
 
-                    <!-- clean cache -->
+                    <!-- Friend permission -->
 
                     <LinearLayout
                         android:id="@+id/ll_setting_friend_permission_layout"
