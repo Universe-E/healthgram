@@ -28,7 +28,7 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 
 ## Administrative
-- Firebase Repository Link: <insert-link-to-firebase-repository>
+- Firebase Repository Link: <https://console.firebase.google.com/u/1/project/gp24-s1>
    - Confirm: I have already added comp21006442@gmail.com as a Developer to the Firebase project prior to due date.
 - Two user accounts for markers' access are usable on the app's APK (do not change the username and password unless there are exceptional circumstances. Note that they are not real e-mail addresses in use):
    - Username: comp2100@anu.edu.au	Password: comp2100
@@ -37,12 +37,13 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 ## Team Members and Roles
 The key area(s) of responsibilities for each member
 
-| UID   |  Name  |   Role |
-|:------|:------:|-------:|
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
+| UID      |      Name      |                          Role |
+| :------- | :------------: | ----------------------------: |
+| u7693498 |   Zehua Kong   |          Back-end Programming |
+| u7752342 |    Han Bao     |          Back-end Programming |
+| u7670173 | Xingchen Zhang |    Android UI Design and Test |
+| u7773219 |   Tianci Li    | Front-end Page Implementation |
+| u7756137 |  Yulong Chen   | Front-end Page Implementation |
 
 
 ## Summary of Individual Contributions
@@ -62,7 +63,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
 
-1. **UID1, Name1**  I have 30% contribution, as follows: <br>
+1. **u7693498, Zehua Kong**  I have 20% contribution, as follows: <br>
   - **Code Contribution in the final App**
     - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
     - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
@@ -85,35 +86,35 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *[What is your application, what does it do? Include photos or diagrams if necessary]*
 
-*Here is a pet specific application example*
-
-*PetBook is a social media application specifically targetting pet owners... it provides... certified practitioners, such as veterians are indicated by a label next to their profile...*
+*Healthgram is a social media application specifically targeting healthcare workers and patients, it provides latest medicare posts for all users, give information and professional advice for special groups, such as medical treatments, recent progress on bio-sciences, and latest news on healthcare policies. You can also use this application to post your ideas on healthcare issues.*
 
 ### Application Use Cases and or Examples
 
 *[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
 
-*Here is a pet training application example*
+*A patient names Alice wants to know something about his illnesses, and see a public post by physician Bob on the Healthgram app*
 
-*Molly wants to inquiry about her cat, McPurr's recent troublesome behaviour*
-1. *Molly notices that McPurr has been hostile since...*
-2. *She makes a post about... with the tag...*
-3. *Lachlan, a vet, writes a reply to Molly's post...*
-4. ...
-5. *Molly gives Lachlan's reply a 'tick' response*
+1. *Alice found that the medicare advice from Bob is useful*
+2. *The post is edited by Bob with the content is mainly about adjust your daily diet to keep away from diseases*
+3. *Alice followed doctor Bob, each time when Bob sends new posts, Alice will receive new notification from him*
+4. *Alice want to inquiry her conditions in privacy with Bob, she set some of her posts private, so that no other people can see these posts*
+5. *After Alice's illnesses were cured, she unfollowed doctor Bob, this operation will let her not to receive notification from doctor Bob*
 
 *Here is a map navigation application example*
 
-*Targets Users: Drivers*
+*Targets Users: Patients
 
-* *Users can use it to navigate in order to reach the destinations.*
-* *Users can learn the traffic conditions*
-* ...
+* *Patients can use it to search for useful posts by keywords*
+* *Patients can add their own posts to share recent progress on their conditions*
+* *Patients can learn the knowledge from public posts*
+* *Patients can set visibility of posts to private to protect their privacy* 
+* Patients can follow other patients, or doctors to trace their status
 
-*Target Users: Those who want to find some good restaurants*
+*Target Users: Doctors
 
-* *Users can find nearby restaurants and the application can give recommendations*
-* ...
+* Doctors can publish professional suggestions
+* Doctors can follow other doctors and patients for better medical treatment inquiry
+* Doctors can set privacy status due to privacy protection
 
 *List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
 
@@ -131,10 +132,13 @@ Note that the core criteria of contribution is based on `code contribution` (the
 This is an important section of your report and should include all technical decisions made. Well-written justifications will increase your marks for both the report as well as for the relevant parts (e.g., data structure). This includes, for example,
 
 - Details about the parser (describe the formal grammar and language used)
-
-- Decisions made (e.g., explain why you chose one or another data structure, why you used a specific data model, etc.)
-
-- Details about the design patterns used (where in the code, justification of the choice, etc)
+- **Data Structure used:** 
+  - Choose **Map** and **ArrayList** to store posts and friend lists to allow fast search of friends and posts associated with a particular user. **Map** and **ArrayList** are useful for operations that require sequential access, such as displaying a user's timeline or list of followers. 
+  - Choose **B-Tree** for temporary data storage is efficient for searching, since the return type is a list of results.
+- **Design Patterns used:**
+  - **Singleton Pattern**: Useful to initialize instances (User and Post) from firebase, this design pattern is used in **Database.java**
+  - **Observer Pattern**: Maintains a list of its observers, and notifies them of any state changes. In our application, the observers are **followers**, when user publishes their posts (not in privacy), all the other followers can receive **notifications** from this user.
+  - **Adaptor Pattern**: Provides a unified interface to a set of interfaces in a subsystem, in our case these classes with suffix "Util" , are all implemented in package **utils**. They provide methods to solve the incompatible problem, and convert the interface of one class to another interface so that front-end Android UI can work normally without modifying source code.
 
 *Please give clear and concise descriptions for each subsections of this part. It would be better to list all the concrete items for each subsection and give no more than `5` concise, crucial reasons of your design.
 
@@ -148,25 +152,29 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 
 *I used the following data structures in my project:*
 
-1. *LinkedList*
-   * *Objective: used for storing xxxx for xxx feature.*
+1. ArrayList
+   * *Objective: used for storing users and posts for **Data-Profile** feature.*
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
    * *Reasons:*
       * *It is more efficient than Arraylist for insertion with a time complexity O(1)*
       * *We don't need to access the item by index for xxx feature because...*
-      * For the (part), the data ... (characteristics) ...
-
-2. ...
-
-3. ...
+      * For the list of users, we got a list as the receiving parameter from firebase, and uses in searching matched users or posts when handling authentication or get id methods
+2. Map
+   * *Objective: used for storing followers and posts for **Interact-Noti** feature.*
+   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * * For the map of followers and posts, we receive the map id (String) first, and search the corresponding follower and post in a high efficiency
+3. B-Tree
+   * *Objective: used for storing temperary users and posts for **Search-Filter** feature.*
+   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * * For the B-Tree for data collections, we search results in database and stored temporarily in B-Tree structure
 
 <hr>
 
 ### Design Patterns
 *[What design patterns did your team utilise? Where and why?]*
 
-1. *xxx Pattern*
-   * *Objective: used for storing xxxx for xxx feature.*
+1. *Singleton Pattern*
+   * *Objective: used for initialize User and Post.*
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
    * *Reasons:*
       * ...
@@ -203,34 +211,100 @@ Production Rules:
 *List all features you have completed in their separate categories with their featureId. THe features must be one of the basic/custom features, or an approved feature from Voice Four Feature.*
 
 ### Basic Features
-1. [LogIn]. Description of the feature ... (easy)
+1. [LogIn]. User can login with their username and password (if account created)
    * Code: [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
    * Description of feature: ... <br>
    * Description of your implementation: ... <br>
-
-2. [DataFiles]. Description  ... ... (...)
+2. [DataFiles]. Store user data, all info from users
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+3. [LoadShowData]. Load and display data instances from firebase
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+4. [DataStream]. Create Data by using methods in Database.java, and refresh data in firebase with the interaction of users
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+5. [Search]. Search posts and users from app
    * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
    * Link to the Firebase repo: ...
 
-3. ...
-   <br>
-
 ### Custom Features
-Feature Category: Privacy <br>
-1. [Privacy-Request]. Description of the feature  (easy)
-   * Code: [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
-   * Description of your implementation: ... <br>
-     <br>
+Feature Category: Search-related features<br>
+1. [Search-Filter] search with keywords, return a sorted and filtered list of results
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
 
-2. [Privacy-Block]. Description ... ... (medium)
-   ... ...
-   <br><br>
+
+
+Feature Category: UI Design And Testing<br>
+
+2. [UI-Layout] suitable layout adjustments in the UI components when size of screen changes
+
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+
+   
+
+Greater Data Usage, Handling and Sophistication
+
+3. [Data-Formats] read data from json and xml formats
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+
+4. [Data-Profile] Profile page to present users with avatar as media file (avatar is jpg format)
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+
+
 
 Feature Category: Firebase Integration <br>
-3. [FB-Auth] Description of the feature (easy)
-   * Code: [Class X, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
-   * [Class B](../src/path/to/class/file.java#L30-85): methods A, B, C, lines of code: 30 to 85
-   * Description of your implementation: ... <br>
+5. [FB-Auth] Implement authentication by firebase
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+
+6. [FB-Auth] Implement authentication by firebase
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+
+7. [FB-Persist] Firebase to persist all data used in app
+
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+
+   
+
+Feature Category: User Interactivity
+
+8. [Interact-Follow] Firebase to persist all data used in app
+
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+   * Link to the Firebase repo: ...
+
+9. [Interact-Noti] Send notifications to all followers when user publish a new post
+
+   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+
+   * Link to the Firebase repo: ...
+
+     
+
+Feature Category: User Interactivity
+
+10. [Privacy-Request] Send requests to view certain contents, in our case, non-public posts
+
+    * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+
+    * Link to the Firebase repo: ...
+
+      
+
+Privacy
+
+11. [Privacy-Visibility] We give privacy states: public, restricted, private
+    * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+    * Link to the Firebase repo: ...
+
+
 
 <hr>
 
@@ -282,14 +356,14 @@ Feature Category: Firebase Integration <br>
 
 ### Meetings Records
 * Link to the minutes of your meetings like above. There must be at least 4 team meetings.
-  (each commited within 2 days aftre the meeting)
+  (each commited within 2 days after the meeting)
 * Your meetings should also have a reasonable date spanning across Week 6 to 11.*
 
 
 - *[Team Meeting 1](meeting1.md)*
 - *[Team Meeting 2](meeting2.md)*
-- ...
-- [Team Meeting 4](link_to_md_file.md)
+- *[Team Meeting 3](meeting3.md)*
+- *[Team Meeting 4](meeting4.md)*
 - ... (Add any descriptions if needed) ...
 
 <hr>

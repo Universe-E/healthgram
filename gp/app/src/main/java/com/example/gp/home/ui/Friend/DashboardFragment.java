@@ -15,11 +15,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gp.Activity_note_detail;
 import com.example.gp.Adapter.FriendsRecyclerViewAdapter;
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
 import com.example.gp.R;
 import com.example.gp.SearchActivity;
 import com.example.gp.Items.Friend;
+import com.example.gp.databinding.ActivityFriendDetailBinding;
 import com.example.gp.databinding.FragmentDashboardBinding;
 import com.example.gp.home.Fragment_home;
 import com.google.android.material.search.SearchBar;
@@ -63,9 +65,18 @@ public class DashboardFragment extends Fragment {
 
         // Initialize RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new FriendsRecyclerViewAdapter(friends);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new FriendsRecyclerViewAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
+
+        // Set click listener to navigate to friend's profile
+//        adapter.setOnItemClickListener(new FriendsRecyclerViewAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(Friend friend) {
+//                openFriendProfile(friend);
+//            }
+//        });
+
 
         return view;
     }
@@ -83,5 +94,10 @@ public class DashboardFragment extends Fragment {
         friends = new ArrayList<>();
         friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
         friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
+    }
+
+    private void openFriendProfile(Friend friend) {
+        Intent intent = new Intent(getContext(), ActivityFriendDetailBinding.class);
+        startActivity(intent);
     }
 }

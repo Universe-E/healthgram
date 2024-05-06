@@ -1,5 +1,5 @@
 # [G04]
-## Team Meeting 1- Week 6 - 2024-04-12 (16:00 - 17:00)
+## Team Meeting 1 - Week 6 - 2024-04-12 (16:00 - 17:00)
 **Attend:** Zehua Kong, Yulong Chen, Han Bao, Tianci Li, Xingchen Zhang
 
 **Absent:** None

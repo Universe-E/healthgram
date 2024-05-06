@@ -19,13 +19,16 @@
             android:name=".setting.FriendDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".interaction.PostEditing"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".setting.FriendPermissionActivity"-->
+<!--            android:exported="false" />-->
+        <activity
             android:name=".setting.PostVisibilityActivity"
             android:exported="true" />
         <activity
             android:name=".SimpleTestActivity"
-            android:exported="true" />
-        <activity
-            android:name=".interaction.PostEditing"
             android:exported="true" />
         <activity
             android:name=".Activity_note_detail"

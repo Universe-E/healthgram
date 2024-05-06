@@ -2,10 +2,10 @@
 The following markdown document is a checklist of items you **should** complete before submission of your assignment. This exists to help you keep track of all the requirements you must fulfil.
 
 ## Git & Project Access
-- [ ] **GitLab**: Commits (as shown in the Git commit history) using your own account. Failing to do this may result in zero marks.
-- [ ] **GitLab**: The marker account is a 'maintainer' in your project. (Note: this should be automatically done, but please ensure the marker account exists like in the labs)
-- [ ] The markers will be able to login to your **App** via the APK using either of the sets of accounts (see assignment specification).
-- [ ] If **Firebase** has been used, you have added the Marker's email to your Firebase project, and included the link to your Firebase project in your report.
+- [x] **GitLab**: Commits (as shown in the Git commit history) using your own account. Failing to do this may result in zero marks.
+- [x] **GitLab**: The marker account is a 'maintainer' in your project. (Note: this should be automatically done, but please ensure the marker account exists like in the labs)
+- [x] The markers will be able to login to your **App** via the APK using either of the sets of accounts (see assignment specification).
+- [x] If **Firebase** has been used, you have added the Marker's email to your Firebase project, and included the link to your Firebase project in your report.
 
 ## Documents (all non-android files) located in a folder named `items`
 - [ ] A conflict resolution protocol is documented and well-defined.
@@ -13,7 +13,7 @@ The following markdown document is a checklist of items you **should** complete 
 - [ ] Create ONE video titled  `features.(mp4|mov)` that demonstrates each implemented feature (basic + custom features), in the same order as listed in the report (and a general overview too, is time permits). Max. 4 minutes.
 - [ ] A working standalone **APK** that can be loaded and execute correctly on an AVD (see [demo video](https://gitlab.cecs.anu.edu.au/comp2100/student-resources/comp2100-lab-videos/-/blob/main/gp-resources/GPAPKGenerationGuide.mp4?ref_type=heads)).
 - [ ] **Report**: Completed the markdown report document titled [report.md](report.md).
-- [ ] **Statement of Originality**: All members have read and signed the [statement of originality](statement-of-originality.yml). Failure to do so will result in zero marks.
+- [x] **Statement of Originality**: All members have read and signed the [statement of originality](statement-of-originality.yml). Failure to do so will result in zero marks.
 - [ ] All external code, assets or help received outside the group is documented in the [statement of originality](statement-of-originality.yml) and relevant parts in the code.
 
 ## Report Checklist

@@ -19,6 +19,115 @@ Please refer to the `assignment specification` for detailed instructions.
 
 # Change Log
 
+## 2024.05.06
+
+---
+
+### Han Bao
+
+- Modify database back-end methods
+
+- Fixed java redirect bugs
+- Added back-end adaptor for method call in Android UI
+
+### Zehua Kong
+
+- Implemented User and Notification classes
+- Modify Database for data retrieving
+
+### Xingchen Zhang
+
+- Fixed bugs on search bar dropdown
+- Fixed search lists incomplete problem
+
+### Yulong Chen
+
+- Completed notification and privacy set
+- Fixed redirect bugs on logout
+
+### Tianci Li
+
+- Wrote Parser and Tokenizer
+- Modify fragment for better adapt data present
+
+------
+
+## 2024.05.04
+
+---
+
+### Han Bao
+
+- Complete util methods
+
+- Implemented authentication
+
+### Zehua Kong
+
+- Implemented get id methods in database
+- Completed database back-end methods
+
+### Tianci Li
+
+- Added new features on home data present
+- give post structures
+  
+
+------
+
+## 2024.05.01
+
+---
+
+### Xingchen Zhang
+
+- Wrote rough search bar
+
+- Initialize lists in search results
+
+### Yulong Chen
+
+- Wrote rough setting page
+
+- fixed redirect bugs on clicking bottom icon buttons
+
+------
+
+## 2024.04.29
+
+---
+
+### Zehua Kong
+
+- Connect to firebase
+
+- Test login page and initialize accounts
+- modify signup page
+
+### Yulong Chen
+
+- Add front-end privacy management
+
+------
+
+## 2024.04.27
+
+---
+
+### Tianci Li
+
+- Added main page
+
+- Test notification page
+
+## 2024.04.25
+
+---
+
+### Han Bao
+
+- Design rough back-end methods
+
 ## 2024.04.22
 
 ---
@@ -27,7 +136,7 @@ Please refer to the `assignment specification` for detailed instructions.
 
 - Drafted structures for data layer
 
-  More details are in the [README.md](./gp/app/src/main/java/com/example/gp/data/README.md) in the data package.
+  Design initial test cases
 
 ---
 
