@@ -41,22 +41,18 @@ public class PostVisibilityActivity extends BaseActivity {
 
         posts = new ArrayList<>();
         updateUI(posts);
-        Date time = TimeUtil.getCurDate();
-        Database.PostDB.getUserPost(time,10,this,"updateUI");
-
-
-        // Set post adapter
-        mPostAdapter = new PostAdapter(posts);
-        recyclerView.setAdapter(mPostAdapter);
-
+//        Date time = TimeUtil.getCurDate();
+//        Database.PostDB.getUserPost(time,10,this,"updateUI");
     }
     public void updateUI(List<Post> posts){
-        this.posts = posts;
         // Test Code
         Post post_test1 = new Post("01", "02", "This is test01", "Test01", true);
         Post post_test2 = new Post("02", "02", "This is test02", "Test02", false);
         posts.add(post_test1);
         posts.add(post_test2);
+        // Set post adapter
+        mPostAdapter = new PostAdapter(posts);
+        recyclerView.setAdapter(mPostAdapter);
     }
 }
 
