@@ -44,12 +44,12 @@ public class AuthUtil {
         return isValidEmail(input);
     }
 
-    @Nullable
-    @Contract(pure = true)
-    public static String getEmailByUsername(String username) {
-        // Get email by username from the database
-        return Database.UserDB.getEmailByUsername(username);
-    }
+//    @Nullable
+//    @Contract(pure = true)
+//    public static String getEmailByUsername(String username) {
+//        // Get email by username from the database
+//        return Database.UserDB.getEmailByUsername(username);
+//    }
 
     /********** END API **********/
 }
