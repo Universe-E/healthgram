@@ -26,10 +26,8 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
     private OnItemClickListener listener;
     private Context context;
 
-    public FriendsRecyclerViewAdapter(List<Friend> friends, Context context, OnItemClickListener listener) {
+    public FriendsRecyclerViewAdapter(List<Friend> friends) {
         this.friends = friends;
-        this.context = context;
-        this.listener = listener;
     }
 
     @NonNull
