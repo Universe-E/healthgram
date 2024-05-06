@@ -16,11 +16,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.type.DateTime;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -257,13 +258,15 @@ public class Database {
         private static String TAG = "Database.Post";
 
         //Save post data to firestore
-        public static void savePostData(String authorId, String content, DateTime dateTime, Object... args) {
+        public static void savePostData(String authorId, String content, Object... args) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            long timestamp = Calendar.getInstance().getTimeInMillis();
 
             Map<String, Object> post = new HashMap<>();
             post.put("authorId", authorId);
             post.put("content", content);
-            post.put("dateTime", dateTime);
+            post.put("createTimestamp", timestamp);
 
             db.collection("posts").add(post)
                 .addOnSuccessListener(documentReference -> {
@@ -286,11 +289,13 @@ public class Database {
                 });
         }
 
-        //Get a list of posts by date time, descending sorted by dateTime
-        public static void getPostsByDateTime(DateTime datetime, int limit, Object object, String methodName, Object... args) {
+        //Get a list of posts by create timestamp, descending sorted by create timestamp
+        public static void getPostsByTime(Date time, int limit, Object object, String methodName, Object... args) {
+            long timestamp = time.getTime();
+
             CollectionReference postRef = FirebaseFirestore.getInstance().collection("posts");
-            postRef.orderBy("dateTime", Query.Direction.DESCENDING)
-                .whereLessThan("dateTime", datetime)
+            postRef.orderBy("createTimestamp", Query.Direction.DESCENDING)
+                .whereLessThan("createTimestamp", timestamp)
                 .limit(limit).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -332,18 +337,20 @@ public class Database {
         }
 
         // get current user's post
-        public static void getUserPost(DateTime datetime, int limit, Object object, String methodName, Object... args) {
+        public static void getUserPost(Date time, int limit, Object object, String methodName, Object... args) {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-            getPostsByAuthorId(datetime, limit, userId, object, methodName, args);
+            getPostsByAuthorId(time, limit, userId, object, methodName, args);
         }
 
         //Get a list of posts by author id
-        private static void getPostsByAuthorId(DateTime datetime, int limit,String authorId, Object object, String methodName, Object... args) {
+        public static void getPostsByAuthorId(Date time, int limit,String authorId, Object object, String methodName, Object... args) {
+            long timestamp = time.getTime();
+
             FirebaseFirestore.getInstance().collection("posts")
                     .whereEqualTo("authorId", authorId)
-                    .orderBy("dateTime", Query.Direction.DESCENDING)
-                    .whereLessThan("dateTime", datetime)
+                    .orderBy("createTimestamp", Query.Direction.DESCENDING)
+                    .whereLessThan("createTimestamp", timestamp)
                     .limit(limit).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
