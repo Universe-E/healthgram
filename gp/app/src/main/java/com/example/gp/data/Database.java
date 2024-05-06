@@ -204,7 +204,7 @@ public class Database {
                     DocumentSnapshot document = task.getResult();
                     return document.exists();
                 } else {
-                    Log.d(TAG, "get failed with ", task.getException());
+                    Log.e(TAG, "get failed with ", task.getException());
                     throw Objects.requireNonNull(task.getException());
                 }
             });
@@ -378,7 +378,7 @@ public class Database {
                             Log.e(TAG, "Error: " + e.getMessage());
                         }
                     } else {
-                        Log.d(TAG, "Error getting documents: ", task.getException());
+                        Log.e(TAG, "Error getting documents: ", task.getException());
                     }
                 });
         }
@@ -399,7 +399,7 @@ public class Database {
                             Log.d(TAG, "No such document");
                         }
                     } else {
-                        Log.d(TAG, "get failed with ", task.getException());
+                        Log.e(TAG, "get failed with ", task.getException());
                     }
                 });
         }
@@ -437,7 +437,7 @@ public class Database {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
                         } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Log.e(TAG, "Error getting documents: ", task.getException());
                         }
                     });
         }
