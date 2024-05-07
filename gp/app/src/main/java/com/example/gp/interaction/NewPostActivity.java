@@ -1,5 +1,6 @@
 package com.example.gp.interaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.UserData;
 import com.example.gp.databinding.ActivityPostEditingBinding;
+import com.example.gp.home.Fragment_home;
 
 /**
  * This class represents the activity for creating a new post.
@@ -103,13 +105,28 @@ public class NewPostActivity extends BaseActivity {
     }
 
     public void postOut(boolean isSuccess, Object object) {
-        Log.d("NewPostActivity", "mamba out");
         if (!isSuccess) {
-            Toast.makeText(this, "Post failed!", Toast.LENGTH_SHORT).show();
-        } else {
-//            Toast.makeText(this, (String)object, Toast.LENGTH_SHORT).show();
-            ToastUtil.showLong(this, (String)object);
-            onBackPressed();
+            ToastUtil.showLong(this, "Failed to post the new post");
         }
+
+        // disable the button and all the input fields
+        binding.btnFirePost.setEnabled(false);
+        binding.etEditPostHeading.setEnabled(false);
+        binding.etEditPostContent.setEnabled(false);
+        binding.etEditWhoCanSeeThePost.setEnabled(false);
+        binding.cbIsPublic.setEnabled(false);
+
+        // show a toast message
+        ToastUtil.showLong(this, "Successfully posted the new post");
+
+        // finish the activity
+        finish();
+
+        // go back to the previous activity
+        // onBackPressed();
+
+        // Update: load the fragment home page after posting to show the new post
+        Intent intent = new Intent(this, Fragment_home.class);
+        startActivity(intent);
     }
 }
