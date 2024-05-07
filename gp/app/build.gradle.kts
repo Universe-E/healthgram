@@ -75,11 +75,5 @@ dependencies {
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 
-    //Import Jackson for json and xml parser
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.4")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.4")
-
-
-
 
 }

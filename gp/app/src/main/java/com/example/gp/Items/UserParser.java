@@ -1,44 +1,57 @@
 package com.example.gp.Items;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import android.util.Xml;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * User parser class
- * parse user to json or xml files, store in local
- * @author Zehua Kong
- * @since 2024-05-07
- */
 public class UserParser {
-    public static void parseToJSON(User user, String fileName) throws IOException, IllegalAccessException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> userMap = new HashMap<>();
+    public static void parseToJSON(User user, String fileName) throws JSONException, IllegalAccessException, IOException {
+        JSONObject userJson = new JSONObject();
 
         Field[] fields = user.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
-            userMap.put(field.getName(), field.get(user));
+            userJson.put(field.getName(), field.get(user));
         }
 
-        objectMapper.writeValue(new File(fileName), userMap);
+        File file = new File(fileName);
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(userJson.toString().getBytes());
+        fos.close();
     }
 
-    public static void parseToXML(User user, String fileName) throws IOException, IllegalAccessException {
-        XmlMapper xmlMapper = new XmlMapper();
-        Map<String, Object> userMap = new HashMap<>();
+    public static void parseToXML(User user, String fileName) throws IllegalAccessException, IOException {
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        StringWriter writer = new StringWriter();
+        xmlSerializer.setOutput(writer);
+        xmlSerializer.startDocument("UTF-8", true);
+        xmlSerializer.startTag("", "user");
 
         Field[] fields = user.getClass().getDeclaredFields();
         for (Field field : fields) {
             field.setAccessible(true);
-            userMap.put(field.getName(), field.get(user));
+            xmlSerializer.startTag("", field.getName());
+            xmlSerializer.text(String.valueOf(field.get(user)));
+            xmlSerializer.endTag("", field.getName());
         }
 
-        xmlMapper.writeValue(new File(fileName), userMap);
+        xmlSerializer.endTag("", "user");
+        xmlSerializer.endDocument();
+
+        File file = new File(fileName);
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(writer.toString().getBytes());
+        fos.close();
     }
 }
