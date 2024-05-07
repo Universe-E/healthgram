@@ -76,9 +76,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public void bind(Post post) {
             tv_post_title.setText(post.title);
             tv_post_content.setText(post.mContent);
-            tv_is_public.setText(post.isPublic ? "Public" : "Private");
-            tv_is_public.setTextColor(post.isPublic ? Color.GREEN : Color.RED);
+            setStatus(post.isPublic);
         }
+
+        /**
+         * Change the status of the post
+         * eg. public -> private after being clicked
+         * @param v The view that was clicked.
+         */
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
@@ -87,20 +92,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 // Change the state
                 post.setPublic(!post.isPublic);
                 Database.PostDB.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
-                Log.d("PVA100000", post.toString());
+                setStatus(post.isPublic);
             }
         }
-        private void updateIsPublicTextView(boolean isSuccess,int postId) {
+
+        private void setStatus(boolean isPublic) {
+            tv_is_public.setText(isPublic ? "Public" : "Private");
+            tv_is_public.setTextColor(isPublic ? Color.GREEN : Color.RED);
+        }
+
+        /**
+         * Call back method
+         * @param isSuccess the change is successful or not
+         * @param postId the postId
+         */
+        public void updateIsPublicTextView(boolean isSuccess,int postId) {
             if (!isSuccess) {
                 Log.d(TAG, "failed!");
                 ToastUtil.show(itemView.getContext(), "Change state failed, Please try again");
             } else {
                 Log.d(TAG, "postId:" + postId);
                 ToastUtil.show(itemView.getContext(), "Successfully change status");
-                tv_is_public.setText(post.isPublic ? "Public" : "Private");
-                tv_is_public.setTextColor(post.isPublic ? Color.GREEN : Color.RED);
+
             }
 
         }
+
     }
 }
