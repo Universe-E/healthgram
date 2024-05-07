@@ -26,6 +26,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;
 
+import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -595,6 +596,7 @@ public class Database {
          */
         public static void getUserPost(Date time, int limit, Object object, String methodName) {
             Log.d(TAG, "Method: " + methodName);
+            Log.d(TAG, "object: " + object);
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             getPostsByAuthorId(time, limit, userId, object, methodName);
@@ -654,6 +656,7 @@ public class Database {
          */
         public static void getPostsByAuthorId(Date time, int limit,String authorId, Object object, String methodName, Object... args) {
             Timestamp timestamp;
+            Log.d(TAG, "Get posts by author id: object: " + object);
 
             if (time == null) {
                 timestamp = new Timestamp(TimeUtil.getCurDate());
@@ -666,7 +669,9 @@ public class Database {
             Log.d(TAG, "Method: " + methodName);
             Log.d(TAG, "userId: " + userId);
 
-            FirebaseFirestore.getInstance().collection("users").document(userId)
+            FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(userId)
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -692,6 +697,7 @@ public class Database {
                                 Log.d(TAG, message);
                                 return;
                             }
+                            Log.d(TAG, "method name: " + methodName);
                             MethodUtil.invokeMethod(object, methodName, true, postMap);
                             Log.d(TAG, "Posts: " + postMap.toString());
                             /*
