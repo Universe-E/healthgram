@@ -1,5 +1,6 @@
 package com.example.gp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.gp.Items.Friend;
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.TimeUtil;
+import com.example.gp.Utils.UserParserActivity;
 import com.example.gp.data.Database;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -120,9 +122,15 @@ public class SimpleTestActivity extends AppCompatActivity {
 //        testGetPost();
 //        testGetPost();
 //        testAddFriend();
-        testGetFriendList();
+//        testGetFriendList();
+        testUserParserActivity();
     }
 
+    private void testUserParserActivity() {
+        Intent intent = new Intent();
+        intent.setClass(SimpleTestActivity.this, UserParserActivity.class);
+        startActivity(intent);
+    }
     private void testGetFriendList() {
         Database.UserDB.getFriendList("", 10, this, "getFriendList");
     }
