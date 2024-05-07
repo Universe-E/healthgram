@@ -64,8 +64,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_is_public = itemView.findViewById(R.id.tv_is_public);
-            tv_post_title = itemView.findViewById(R.id.tv_post_title);
-            tv_post_content = itemView.findViewById(R.id.tv_post_content);
+            tv_post_title = itemView.findViewById(R.id.tv_post_detail_page_post_title);
+            tv_post_content = itemView.findViewById(R.id.tv_post_detail_page_post_content);
             btn_change_state = itemView.findViewById(R.id.btn_change_state);
             btn_change_state.setOnClickListener(this);
         }
