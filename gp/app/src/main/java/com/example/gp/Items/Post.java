@@ -3,6 +3,8 @@ package com.example.gp.Items;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.ServerTimestamp;
 
+import java.io.Serializable;
+
 /**
  * Post class
  * Each post has a unique identifier (postId), an author identifier (authorId),
@@ -10,11 +12,13 @@ import com.google.firebase.firestore.ServerTimestamp;
  * @author : Yulong Chen
  * @since : 2024-05-05
  */
-public class Post {
+public class Post implements Serializable {
     public String postId;
     public String authorId;
     public String mContent;
     public String title;
+    public int imgId;
+    public int likeCount;
     public boolean isPublic;
     public Timestamp postTimestamp;
     @ServerTimestamp
