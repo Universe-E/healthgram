@@ -17,6 +17,7 @@ import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityPostVisibilityBinding;
 import com.example.gp.setting.Adapter.PostAdapter;
 
+import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -29,7 +30,7 @@ public class PostVisibilityActivity extends BaseActivity {
     private com.example.gp.databinding.ActivityPostVisibilityBinding binding;
     private RecyclerView recyclerView;
     private PostAdapter mPostAdapter;
-    private List<Post> posts;
+    private static List<Post> posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +56,23 @@ public class PostVisibilityActivity extends BaseActivity {
         if (!isSuccess) {
             if (object == null) {
                 ToastUtil.showLong(this, "Get posts failed");
+                return;
             }
             ToastUtil.show(this, object.toString());
             Log.d(TAG, "success");
         } else {
 
             Map<String, Post> postMap = (Map<String, Post>) object;
-            Log.d(TAG, posts.toString());
+            Log.d(TAG, postMap.toString());
+            List<Post> posts = new ArrayList<>();
             //Get posts
-            Collection<Post> postValues = postMap.values();
-            this.posts.addAll(postValues);
-
+            for (Map.Entry<String, Post> entry : postMap.entrySet()) {
+                Log.d(TAG, entry.getValue().toString());
+                posts.add(entry.getValue());
+            }
+            Log.d(TAG, "posts: " + posts.toString());
             // Set post adapter
-            mPostAdapter = new PostAdapter(this.posts);
+            mPostAdapter = new PostAdapter(posts);
             recyclerView.setAdapter(mPostAdapter);
         }
 
