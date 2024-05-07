@@ -70,12 +70,22 @@ public class PostVisibilityActivity extends BaseActivity {
                 Log.d(TAG, entry.getValue().toString());
                 posts.add(entry.getValue());
             }
-            Log.d(TAG, "posts: " + posts.toString());
+//            Collection<Post> posts = postMap.values();
+//            this.posts.addAll(posts);
             // Set post adapter
             mPostAdapter = new PostAdapter(posts);
             recyclerView.setAdapter(mPostAdapter);
         }
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mPostAdapter != null) {
+            mPostAdapter = null;
+        }
 
     }
 }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.R;
 import com.example.gp.Items.Post;
+import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.UserData;
 
@@ -24,7 +25,7 @@ import java.util.List;
  * @since : 2024-05-04
  */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-    private final String TAG = "PA100000000";
+    private static final String TAG = "PA100000000";
     private static List<Post> posts;
 
     public PostAdapter(List<Post> posts) {
@@ -58,6 +59,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         private TextView tv_post_title;
         private TextView tv_post_content;
         private Button btn_change_state;
+        private Post post;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,23 +76,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public void bind(Post post) {
             tv_post_title.setText(post.title);
             tv_post_content.setText(post.mContent);
-            updateIsPublicTextView(post.isPublic);
+            tv_is_public.setText(post.isPublic ? "Public" : "Private");
+            tv_is_public.setTextColor(post.isPublic ? Color.GREEN : Color.RED);
         }
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                Post post = posts.get(position);
+                post = posts.get(position);
                 // Change the state
                 post.setPublic(!post.isPublic);
-                Database.PostDB.savePostData(post,null,null);
-                // update the UI
-                updateIsPublicTextView(post.isPublic);
+                Database.PostDB.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
+                Log.d("PVA100000", post.toString());
             }
         }
-        private void updateIsPublicTextView(boolean isPublic) {
-            tv_is_public.setText(isPublic ? "Public" : "Private");
-            tv_is_public.setTextColor(isPublic ? Color.GREEN : Color.RED);
+        private void updateIsPublicTextView(boolean isSuccess,int postId) {
+            if (!isSuccess) {
+                Log.d(TAG, "failed!");
+                ToastUtil.show(itemView.getContext(), "Change state failed, Please try again");
+            } else {
+                Log.d(TAG, "postId:" + postId);
+                ToastUtil.show(itemView.getContext(), "Successfully change status");
+                tv_is_public.setText(post.isPublic ? "Public" : "Private");
+                tv_is_public.setTextColor(post.isPublic ? Color.GREEN : Color.RED);
+            }
+
         }
     }
 }
