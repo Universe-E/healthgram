@@ -25,6 +25,7 @@ import com.google.firebase.firestore.Query;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -649,10 +650,9 @@ public class Database {
             Timestamp timestamp = Timestamp.now();
             Log.d(TAG, "Method: " + methodName);
 
-            FirebaseFirestore.getInstance().collection("posts")
-                    .whereEqualTo("authorId", authorId)
+            FirebaseFirestore.getInstance().collection("users").document(UserDB.userId).collection("postMap")
                     .orderBy("postTimestamp", Query.Direction.DESCENDING)
-                    .whereLessThan("postTimestamp", timestamp)
+                    .whereGreaterThan("postTimestamp", timestamp)
                     .limit(limit).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -671,6 +671,7 @@ public class Database {
                             for (DocumentSnapshot document : documents) {
                                 posts.add(Map.of(document.getId(), document.toObject(Post.class)));
                             }
+                            Log.d(TAG, "Posts: " + posts.toString());
                             /*
                               Callback
                               Return true and list of PostMap object List<Map<String postId, Post post>>
