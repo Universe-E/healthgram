@@ -91,6 +91,12 @@ public class NewPostActivity extends BaseActivity {
             String visibilityString = this.visibilityString.getText().toString();
             boolean isPublic = this.isPublic.isChecked();
 
+            // 1.5 Check if the heading and content are empty
+            if (heading.isEmpty() || content.isEmpty()) {
+                ToastUtil.showLong(this, "Empty Post Cannot Be Fired!");
+                return;
+            }
+
             // 2. Create a new post
             Post newPost = new Post(content, heading, isPublic);
 
