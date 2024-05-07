@@ -26,7 +26,8 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private PostCardAdapter postCardAdapter;
+    private PostCardAdapter postCardAdapter1;
+    private PostCardAdapter postCardAdapter2;
     private SearchView searchView;
     private List<Post> postList;
 
@@ -34,13 +35,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Initialize the search view, recycler view, and add note button
+        // Initialize the search view, recycler views, and add note button
         initializeSearchView(view);
-        initializeRecyclerView(view);
+        initializeRecyclerViews(view);
         setupAddNoteButton(view);
 
         // Load post data from the database
-        Database.PostDB.getPostsByTime(null, 5, this, "loadPostCards");
+        Database.PostDB.getPostsByTime(new Date(), 5, this, "loadPostCards");
 
         return view;
     }
@@ -48,9 +49,12 @@ public class HomeFragment extends Fragment {
     public void loadPostCards(boolean isSuccess, Object object) {
         if (isSuccess) {
             postList = (List<Post>) object;
-            postCardAdapter.setPostList(postList);
+            int halfSize = postList.size() / 2;
+            List<Post> postList1 = postList.subList(0, halfSize);
+            List<Post> postList2 = postList.subList(halfSize, postList.size());
+            postCardAdapter1.setPostList(postList1);
+            postCardAdapter2.setPostList(postList2);
             Log.d("HomeFragment", "Posts loaded successfully");
-
         } else {
             // Handle error
             ToastUtil.showLong(getContext(), "Failed to load posts");
@@ -63,33 +67,24 @@ public class HomeFragment extends Fragment {
         searchView.getEditText().addTextChangedListener(new SearchViewTextWatcher());
     }
 
-    private void initializeRecyclerView(View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        postCardAdapter = new PostCardAdapter();
-        recyclerView.setAdapter(postCardAdapter);
-    }
+    private void initializeRecyclerViews(View view) {
+        RecyclerView recyclerView1 = view.findViewById(R.id.recycler_view_column1);
+        RecyclerView recyclerView2 = view.findViewById(R.id.recycler_view_column2);
 
-//    private void loadPostData() {
-//        List<Post> postList = Database.PostDB.getPostsByTime();
-//        postCardAdapter.setPostList(postList);
-//    }
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        postCardAdapter1 = new PostCardAdapter();
+        postCardAdapter2 = new PostCardAdapter();
+
+        recyclerView1.setAdapter(postCardAdapter1);
+        recyclerView2.setAdapter(postCardAdapter2);
+    }
 
     private void setupAddNoteButton(View view) {
         FloatingActionButton fabAddNote = view.findViewById(R.id.fab_add_note);
         fabAddNote.setOnClickListener(v -> openAddNoteActivity());
     }
-
-//    private void performSearch(String query) {
-//        List<Post> filteredPosts = new ArrayList<>();
-//        for (Post post : Database.PostDB.getPostList()) {
-//            if (post.getTitle().toLowerCase().contains(query.toLowerCase()) ||
-//                    post.getContent().toLowerCase().contains(query.toLowerCase())) {
-//                filteredPosts.add(post);
-//            }
-//        }
-//        postCardAdapter.setPostList(filteredPosts);
-//    }
 
     private void openAddNoteActivity() {
         Intent intent = new Intent(getContext(), NewPostActivity.class);
@@ -103,7 +98,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            performSearch(s.toString());
+            // Perform search logic if needed
         }
 
         @Override
