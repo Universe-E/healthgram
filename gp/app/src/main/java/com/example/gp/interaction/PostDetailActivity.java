@@ -15,10 +15,11 @@ import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.UserData;
+import com.example.gp.BaseActivity;
 
 import java.util.Objects;
 
-public class PostDetailActivity extends AppCompatActivity {
+public class PostDetailActivity extends BaseActivity {
 
     public static final String EXTRA_POST = "extra_post";
 
@@ -28,6 +29,7 @@ public class PostDetailActivity extends AppCompatActivity {
     private TextView tvPostTitle;
     private TextView tvPostContent;
     private Button btnShare;
+    private TextView tvAuthorName;
 
     private Post post;
 
@@ -43,6 +45,10 @@ public class PostDetailActivity extends AppCompatActivity {
         tvPostTitle = findViewById(R.id.tv_post_detail_page_post_title);
         tvPostContent = findViewById(R.id.tv_post_detail_page_post_content);
         btnShare = findViewById(R.id.btn_post_detail_page_share);
+        tvAuthorName = findViewById(R.id.tv_post_detail_page_author_username);
+
+        // Set up the title bar
+        setUpTitleBar(R.layout.activity_post_detail, "Post Detail");
 
         // Get post data from intent
         Intent intent = getIntent();
@@ -81,8 +87,9 @@ public class PostDetailActivity extends AppCompatActivity {
             return;
         }
 
-        // TODO: Load author avatar
-        this.ivAuthorAvatar.setImageResource(R.mipmap.sample_avatar_2);
+        // Load author information
+        this.ivAuthorAvatar.setImageResource(R.mipmap.sample_avatar_2); // TODO: Load author avatar
+        this.tvAuthorName.setText("Author: " + post.getAuthorId());
 
         // Set follow button text
         // if the author is already followed, set the button text to "Unfollow"
