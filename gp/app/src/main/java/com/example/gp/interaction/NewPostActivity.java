@@ -1,6 +1,5 @@
 package com.example.gp.interaction;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,29 +9,28 @@ import androidx.activity.EdgeToEdge;
 
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
-import com.example.gp.databinding.ActivitySharePageBinding;
+import com.example.gp.databinding.ActivityPostEditingBinding;
 
-public class PostEditing extends BaseActivity {
+public class NewPostActivity extends BaseActivity {
 
     private final String activityName = "New Post";
-    private ActivitySharePageBinding binding;
+    private ActivityPostEditingBinding binding;
 
-    EditText title;
+    EditText heading;
     EditText content;
     EditText visibilityString;
     CheckBox isPublic;
     Button fireButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivitySharePageBinding.inflate(getLayoutInflater());
+        binding = ActivityPostEditingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // initialize top bar
-        setUpTitleBar(R.layout.activity_share_page, activityName);
+        setUpTitleBar(R.layout.activity_post_editing, activityName);
 
         // Set up the components on the page
         setUpComponent();
@@ -44,24 +42,23 @@ public class PostEditing extends BaseActivity {
         setUpFireButtonListener();
     }
 
-    @SuppressLint("WrongViewCast")
     private void setUpComponent() {
-        this.title = findViewById(R.id.tv_post_title);
-        this.content = findViewById(R.id.et_edit_post_content);
-        this.visibilityString = findViewById(R.id.et_edit_who_can_see_the_post);
-        this.isPublic = findViewById(R.id.cb_is_public);
-        this.fireButton = findViewById(R.id.btn_fire_post);
+        this.heading = binding.etEditPostHeading;
+        this.content = binding.etEditPostContent;
+        this.visibilityString = binding.etEditWhoCanSeeThePost;
+        this.isPublic = binding.cbIsPublic;
+        this.fireButton = binding.btnFirePost;
     }
 
     private void setupVisibilityCheckboxListener() {
-        isPublic.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            visibilityString.setEnabled(!isChecked); // Disable the EditText if CheckBox is checked
+        binding.cbIsPublic.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            binding.etEditWhoCanSeeThePost.setEnabled(!isChecked);
         });
     }
 
     private void setUpFireButtonListener() {
-        // TODO: do something when the button is clicked
+        binding.btnFirePost.setOnClickListener(v -> {
+            // TODO: do something when the button is clicked
+        });
     }
-
-
 }
