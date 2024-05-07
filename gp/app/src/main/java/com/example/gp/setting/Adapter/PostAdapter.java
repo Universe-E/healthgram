@@ -23,10 +23,11 @@ import java.util.List;
  * @since : 2024-05-04
  */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
+    private final String TAG = "PA100000000";
     private static List<Post> posts;
 
     public PostAdapter(List<Post> posts) {
-        this.posts = posts;
+        PostAdapter.posts = posts;
     }
     @NonNull
     @Override
@@ -39,6 +40,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.PostViewHolder holder, int position) {
         Post post = posts.get(position);
+        Log.d(TAG,post.getPostId());
         holder.bind(post);
     }
 

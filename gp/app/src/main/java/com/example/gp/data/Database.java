@@ -11,6 +11,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
+import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -647,12 +648,21 @@ public class Database {
          * Callback return true and list of PostMap object List<Map<String postId, Post post>>
          */
         public static void getPostsByAuthorId(Date time, int limit,String authorId, Object object, String methodName, Object... args) {
-            Timestamp timestamp = Timestamp.now();
+            Timestamp timestamp;
+
+            if (time == null) {
+                timestamp = new Timestamp(TimeUtil.getCurDate());
+            } else {
+                timestamp = new Timestamp(time);
+            }
+
+            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
             Log.d(TAG, "Method: " + methodName);
 
-            FirebaseFirestore.getInstance().collection("users").document(UserDB.userId).collection("postMap")
+            FirebaseFirestore.getInstance().collection("users").document(userId).collection("postMap")
                     .orderBy("postTimestamp", Query.Direction.DESCENDING)
-                    .whereGreaterThan("postTimestamp", timestamp)
+                    .whereLessThan("postTimestamp", timestamp)
                     .limit(limit).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -682,6 +692,5 @@ public class Database {
                         }
                     });
         }
-
     }
 }
