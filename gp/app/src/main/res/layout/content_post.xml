@@ -27,7 +27,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_post_title"
+            android:id="@+id/tv_post_detail_page_post_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Title"
@@ -35,7 +35,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_post_content"
+            android:id="@+id/tv_post_detail_page_post_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Description"
