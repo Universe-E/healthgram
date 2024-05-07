@@ -30,7 +30,7 @@ public class PostVisibilityActivity extends BaseActivity {
     private com.example.gp.databinding.ActivityPostVisibilityBinding binding;
     private RecyclerView recyclerView;
     private PostAdapter mPostAdapter;
-    private static List<Post> posts = new ArrayList<>();
+    private List<Post> posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class PostVisibilityActivity extends BaseActivity {
 
         recyclerView = binding.recyclerViewPosts;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        posts = new ArrayList<>();
 
         Date time = TimeUtil.getCurDate();
         Database.PostDB.getUserPost(time,10,this,"updateUI");

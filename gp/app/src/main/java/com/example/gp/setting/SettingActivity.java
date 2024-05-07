@@ -8,7 +8,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.BaseActivity;
+import com.example.gp.MainActivity;
 import com.example.gp.R;
+import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivitySettingBinding;
 
 public class SettingActivity extends BaseActivity {
@@ -37,6 +39,8 @@ public class SettingActivity extends BaseActivity {
         // 3 privacy
         binding.llSettingRequestLayout.setOnClickListener(this);
         binding.llSettingVisibilityLayout.setOnClickListener(this);
+        // quit
+        binding.btnSettingMainQuit.setOnClickListener(this);
 
     }
 
@@ -60,6 +64,10 @@ public class SettingActivity extends BaseActivity {
             startActivity(intent);
         } else if(v == binding.llSettingVisibilityLayout) {
             Intent intent = new Intent(this, PostVisibilityActivity.class);
+            startActivity(intent);
+        } else if(v == binding.btnSettingMainQuit) {
+            Database.UserDB.signOut(null,null);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
     }

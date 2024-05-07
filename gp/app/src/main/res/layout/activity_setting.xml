@@ -24,7 +24,7 @@
             android:layout_marginBottom="20dp">
 
             <Button
-                android:id="@+id/setting_main_quit"
+                android:id="@+id/btn_setting_main_quit"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_centerHorizontal="true"
