@@ -652,7 +652,7 @@ public class Database {
 
             FirebaseFirestore.getInstance().collection("users").document(UserDB.userId).collection("postMap")
                     .orderBy("postTimestamp", Query.Direction.DESCENDING)
-                    .whereLessThan("postTimestamp", timestamp)
+                    .whereGreaterThan("postTimestamp", timestamp)
                     .limit(limit).get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
