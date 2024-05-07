@@ -2,11 +2,13 @@ package com.example.gp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gp.Items.User;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityMainBinding;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
         Database.UserDB.checkSignedIn(this, "updateUI");
+        Log.d(TAG, "onStart: checkSignedIn");
     }
 
     @Override
@@ -56,14 +59,25 @@ public class MainActivity extends AppCompatActivity {
         // Sign in with email and password
 
         if (validateForm(username, password)) {
+            Log.d(TAG, "login: " + username);
             // authenticate the user
             Database.UserDB.signIn(username, password, this, "updateUI");
         }
     }
 
-    public void updateUI() {
-        Intent intent = new Intent(MainActivity.this, Fragment_home.class);
-        startActivity(intent);
+    public void updateUI(boolean isSuccess, Object args) {
+        Log.d(TAG, "updateUI: " + isSuccess);
+        if (isSuccess) {
+            Log.d(TAG, "updateUI: " + args.toString());
+            Intent intent = new Intent(MainActivity.this, Fragment_home.class);
+            startActivity(intent);
+        } else {
+            if (args != null) {
+                ToastUtil.showLong(this, "Login failed: " + args.toString());
+            } else {
+                ToastUtil.showLong(this, "Login failed");
+            }
+        }
     }
 
     private boolean validateForm(String usernameOrEmail, String password) {

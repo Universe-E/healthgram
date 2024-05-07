@@ -4,6 +4,8 @@ import android.nfc.Tag;
 import android.util.Log;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class MethodUtil {

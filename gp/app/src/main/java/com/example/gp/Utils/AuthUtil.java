@@ -50,6 +50,5 @@ public class AuthUtil {
 //        // Get email by username from the database
 //        return Database.UserDB.getEmailByUsername(username);
 //    }
-
     /********** END API **********/
 }

@@ -45,9 +45,18 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-    public void updateUI() {
-        Intent intent = new Intent(this, Fragment_home.class);
-        startActivity(intent);
+    public void updateUI(Boolean isSuccess, Object args) {
+        if (isSuccess) {
+            Intent intent = new Intent(this, Fragment_home.class);
+            startActivity(intent);
+        } else {
+            if (args != null) {
+                String errorMsg = (String) args;
+                ToastUtil.showLong(this, "Create account failed: " + errorMsg);
+            } else {
+                ToastUtil.showLong(this, "Create account failed");
+            }
+        }
     }
 
     private boolean validateForm(String username, String email, String password, String repeat_password) {
