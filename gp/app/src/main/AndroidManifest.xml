@@ -19,11 +19,8 @@
             android:name=".setting.FriendDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".interaction.PostEditing"
+            android:name=".interaction.NewPostActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".setting.FriendPermissionActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".setting.PostVisibilityActivity"
             android:exported="true" />

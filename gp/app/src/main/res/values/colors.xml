@@ -8,4 +8,6 @@
     <color name="text_gray">#AAAAAA</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
+    <color name="accept_green">#4CAF50</color>
+    <color name="reject_red">#D32F2F</color>
 </resources>

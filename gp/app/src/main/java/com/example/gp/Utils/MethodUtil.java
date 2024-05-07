@@ -14,8 +14,8 @@ public class MethodUtil {
     private static Method getMethod(Object obj, String methodName) {
         Method[] methods = obj.getClass().getMethods();
         for (Method method : methods) {
-            Log.d("MethodUtil", "method name: " + method.getName());
             if (method.getName().equals(methodName)) {
+                Log.d("MethodUtil", "method name: " + method.getName());
                 return method;
             }
         }
@@ -49,9 +49,12 @@ public class MethodUtil {
             return;
         }
         try {
-            Objects.requireNonNull(getMethod(obj, methodName)).invoke(obj, args);
+            Log.d(TAG, "invoke method: " + methodName);
+            Log.d(TAG, "object: " + obj);
+            Log.d(TAG, "args: " + Arrays.toString(args));
+            getMethod(obj, methodName).invoke(obj, args);
         } catch (Exception e) {
-            Log.e(TAG, "invoke method error: " + e.getMessage());
+            Log.e(TAG, "invoke method error: " + e);
         }
     }
 }

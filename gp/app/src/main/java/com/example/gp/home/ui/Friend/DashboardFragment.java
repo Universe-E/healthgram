@@ -1,7 +1,5 @@
 package com.example.gp.home.ui.Friend;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,24 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.Activity_note_detail;
 import com.example.gp.Adapter.FriendsRecyclerViewAdapter;
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
-import com.example.gp.MainActivity;
 import com.example.gp.R;
 import com.example.gp.SearchActivity;
 import com.example.gp.Items.Friend;
-import com.example.gp.Utils.ToastUtil;
 import com.example.gp.databinding.ActivityFriendDetailBinding;
 import com.example.gp.databinding.FragmentDashboardBinding;
 import com.example.gp.home.Fragment_home;
-import com.example.gp.setting.Adapter.PostAdapter;
 import com.google.android.material.search.SearchBar;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import com.example.gp.data.Database;
-
 
 /*
 * 登录成功跳转的主界面
@@ -48,9 +38,9 @@ public class DashboardFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
     private SearchBar searchBar;
-    private RecyclerView recyclerView;
-    private FriendsRecyclerViewAdapter friendadapter;
+    private FriendsRecyclerViewAdapter adapter;
     private List<Friend> friends;
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,21 +61,12 @@ public class DashboardFragment extends Fragment {
             Log.e("DashboardFragment", "未找到 SearchBar");
         }
 
-        Database.UserDB.getFriendList("",100,this, "updateUI");
-
-//        // Load friends
-//        loadFriends();
-
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        friendadapter = new FriendsRecyclerViewAdapter(new ArrayList<>());
-//        recyclerView.setAdapter(friendadapter);
-//
 
-//        friends = new ArrayList<>();
-//        updateUI(friends);
-
+        // Load friends
+        loadFriends();
 
         // Set click listener to navigate to friend's profile
 //        adapter.setOnItemClickListener(new FriendsRecyclerViewAdapter.OnItemClickListener() {
@@ -112,30 +93,14 @@ public class DashboardFragment extends Fragment {
         friends = new ArrayList<>();
         friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
         friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
+
+        //input context to prevent null pointer exception
+        adapter = new FriendsRecyclerViewAdapter(getContext(),friends);
+        recyclerView.setAdapter(adapter);
     }
 
     private void openFriendProfile(Friend friend) {
         Intent intent = new Intent(getContext(), ActivityFriendDetailBinding.class);
         startActivity(intent);
-    }
-    public void updateUI(boolean isSuccess, Object object) {
-        if (!isSuccess) {
-            ToastUtil.showLong(this.getContext(), "failed");
-            return;
-        }
-
-        if(object != null) {
-            // Get posts
-            List<Map<String, Friend>> myFriends = (List<Map<String, Friend>>) object;
-            for (Map<String, Friend> friendMap : myFriends) {
-                Iterator<Friend> it =  friendMap.values().iterator();
-                while(it!=null){
-                    friends.add(it.next());
-                }
-            }
-        }
-        friendadapter = new FriendsRecyclerViewAdapter(friends);
-        recyclerView.setAdapter(friendadapter);
-
     }
 }

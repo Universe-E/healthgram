@@ -12,8 +12,10 @@ public class Friend {
         this.avatar = avatar;
     }
 
+    /**
+     * DO NOT DELETE THIS CONSTRUCTOR
+     */
     public Friend() {
-
     }
 
     public String getName(){

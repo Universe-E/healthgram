@@ -17,8 +17,8 @@ import com.example.gp.Activity_note_detail;
 import com.example.gp.data.UserData;
 import com.example.gp.data.UserData.Note;
 import com.example.gp.Adapter.NoteRecyclerViewAdapter;
-import com.example.gp.interaction.PostEditing;
-import com.example.gp.setting.SettingActivity;
+import com.example.gp.interaction.NewPostActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
@@ -58,8 +58,8 @@ public class HomeFragment extends Fragment {
         setupSearchViewListener();
 
         // Find the FloatingActionButton and set its click listener
-//        FloatingActionButton fabAddNote = view.findViewById(R.id.fab_add_note);
-//        fabAddNote.setOnClickListener(v -> openAddNoteActivity());
+        FloatingActionButton fabAddNote = view.findViewById(R.id.fab_add_note);
+        fabAddNote.setOnClickListener(v -> openAddNoteActivity());
         return view;
     }
 
@@ -110,8 +110,8 @@ public class HomeFragment extends Fragment {
     }
     // Open Add Note Activity
     private void openAddNoteActivity() {
-//        Intent intent = new Intent(getContext(), AddNoteActivity.class); // 替换为你要跳转的 Activity
-//        startActivity(intent);
+        Intent intent = new Intent(getContext(), NewPostActivity.class); // 替换为你要跳转的 Activity
+        startActivity(intent);
     }
 }
 

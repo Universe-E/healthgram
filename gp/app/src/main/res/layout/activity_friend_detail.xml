@@ -61,7 +61,7 @@
             android:id="@+id/sw_block_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_marginEnd="10dp" />
 
     </LinearLayout>
 
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="0dp"
-        android:background="@color/white"
+        android:background="@drawable/layout_pressed_effect"
         android:orientation="horizontal"
         android:padding="15dp">
 
