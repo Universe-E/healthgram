@@ -11,6 +11,11 @@ import com.example.gp.BaseActivity;
 import com.example.gp.R;
 import com.example.gp.databinding.ActivityPostEditingBinding;
 
+/**
+ * This class represents the activity for creating a new post.
+ * @author Tianci
+ */
+
 public class NewPostActivity extends BaseActivity {
 
     private final String activityName = "New Post";
@@ -51,9 +56,23 @@ public class NewPostActivity extends BaseActivity {
     }
 
     private void setupVisibilityCheckboxListener() {
+
+        // When the checkbox is checked, it means the post is public
+        // When the checkbox is unchecked, it means the post is private
         binding.cbIsPublic.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            binding.etEditWhoCanSeeThePost.setEnabled(!isChecked);
+            // 1. Change the hint message
+            if (isChecked)
+                binding.etEditWhoCanSeeThePost.setHint("Everyone can see this post!");
+            else
+                binding.etEditWhoCanSeeThePost.setHint("All friends can see this unless you specify!");
+
+            // 2. disable the text field if the checkbox is checked
+            if (isChecked)
+                binding.etEditWhoCanSeeThePost.setEnabled(false);
+            else
+                binding.etEditWhoCanSeeThePost.setEnabled(true);
         });
+
     }
 
     private void setUpFireButtonListener() {
