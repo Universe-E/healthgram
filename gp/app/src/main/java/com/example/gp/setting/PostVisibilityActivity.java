@@ -30,7 +30,7 @@ public class PostVisibilityActivity extends BaseActivity {
     private com.example.gp.databinding.ActivityPostVisibilityBinding binding;
     private RecyclerView recyclerView;
     private PostAdapter mPostAdapter;
-    private static List<Post> posts;
+    private static List<Post> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,6 @@ public class PostVisibilityActivity extends BaseActivity {
 
             Map<String, Post> postMap = (Map<String, Post>) object;
             Log.d(TAG, postMap.toString());
-            List<Post> posts = new ArrayList<>();
             //Get posts
             for (Map.Entry<String, Post> entry : postMap.entrySet()) {
                 Log.d(TAG, entry.getValue().toString());
