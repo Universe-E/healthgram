@@ -1,10 +1,12 @@
 package com.example.gp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.R;
 import com.example.gp.Items.Friend;
+import com.example.gp.databinding.ActivityFriendDetailBinding;
+import com.example.gp.setting.FriendDetailActivity;
 
 import java.util.List;
 
@@ -67,7 +71,8 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
         void onItemClick(int position, Friend friend);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private LinearLayout friendContent;
         public TextView friendName;
         public ImageView friendAvatar;
 
@@ -75,12 +80,23 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
             super(itemView);
             friendName = itemView.findViewById(R.id.tv_friend_name);
             friendAvatar = itemView.findViewById(R.id.iv_friend_avatar);
+            friendContent = itemView.findViewById(R.id.ll_friend_content);
+            friendContent.setOnClickListener(this);
         }
 
         public void bind(Friend friend) {
             friendName.setText(friend.getNickname());
             // Assuming friendAvatarUrl is a method you might implement to get URL of the avatar
             friendAvatar.setImageResource(R.mipmap.sample_avatar_1); // This can be replaced with image loading logic
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v == friendContent) {
+                Context context = itemView.getContext();
+                Intent intent = new Intent(context, FriendDetailActivity.class);
+                context.startActivity(intent);
+            }
         }
     }
 }

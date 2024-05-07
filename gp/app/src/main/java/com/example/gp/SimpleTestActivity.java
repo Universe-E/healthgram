@@ -1,5 +1,6 @@
 package com.example.gp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,12 +8,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gp.Items.Friend;
+import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.TimeUtil;
@@ -217,5 +220,24 @@ public class SimpleTestActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.test_editText);
         editText.setText(post.title);
         editText.setTag(post.postId);
+    }
+
+    private void showAddFriendDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to send a friend request？")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        FriendRequest fr = new FriendRequest("user1@gmail.com");
+                        Database.UserDB.sendFriendRequestTo(fr,null,null);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        // Show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
