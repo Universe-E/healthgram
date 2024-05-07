@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Activity_note_detail;
 import com.example.gp.Adapter.FriendsRecyclerViewAdapter;
-import com.example.gp.Adapter.NoteRecyclerViewAdapter;
+
 import com.example.gp.R;
 import com.example.gp.SearchActivity;
 import com.example.gp.Items.Friend;

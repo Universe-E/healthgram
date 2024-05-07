@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.R;
 import com.example.gp.Items.Post;
 import com.example.gp.data.Database;
+import com.example.gp.data.UserData;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public int getItemCount() {
         return posts.size();
     }
+
 
 
     public static class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
