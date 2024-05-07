@@ -2,8 +2,7 @@ package com.example.gp.home.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,105 +12,97 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.R;
-import com.example.gp.Activity_note_detail;
-import com.example.gp.data.UserData;
-import com.example.gp.data.UserData.Note;
-import com.example.gp.Adapter.NoteRecyclerViewAdapter;
+import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.Database;
+import com.example.gp.Items.Post;
 import com.example.gp.interaction.NewPostActivity;
+import com.example.gp.interaction.PostCardAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    private NoteRecyclerViewAdapter adapter;
+    private PostCardAdapter postCardAdapter1;
+    private PostCardAdapter postCardAdapter2;
     private SearchView searchView;
+    private List<Post> postList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Initialize SearchView
-        View searchLayout = view.findViewById(R.id.search_layout);
-        searchView = searchLayout.findViewById(R.id.search_view);
+        // Initialize the search view, recycler views, and add note button
+        initializeSearchView(view);
+        initializeRecyclerViews(view);
+        setupAddNoteButton(view);
 
-        // Initialize RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new NoteRecyclerViewAdapter(new ArrayList<>());
-        recyclerView.setAdapter(adapter);
+        // Load post data from the database
+        Database.PostDB.getPostsByTime(new Date(), 10, this, "loadPostCards");
 
-        // Set click listener to navigate to detail page
-        adapter.setOnItemClickListener(this::openDetailActivity);
-
-        // Add initial data
-        addInitialNotes();
-
-        // Observe notes in UserData
-        UserData.notes().observe(getViewLifecycleOwner(), notes -> {
-            adapter.updateNotes(notes); // Update adapter with new data
-        });
-
-        // Setup SearchView listener
-        setupSearchViewListener();
-
-        // Find the FloatingActionButton and set its click listener
-        FloatingActionButton fabAddNote = view.findViewById(R.id.fab_add_note);
-        fabAddNote.setOnClickListener(v -> openAddNoteActivity());
         return view;
     }
 
-    // Set up SearchView listener
-    private void setupSearchViewListener() {
-        // 使用 TextWatcher 监听输入框的内容变化
-        searchView.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                performSearch(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
-    }
-
-
-    // Search function to filter notes based on query
-    private void performSearch(String query) {
-        List<Note> filteredNotes = new ArrayList<>();
-        for (Note note : UserData.getNotes()) {
-            if (note.name.toLowerCase().contains(query.toLowerCase()) || note.description.toLowerCase().contains(query.toLowerCase())) {
-                filteredNotes.add(note);
-            }
+    public void loadPostCards(boolean isSuccess, Object object) {
+        if (isSuccess) {
+            postList = (List<Post>) object;
+            int halfSize = postList.size() / 2;
+            List<Post> postList1 = postList.subList(0, halfSize);
+            List<Post> postList2 = postList.subList(halfSize, postList.size());
+            postCardAdapter1.setPostList(postList1);
+            postCardAdapter2.setPostList(postList2);
+            Log.d("HomeFragment", "Posts loaded successfully");
+        } else {
+            // Handle error
+            ToastUtil.showLong(getContext(), "Failed to load posts");
         }
-        adapter.updateNotes(filteredNotes);  // 更新适配器数据并刷新 RecyclerView
     }
 
-    // Add some example data
-    private void addInitialNotes() {
-        UserData.addNote(new Note("1", "Europe Cup Champions", "Sport News"));
-        UserData.addNote(new Note("2", "Game", "WOW Game Strategy"));
-        UserData.addNote(new Note("3", "WTF NO.375", "COC"));
-        UserData.addNote(new Note("4", "Australia news", "Canberra parliament"));
+    private void initializeSearchView(View view) {
+        View searchLayout = view.findViewById(R.id.search_layout);
+        searchView = searchLayout.findViewById(R.id.search_view);
+        searchView.getEditText().addTextChangedListener(new SearchViewTextWatcher());
     }
 
-    // Launch detail activity
-    private void openDetailActivity(Note note) {
-        Intent intent = new Intent(getContext(), Activity_note_detail.class);
-        intent.putExtra("title", note.name);
-        intent.putExtra("description", note.description);
-        intent.putExtra("imageResId", note.imageName);
-        startActivity(intent);
+    private void initializeRecyclerViews(View view) {
+        RecyclerView recyclerView1 = view.findViewById(R.id.recycler_view_column1);
+        RecyclerView recyclerView2 = view.findViewById(R.id.recycler_view_column2);
+
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        postCardAdapter1 = new PostCardAdapter();
+        postCardAdapter2 = new PostCardAdapter();
+
+        recyclerView1.setAdapter(postCardAdapter1);
+        recyclerView2.setAdapter(postCardAdapter2);
     }
-    // Open Add Note Activity
+
+    private void setupAddNoteButton(View view) {
+        FloatingActionButton fabAddNote = view.findViewById(R.id.fab_add_note);
+        fabAddNote.setOnClickListener(v -> openAddNoteActivity());
+    }
+
     private void openAddNoteActivity() {
-        Intent intent = new Intent(getContext(), NewPostActivity.class); // 替换为你要跳转的 Activity
+        Intent intent = new Intent(getContext(), NewPostActivity.class);
         startActivity(intent);
+    }
+
+    private class SearchViewTextWatcher implements android.text.TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // Perform search logic if needed
+        }
+
+        @Override
+        public void afterTextChanged(android.text.Editable s) {
+        }
     }
 }
-

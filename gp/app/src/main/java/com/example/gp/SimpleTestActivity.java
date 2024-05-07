@@ -21,7 +21,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 public class SimpleTestActivity extends AppCompatActivity {
@@ -119,7 +118,18 @@ public class SimpleTestActivity extends AppCompatActivity {
 //        testPost();
 //        testTag(view);
 //        testGetPost();
-        testGetPost();
+//        testGetPost();
+//        testAddFriend();
+        testGetFriendList();
+    }
+
+    private void testGetFriendList() {
+        Database.UserDB.getFriendList("", 10, this, "getFriendList");
+    }
+
+    public void getFriendList(boolean isSuccess, Object object) {
+//        List<Map<String, Friend>> friendMap = (List<Map<String, Friend>>) object;
+        Log.d(TAG, "getFriendList: " + object.toString());
     }
 
     private void testTag(View view) {
@@ -184,6 +194,14 @@ public class SimpleTestActivity extends AppCompatActivity {
             editText.setText(post.title);
             editText.setTag(post.postId);
         }
+    }
+
+    void testAddFriend() {
+        Friend friend = new Friend();
+        friend.setId(String.valueOf(friend.hashCode()));
+        friend.setNickname("test" + friend.hashCode());
+        friend.setAvatar(1);
+        Database.UserDB.addFriend(friend, null, null);
     }
 
     void updateUI(boolean isSuccess, Object object) {

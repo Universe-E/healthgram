@@ -1,12 +1,9 @@
 package com.example.gp.Utils;
 
-import android.nfc.Tag;
 import android.util.Log;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class MethodUtil {
     private static final String TAG = "MethodUtil";
@@ -55,6 +52,7 @@ public class MethodUtil {
             getMethod(obj, methodName).invoke(obj, args);
         } catch (Exception e) {
             Log.e(TAG, "invoke method error: " + e);
+            e.printStackTrace();
         }
     }
 }
