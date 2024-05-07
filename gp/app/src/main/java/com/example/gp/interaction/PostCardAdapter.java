@@ -58,6 +58,10 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     public int getItemCount() {
         return postList.size();
     }
+    public void updatePosts(List<Post> userposts) {
+        this.postList = userposts;
+        notifyDataSetChanged();
+    }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;

@@ -14,6 +14,11 @@ import com.example.gp.data.UserData;
 
 import java.util.List;
 
+/**
+ * Adapter for RecyclerView to display list of Note(brief page)
+ * @author Xingchen Zhang / Tianci Li
+ * Date:2024-05-07
+ */
 public class NoteRecyclerViewAdapter extends RecyclerView.Adapter<NoteRecyclerViewAdapter.ViewHolder> {
 
     private List<UserData.Note> notes;
