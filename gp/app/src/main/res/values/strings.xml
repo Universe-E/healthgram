@@ -26,6 +26,8 @@
     <string name="searchbar_hint">Search what you want</string>
     <string name="setting_public_visibility">Public posts</string>
     <string name="setting_private_visibility">Private posts</string>
+    <string name="request_accept">Accept</string>
+    <string name="request_reject">Reject</string>
 
 
 </resources>
