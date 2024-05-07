@@ -50,10 +50,11 @@ public class MethodUtil {
         }
         try {
             Log.d(TAG, "invoke method: " + methodName);
+            Log.d(TAG, "object: " + obj);
             Log.d(TAG, "args: " + Arrays.toString(args));
-            Objects.requireNonNull(getMethod(obj, methodName)).invoke(obj, args);
+            getMethod(obj, methodName).invoke(obj, args);
         } catch (Exception e) {
-            Log.e(TAG, "invoke method error: " + e.getMessage());
+            Log.e(TAG, "invoke method error: " + e);
         }
     }
 }

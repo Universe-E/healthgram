@@ -1,16 +1,24 @@
 package com.example.gp.setting.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Items.Friend;
 import com.example.gp.R;
+import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.Database;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder> {
     private List<Friend> friends;
@@ -37,13 +45,48 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         return friends.size();
     }
 
-    public class RequestViewHolder extends RecyclerView.ViewHolder {
+    public class RequestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final ImageView mRequestFriendAvatar;
+        private final TextView mRequestFriendName;
+        private final Button mRequestAccept;
+        private final Button mRequestReject;
+
         public RequestViewHolder(@NonNull View itemView){
             super(itemView);
+            mRequestFriendAvatar = itemView.findViewById(R.id.iv_request_friend_avatar);
+            mRequestFriendName = itemView.findViewById(R.id.tv_request_friend_name);
+            mRequestAccept = itemView.findViewById(R.id.btn_request_accept);
+            mRequestReject = itemView.findViewById(R.id.btn_request_reject);
+            mRequestAccept.setOnClickListener(this);
+            mRequestAccept.setOnClickListener(this);
         }
 
         public void bind(Friend friend) {
+            mRequestFriendName.setText(friend.getNickname());
+            mRequestFriendAvatar.setImageResource(friend.getAvatar());
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            if (v == mRequestAccept) {
+                // Update friend list
+                Friend awaitFriend = friends.get(position);
+                Database.UserDB.addFriend(awaitFriend,this,"updateUI");
+            } else if (v == mRequestReject) {
+                // Delete this message
+                friends.remove(position);
+                notifyItemRemoved(position);
+            }
+        }
+
+        public void updateUI(boolean isSuccess,Object object){
+            if (!isSuccess) {
+                ToastUtil.show(itemView.getContext(), object.toString());
+            } else {
+                ToastUtil.show(itemView.getContext(), "Friend request accepted!");
+            }
         }
     }
 }
