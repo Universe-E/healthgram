@@ -26,13 +26,18 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
     private OnItemClickListener listener;
     private Context context;
 
+    public FriendsRecyclerViewAdapter(Context context, List<Friend> friends) {
+        this.context = context;
+        this.friends = friends;
+    }
+
     public FriendsRecyclerViewAdapter(List<Friend> friends) {
         this.friends = friends;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.content_friend, parent, false);
         return new ViewHolder(view);
     }
