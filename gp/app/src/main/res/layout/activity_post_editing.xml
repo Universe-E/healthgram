@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interaction.PostEditing">
+    tools:context=".interaction.NewPostActivity">
 
     <EditText
         android:id="@+id/et_edit_post_content"
