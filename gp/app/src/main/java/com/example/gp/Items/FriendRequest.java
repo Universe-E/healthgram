@@ -16,6 +16,11 @@ public class FriendRequest {
     public FriendRequest() {
     }
 
+    /**
+     * Only use this constructor
+     * Don't use getters and setters
+     * @param receiverId
+     */
     public FriendRequest(String receiverId) {
         this.receiverId = receiverId;
     }

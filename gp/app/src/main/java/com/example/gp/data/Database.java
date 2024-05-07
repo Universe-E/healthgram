@@ -205,6 +205,12 @@ public class Database {
                     });
         }
 
+        /**
+         * Get friend request from firestore
+         * @param date Don't need this parameter for this stage just use null
+         * @param limit not used
+         * @param object
+         */
         public static void getFriendRequest (Date date, int limit, Object object, String methodName) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
