@@ -24,6 +24,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Home fragment
+ * The page to show home page of posts sent by all other users you followed
+ * Author: Xingchen Zhang
+ * Date: 2024-05-01
+ */
 public class HomeFragment extends Fragment {
 
     private PostCardAdapter postCardAdapter1;
