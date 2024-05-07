@@ -651,7 +651,6 @@ public class Database {
             Log.d(TAG, "Method: " + methodName);
 
             FirebaseFirestore.getInstance().collection("users").document(UserDB.userId).collection("postMap")
-                    .whereEqualTo("authorId", authorId)
                     .orderBy("postTimestamp", Query.Direction.DESCENDING)
                     .whereLessThan("postTimestamp", timestamp)
                     .limit(limit).get()
