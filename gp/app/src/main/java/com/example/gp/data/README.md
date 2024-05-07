@@ -23,8 +23,9 @@ Please read [Android Doc](https://developer.android.com/topic/architecture/data-
 
 # Demands
 
-FriendList
-Post: setPublic(boolean isPublic) disc: if true then set the post.isPublic true else set the post.isPublic false
+sendRequest(User user) send the request to certain user
+getRequests() get all requests which are sent to current user
+
 
 # Update on Backend API Data Return Format
 
