@@ -24,14 +24,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Source;
 
-import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -143,12 +139,11 @@ public class Database {
         public static void addFriend (Friend friend, Object object, String methodName) {
             // Add friend to firestore
             FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             db.collection("users")
-                    .document(UserDB.userId)
-                    .collection("friendMap")
-                    .document(friend.getId())
-                    .set(friend)
+                    .document(userId)
+                    .set(Map.of("friendMap", Map.of(friend.getId(), friend)), SetOptions.merge())
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // If successful
@@ -183,28 +178,40 @@ public class Database {
 
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
-            FirebaseFirestore.getInstance().document(userId)
-                    .collection("friendMap")
-                    .orderBy("nickname", Query.Direction.ASCENDING)
-                    .whereGreaterThan("nickname", nickname)
-                    .limit(limit).get()
+            FirebaseFirestore.getInstance()
+                    .collection("users")
+                    .document(userId)
+                    .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                            List<Map<String, Object>> friends = new ArrayList<>();
-                            for (DocumentSnapshot document : documents) {
-                                // will return a list of friendMap which is a map of <String userId, Friend friend>
-                                friends.add(Map.of(document.getId(), document.toObject(Friend.class)));
-                            }
-                            try {
+                            if (task.getResult() == null) {
+                                String message = "No friend";
                                 /*
                                   Callback
-                                  Return true and list of Map List<Map<String userId, Friend friend>> aka friendMap
+                                  Return error message
                                  */
-                                MethodUtil.invokeMethod(object, methodName, true, friends);
-                            } catch (Exception e) {
-                                Log.e(TAG, "Error: " + e.getMessage());
+                                MethodUtil.invokeMethod(object, methodName, false, message);
+                                Log.d(TAG, message);
+                                return;
                             }
+                            User user = task.getResult().toObject(User.class);
+                            Map<String, Friend> friendMap = user.getFriendMap();
+                            if (friendMap == null) {
+                                String message = "No friend";
+                                /*
+                                  Callback
+                                  Return error message
+                                 */
+                                MethodUtil.invokeMethod(object, methodName, false, message);
+                                return;
+                            }
+                            Log.d(TAG, "method name: " + methodName);
+                            /*
+                              Callback
+                              Return true and list of Map List<Map<String userId, Friend friend>> aka friendMap
+                             */
+                            MethodUtil.invokeMethod(object, methodName, true, friendMap);
+                            Log.d(TAG, "FriendMap: " + friendMap.toString());
                         } else {
                             Exception e = task.getException();
                             /*
@@ -698,14 +705,20 @@ public class Database {
                                 return;
                             }
                             Log.d(TAG, "method name: " + methodName);
-                            MethodUtil.invokeMethod(object, methodName, true, postMap);
-                            Log.d(TAG, "Posts: " + postMap.toString());
                             /*
                               Callback
                               Return true and list of PostMap object List<Map<String postId, Post post>>
                              */
+                            MethodUtil.invokeMethod(object, methodName, true, postMap);
+                            Log.d(TAG, "Posts: " + postMap.toString());
                         } else {
-                            Log.e(TAG, "Error getting documents: ", task.getException());
+                            Exception e = task.getException();
+                            /*
+                              Callback
+                              Return error message
+                             */
+                            MethodUtil.invokeMethod(object, methodName, false, Objects.requireNonNull(e).getMessage());
+                            Log.e(TAG, "Error getting documents: ", e);
                         }
                     });
         }
