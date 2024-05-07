@@ -39,6 +39,7 @@
         <activity
             android:name=".home.Fragment_home"
             android:exported="true"
+            android:enableOnBackInvokedCallback="true"
             android:label="@string/title_activity_fragment_home" />
 <!--        <activity-->
 <!--            android:name=".NewMainActivity"-->

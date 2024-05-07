@@ -39,11 +39,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Description"
-            android:textSize="15sp" />
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="14sp" />
 
     </LinearLayout>
     <Button
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:id="@+id/btn_change_state"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,7 +53,7 @@
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:background="@drawable/button_pressed_effect"
-        android:text="Change state"
+        android:text="Change status"
         android:textSize="@dimen/dimen_middle_size"
         android:layout_marginEnd="10dp"/>
 </LinearLayout>

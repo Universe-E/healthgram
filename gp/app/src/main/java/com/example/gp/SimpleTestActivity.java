@@ -54,7 +54,7 @@ public class SimpleTestActivity extends AppCompatActivity {
 //        testFirebaseFirestore();
 //        testGetDocIdFromDocRefBeforeSet();
 
-        testSavePost(new Post("testpoqewrq", "455rtrgdf", true));
+//        testSavePost(new Post("testpoqewrq", "455rtrgdf", true));
     }
 
     @Override

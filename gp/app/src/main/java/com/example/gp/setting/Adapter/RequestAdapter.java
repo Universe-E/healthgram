@@ -20,6 +20,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Adapter class to populate a RecyclerView with a list of friend objects
+ * who send the friend request to current user.
+ * @author Yulong Chen
+ * @since 2024-05-07
+ */
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder> {
     private List<Friend> friends;
 

@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             if (args != null) {
-                ToastUtil.showLong(this, "Login failed: " + args.toString());
+//                ToastUtil.showLong(this, "Login failed: " + args.toString());
             } else {
-                ToastUtil.showLong(this, "Login failed");
+//                ToastUtil.showLong(this, "Login failed");
             }
         }
     }

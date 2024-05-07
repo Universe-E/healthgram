@@ -7,12 +7,14 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.gp.Items.Friend;
+import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
+import com.example.gp.setting.FriendDetailActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -162,6 +164,90 @@ public class Database {
                             MethodUtil.invokeMethod(object, methodName, false, Objects.requireNonNull(e).getMessage());
                             Log.e(TAG, "Error writing document", e);
                         }
+                    });
+        }
+
+        /**
+         * Send friend request to firestore
+         * @param friendRequest that only contains receiver's userId
+         * @param object
+         * @param methodName
+         */
+        public static void sendFriendRequestTo (FriendRequest friendRequest, Object object, String methodName) {
+            // Send friend request to firestore
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String senderId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+            Timestamp timestamp = TimeUtil.getTimestamp();
+
+            DocumentReference docRef = db.collection("friendRequests").document();
+
+            friendRequest.setRequestId(docRef.getId());
+            friendRequest.setRequestTimestamp(timestamp);
+            friendRequest.setSenderId(senderId);
+            friendRequest.setRead(false);
+
+            docRef.set(friendRequest)
+                    .addOnSuccessListener(aVoid -> {
+                        /*
+                          Callback
+                          Return true and friendRequest object
+                         */
+                        MethodUtil.invokeMethod(object, methodName, true, friendRequest);
+                    })
+                    .addOnFailureListener(e -> {
+                        /*
+                          Callback
+                          Return error message
+                         */
+                        MethodUtil.invokeMethod(object, methodName, false, Objects.requireNonNull(e).getMessage());
+                        Log.e(TAG, "Error: " + e);
+                    });
+        }
+
+        /**
+         * Get friend request from firestore
+         * @param date Don't need this parameter for this stage just use null
+         * @param limit not used
+         * @param object
+         */
+        public static void getFriendRequest (Date date, int limit, Object object, String methodName) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
+            db.collection("friendRequests")
+                    .whereEqualTo("receiverId", userId)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            if (task.getResult() == null) {
+                                /*
+                                  Callback
+                                  Return error message
+                                 */
+                                MethodUtil.invokeMethod(object, methodName, false, "No friend request");
+                                Log.d(TAG, "No friend request");
+                                return;
+                            }
+                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                            List<FriendRequest> friendRequests = new ArrayList<>();
+                            for (DocumentSnapshot document : documents) {
+                                friendRequests.add(document.toObject(FriendRequest.class));
+                            }
+                            /*
+                              Callback
+                              Return true and list of FriendRequest object
+                             */
+                            MethodUtil.invokeMethod(object, methodName, true, friendRequests);
+                            Log.d(TAG, "FriendRequests: " + friendRequests.toString());
+                        }
+                        Exception e = task.getException();
+                        /*
+                          Callback
+                          Return error message
+                         */
+                        MethodUtil.invokeMethod(object, methodName, false, Objects.requireNonNull(e).getMessage());
+                        Log.e(TAG, "Error getting documents: ", e);
                     });
         }
 
@@ -628,6 +714,9 @@ public class Database {
                     .document(postId)
                     .update("isPublic", isPublic)
                     .addOnSuccessListener(aVoid -> {
+                        db.collection("users")
+                                .document(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                                        .update("postMap." + postId + ".isPublic", isPublic);
                         /*
                           Callback
                           Return true and postId

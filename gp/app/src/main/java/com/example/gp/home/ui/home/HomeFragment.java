@@ -2,6 +2,7 @@ package com.example.gp.home.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.R;
+import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.Items.Post;
@@ -25,6 +27,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Home fragment
+ * The page to show home page of posts sent by all other users you followed
+ * Author: Xingchen Zhang
+ * Date: 2024-05-01
+ */
 public class HomeFragment extends Fragment {
 
     private PostCardAdapter postCardAdapter1;
@@ -47,7 +55,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void loadPostCards(boolean isSuccess, Object object) {
+    public List<Post> loadPostCards(boolean isSuccess, Object object) {
         if (isSuccess) {
             postList = (List<Post>) object;
             int halfSize = postList.size() / 2;
@@ -60,12 +68,14 @@ public class HomeFragment extends Fragment {
             // Handle error
             ToastUtil.showLong(getContext(), "Failed to load posts");
         }
+
+        return postList;
     }
 
     private void initializeSearchView(View view) {
         View searchLayout = view.findViewById(R.id.search_layout);
         searchView = searchLayout.findViewById(R.id.search_view);
-        searchView.getEditText().addTextChangedListener(new SearchViewTextWatcher());
+        setupSearchViewListener();
     }
 
     private void initializeRecyclerViews(View view) {
@@ -101,18 +111,34 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
-    private class SearchViewTextWatcher implements android.text.TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
+    // Set up SearchView listener
+    private void setupSearchViewListener() {
+        // 使用 TextWatcher 监听输入框的内容变化
+        searchView.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            // Perform search logic if needed
-        }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                performSearch(true,this,s.toString());
+            }
 
-        @Override
-        public void afterTextChanged(android.text.Editable s) {
+            @Override
+            public void afterTextChanged(android.text.Editable s) {}
+        });
+    }
+
+    private void performSearch(boolean isSuccess, Object object,String query) {
+        List<Post> filteredPosts = new ArrayList<>();
+        // get the post data of user
+        for (Post post : postList) {
+            if (post.title.toLowerCase().contains(query.toLowerCase()) ) {
+                filteredPosts.add(post);
+            }
         }
+        postCardAdapter1.updatePosts(filteredPosts);  // 更新适配器数据并刷新 RecyclerView
+        postCardAdapter2.updatePosts(filteredPosts);  // 更新适配器数据并刷新 RecyclerView
+
+
     }
 }
