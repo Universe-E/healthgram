@@ -40,6 +40,7 @@ public class DashboardFragment extends Fragment {
     private SearchBar searchBar;
     private FriendsRecyclerViewAdapter adapter;
     private List<Friend> friends;
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,14 +61,12 @@ public class DashboardFragment extends Fragment {
             Log.e("DashboardFragment", "未找到 SearchBar");
         }
 
+        // Initialize RecyclerView
+        recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         // Load friends
         loadFriends();
-
-        // Initialize RecyclerView
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new FriendsRecyclerViewAdapter(new ArrayList<>());
-        recyclerView.setAdapter(adapter);
 
         // Set click listener to navigate to friend's profile
 //        adapter.setOnItemClickListener(new FriendsRecyclerViewAdapter.OnItemClickListener() {
@@ -94,6 +93,10 @@ public class DashboardFragment extends Fragment {
         friends = new ArrayList<>();
         friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
         friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
+
+        //input context to prevent null pointer exception
+        adapter = new FriendsRecyclerViewAdapter(getContext(),friends);
+        recyclerView.setAdapter(adapter);
     }
 
     private void openFriendProfile(Friend friend) {
