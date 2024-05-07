@@ -1,0 +1,120 @@
+package com.example.gp.interaction;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gp.Items.Post;
+import com.example.gp.R;
+import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.Database;
+import com.example.gp.data.UserData;
+
+import java.util.Objects;
+
+public class PostDetailActivity extends AppCompatActivity {
+
+    public static final String EXTRA_POST = "extra_post";
+
+    private ImageView ivAuthorAvatar;
+    private Button btnFollow;
+    private ImageView ivPostImage;
+    private TextView tvPostTitle;
+    private TextView tvPostContent;
+    private Button btnShare;
+
+    private Post post;
+
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_post_detail);
+
+        ivAuthorAvatar = findViewById(R.id.iv_post_detail_page_author_avatar);
+        btnFollow = findViewById(R.id.btn_post_detail_page_follow);
+        ivPostImage = findViewById(R.id.iv_post_detail_page_post_image);
+        tvPostTitle = findViewById(R.id.tv_post_detail_page_post_title);
+        tvPostContent = findViewById(R.id.tv_post_detail_page_post_content);
+        btnShare = findViewById(R.id.btn_post_detail_page_share);
+
+        // Get post data from intent
+        Intent intent = getIntent();
+        String postId = intent.getStringExtra("postId");
+
+        // Load corresponding post data from database
+        Database.PostDB.getPostByPostId(postId, this, "loadPostData");
+
+        // Set share button click listener
+        btnShare.setOnClickListener(v -> {
+            Intent shareIntent = new Intent(this, SharePageActivity.class);
+            // Pass necessary data to ShareActivity
+            shareIntent.putExtra("postId", post.getPostId());
+            startActivity(shareIntent);
+        });
+
+        // Set follow button click listener
+        btnFollow.setOnClickListener(v -> {
+            if (isAuthorFollowed()) {
+                // Unfollow the author
+                // ...
+                btnFollow.setText("Follow");
+            } else {
+                // Follow the author
+                // ...
+                btnFollow.setText("Unfollow");
+            }
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void showPostData() {
+        if (post == null) {
+            // Handle the case when post data is not loaded yet
+            ToastUtil.showLong(this, "Post data is not loaded yet");
+            return;
+        }
+
+        // TODO: Load author avatar
+        this.ivAuthorAvatar.setImageResource(R.mipmap.sample_avatar_2);
+
+        // Set follow button text
+        // if the author is already followed, set the button text to "Unfollow"
+        // else set the button text to "Follow"
+        if (isAuthorFollowed()) {
+            btnFollow.setText("Unfollow");
+        } else {
+            btnFollow.setText("Follow");
+        }
+
+        // Set post content: title, image, and content
+        tvPostTitle.setText(post.getTitle());
+        ivPostImage.setImageResource(R.mipmap.sample_avatar_1); // TODO: Load post image
+        tvPostContent.setText(post.getmContent());
+    }
+
+    public void loadPostData(boolean isSuccess, Object object) {
+        if (isSuccess) {
+            // Store post data
+            post = (Post) object;
+            showPostData();
+            Log.d("PostDetailActivity", "Post data loaded successfully");
+        } else {
+            // Handle error
+            ToastUtil.showLong(this, "Failed to load post data");
+        }
+    }
+
+    private boolean isAuthorFollowed() {
+        // TODO: Implement this method
+//        UserData.
+//        return Objects.equals(this.post.getAuthorId(), UserData.);
+        return false;
+    }
+}

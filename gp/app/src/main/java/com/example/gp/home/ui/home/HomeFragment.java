@@ -17,6 +17,7 @@ import com.example.gp.data.Database;
 import com.example.gp.Items.Post;
 import com.example.gp.interaction.NewPostActivity;
 import com.example.gp.interaction.PostCardAdapter;
+import com.example.gp.interaction.PostDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.search.SearchView;
 
@@ -79,6 +80,15 @@ public class HomeFragment extends Fragment {
 
         recyclerView1.setAdapter(postCardAdapter1);
         recyclerView2.setAdapter(postCardAdapter2);
+
+        postCardAdapter1.setOnPostClickListener(this::onPostClick);
+        postCardAdapter2.setOnPostClickListener(this::onPostClick);
+    }
+
+    private void onPostClick(Post post) {
+        Intent intent = new Intent(getContext(), PostDetailActivity.class);
+        intent.putExtra("postId", post.getPostId());
+        startActivity(intent);
     }
 
     private void setupAddNoteButton(View view) {

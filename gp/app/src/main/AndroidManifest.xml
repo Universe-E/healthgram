@@ -25,6 +25,9 @@
             android:name=".setting.PostVisibilityActivity"
             android:exported="true" />
         <activity
+            android:name=".interaction.PostDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".SimpleTestActivity"
             android:exported="true" />
         <activity
