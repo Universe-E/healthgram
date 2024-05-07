@@ -521,10 +521,15 @@ public class Database {
          * @param limit
          * @param object
          * @param methodName
-         * Callback return true and list of PostMap object List<Map<String postId, Post post>>
+         * Callback return true and list of PostMap object List<Post>
          */
         public static void getPostsByTime(Date time, int limit, Object object, String methodName) {
-            long timestamp = time.getTime();
+            Timestamp timestamp;
+            if (time != null) {
+                timestamp = new Timestamp(time);
+            } else {
+                timestamp = TimeUtil.getTimestamp();
+            }
 
             CollectionReference postRef = FirebaseFirestore.getInstance().collection("posts");
             postRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
@@ -533,9 +538,9 @@ public class Database {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                        List<Map<String, Object>> posts = new ArrayList<>();
+                        List<Post> posts = new ArrayList<>();
                         for (DocumentSnapshot document : documents) {
-                            posts.add(Map.of(document.getId(), document.toObject(Post.class)));
+                            posts.add(document.toObject(Post.class));
                         }
                         /*
                           Callback
