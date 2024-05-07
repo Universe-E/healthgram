@@ -41,11 +41,17 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
         holder.textViewHeading.setText(post.getTitle());
         holder.textViewContent.setText(post.getmContent());
 
+        // Set a random avatar image for the post
+        int randomNumber = random.nextInt(8) + 1;
+        String avatarName = "sample_avatar_" + randomNumber;
+        holder.imageView.setImageResource(holder.itemView.getResources().getIdentifier(avatarName, "drawable", holder.itemView.getContext().getPackageName()));
+
         // Set a random height for the post card
-        int minHeight = 200;
-        int maxHeight = 400;
+        int minHeight = 700;
+        int maxHeight = 900;
         int randomHeight = random.nextInt(maxHeight - minHeight + 1) + minHeight;
         holder.itemView.getLayoutParams().height = randomHeight;
+        holder.itemView.requestLayout();
     }
 
     @Override

@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
         setupAddNoteButton(view);
 
         // Load post data from the database
-        Database.PostDB.getPostsByTime(new Date(), 5, this, "loadPostCards");
+        Database.PostDB.getPostsByTime(new Date(), 10, this, "loadPostCards");
 
         return view;
     }
