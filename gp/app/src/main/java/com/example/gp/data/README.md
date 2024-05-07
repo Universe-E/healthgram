@@ -53,14 +53,14 @@ If a parameter is already available in the class, it can be directly accessed th
 ### Example of UpdateUI Method
 
 ```java
-private void updateUI(boolean isSuccess, Object... args) {
+private void updateUI(boolean isSuccess, Object args) {
     if (isSuccess) {
         T theObject0Needed = (T) args[0];
         // Use theObject0Needed for UI update
         ...
     } else {
-        if (args[0] != null) {
-            String errorMsg = (String) args[0];
+        if (args != null) {
+            String errorMsg = (String) args;
             // Handle error message
             ... 
         }
@@ -90,13 +90,13 @@ private void updateUI(boolean isSuccess, Object... args) {
 
     }
 
-    public void updateUI(Boolean isSuccess, Object... args) {
+    public void updateUI(Boolean isSuccess, Object args) {
         if (isSuccess) {
             Intent intent = new Intent(this, Fragment_home.class);
             startActivity(intent);
         } else {
-            if (args[0] != null) {
-                String errorMsg = (String) args[0];
+            if (args != null) {
+                String errorMsg = (String) args;
                 ToastUtil.showLong(this, "Create account failed: " + errorMsg);
             } else {
                 ToastUtil.showLong(this, "Create account failed");
