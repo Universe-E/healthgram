@@ -78,7 +78,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
         }
 
         public void bind(Friend friend) {
-            friendName.setText(friend.getName());
+            friendName.setText(friend.getNickname());
             // Assuming friendAvatarUrl is a method you might implement to get URL of the avatar
             friendAvatar.setImageResource(R.mipmap.sample_avatar_1); // This can be replaced with image loading logic
         }

@@ -58,18 +58,20 @@ public class PostVisibilityActivity extends BaseActivity {
             }
             ToastUtil.show(this, object.toString());
             Log.d(TAG, "success");
-        }
+        } else {
 
-        List<Map<String, Post>> posts = (List<Map<String, Post>>) object;
-        Log.d(TAG, posts.toString());
-        //Get posts
-        for (Map<String, Post> postMap : posts) {
+            Map<String, Post> postMap = (Map<String, Post>) object;
+            Log.d(TAG, posts.toString());
+            //Get posts
             Collection<Post> postValues = postMap.values();
             this.posts.addAll(postValues);
+
+            // Set post adapter
+            mPostAdapter = new PostAdapter(this.posts);
+            recyclerView.setAdapter(mPostAdapter);
         }
-        // Set post adapter
-        mPostAdapter = new PostAdapter(this.posts);
-        recyclerView.setAdapter(mPostAdapter);
+
+
     }
 }
 
