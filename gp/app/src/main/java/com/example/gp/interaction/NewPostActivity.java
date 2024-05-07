@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
 import com.example.gp.BaseActivity;
+import com.example.gp.Items.Post;
 import com.example.gp.R;
+import com.example.gp.data.Database;
+import com.example.gp.data.UserData;
 import com.example.gp.databinding.ActivityPostEditingBinding;
 
 /**
@@ -77,7 +81,27 @@ public class NewPostActivity extends BaseActivity {
 
     private void setUpFireButtonListener() {
         binding.btnFirePost.setOnClickListener(v -> {
-            // TODO: do something when the button is clicked
+            // 1. Get the information from the components
+            String heading = this.heading.getText().toString();
+            String content = this.content.getText().toString();
+            String visibilityString = this.visibilityString.getText().toString();
+            boolean isPublic = this.isPublic.isChecked();
+
+            // 2. Create a new post
+            Post newPost = new Post(content, heading, isPublic);
+
+            // TODO: 3. handle visibility
+            // parse the visibilityString to a list of user ids
+            // for each user id, add it to the visibility list of the post
+
+            // 4. Add the post to the database
+            Database.PostDB.savePostData(newPost, this, "postOut");
+
         });
+    }
+
+    private void postOut(boolean isSuccess, Object object) {
+        Toast.makeText(this, "Post successfully!", Toast.LENGTH_SHORT).show();
+        onBackPressed();
     }
 }
