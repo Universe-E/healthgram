@@ -59,6 +59,9 @@ public class User {
         this.notificationMap = new HashMap<>();
     }
 
+    /**
+     * DO NOT DELETE THIS CONSTRUCTOR
+     */
     public User() {
     }
 

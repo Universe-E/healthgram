@@ -1,6 +1,7 @@
 package com.example.gp.Items;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.ServerTimestamp;
 
 /**
  * Post class
@@ -16,6 +17,7 @@ public class Post {
     public String title;
     public boolean isPublic;
     public Timestamp postTimestamp;
+    @ServerTimestamp
     public Timestamp lastEditTimestamp;
 
     /**
@@ -44,6 +46,12 @@ public class Post {
         this.mContent = content;
         this.title = title;
         this.isPublic = true;
+    }
+
+    /**
+     * DO NOT DELETE THIS CONSTRUCTOR
+     */
+    public Post() {
     }
 
     public void setPublic(boolean isPublic){

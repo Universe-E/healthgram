@@ -23,6 +23,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.Source;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -478,11 +480,12 @@ public class Database {
         public static void savePostData(Post post, Object object, String methodName) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            post.setAuthorId(UserDB.userId);
+            post.setAuthorId(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
 
             DocumentReference docRef = db.collection("posts").document();
 
             post.setPostId(docRef.getId());
+            post.setPostTimestamp(TimeUtil.getTimestamp());
 
             docRef.set(post)
                     .addOnSuccessListener(dRef -> {
@@ -491,6 +494,8 @@ public class Database {
                           Return true and Post object
                          */
                         MethodUtil.invokeMethod(object, methodName, true, post);
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        savePostMap(docRef.getId(), post);
                     })
                     .addOnFailureListener(e -> {
                         /*
@@ -659,14 +664,13 @@ public class Database {
             String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             Log.d(TAG, "Method: " + methodName);
+            Log.d(TAG, "userId: " + userId);
 
-            FirebaseFirestore.getInstance().collection("users").document(userId).collection("postMap")
-                    .orderBy("postTimestamp", Query.Direction.DESCENDING)
-                    .whereLessThan("postTimestamp", timestamp)
-                    .limit(limit).get()
+            FirebaseFirestore.getInstance().collection("users").document(userId)
+                    .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            if (task.getResult().isEmpty()) {
+                            if (task.getResult() == null) {
                                 String message = "No post";
                                 /*
                                   Callback
@@ -676,21 +680,38 @@ public class Database {
                                 Log.d(TAG, message);
                                 return;
                             }
-                            List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                            List<Map<String, Object>> posts = new ArrayList<>();
-                            for (DocumentSnapshot document : documents) {
-                                posts.add(Map.of(document.getId(), document.toObject(Post.class)));
+                            User user = task.getResult().toObject(User.class);
+                            Map<String, Post> postMap = user.getPostMap();
+                            if (postMap == null) {
+                                String message = "No post";
+                                /*
+                                  Callback
+                                  Return error message
+                                 */
+                                MethodUtil.invokeMethod(object, methodName, false, message);
+                                Log.d(TAG, message);
+                                return;
                             }
-                            Log.d(TAG, "Posts: " + posts.toString());
+                            MethodUtil.invokeMethod(object, methodName, true, postMap);
+                            Log.d(TAG, "Posts: " + postMap.toString());
                             /*
                               Callback
                               Return true and list of PostMap object List<Map<String postId, Post post>>
                              */
-                            MethodUtil.invokeMethod(object, methodName, true, posts);
                         } else {
                             Log.e(TAG, "Error getting documents: ", task.getException());
                         }
                     });
+        }
+
+        private static void savePostMap(String postId, Post post) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+            Log.d(TAG, "userId: " + userId);
+
+            db.collection("users").document(userId)
+                    .set(Map.of("postMap", Map.of(postId, post)), SetOptions.merge());
         }
     }
 }
