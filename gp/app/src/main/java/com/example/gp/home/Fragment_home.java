@@ -31,7 +31,7 @@ public class Fragment_home extends BaseActivity {
     private final String activityName = "GP community";
 
     private ActivityFragmentHomeBinding binding;
-    private ImageView iv_back;
+    private ImageView iv_avatar;
 
     /*通过点击下方图标跳转到不同的其他界面: home notification friends(dashboard)*/
     @Override
@@ -45,7 +45,7 @@ public class Fragment_home extends BaseActivity {
         setUpTitleBar(R.layout.activity_fragment_home,activityName);
         setLeftIcon(R.drawable.user_avatar);
 
-        iv_back = findViewById(R.id.iv_back);
+        iv_avatar = findViewById(R.id.iv_back);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
@@ -57,7 +57,7 @@ public class Fragment_home extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        if(v == iv_back) {
+        if(v == iv_avatar) {
             Intent intent = new Intent(this, SettingActivity.class);
             startActivity(intent);
         }
