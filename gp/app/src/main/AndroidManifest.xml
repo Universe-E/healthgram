@@ -22,6 +22,9 @@
             android:name=".interaction.NewPostActivity"
             android:exported="false" />
         <activity
+            android:name=".interaction.SharePageActivity"
+            android:exported="false" />
+        <activity
             android:name=".setting.PostVisibilityActivity"
             android:exported="true" />
         <activity

@@ -222,22 +222,4 @@ public class SimpleTestActivity extends AppCompatActivity {
         editText.setTag(post.postId);
     }
 
-    private void showAddFriendDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do you want to send a friend request？")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        FriendRequest fr = new FriendRequest("user1@gmail.com");
-                        Database.UserDB.sendFriendRequestTo(fr,null,null);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-        // Show the dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 }

@@ -130,6 +130,13 @@ public class HomeFragment extends Fragment {
 
     private void performSearch(boolean isSuccess, Object object,String query) {
         List<Post> filteredPosts = new ArrayList<>();
+
+        if (postList == null) {
+            // Handle the case when post data is not loaded yet
+            Log.e("HomeFragment", "Post data is not loaded yet");
+            return;
+        }
+
         // get the post data of user
         for (Post post : postList) {
             if (post.title.toLowerCase().contains(query.toLowerCase()) ) {

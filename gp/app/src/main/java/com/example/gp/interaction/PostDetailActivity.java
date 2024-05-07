@@ -1,6 +1,7 @@
 package com.example.gp.interaction;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,10 +9,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
 import com.example.gp.R;
+import com.example.gp.SimpleTestActivity;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.UserData;
@@ -57,26 +61,6 @@ public class PostDetailActivity extends BaseActivity {
         // Load corresponding post data from database
         Database.PostDB.getPostByPostId(postId, this, "loadPostData");
 
-        // Set share button click listener
-        btnShare.setOnClickListener(v -> {
-            Intent shareIntent = new Intent(this, SharePageActivity.class);
-            // Pass necessary data to ShareActivity
-            shareIntent.putExtra("postId", post.getPostId());
-            startActivity(shareIntent);
-        });
-
-        // Set follow button click listener
-        btnFollow.setOnClickListener(v -> {
-            if (isAuthorFollowed()) {
-                // Unfollow the author
-                // ...
-                btnFollow.setText("Follow");
-            } else {
-                // Follow the author
-                // ...
-                btnFollow.setText("Unfollow");
-            }
-        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -104,6 +88,27 @@ public class PostDetailActivity extends BaseActivity {
         tvPostTitle.setText(post.getTitle());
         ivPostImage.setImageResource(R.mipmap.sample_avatar_1); // TODO: Load post image
         tvPostContent.setText(post.getmContent());
+
+        // Set share button click listener
+        btnShare.setOnClickListener(v -> {
+            Intent shareIntent = new Intent(this, SharePageActivity.class);
+            // TODO: Pass necessary data to ShareActivity
+            shareIntent.putExtra("postId", post.getPostId());
+            startActivity(shareIntent);
+        });
+
+        // Set follow button click listener
+        btnFollow.setOnClickListener(v -> {
+            if (isAuthorFollowed()) {
+                // Unfollow the author
+                // ...
+                btnFollow.setText("Follow");
+            } else {
+                // Show follow confirmation dialog
+                showAddFriendDialog();
+                btnFollow.setText("Unfollow");
+            }
+        });
     }
 
     public void loadPostData(boolean isSuccess, Object object) {
@@ -123,5 +128,24 @@ public class PostDetailActivity extends BaseActivity {
 //        UserData.
 //        return Objects.equals(this.post.getAuthorId(), UserData.);
         return false;
+    }
+
+    private void showAddFriendDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to send a friend request？")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        FriendRequest fr = new FriendRequest("user1@gmail.com");
+                        Database.UserDB.sendFriendRequestTo(fr,null,null);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        // Show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
