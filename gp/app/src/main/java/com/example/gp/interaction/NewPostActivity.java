@@ -1,6 +1,7 @@
 package com.example.gp.interaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import androidx.activity.EdgeToEdge;
 import com.example.gp.BaseActivity;
 import com.example.gp.Items.Post;
 import com.example.gp.R;
+import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.UserData;
 import com.example.gp.databinding.ActivityPostEditingBinding;
@@ -100,8 +102,14 @@ public class NewPostActivity extends BaseActivity {
         });
     }
 
-    private void postOut(boolean isSuccess, Object object) {
-        Toast.makeText(this, "Post successfully!", Toast.LENGTH_SHORT).show();
-        onBackPressed();
+    public void postOut(boolean isSuccess, Object object) {
+        Log.d("NewPostActivity", "mamba out");
+        if (!isSuccess) {
+            Toast.makeText(this, "Post failed!", Toast.LENGTH_SHORT).show();
+        } else {
+//            Toast.makeText(this, (String)object, Toast.LENGTH_SHORT).show();
+            ToastUtil.showLong(this, (String)object);
+            onBackPressed();
+        }
     }
 }
