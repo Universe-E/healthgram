@@ -47,19 +47,13 @@ public class UserParserActivity extends AppCompatActivity {
         user.setNotificationMap(notis);
 
         try {
-            // save in local directories
-            String jsonFilePath = getFilesDir().getAbsolutePath() + "/user.json";
-            String xmlFilePath = getFilesDir().getAbsolutePath() + "/user.xml";
-
-            UserParser.parseToJSON(user, jsonFilePath);
-            UserParser.parseToXML(user, xmlFilePath);
+            UserParser.parseToJSON(getApplicationContext(), user, "user.json");
+            UserParser.parseToXML(getApplicationContext(), user, "user.xml");
 
             Toast.makeText(this, "User parsed successfully", Toast.LENGTH_SHORT).show();
-        } catch (IOException | IllegalAccessException e) {
+        } catch (IOException | IllegalAccessException | JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "Error occurred while parsing user", Toast.LENGTH_SHORT).show();
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
         }
     }
 }

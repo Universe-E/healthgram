@@ -126,7 +126,8 @@ public class SimpleTestActivity extends AppCompatActivity {
 //        testGetPost();
 //        testAddFriend();
 //        testGetFriendList();
-//        testUserParserActivity();
+        Log.e("Button","Button was wrong");
+        testUserParserActivity();
         testGetFriend();
     }
 
