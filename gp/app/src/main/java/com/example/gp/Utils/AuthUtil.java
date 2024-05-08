@@ -18,7 +18,7 @@ public class AuthUtil {
 
     public static boolean isValidEmail(String email) {
         // Check if the email is in the correct format
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         return email.matches(emailPattern);
     }
 
