@@ -1,67 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".interaction.NewPostActivity">
+    android:fillViewport="true">
 
-    <include
-        android:id="@+id/tb_top_navigation_bar"
-        layout="@layout/top_navigation_bar" />
-
-    <EditText
-        android:id="@+id/et_edit_post_heading"
-        android:layout_width="374dp"
-        android:layout_height="70dp"
-        android:layout_below="@id/tb_top_navigation_bar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Heading"
-        android:inputType="text" />
-
-    <EditText
-        android:id="@+id/et_edit_post_content"
-        android:layout_width="374dp"
-        android:layout_height="350dp"
-        android:layout_below="@id/et_edit_post_heading"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:gravity="top|start"
-        android:hint="Content"
-        android:inputType="text"
-        android:textAlignment="textStart" />
-
-    <EditText
-        android:id="@+id/et_edit_who_can_see_the_post"
-        android:layout_width="374dp"
-        android:layout_height="48dp"
-        android:layout_below="@id/et_edit_post_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Who Can See This Post?"
-        android:inputType="text" />
-
-    <CheckBox
-        android:id="@+id/cb_is_public"
-        android:layout_width="176dp"
-        android:layout_height="35dp"
-        android:layout_below="@id/et_edit_who_can_see_the_post"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:text="Post it to the world!" />
-
-    <Button
-        android:id="@+id/btn_fire_post"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_edit_who_can_see_the_post"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="FIRE" />
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <include
+            android:id="@+id/tb_top_navigation_bar"
+            layout="@layout/top_navigation_bar" />
+
+        <EditText
+            android:id="@+id/et_edit_post_heading"
+            android:layout_width="374dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Heading"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/et_edit_post_content"
+            android:layout_width="374dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:gravity="top|start"
+            android:hint="Content"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:textAlignment="textStart" />
+
+        <EditText
+            android:id="@+id/et_edit_who_can_see_the_post"
+            android:layout_width="374dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Who Can See This Post?"
+            android:inputType="text" />
+
+        <CheckBox
+            android:id="@+id/cb_is_public"
+            android:layout_width="176dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:text="Post it to the world!" />
+
+        <Button
+            android:id="@+id/btn_fire_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="FIRE" />
+
+    </LinearLayout>
+
+</ScrollView>
