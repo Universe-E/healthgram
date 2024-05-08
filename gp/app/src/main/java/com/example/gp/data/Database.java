@@ -44,7 +44,7 @@ public class Database {
         // User data
         private static final String TAG = "Database.User";
 
-        private static String userId;
+//        private static String userId;
         private static String username;
         private static String email;
         private static Uri photoUri;
@@ -263,12 +263,18 @@ public class Database {
         public static void getFriendList(String nickname, int limit, Object object, String methodName) {
             Log.d(TAG, "Method: " + methodName);
 
-            try {
-                String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                Log.d(TAG, "userId: " + userId);
-            } catch (Exception e) {
-                Log.e(TAG, "Error No AuthUser please sign in: " + e);
+            FirebaseUser FireUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (FireUser == null) {
+                String message = "User does not sign in yet";
+                Log.d(TAG, message);
+                /*
+                  Callback
+                  Return error message
+                 */
+                MethodUtil.invokeMethod(object, methodName, false, message);
+                return;
             }
+            String userId = FireUser.getUid();
 
             FirebaseFirestore.getInstance()
                     .collection("users")
@@ -368,10 +374,6 @@ public class Database {
 
         public String getEmail() {
             return UserDB.email;
-        }
-
-        public String getUserId() {
-            return UserDB.userId;
         }
 
         @Nullable
@@ -481,7 +483,6 @@ public class Database {
             mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        setUserDB(Objects.requireNonNull(task.getResult().getUser()));
                         User userForCallback = firebaseUserToUser(Objects.requireNonNull(task.getResult().getUser()));
                         /*
                           Callback
@@ -552,14 +553,6 @@ public class Database {
                         Log.e(TAG, "Error getting documents: ", e);
                     }
                 });
-        }
-
-        private static void setUserDB(FirebaseUser user) {
-            // Set user data for using inside async method
-            UserDB.userId = user.getUid();
-            UserDB.username = user.getDisplayName();
-            UserDB.email = user.getEmail();
-            UserDB.photoUri = user.getPhotoUrl();
         }
     }
 
