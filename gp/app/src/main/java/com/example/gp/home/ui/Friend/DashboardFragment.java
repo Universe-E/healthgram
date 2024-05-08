@@ -90,7 +90,7 @@ public class DashboardFragment extends Fragment {
     private void openSearchActivity() {
         Intent searchIntent = new Intent(getContext(), SearchActivity.class);
         if (searchBar != null) {
-            String initialQuery = searchBar.getText().toString(); // 从搜索栏获取文本
+            String initialQuery = searchBar.getText().toString();
             searchIntent.putExtra("QUERY", initialQuery);
         }
         startActivity(searchIntent);

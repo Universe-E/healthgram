@@ -20,8 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".interaction.NewPostActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".interaction.SharePageActivity"

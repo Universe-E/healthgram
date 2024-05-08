@@ -22,6 +22,7 @@ import com.example.gp.data.UserData;
 import com.example.gp.BaseActivity;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class PostDetailActivity extends BaseActivity {
 
