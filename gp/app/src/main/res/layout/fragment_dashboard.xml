@@ -8,11 +8,15 @@
 
 
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_height="600dp"
 
         android:onClick="test"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,6 +24,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/content_friend" />
+
+    </LinearLayout>
+
     <!-- Include Search Bar -->
     <include
         android:id="@+id/search_layout"
