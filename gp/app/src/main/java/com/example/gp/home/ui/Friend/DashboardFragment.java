@@ -100,10 +100,6 @@ public class DashboardFragment extends Fragment {
 
     private void loadFriends() {
         friends = new ArrayList<>();
-//        friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
-//        friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
-//        friends.add(new Friend("user3", "Sam", R.mipmap.sample_avatar_2));
-
         //input context to prevent null pointer exception
         friendadapter = new FriendsRecyclerViewAdapter(getContext(),friends);
         recyclerView.setAdapter(friendadapter);
