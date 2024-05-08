@@ -19,13 +19,16 @@ import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.TimeUtil;
+import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Utils.UserParserActivity;
 import com.example.gp.data.Database;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class SimpleTestActivity extends AppCompatActivity {
@@ -126,7 +129,8 @@ public class SimpleTestActivity extends AppCompatActivity {
 //        testGetPost();
 //        testAddFriend();
 //        testGetFriendList();
-        testUserParserActivity();
+//        testUserParserActivity();
+        testGetFriend();
     }
 
     private void testUserParserActivity() {
@@ -134,6 +138,7 @@ public class SimpleTestActivity extends AppCompatActivity {
         intent.setClass(SimpleTestActivity.this, UserParserActivity.class);
         startActivity(intent);
     }
+
     private void testGetFriendList() {
         Database.UserDB.getFriendList("", 10, this, "getFriendList");
     }
@@ -153,6 +158,7 @@ public class SimpleTestActivity extends AppCompatActivity {
         Date date = TimeUtil.getCurDate();
         Database.PostDB.getPostsByTime(date, 1, this, "updateUI");
     }
+
     public void testFirebaseFirestore() {
         Log.d(TAG, "testFirebaseFirestore");
         User user = new User("123", "123", "123");
@@ -213,6 +219,40 @@ public class SimpleTestActivity extends AppCompatActivity {
         friend.setNickname("test" + friend.hashCode());
         friend.setAvatar(1);
         Database.UserDB.addFriend(friend, null, null);
+    }
+
+    public void testGetFriend() {
+        List<Friend> friends = new ArrayList<>();
+        Database.UserDB.getFriendList("", 10, this, "getFriend");
+    }
+
+    /**
+     * Example of get friend list
+     *
+     * @param isSuccess will be passed in reflect method
+     * @param object    will be passed in reflect method
+     */
+    private void getFriend(boolean isSuccess, Object object) {
+        List<Friend> friends = new ArrayList<>();
+
+        if (!isSuccess) {
+            if (object == null) {
+                ToastUtil.showLong(this, "Get posts failed");
+                return;
+            }
+            ToastUtil.show(this, object.toString());
+            Log.d(TAG, "success");
+        } else {
+
+            Map<String, Friend> friendMap = (Map<String, Friend>) object;
+            Log.d(TAG, friendMap.toString());
+            //Get posts
+            for (Map.Entry<String, Friend> friendEntry : friendMap.entrySet()) {
+                Log.d(TAG, friendEntry.getValue().toString());
+                friends.add(friendEntry.getValue());
+            }
+        }
+        Log.d(TAG, "friends: " + friends.toString());
     }
 
     void updateUI(boolean isSuccess, Object object) {
