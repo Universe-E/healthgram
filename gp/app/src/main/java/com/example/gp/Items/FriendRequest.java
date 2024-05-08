@@ -29,6 +29,12 @@ public class FriendRequest {
         return RequestId;
     }
 
+    /**
+     * Getters and Setters
+     * <p>
+     * DO NOT MODIFY THIS
+     *
+     */
     public void setRequestId(String requestId) {
         RequestId = requestId;
     }
@@ -64,4 +70,6 @@ public class FriendRequest {
     public void setRequestTimestamp(Timestamp requestTimestamp) {
         this.requestTimestamp = requestTimestamp;
     }
+    // END OF DO NOT MODIFY THIS
+    // End of getters and setters
 }
