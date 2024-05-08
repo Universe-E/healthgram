@@ -100,9 +100,9 @@ public class DashboardFragment extends Fragment {
 
     private void loadFriends() {
         friends = new ArrayList<>();
-        friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
-        friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
-        friends.add(new Friend("user3", "Sam", R.mipmap.sample_avatar_2));
+//        friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
+//        friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
+//        friends.add(new Friend("user3", "Sam", R.mipmap.sample_avatar_2));
 
         //input context to prevent null pointer exception
         friendadapter = new FriendsRecyclerViewAdapter(getContext(),friends);
@@ -114,7 +114,6 @@ public class DashboardFragment extends Fragment {
         startActivity(intent);
     }
     public void updateUI(boolean isSuccess, Object object) {
-        friends = new ArrayList<>();
         if (!isSuccess) {
             ToastUtil.showLong(getContext(), "Failed to load friends: " + object);
             return;
@@ -122,7 +121,7 @@ public class DashboardFragment extends Fragment {
 
         if (object instanceof Map) {
             Map<String, Friend> outerMap = (Map<String, Friend>) object;
-//            friends.clear();  // 清除旧数据
+            List<Friend> newFriends = new ArrayList<>();
 
             for (Map.Entry<String, Friend> entry : outerMap.entrySet()) {
                 Friend friendDetails = entry.getValue();
@@ -132,23 +131,21 @@ public class DashboardFragment extends Fragment {
                     int avatar = friendDetails.getAvatar();  // 注意这里假设 avatar 是已经正确存储为整数类型
 
                     Friend friend = new Friend(id, nickname, avatar);
-                    friends.add(friend);
+                    newFriends.add(friend);
                 } catch (ClassCastException e) {
                     Log.e("UpdateUI", "Error casting friend details", e);
                 }
             }
 
-            if (!friends.isEmpty()) {
-                friendadapter.updateFriends(friends);
-                Log.d("UpdateUI", "Friends updated, count: " + friends.size());
+            if (!newFriends.isEmpty()) {
+                friendadapter.updateFriends(newFriends);  // 更新适配器数据
+                Log.d("UpdateUI", "Friends updated, count: " + newFriends.size());
             } else {
                 Log.d("UpdateUI", "Friends list is empty after update.");
             }
         } else {
             ToastUtil.showLong(getContext(), "Incorrect data type received");
         }
-        friendadapter = new FriendsRecyclerViewAdapter(friends);
-        recyclerView.setAdapter(friendadapter);
     }
 
 }
