@@ -72,9 +72,6 @@ public class DashboardFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        friends = new ArrayList<>();  // 初始化列表避免 NullPointerException
-        friendadapter = new FriendsRecyclerViewAdapter(new ArrayList<>());
-        recyclerView.setAdapter(friendadapter);
 
         Database.UserDB.getFriendList("",100,this, "updateUI");
         // Load friends
@@ -116,21 +113,22 @@ public class DashboardFragment extends Fragment {
         startActivity(intent);
     }
     public void updateUI(boolean isSuccess, Object object) {
+        friends = new ArrayList<>();
         if (!isSuccess) {
             ToastUtil.showLong(getContext(), "Failed to load friends: " + object);
             return;
         }
 
         if (object instanceof Map) {
-            Map<String, Map<String, Object>> outerMap = (Map<String, Map<String, Object>>) object;
+            Map<String, Friend> outerMap = (Map<String, Friend>) object;
 //            friends.clear();  // 清除旧数据
 
-            for (Map.Entry<String, Map<String, Object>> entry : outerMap.entrySet()) {
-                Map<String, Object> friendDetails = entry.getValue();
+            for (Map.Entry<String, Friend> entry : outerMap.entrySet()) {
+                Friend friendDetails = entry.getValue();
                 try {
-                    String id = (String) friendDetails.get("id");
-                    String nickname = (String) friendDetails.get("nickname");
-                    int avatar = (int) friendDetails.get("avatar");  // 注意这里假设 avatar 是已经正确存储为整数类型
+                    String id = friendDetails.getId();
+                    String nickname = friendDetails.getNickname();
+                    int avatar = friendDetails.getAvatar();  // 注意这里假设 avatar 是已经正确存储为整数类型
 
                     Friend friend = new Friend(id, nickname, avatar);
                     friends.add(friend);
@@ -148,6 +146,8 @@ public class DashboardFragment extends Fragment {
         } else {
             ToastUtil.showLong(getContext(), "Incorrect data type received");
         }
+        friendadapter = new FriendsRecyclerViewAdapter(friends);
+        recyclerView.setAdapter(friendadapter);
     }
 
 }
