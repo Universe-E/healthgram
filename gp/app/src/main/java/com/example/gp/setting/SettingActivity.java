@@ -68,7 +68,10 @@ public class SettingActivity extends BaseActivity {
         } else if(v == binding.btnSettingMainQuit) {
             Database.UserDB.signOut(null,null);
             Intent intent = new Intent(this, MainActivity.class);
+            //start new activity, clear old tasks
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         }
     }
 }
