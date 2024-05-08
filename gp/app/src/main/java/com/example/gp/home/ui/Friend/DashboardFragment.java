@@ -75,7 +75,7 @@ public class DashboardFragment extends Fragment {
 
         Database.UserDB.getFriendList("",100,this, "updateUI");
         // Load friends
-//        loadFriends();
+        loadFriends();
 
         // Set click listener to navigate to friend's profile
 //        adapter.setOnItemClickListener(new FriendsRecyclerViewAdapter.OnItemClickListener() {
@@ -92,21 +92,22 @@ public class DashboardFragment extends Fragment {
     private void openSearchActivity() {
         Intent searchIntent = new Intent(getContext(), SearchActivity.class);
         if (searchBar != null) {
-            String initialQuery = searchBar.getText().toString(); // 从搜索栏获取文本
+            String initialQuery = searchBar.getText().toString();
             searchIntent.putExtra("QUERY", initialQuery);
         }
         startActivity(searchIntent);
     }
 
-//    private void loadFriends() {
-//        friends = new ArrayList<>();
-//        friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
-//        friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
-//
-//        //input context to prevent null pointer exception
-//        adapter = new FriendsRecyclerViewAdapter(getContext(),friends);
-//        recyclerView.setAdapter(adapter);
-//    }
+    private void loadFriends() {
+        friends = new ArrayList<>();
+        friends.add(new Friend("user1", "Alice", R.mipmap.sample_avatar_1));
+        friends.add(new Friend("user2", "Bob", R.mipmap.sample_avatar_2));
+        friends.add(new Friend("user3", "Sam", R.mipmap.sample_avatar_2));
+
+        //input context to prevent null pointer exception
+        friendadapter = new FriendsRecyclerViewAdapter(getContext(),friends);
+        recyclerView.setAdapter(friendadapter);
+    }
 
     private void openFriendProfile(Friend friend) {
         Intent intent = new Intent(getContext(), ActivityFriendDetailBinding.class);

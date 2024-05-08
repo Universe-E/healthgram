@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        Database.UserDB.checkSignedIn(this, "updateUI");
+        Database.UserDB.checkSignedIn(this, "updateStartUI");
         Log.d(TAG, "onStart: checkSignedIn");
     }
 
@@ -32,8 +32,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //If not root task, cannot go back to previous page
+        if (!isTaskRoot()) {
+            final Intent intent = getIntent();
+            final String intentAction = intent.getAction();
+            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intentAction != null
+                    && intentAction.equals(Intent.ACTION_MAIN)) {
+                finish();
+                return;
+            }
+        }
+
         // Check if user is already signed in
-        Database.UserDB.checkSignedIn(this, "updateUI");
+        Database.UserDB.checkSignedIn(this, "updateStartUI");
 
         // load the layout using view binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -65,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void updateStartUI(boolean isSuccess, Object args) {
+        Log.d(TAG, "updateStartUI: " + isSuccess);
+        if (isSuccess) {
+            Log.d(TAG, "updateStartUI: " + args.toString());
+            Intent intent = new Intent(MainActivity.this, Fragment_home.class);
+            startActivity(intent);
+        }
+    }
+
     public void updateUI(boolean isSuccess, Object args) {
         Log.d(TAG, "updateUI: " + isSuccess);
         if (isSuccess) {
@@ -73,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             if (args != null) {
-//                ToastUtil.showLong(this, "Login failed: " + args.toString());
+                ToastUtil.showLong(this, "Login failed: wrong credentials");
             } else {
-//                ToastUtil.showLong(this, "Login failed");
+                ToastUtil.showLong(this, "Login failed");
             }
         }
     }

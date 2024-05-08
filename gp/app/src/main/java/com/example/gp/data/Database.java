@@ -81,24 +81,25 @@ public class Database {
         }
 
         public static void signUp(String username, String email, String password, Object object, String methodName) {
+            Log.d(TAG, "signUp username: " + username);
             FirebaseFirestore.getInstance()
                 .collection("users")
                 .whereEqualTo("username", username)
                 .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        if (!task.getResult().isEmpty()) {
-                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                .addOnCompleteListener(querySnapshotTask -> {
+                    if (querySnapshotTask.isSuccessful()) {
+                        if (!querySnapshotTask.getResult().isEmpty()) {
+                            DocumentSnapshot document = querySnapshotTask.getResult().getDocuments().get(0);
                             if (document.exists()) {
                                 ToastUtil.showLong((Context) object, "Username already exist");
                             }
                         } else {
                             FirebaseAuth mAuth = FirebaseAuth.getInstance();
                             mAuth.createUserWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(task1 -> {
-                                    if (task1.isSuccessful()) {
+                                .addOnCompleteListener(authResultTask -> {
+                                    if (authResultTask.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
-                                        FirebaseUser user = task1.getResult().getUser();
+                                        FirebaseUser user = authResultTask.getResult().getUser();
 
                                         String userId = Objects.requireNonNull(user).getUid();
                                         saveUserData(userId, username, email);
@@ -117,7 +118,7 @@ public class Database {
                                         MethodUtil.invokeMethod(object, methodName, true, userForCallback);
                                     } else {
                                         // If sign in fails, display a message to the user.
-                                        Exception e = task1.getException();
+                                        Exception e = authResultTask.getException();
                                         /*
                                           Callback
                                           Return error message
@@ -449,7 +450,7 @@ public class Database {
             User user = new User();
 
             user.setUserId(Objects.requireNonNull(firebaseUser).getUid());
-            user.setUsername(firebaseUser.getDisplayName());
+            user.setUsername(username);
             user.setEmail(firebaseUser.getEmail());
 
             db.collection("users").document(user.getUserId()).set(user)

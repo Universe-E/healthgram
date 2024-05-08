@@ -1,123 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/friend_permission"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <include
-        android:id="@+id/tb_top_navigation_bar"
-        layout="@layout/top_navigation_bar" />
-
-    <!-- friend permission -->
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/ll_friend_detail_friend_permission_layout"
+        android:id="@+id/friend_permission"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="0dp"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        android:paddingLeft="15dp">
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:maxWidth="400dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/tb_top_navigation_bar"
+            layout="@layout/top_navigation_bar" />
+
+        <!-- friend permission -->
+        <LinearLayout
+            android:id="@+id/ll_friend_detail_friend_permission_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Friend Permission"
-            android:textColor="@color/text_gray"
-            android:textSize="@dimen/dimen_small_size" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:paddingLeft="15dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Friend Permission"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/dimen_small_size" />
+
+        </LinearLayout>
+
+        <!-- block -->
+        <LinearLayout
+            android:id="@+id/ll_friend_detail_block_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:text="Block message from him/her"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_middle_size" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_block_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp" />
+
+        </LinearLayout>
+
+        <!-- chat -->
+        <LinearLayout
+            android:id="@+id/ll_friend_detail_chat_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:paddingLeft="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Chat"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/dimen_small_size" />
+
+        </LinearLayout>
+
+        <!-- direct message -->
+        <LinearLayout
+            android:id="@+id/ll_friend_detail_direct_message_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/layout_pressed_effect"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:text="Direct Message"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_middle_size" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/perfect_user_more"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="15dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-
-
-
-    <!-- block -->
-
-    <LinearLayout
-        android:id="@+id/ll_friend_detail_block_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="0dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:text="Block message from him/her"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_middle_size" />
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/sw_block_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/ll_friend_detail_chat_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="0dp"
-        android:orientation="horizontal"
-        android:visibility="visible"
-        android:paddingLeft="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Chat"
-            android:textColor="@color/text_gray"
-            android:textSize="@dimen/dimen_small_size" />
-
-
-    </LinearLayout>
-
-
-
-
-    <!-- direct message -->
-
-    <LinearLayout
-        android:id="@+id/ll_friend_detail_direct_message_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/layout_pressed_effect"
-        android:orientation="horizontal"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="15dp"
-            android:text="Direct Message"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_middle_size" />
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/perfect_user_more"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="15dp"/>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

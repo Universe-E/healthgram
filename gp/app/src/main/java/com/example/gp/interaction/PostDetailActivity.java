@@ -22,6 +22,7 @@ import com.example.gp.data.UserData;
 import com.example.gp.BaseActivity;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class PostDetailActivity extends BaseActivity {
 
@@ -76,12 +77,17 @@ public class PostDetailActivity extends BaseActivity {
         this.tvAuthorName.setText("Author: " + post.getAuthorId());
 
         // Set follow button text
-        // if the author is already followed, set the button text to "Unfollow"
-        // else set the button text to "Follow"
-        if (isAuthorFollowed()) {
-            btnFollow.setText("Unfollow");
+        // if the author is myself, hide the follow button
+        if (isAuthorMyself()) {
+            btnFollow.setVisibility(Button.GONE);
         } else {
-            btnFollow.setText("Follow");
+            // if the author is already followed, set the button text to "Unfollow"
+            // else set the button text to "Follow"
+            if (isAuthorFollowed()) {
+                btnFollow.setText("Unfollow");
+            } else {
+                btnFollow.setText("Follow");
+            }
         }
 
         // Set post content: title, image, and content
@@ -115,7 +121,10 @@ public class PostDetailActivity extends BaseActivity {
         if (isSuccess) {
             // Store post data
             post = (Post) object;
+
+            // Show post data
             showPostData();
+
             Log.d("PostDetailActivity", "Post data loaded successfully");
         } else {
             // Handle error
@@ -128,6 +137,9 @@ public class PostDetailActivity extends BaseActivity {
 //        UserData.
 //        return Objects.equals(this.post.getAuthorId(), UserData.);
         return false;
+    }
+    private boolean isAuthorMyself() {
+        return Objects.equals(this.post.getAuthorId(), UserData.userId.getValue());
     }
 
     private void showAddFriendDialog() {
