@@ -1,21 +1,17 @@
 package com.example.gp.home.ui.Friend;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gp.Activity_note_detail;
 import com.example.gp.Adapter.FriendsRecyclerViewAdapter;
 
 import com.example.gp.R;
@@ -24,11 +20,9 @@ import com.example.gp.Items.Friend;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.databinding.ActivityFriendDetailBinding;
 import com.example.gp.databinding.FragmentDashboardBinding;
-import com.example.gp.home.Fragment_home;
 import com.google.android.material.search.SearchBar;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

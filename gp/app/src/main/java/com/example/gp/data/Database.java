@@ -14,7 +14,6 @@ import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.setting.FriendDetailActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;

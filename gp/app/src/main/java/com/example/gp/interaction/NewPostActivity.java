@@ -2,11 +2,9 @@ package com.example.gp.interaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 
@@ -15,7 +13,6 @@ import com.example.gp.Items.Post;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
-import com.example.gp.data.UserData;
 import com.example.gp.databinding.ActivityPostEditingBinding;
 import com.example.gp.home.Fragment_home;
 

@@ -17,13 +17,10 @@ import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityPostVisibilityBinding;
 import com.example.gp.setting.Adapter.PostAdapter;
 
-import java.lang.annotation.ElementType;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class PostVisibilityActivity extends BaseActivity {
     private static String TAG = "PVA1000000";

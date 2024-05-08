@@ -10,19 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
 import com.example.gp.R;
-import com.example.gp.SimpleTestActivity;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.UserData;
 import com.example.gp.BaseActivity;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class PostDetailActivity extends BaseActivity {
 

@@ -1,6 +1,5 @@
 package com.example.gp.setting.Adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,7 @@ import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Adapter class to populate a RecyclerView with a list of friend objects
