@@ -63,7 +63,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
     }
 
     public void updateFriends(List<Friend> newFriends) {
-        friends = newFriends;
+        this.friends = newFriends;
         notifyDataSetChanged();
     }
 
