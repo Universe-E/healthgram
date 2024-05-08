@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">gp</string>
+    <string name="app_name">Healthgram</string>
     <string name="login">login</string>
     <string name="without_account_disc">If you do not have an account, sign up now</string>
     <string name="create_account">Create Account</string>
