@@ -263,7 +263,12 @@ public class Database {
         public static void getFriendList(String nickname, int limit, Object object, String methodName) {
             Log.d(TAG, "Method: " + methodName);
 
-            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+            try {
+                String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                Log.d(TAG, "userId: " + userId);
+            } catch (Exception e) {
+                Log.e(TAG, "Error No AuthUser please sign in: " + e);
+            }
 
             FirebaseFirestore.getInstance()
                     .collection("users")
@@ -346,11 +351,8 @@ public class Database {
                 return;
             }
 
-            UserDB.setUserDB(Objects.requireNonNull(user));
-
             User userForCallback = new User();
             userForCallback.setUserId(user.getUid());
-            userForCallback.setUsername(user.getDisplayName());
             userForCallback.setEmail(user.getEmail());
 
             /*
@@ -450,6 +452,7 @@ public class Database {
             User user = new User();
 
             user.setUserId(Objects.requireNonNull(firebaseUser).getUid());
+            Log.d("Save user data", "username: " + username);
             user.setUsername(username);
             user.setEmail(firebaseUser.getEmail());
 
@@ -465,7 +468,6 @@ public class Database {
         private static User firebaseUserToUser(FirebaseUser user) {
             User userReturn = new User();
             userReturn.setUserId(user.getUid());
-            userReturn.setUsername(user.getDisplayName());
             userReturn.setEmail(user.getEmail());
 
             return userReturn;
