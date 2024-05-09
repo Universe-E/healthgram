@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.ui.Friend.DashboardFragment">
+    tools:context=".home.ui.Friend.FriendFragment">
 
 
 
@@ -14,7 +14,7 @@
         android:layout_marginTop="100dp"
         android:orientation="horizontal">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_friend"
         android:layout_width="match_parent"
         android:layout_height="600dp"
 

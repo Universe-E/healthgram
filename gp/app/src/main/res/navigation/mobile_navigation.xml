@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.gp.home.ui.Friend.DashboardFragment"
+        android:name="com.example.gp.home.ui.Friend.FriendFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_friendboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"

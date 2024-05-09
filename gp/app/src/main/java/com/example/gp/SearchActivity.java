@@ -13,11 +13,19 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+/**
+ * Search activity function example code to implement
+ * You can implement search component following this code file
+ * Author: Xingchen Zhang
+ * Date: 2024-05-03
+ */
 public class SearchActivity extends AppCompatActivity {
     private static final String TAG = "SearchActivity";
     private SearchBar searchBar;
-    private SearchView searchView;
-    private List<Post> searchResults; // 存储搜索结果
+    private SearchView searchView; // to show the search list
+    private List<Post> searchResults; // store the search result
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +77,7 @@ public class SearchActivity extends AppCompatActivity {
 //    private List<Post> searchPosts(String query) {
 //        List<Post> results = new ArrayList<>();
 //
-//        // 根据新数据结构的属性过滤
+//        // filter
 //        for (Post post : Database.PostDB.getAllPosts()) {
 //            if (post.getTitle().toLowerCase().contains(query) ||
 //                    post.getmContent().toLowerCase().contains(query)) {

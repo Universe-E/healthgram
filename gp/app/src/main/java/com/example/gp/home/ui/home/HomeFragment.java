@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -112,22 +113,32 @@ public class HomeFragment extends Fragment {
 
     // Set up SearchView listener
     private void setupSearchViewListener() {
-        // 使用 TextWatcher 监听输入框的内容变化
+        // Use TextWatcher to monitor content changes in the input box
         searchView.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                performSearch(true,this,s.toString());
+                performSearch(s.toString());
             }
 
             @Override
             public void afterTextChanged(android.text.Editable s) {}
         });
+        // Close SearchView after search is complete
+        searchView.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String query = v.getText().toString();
+                performSearch(query);
+                searchView.hide();
+                return true;
+            }
+            return false;
+        });
     }
 
-    private void performSearch(boolean isSuccess, Object object,String query) {
+    private void performSearch(String query) {
         List<Post> filteredPosts = new ArrayList<>();
 
         if (postList == null) {
@@ -142,8 +153,8 @@ public class HomeFragment extends Fragment {
                 filteredPosts.add(post);
             }
         }
-        postCardAdapter1.updatePosts(filteredPosts);  // 更新适配器数据并刷新 RecyclerView
-        postCardAdapter2.updatePosts(filteredPosts);  // 更新适配器数据并刷新 RecyclerView
+        postCardAdapter1.updatePosts(filteredPosts);  // update posts RecyclerView
+        postCardAdapter2.updatePosts(filteredPosts);
 
 
     }
