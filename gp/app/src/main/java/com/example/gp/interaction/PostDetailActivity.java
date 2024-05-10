@@ -15,9 +15,10 @@ import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.Database;
 import com.example.gp.data.UserData;
 import com.example.gp.BaseActivity;
+import com.example.gp.data.database.PostDB;
+import com.example.gp.data.database.UserDB;
 
 import java.util.Objects;
 
@@ -57,7 +58,7 @@ public class PostDetailActivity extends BaseActivity {
         String postId = intent.getStringExtra("postId");
 
         // Load corresponding post data from database
-        Database.PostDB.getPostByPostId(postId, this, "loadPostData");
+        PostDB.getPostByPostId(postId, this, "loadPostData");
 
     }
 
@@ -145,7 +146,7 @@ public class PostDetailActivity extends BaseActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         FriendRequest fr = new FriendRequest("user1@gmail.com");
-                        Database.UserDB.sendFriendRequestTo(fr,null,null);
+                        UserDB.sendFriendRequestTo(fr,null,null);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

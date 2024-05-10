@@ -1,5 +1,6 @@
 package com.example.gp.setting.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.Items.Friend;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.Database;
+import com.example.gp.data.database.UserDB;
 
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             if (v == mRequestAccept) {
                 // Update friend list
                 Friend awaitFriend = friends.get(position);
-                Database.UserDB.addFriend(awaitFriend,this,"updateUI");
+                UserDB.addFriend(awaitFriend,this,"updateUI");
                 // Delete this message
                 friends.remove(position);
                 notifyItemRemoved(position);
@@ -88,6 +89,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         }
 
         public void updateUI(boolean isSuccess,Object object){
+            Log.d("Accept request", "isSuccess: " + isSuccess);
             if (!isSuccess) {
                 ToastUtil.show(itemView.getContext(), object.toString());
             } else {

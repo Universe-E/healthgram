@@ -13,7 +13,7 @@ import com.example.gp.R;
 import com.example.gp.Items.Post;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.Database;
+import com.example.gp.data.database.PostDB;
 import com.example.gp.databinding.ActivityPostVisibilityBinding;
 import com.example.gp.setting.Adapter.PostAdapter;
 
@@ -43,7 +43,7 @@ public class PostVisibilityActivity extends BaseActivity {
         posts = new ArrayList<>();
 
         Date time = TimeUtil.getCurDate();
-        Database.PostDB.getUserPost(time,10,this,"updateUI");
+        PostDB.getUserPost(time,10,this,"updateUI");
 
 
     }
