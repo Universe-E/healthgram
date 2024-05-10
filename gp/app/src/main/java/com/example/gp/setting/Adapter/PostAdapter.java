@@ -91,7 +91,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 // Change the state
                 post.setPublic(!post.isPublic);
                 PostDB.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
-                setStatus(post.isPublic);
             }
         }
 
@@ -113,6 +112,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             } else {
                 Log.d(TAG, "postId:" + postId);
                 ToastUtil.show(itemView.getContext(), "Successfully change status");
+                setStatus(post.isPublic);
 
             }
 
