@@ -91,7 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 // Change the state
                 post.setPublic(!post.isPublic);
                 Database.PostDB.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
-                setStatus(post.isPublic);
+
             }
         }
 
@@ -105,14 +105,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
          * @param isSuccess the change is successful or not
          * @param postId the postId
          */
-        public void updateIsPublicTextView(boolean isSuccess,int postId) {
+        public void updateIsPublicTextView(boolean isSuccess,String postId) {
             if (!isSuccess) {
                 Log.d(TAG, "failed!");
-                ToastUtil.show(itemView.getContext(), "Change state failed, Please try again");
+                ToastUtil.show(itemView.getContext(), "Change state failed, Please check your Internet connection");
             } else {
                 Log.d(TAG, "postId:" + postId);
                 ToastUtil.show(itemView.getContext(), "Successfully change status");
-
+                setStatus(post.isPublic);
             }
 
         }
