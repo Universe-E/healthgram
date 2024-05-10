@@ -7,6 +7,7 @@ public class FriendRequest {
     private String senderId;
     private String receiverId;
     private boolean isRead;
+    private boolean isAccepted;
     private Timestamp requestTimestamp;
 
     /**
@@ -70,6 +71,15 @@ public class FriendRequest {
     public void setRequestTimestamp(Timestamp requestTimestamp) {
         this.requestTimestamp = requestTimestamp;
     }
+
+    public boolean isAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(boolean accepted) {
+        isAccepted = accepted;
+    }
+
     // END OF DO NOT MODIFY THIS
     // End of getters and setters
 }
