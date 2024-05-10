@@ -12,7 +12,7 @@ import com.example.gp.BaseActivity;
 import com.example.gp.Items.Post;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.database.PostDB;
+import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityPostEditingBinding;
 import com.example.gp.home.Fragment_home;
 
@@ -102,7 +102,7 @@ public class NewPostActivity extends BaseActivity {
             // for each user id, add it to the visibility list of the post
 
             // 4. Add the post to the database
-            PostDB.savePostData(newPost, this, "postOut");
+            Database.savePostData(newPost, this, "postOut");
 
         });
     }

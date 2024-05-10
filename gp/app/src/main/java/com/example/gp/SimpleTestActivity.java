@@ -18,8 +18,7 @@ import com.example.gp.Items.User;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Utils.UserParserActivity;
-import com.example.gp.data.database.PostDB;
-import com.example.gp.data.database.UserDB;
+import com.example.gp.data.Database;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -139,7 +138,7 @@ public class SimpleTestActivity extends AppCompatActivity {
     }
 
     private void testGetFriendList() {
-        UserDB.getFriendList("", 10, this, "getFriendList");
+        Database.getFriendList("", 10, this, "getFriendList");
     }
 
     public void getFriendList(boolean isSuccess, Object object) {
@@ -155,7 +154,7 @@ public class SimpleTestActivity extends AppCompatActivity {
 
     public void testPost() {
         Date date = TimeUtil.getCurDate();
-        PostDB.getPostsByTime(date, 1, this, "updateUI");
+        Database.getPostsByTime(date, 1, this, "updateUI");
     }
 
     public void testFirebaseFirestore() {
@@ -192,12 +191,12 @@ public class SimpleTestActivity extends AppCompatActivity {
     }
 
     void testSavePost(Post post) {
-        PostDB.savePostData(post, null, null);
+        Database.savePostData(post, null, null);
     }
 
     void testGetPost() {
         Log.d(TAG, "this: " + this);
-        PostDB.getUserPost(null, 10, this, "updateUITestPost");
+        Database.getUserPost(null, 10, this, "updateUITestPost");
     }
 
     public void updateUITestPost(boolean isSuccess, Object object) {
@@ -217,12 +216,12 @@ public class SimpleTestActivity extends AppCompatActivity {
         friend.setId(String.valueOf(friend.hashCode()));
         friend.setNickname("test" + friend.hashCode());
         friend.setAvatar(1);
-        UserDB.addFriend(friend, null, null);
+        Database.addFriend(friend, null, null);
     }
 
     public void testGetFriend() {
         List<Friend> friends = new ArrayList<>();
-        UserDB.getFriendList("", 10, this, "getFriend");
+        Database.getFriendList("", 10, this, "getFriend");
     }
 
     /**

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.R;
 import com.example.gp.Items.Post;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.database.PostDB;
+import com.example.gp.data.Database;
 
 import java.util.List;
 
@@ -90,7 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 post = posts.get(position);
                 // Change the state
                 post.setPublic(!post.isPublic);
-                PostDB.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
+                Database.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
             }
         }
 

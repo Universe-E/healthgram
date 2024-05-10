@@ -9,7 +9,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.database.UserDB;
+import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityMainBinding;
 import com.example.gp.home.Fragment_home;
 import com.example.gp.setting.SettingActivity;
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        UserDB.checkSignedIn(this, "updateStartUI");
+        Database.checkSignedIn(this, "updateStartUI");
         Log.d(TAG, "onStart: checkSignedIn");
     }
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Check if user is already signed in
-        UserDB.checkSignedIn(this, "updateStartUI");
+        Database.checkSignedIn(this, "updateStartUI");
 
         // load the layout using view binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         if (validateForm(username, password)) {
             Log.d(TAG, "login: " + username);
             // authenticate the user
-            UserDB.signIn(username, password, this, "updateUI");
+            Database.signIn(username, password, this, "updateUI");
         }
     }
 

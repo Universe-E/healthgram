@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
-import com.example.gp.data.database.PostDB;
+import com.example.gp.data.Database;
 import com.example.gp.interaction.NewPostActivity;
 import com.example.gp.interaction.PostCardAdapter;
 import com.example.gp.interaction.PostDetailActivity;
@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
         setupAddNoteButton(view);
 
         // Load post data from the database
-        PostDB.getPostsByTime(new Date(), 10, this, "loadPostCards");
+        Database.getPostsByTime(new Date(), 10, this, "loadPostCards");
 
         return view;
     }

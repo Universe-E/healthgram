@@ -214,9 +214,8 @@ public class PostDB {
      * @param authorId
      * @param object
      * @param methodName
-     * @param args       Callback return true and list of PostMap object List<Map<String postId, Post post>>
      */
-    public static void getPostsByAuthorId(Date time, int limit, String authorId, Object object, String methodName, Object... args) {
+    public static void getPostsByAuthorId(Date time, int limit, String authorId, Object object, String methodName) {
         Timestamp timestamp;
         Log.d(TAG, "Get posts by author id: object: " + object);
 
