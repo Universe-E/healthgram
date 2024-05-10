@@ -65,6 +65,13 @@ public class UserDB {
 //            }
 //        }
 
+    /**
+     * Allow user to sign in
+     * @param input
+     * @param password
+     * @param object
+     * @param methodName
+     */
     public static void signIn(String input, String password, Object object, String methodName) {
         if (AuthUtil.isEmail(input)) {
             signInWithEmail(input, password, object, methodName);
@@ -73,6 +80,14 @@ public class UserDB {
         }
     }
 
+    /**
+     * Allow user to sign up
+     * @param username
+     * @param email
+     * @param password
+     * @param object
+     * @param methodName
+     */
     public static void signUp(String username, String email, String password, Object object, String methodName) {
         Log.d(TAG, "signUp username: " + username);
         FirebaseFirestore.getInstance()
@@ -363,11 +378,11 @@ public class UserDB {
         MethodUtil.invokeMethod(object, methodName, true, userForCallback);
     }
 
-    public String getUsername() {
+    private String getUsername() {
         return UserDB.username;
     }
 
-    public String getEmail() {
+    private String getEmail() {
         return UserDB.email;
     }
 

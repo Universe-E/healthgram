@@ -11,14 +11,14 @@ import java.util.Map;
  * @since 2024-05-06
  */
 public class User {
-    private String userId;
-    private String username;
-    private String email;
-    private String description;
-    private String avatar;
-    private Map<String, Friend> friendMap;
-    private Map<String, Post> postMap;
-    private Map<String, Notification> notificationMap;
+    private static String userId;
+    private static String username;
+    private static String email;
+    private static String description;
+    private static String avatar;
+    private static Map<String, Friend> friendMap;
+    private static Map<String, Post> postMap;
+    private static Map<String, Notification> notificationMap;
 
     /**
      * Constructor with full parameter
@@ -35,28 +35,28 @@ public class User {
     public User(String userId, String username, String email, String description,
                 String avatar, Map<String, Friend> friendMap, Map<String, Post> postMap,
                 Map<String, Notification> notificationMap) {
-        this.userId = userId;
-        this.username = username;
-        this.email = email;
-        this.description = description;
-        this.avatar = avatar;
-        this.friendMap = friendMap;
-        this.postMap = postMap;
-        this.notificationMap = notificationMap;
+        User.userId = userId;
+        User.username = username;
+        User.email = email;
+        User.description = description;
+        User.avatar = avatar;
+        User.friendMap = friendMap;
+        User.postMap = postMap;
+        User.notificationMap = notificationMap;
     }
 
     /**
      * Constructor with required parameter
      */
     public User(String userId, String username, String email) {
-        this.userId = userId;
-        this.username = username;
-        this.email = email;
-        this.description = "set description";
-        this.avatar = "set avatar";
-        this.friendMap = new HashMap<>();
-        this.postMap = new HashMap<>();
-        this.notificationMap = new HashMap<>();
+        User.userId = userId;
+        User.username = username;
+        User.email = email;
+        User.description = "set description";
+        User.avatar = "set avatar";
+        User.friendMap = new HashMap<>();
+        User.postMap = new HashMap<>();
+        User.notificationMap = new HashMap<>();
     }
 
     /**
@@ -70,7 +70,7 @@ public class User {
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        User.userId = userId;
     }
 
     public String getUsername() {
@@ -78,7 +78,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        User.username = username;
     }
 
     public String getEmail() {
@@ -86,7 +86,7 @@ public class User {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        User.email = email;
     }
 
     public String getDescription() {
@@ -94,7 +94,7 @@ public class User {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        User.description = description;
     }
 
     public String getAvatar() {
@@ -102,7 +102,7 @@ public class User {
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        User.avatar = avatar;
     }
 
     public Map<String, Friend> getFriendMap() {
@@ -110,7 +110,7 @@ public class User {
     }
 
     public void setFriendMap(Map<String, Friend> friendMap) {
-        this.friendMap = friendMap;
+        User.friendMap = friendMap;
     }
 
     public Map<String, Post> getPostMap() {
@@ -118,7 +118,7 @@ public class User {
     }
 
     public void setPostMap(Map<String, Post> postMap) {
-        this.postMap = postMap;
+        User.postMap = postMap;
     }
 
     public Map<String, Notification> getNotificationMap() {
@@ -126,6 +126,6 @@ public class User {
     }
 
     public void setNotificationMap(Map<String, Notification> notificationMap) {
-        this.notificationMap = notificationMap;
+        User.notificationMap = notificationMap;
     }
 }
