@@ -16,22 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Adapter.FriendsRecyclerViewAdapter;
 
-import com.example.gp.Items.Post;
 import com.example.gp.R;
-import com.example.gp.SearchActivity;
 import com.example.gp.Items.Friend;
 import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivityFriendDetailBinding;
 import com.example.gp.databinding.FragmentFriendboardBinding;
-import com.example.gp.interaction.PostCardAdapter;
-import com.google.android.material.search.SearchBar;
 import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.example.gp.data.Database;
 
 /**
  * FriendList fragment
@@ -57,7 +52,7 @@ public class FriendFragment extends Fragment {
 
 
         initializeSearchView(view);
-        Database.UserDB.getFriendList("",100,this, "updateUI");
+        UserDB.getFriendList("",100,this, "updateUI");
         // Load friends
         initializeRecyclerViews(view);
 

@@ -18,7 +18,8 @@ import com.example.gp.Items.User;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Utils.UserParserActivity;
-import com.example.gp.data.Database;
+import com.example.gp.data.database.PostDB;
+import com.example.gp.data.database.UserDB;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -138,7 +139,7 @@ public class SimpleTestActivity extends AppCompatActivity {
     }
 
     private void testGetFriendList() {
-        Database.UserDB.getFriendList("", 10, this, "getFriendList");
+        UserDB.getFriendList("", 10, this, "getFriendList");
     }
 
     public void getFriendList(boolean isSuccess, Object object) {
@@ -154,7 +155,7 @@ public class SimpleTestActivity extends AppCompatActivity {
 
     public void testPost() {
         Date date = TimeUtil.getCurDate();
-        Database.PostDB.getPostsByTime(date, 1, this, "updateUI");
+        PostDB.getPostsByTime(date, 1, this, "updateUI");
     }
 
     public void testFirebaseFirestore() {
@@ -191,12 +192,12 @@ public class SimpleTestActivity extends AppCompatActivity {
     }
 
     void testSavePost(Post post) {
-        Database.PostDB.savePostData(post, null, null);
+        PostDB.savePostData(post, null, null);
     }
 
     void testGetPost() {
         Log.d(TAG, "this: " + this);
-        Database.PostDB.getUserPost(null, 10, this, "updateUITestPost");
+        PostDB.getUserPost(null, 10, this, "updateUITestPost");
     }
 
     public void updateUITestPost(boolean isSuccess, Object object) {
@@ -216,12 +217,12 @@ public class SimpleTestActivity extends AppCompatActivity {
         friend.setId(String.valueOf(friend.hashCode()));
         friend.setNickname("test" + friend.hashCode());
         friend.setAvatar(1);
-        Database.UserDB.addFriend(friend, null, null);
+        UserDB.addFriend(friend, null, null);
     }
 
     public void testGetFriend() {
         List<Friend> friends = new ArrayList<>();
-        Database.UserDB.getFriendList("", 10, this, "getFriend");
+        UserDB.getFriendList("", 10, this, "getFriend");
     }
 
     /**

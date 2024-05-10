@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.R;
 import com.example.gp.Items.Post;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.Database;
+import com.example.gp.data.database.PostDB;
 
 import java.util.List;
 
@@ -90,7 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 post = posts.get(position);
                 // Change the state
                 post.setPublic(!post.isPublic);
-                Database.PostDB.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
+                PostDB.setPublic(post.getPostId(), post.getIsPublic(),this,"updateIsPublicTextView");
                 setStatus(post.isPublic);
             }
         }
@@ -105,7 +105,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
          * @param isSuccess the change is successful or not
          * @param postId the postId
          */
-        public void updateIsPublicTextView(boolean isSuccess,int postId) {
+        public void updateIsPublicTextView(boolean isSuccess,String postId) {
+            Log.d(TAG, "updateIsPublicTextView");
             if (!isSuccess) {
                 Log.d(TAG, "failed!");
                 ToastUtil.show(itemView.getContext(), "Change state failed, Please try again");
