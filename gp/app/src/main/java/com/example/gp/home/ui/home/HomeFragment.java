@@ -68,29 +68,27 @@ public class HomeFragment extends Fragment {
                 int postId = post.getPostId().hashCode();
                 postTree.add(postId, post); // add posts to BTree
             }
-            updatePostCards(); // renew UI
+
+            //renew UI
+            List<Post> postList1 = new ArrayList<>();
+            List<Post> postList2 = new ArrayList<>();
+            ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
+            for (int i = 0; i < keys.size(); i++) {
+                Post post = (Post) postTree.search(keys.get(i)); // find post by key
+                if (i < keys.size() / 2) {
+                    postList1.add(post);
+                } else {
+                    postList2.add(post);
+                }
+            }
+            postCardAdapter1.setPostList(postList1);
+            postCardAdapter2.setPostList(postList2);
             Log.d("HomeFragment", "Posts loaded successfully");
         } else {
             // Handle error
             ToastUtil.showLong(getContext(), "Failed to load posts");
         }
         return postList;
-    }
-
-    private void updatePostCards() {
-        List<Post> postList1 = new ArrayList<>();
-        List<Post> postList2 = new ArrayList<>();
-        ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // 获取所有的键
-        for (int i = 0; i < keys.size(); i++) {
-            Post post = (Post) postTree.search(keys.get(i)); // 根据键查找帖子
-            if (i < keys.size() / 2) {
-                postList1.add(post);
-            } else {
-                postList2.add(post);
-            }
-        }
-        postCardAdapter1.setPostList(postList1);
-        postCardAdapter2.setPostList(postList2);
     }
 
     private void initializeSearchView(View view) {
