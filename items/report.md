@@ -322,12 +322,34 @@ Privacy
 
 *Here is an example:*
 
-1. *Bug 1:*
-   - *A space bar (' ') in the sign in email will crash the application.*
-   - ...
+- *Bug 1:*
+  - User can follow themselves, generally this should be banned
+  - Follow and unfollow functions are unavailable now
 
-2. *Bug 2:*
-3. ...
+- *Bug 2:* 
+  - After clicking share button, user cannot share to other users
+  - Click Setting - Request will crash
+  - Cannot use change avatar, nickname, phone number, password, etc
+
+- *Bug 3:* 
+  - Cannot select texts in post and head text bar
+  - All post images are randomly selected from resources
+  - User cannot share pictures in their posts
+  - User should enter user id to share with friends
+
+- *Bug 4:* 
+  - In a very rare situation, after logout, if user deliberately input the wrong password, the app may crash
+  - If user deliberately input the wrong password several times, then input correct password, it will take seconds to response to the successful password authentication
+
+*Bug 5:* 
+
+*Bug 6:* 
+
+*Bug 7:* 
+
+*Bug 3:* Cannot select texts in post and head text bar
+
+*Bug 3:* Cannot select texts in post and head text bar
 
 <br> <hr>
 

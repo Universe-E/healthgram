@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
+import com.example.gp.data.BTree;
 import com.example.gp.data.Database;
 import com.example.gp.interaction.NewPostActivity;
 import com.example.gp.interaction.PostCardAdapter;
@@ -40,9 +41,14 @@ public class HomeFragment extends Fragment {
     private SearchView searchView;
     private List<Post> postList;
 
+    //use BTree to store posts
+    private BTree postTree;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        postTree = new BTree();
 
         // Initialize the search view, recycler views, and add note button
         initializeSearchView(view);
@@ -58,18 +64,33 @@ public class HomeFragment extends Fragment {
     public List<Post> loadPostCards(boolean isSuccess, Object object) {
         if (isSuccess) {
             postList = (List<Post>) object;
-            int halfSize = postList.size() / 2;
-            List<Post> postList1 = postList.subList(0, halfSize);
-            List<Post> postList2 = postList.subList(halfSize, postList.size());
-            postCardAdapter1.setPostList(postList1);
-            postCardAdapter2.setPostList(postList2);
+            for (Post post : postList) {
+                int postId = post.getPostId().hashCode();
+                postTree.add(postId, post); // add posts to BTree
+            }
+            updatePostCards(); // renew UI
             Log.d("HomeFragment", "Posts loaded successfully");
         } else {
             // Handle error
             ToastUtil.showLong(getContext(), "Failed to load posts");
         }
-
         return postList;
+    }
+
+    private void updatePostCards() {
+        List<Post> postList1 = new ArrayList<>();
+        List<Post> postList2 = new ArrayList<>();
+        ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // 获取所有的键
+        for (int i = 0; i < keys.size(); i++) {
+            Post post = (Post) postTree.search(keys.get(i)); // 根据键查找帖子
+            if (i < keys.size() / 2) {
+                postList1.add(post);
+            } else {
+                postList2.add(post);
+            }
+        }
+        postCardAdapter1.setPostList(postList1);
+        postCardAdapter2.setPostList(postList2);
     }
 
     private void initializeSearchView(View view) {
@@ -147,9 +168,10 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        // get the post data of user
-        for (Post post : postList) {
-            if (post.title.toLowerCase().contains(query.toLowerCase()) ) {
+        ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
+        for (int key : keys) {
+            Post post = (Post) postTree.search(key); // find posts by key
+            if (post.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 filteredPosts.add(post);
             }
         }

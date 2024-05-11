@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class BTree {
     private static final int T = 4;
-    private Node mRootNode;
+    public Node mRootNode;
     private static final int LEFT_CHILD_NODE = 0;
     private static final int RIGHT_CHILD_NODE = 1;
 
@@ -374,7 +374,7 @@ public class BTree {
     }
 
     // Recursive search method.
-    public Object search(Node node, int key) {
+    private Object search(Node node, int key) {
         int i = 0;
         while (i < node.mNumKeys && key > node.mKeys[i]) {
             i++;
@@ -465,7 +465,7 @@ public class BTree {
     }
 
     // Inorder walk over the tree.
-    ArrayList<Integer> getKeys(Node node) {
+    public ArrayList<Integer> getKeys(Node node) {
         ArrayList<Integer> array = new ArrayList<Integer>();
         if (node != null) {
             if (node.mIsLeafNode) {

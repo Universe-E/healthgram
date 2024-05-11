@@ -19,6 +19,38 @@ Please refer to the `assignment specification` for detailed instructions.
 
 # Change Log
 
+## 2024.05.08
+
+---
+
+### Finished Checkpoint 2
+
+### Zehua Kong
+
+- Implemented User and Notification classes
+- Modify Database for data retrieving
+
+- Modify database back-end methods
+
+- Fixed java redirect bug
+
+### Xingchen Zhang
+
+- Fixed bugs on search bar dropdown
+- Fixed search lists incomplete problem
+
+### Yulong Chen
+
+- Completed notification and privacy set
+- Fixed redirect bugs on logout
+
+### Tianci Li
+
+- Wrote Parser and Tokenizer
+- Modify fragment for better adapt data present
+
+------
+
 ## 2024.05.06
 
 ---
