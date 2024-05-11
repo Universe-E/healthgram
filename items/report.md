@@ -1,4 +1,4 @@
-# [G0 - Team Name] Report
+# [G04] Report
 
 The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
 
@@ -134,7 +134,7 @@ This is an important section of your report and should include all technical dec
 - Details about the parser (describe the formal grammar and language used)
 - **Data Structure used:** 
   - Choose **Map** and **ArrayList** to store posts and friend lists to allow fast search of friends and posts associated with a particular user. **Map** and **ArrayList** are useful for operations that require sequential access, such as displaying a user's timeline or list of followers. 
-  - Choose **B-Tree** for temporary data storage is efficient for searching, since the return type is a list of results.
+  - Choose **B-Tree** for temporary data storage is efficient for searching, since the return type is a list of results. 
 - **Design Patterns used:**
   - **Singleton Pattern**: Useful to initialize instances (User and Post) from firebase, this design pattern is used in **Database.java**
   - **Observer Pattern**: Maintains a list of its observers, and notifies them of any state changes. In our application, the observers are **followers**, when user publishes their posts (not in privacy), all the other followers can receive **notifications** from this user.
@@ -156,17 +156,21 @@ Here is a partial (short) example for the subsection `Data Structures`:*
    * *Objective: used for storing users and posts for **Data-Profile** feature.*
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
    * *Reasons:*
-      * *It is more efficient than Arraylist for insertion with a time complexity O(1)*
-      * *We don't need to access the item by index for xxx feature because...*
+      * Provides dynamic resizing, allowing easy addition and removal of elements as needed for managing user posts
+      * ArrayList offers random access elements, enabling efficient search and display specific posts
       * For the list of users, we got a list as the receiving parameter from firebase, and uses in searching matched users or posts when handling authentication or get id methods
 2. Map
    * *Objective: used for storing followers and posts for **Interact-Noti** feature.*
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
-   * * For the map of followers and posts, we receive the map id (String) first, and search the corresponding follower and post in a high efficiency
+   * * Map provides key-value pairs, where user data needs to be organized and accessed based on a specific key
+     * In Hashmap, the time complexity of accessing specific key is O(1), for followers and posts,  we receive the map id (String) first, and search the corresponding follower and post in a high efficiency
+     * Keys in map are unique, this feature prevents duplicate data when storing followers and posts by unique id
 3. B-Tree
    * *Objective: used for storing temperary users and posts for **Search-Filter** feature.*
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
-   * * For the B-Tree for data collections, we search results in database and stored temporarily in B-Tree structure
+   * * B-Tree provides efficient search and retrieval operations, we search results in database and stored temporarily in B-Tree structure
+     * B-Tree maintains a balanced tree structure, for large data sets of users and posts, the balanced structure reduces the risk of performance degradation
+     * B-Tree allows for range queries and partial key searches, making search filter working in a high efficiency
 
 <hr>
 
@@ -174,10 +178,29 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 *[What design patterns did your team utilise? Where and why?]*
 
 1. *Singleton Pattern*
+   
+   * *Objective: used for initialize User and Post.*
+   
+   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   
+   * *Reasons:*
+     
+      *  Ensure that only one instance of the Database class is created, preventing multiple connections to Firebase and reducing redundant performance consumption.
+      * Singleton Pattern helps maintain data consistency by ensuring all parts of the application use the same instance of the Database class.
+      
+   
+2. *Observer Pattern*
    * *Objective: used for initialize User and Post.*
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
    * *Reasons:*
-      * ...
+     * Observer pattern provides a solution for handling notifications of users.
+     * Observer pattern allows publishers and observers interact normally, making app more flexible and maintainable.
+3. *Adaptor Pattern*
+   * *Objective: used for initialize User and Post.*
+   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * *Reasons:*
+     * Adapter pattern allows for the reuse of classes that have incompatible interfaces.
+     * provides an organized way to focus on their specific functionality, improves the capability of app functions.
 
 <hr>
 
@@ -341,15 +364,7 @@ Privacy
   - In a very rare situation, after logout, if user deliberately input the wrong password, the app may crash
   - If user deliberately input the wrong password several times, then input correct password, it will take seconds to response to the successful password authentication
 
-*Bug 5:* 
 
-*Bug 6:* 
-
-*Bug 7:* 
-
-*Bug 3:* Cannot select texts in post and head text bar
-
-*Bug 3:* Cannot select texts in post and head text bar
 
 <br> <hr>
 
