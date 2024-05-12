@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".data.databaseTest.DatabaseTestActivity">
+    tools:context=".data.databaseTest.DatabaseTestActivity"
+    tools:visibility="visible">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -27,11 +28,12 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="52dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/Theme.Gp.PopupOverlay" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_scrolling" />
@@ -45,10 +47,21 @@
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/text_margin"
+        android:text="TestGet"
+        app:layout_anchor="@+id/imageView"
+        app:layout_anchorGravity="bottom|center" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="517dp"
+        android:layout_height="258dp"
+        app:layout_anchor="@+id/app_bar"
+        app:layout_anchorGravity="center"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

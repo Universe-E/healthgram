@@ -66,7 +66,7 @@ public class PostDB {
                       Callback
                       Return true and list of PostMap object List<Map<String postId, Post post>>
                      */
-                        MethodUtil.invokeMethod(object, methodName, true, posts);
+                        FileDB.getImages(posts, 0, object, methodName);
                     } else {
                         Exception e = task.getException();
                     /*
@@ -96,7 +96,8 @@ public class PostDB {
                           Callback
                           Return true and Post object
                          */
-                            MethodUtil.invokeMethod(object, methodName, true, document.toObject(Post.class));
+                            Post post = document.toObject(Post.class);
+                            FileDB.getImage(post, object, methodName);
                         } else {
                             String message = "No such document";
                         /*

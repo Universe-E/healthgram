@@ -1,6 +1,7 @@
 package com.example.gp.data.database;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.example.gp.Items.Post;
 import com.example.gp.Utils.MethodUtil;
@@ -10,6 +11,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.security.spec.PSSParameterSpec;
+import java.util.List;
 import java.util.UUID;
 
 public class FileDB {
@@ -52,6 +54,49 @@ public class FileDB {
         }).addOnSuccessListener(taskSnapshot -> {
             PostDB.savePost(true, post, object, methodName);
         });
+    }
+
+    public static void getImage(Post post, Object object, String methodName) {
+        FileDB fileDB = getInstance();
+        StorageReference storageReference = storage.getReference();
+        StorageReference islandRef = storageReference.child("image/" + post.getImgUUID() + ".jpg");
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        islandRef.getBytes(ONE_MEGABYTE)
+                .addOnSuccessListener(bytes -> {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    post.setImg(bitmap);
+                    MethodUtil.invokeMethod(object, methodName, true, post);
+                })
+                .addOnFailureListener(exception -> {
+                    // Handle any errors
+                    MethodUtil.invokeMethod(object, methodName, false, exception.getMessage());
+                });
+    }
+
+    public static void getImages(List<Post> posts, int position, Object object, String methodName) {
+        FileDB fileDB = getInstance();
+        StorageReference storageReference = storage.getReference();
+
+        if (position >= posts.size()) {
+            MethodUtil.invokeMethod(object, methodName, true, posts);
+            return;
+        }
+
+        String uuid = posts.get(position).getImgUUID();
+        if (uuid == null) {
+            getImages(posts, position + 1, object, methodName);
+            return;
+        }
+
+        StorageReference islandRef = storageReference.child("image/" + uuid + ".jpg");
+        islandRef.getBytes(1024 * 1024)
+                .addOnSuccessListener(bytes -> {
+                    getImages(posts, position + 1, object, methodName);
+                })
+                .addOnFailureListener(exception -> {
+                    MethodUtil.invokeMethod(object, methodName, false, exception.getMessage());
+                });
     }
 
     private String getUUID() {
