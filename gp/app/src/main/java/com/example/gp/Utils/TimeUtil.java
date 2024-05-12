@@ -6,11 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TimeUtil {
-    public static Date getCurDate() {
-        return Calendar.getInstance().getTime();
-    }
-
     public static Timestamp getTimestamp() {
         return new Timestamp(Calendar.getInstance().getTime());
+    }
+
+    public static Timestamp getTimestamp(Timestamp timestamp) {
+        if (timestamp == null) {
+            return getTimestamp();
+        }
+        return timestamp;
     }
 }

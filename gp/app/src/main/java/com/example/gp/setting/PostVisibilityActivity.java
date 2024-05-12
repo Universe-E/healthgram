@@ -16,6 +16,7 @@ import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityPostVisibilityBinding;
 import com.example.gp.setting.Adapter.PostAdapter;
+import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,8 +43,8 @@ public class PostVisibilityActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         posts = new ArrayList<>();
 
-        Date time = TimeUtil.getCurDate();
-        Database.getUserPost(time,10,this,"updateUI");
+        Timestamp timestamp = TimeUtil.getTimestamp();
+        Database.getUserPost(timestamp,10,this,"updateUI");
 
 
     }

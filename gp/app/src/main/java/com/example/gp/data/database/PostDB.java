@@ -1,5 +1,8 @@
 package com.example.gp.data.database;
 
+import static com.example.gp.Utils.TimeUtil.getTimestamp;
+import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
+
 import android.util.Log;
 
 import com.example.gp.Items.Post;
@@ -26,18 +29,6 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
 
-    private static PostDB instance;
-
-    private PostDB() {
-    }
-
-    public static PostDB getInstance() {
-        if (instance == null) {
-            instance = new PostDB();
-        }
-        return instance;
-    }
-
     /**
      * Save post data to firestore
      *
@@ -52,18 +43,13 @@ public class PostDB {
     /**
      * Get a list of posts by post timestamp, descending sorted by post timestamp
      *
-     * @param time
+     * @param timestamp
      * @param limit
      * @param object
      * @param methodName Callback return true and list of PostMap object List<Post>
      */
-    public static void getPostsByTime(Date time, int limit, Object object, String methodName) {
-        Timestamp timestamp;
-        if (time != null) {
-            timestamp = new Timestamp(time);
-        } else {
-            timestamp = TimeUtil.getTimestamp();
-        }
+    public static void getPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+        timestamp = getTimestamp(timestamp);
 
         CollectionReference postRef = FirebaseFirestore.getInstance().collection("posts");
         postRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
@@ -135,17 +121,17 @@ public class PostDB {
     /**
      * get current user's post
      *
-     * @param time
+     * @param timestamp
      * @param limit
      * @param object
      * @param methodName Callback return true and list of PostMap object List<Map<String postId, Post post>>
      */
-    public static void getUserPost(Date time, int limit, Object object, String methodName) {
+    public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
         Log.d(TAG, "Method: " + methodName);
         Log.d(TAG, "object: " + object);
-        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String userId = getCurrentUserId();
 
-        getPostsByAuthorId(time, limit, userId, object, methodName);
+        getPostsByAuthorId(timestamp, limit, userId, object, methodName);
     }
 
     /**
@@ -196,30 +182,22 @@ public class PostDB {
     /**
      * Get a list of posts by author id
      *
-     * @param time
+     * @param timestamp
      * @param limit
      * @param authorId
      * @param object
      * @param methodName
      */
-    public static void getPostsByAuthorId(Date time, int limit, String authorId, Object object, String methodName) {
-        Timestamp timestamp;
+    public static void getPostsByAuthorId(Timestamp timestamp, int limit, String authorId, Object object, String methodName) {
         Log.d(TAG, "Get posts by author id: object: " + object);
-
-        if (time == null) {
-            timestamp = new Timestamp(TimeUtil.getCurDate());
-        } else {
-            timestamp = new Timestamp(time);
-        }
-
-        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        timestamp = getTimestamp(timestamp);
 
         Log.d(TAG, "Method: " + methodName);
-        Log.d(TAG, "userId: " + userId);
+        Log.d(TAG, "userId: " + authorId);
 
         FirebaseFirestore.getInstance()
                 .collection("users")
-                .document(userId)
+                .document(authorId)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -276,7 +254,8 @@ public class PostDB {
 
     /**
      * DO NOT USE THIS METHOD
-     * @param post
+     * @param isSuccessful
+     * @param result
      * @param object
      * @param methodName
      */

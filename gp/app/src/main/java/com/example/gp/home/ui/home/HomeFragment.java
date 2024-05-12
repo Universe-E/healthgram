@@ -24,6 +24,7 @@ import com.example.gp.interaction.PostCardAdapter;
 import com.example.gp.interaction.PostDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.search.SearchView;
+import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +57,8 @@ public class HomeFragment extends Fragment {
         setupAddNoteButton(view);
 
         // Load post data from the database
-        Database.getPostsByTime(new Date(), 10, this, "loadPostCards");
+        Timestamp timestamp = new Timestamp(new Date());
+        Database.getPostsByTime(timestamp, 10, this, "loadPostCards");
 
         return view;
     }

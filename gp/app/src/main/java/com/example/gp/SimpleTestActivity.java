@@ -19,6 +19,7 @@ import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Utils.UserParserActivity;
 import com.example.gp.data.Database;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -153,8 +154,8 @@ public class SimpleTestActivity extends AppCompatActivity {
     }
 
     public void testPost() {
-        Date date = TimeUtil.getCurDate();
-        Database.getPostsByTime(date, 1, this, "updateUI");
+        Timestamp timestamp = TimeUtil.getTimestamp();
+        Database.getPostsByTime(timestamp, 1, this, "updateUI");
     }
 
     public void testFirebaseFirestore() {

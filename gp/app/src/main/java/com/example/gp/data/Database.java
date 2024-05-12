@@ -1,41 +1,14 @@
 package com.example.gp.data;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.util.Log;
-
-import androidx.annotation.Nullable;
-
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
-import com.example.gp.Items.User;
-import com.example.gp.Utils.AuthUtil;
-import com.example.gp.Utils.MethodUtil;
-import com.example.gp.Utils.TimeUtil;
-import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.database.FileDB;
 import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.SetOptions;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class Database {
     private static final String TAG = "Database";
@@ -161,13 +134,13 @@ public class Database {
      * Get a list of posts by post timestamp, descending sorted by post timestamp
      * Callback parameters: true and PostMap object, false and error message if fail
      *
-     * @param time   post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
+     * @param timestamp   post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
      * @param limit  The number of post retrieval
      * @param object The object that calls the method
      * @param methodName The method name
      */
-    public static void getPostsByTime(Date time, int limit, Object object, String methodName) {
-        PostDB.getPostsByTime(time, limit, object, methodName);
+    public static void getPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+        PostDB.getPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**
@@ -186,13 +159,13 @@ public class Database {
      * Get current user's post
      * Callback parameters: true and PostMap object, false and error message if fail
      *
-     * @param time The timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
+     * @param timestamp The timestamp, e.g., if you try to get the list first timestamp, set timestamp to null, or set timestamp to the last post you already got timestamp
      * @param limit The number of post retrieval
      * @param object The object that calls the method
      * @param methodName The method name
      */
-    public static void getUserPost(Date time, int limit, Object object, String methodName) {
-        PostDB.getUserPost(time, limit, object, methodName);
+    public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
+        PostDB.getUserPost(timestamp, limit, object, methodName);
     }
 
     /**
@@ -224,13 +197,13 @@ public class Database {
      * Get a list of posts by author id
      * Callback parameters: true and PostMap object, false and error message if fail
      *
-     * @param time   post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
+     * @param timestamp   post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
      * @param limit  The number of post retrieval
      * @param authorId   author id aka user id
      * @param object The object that calls the method
      * @param methodName The method name
      */
-    public static void getPostsByAuthorId(Date time, int limit, String authorId, Object object, String methodName) {
-        PostDB.getPostsByAuthorId(time, limit, authorId, object, methodName);
+    public static void getPostsByAuthorId(Timestamp timestamp, int limit, String authorId, Object object, String methodName) {
+        PostDB.getPostsByAuthorId(timestamp, limit, authorId, object, methodName);
     }
 }
