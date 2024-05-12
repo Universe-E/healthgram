@@ -6,6 +6,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
+import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -45,8 +46,7 @@ public class PostDB {
      * @param methodName Callback return true and Post object if success, false and error message if fail
      */
     public static void savePostData(Post post, Object object, String methodName) {
-        PostDB postDB = getInstance();
-        FileDB.saveImage(post.getImg(), postDB, "savePost", object, methodName);
+        FileDB.saveImage(post, object, methodName);
     }
 
     /**
@@ -264,7 +264,7 @@ public class PostDB {
                 });
     }
 
-    private static void savePostMap(String postId, Post post) {
+    private static void savePostMap(String postId, PostModel post) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -280,18 +280,22 @@ public class PostDB {
      * @param object
      * @param methodName
      */
-    public static void savePost(Post post, Object object, String methodName, String uuid) {
+    public static void savePost(boolean isSuccessful, Object result, Object object, String methodName) {
+        if (!isSuccessful) {
+            /*
+              Callback
+              Return error message
+             */
+            MethodUtil.invokeMethod(object, methodName, false, result);
+            return;
+        }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        post.setAuthorId(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
-
         DocumentReference docRef = db.collection("posts").document();
+        Post post = (Post) result;
+        PostModel postModel = new PostModel();
+        postModel.setModelFromPost(post);
 
-        post.setPostId(docRef.getId());
-        post.setPostTimestamp(TimeUtil.getTimestamp());
-        post.setImgUUID(uuid);
-
-        docRef.set(post)
+        docRef.set(postModel)
                 .addOnSuccessListener(dRef -> {
                     /*
                       Callback
@@ -299,7 +303,7 @@ public class PostDB {
                      */
                     MethodUtil.invokeMethod(object, methodName, true, post);
                     Log.d(TAG, "DocumentSnapshot successfully written!");
-                    savePostMap(docRef.getId(), post);
+                    savePostMap(docRef.getId(), postModel);
                 })
                 .addOnFailureListener(e -> {
                     /*

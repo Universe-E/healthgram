@@ -2,10 +2,12 @@ package com.example.gp.Items;
 
 import android.graphics.Bitmap;
 
+import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Post class
@@ -26,8 +28,7 @@ public class Post implements Serializable {
     public int likeCount;
     public boolean isPublic;
     public Timestamp postTimestamp;
-    @ServerTimestamp
-    public Timestamp lastEditTimestamp;
+    private List<String> viewers;
 
     /**
      * Please use this constructor when creating a new post.
@@ -76,6 +77,22 @@ public class Post implements Serializable {
      * DO NOT DELETE THIS CONSTRUCTOR
      */
     public Post() {
+    }
+
+    /**
+     * Set post from model
+     * @param postModel
+     */
+    public void setFromModel(PostModel postModel){
+        this.postId = postModel.getPostId();
+        this.authorId = postModel.getAuthorId();
+        this.mContent = postModel.getContent();
+        this.title = postModel.getTitle();
+        this.isPublic = postModel.isPublic();
+        this.postTimestamp = postModel.getPostTimestamp();
+        this.imgUUID = postModel.getImgUUID();
+        this.likeCount = postModel.getLikeCount();
+        this.viewers = postModel.getViewers();
     }
 
     public void setPublic(boolean isPublic){
@@ -134,14 +151,6 @@ public class Post implements Serializable {
         this.postTimestamp = postTimestamp;
     }
 
-    public void setLastEditTimestamp(Timestamp lastEditTimestamp) {
-        this.lastEditTimestamp = lastEditTimestamp;
-    }
-
-    public Timestamp getLastEditTimestamp() {
-        return lastEditTimestamp;
-    }
-
     public String getAuthorName() {
         return authorName;
     }
@@ -182,6 +191,14 @@ public class Post implements Serializable {
         this.imgUUID = imgUUID;
     }
 
+    public List<String> getViewers() {
+        return viewers;
+    }
+
+    public void setViewers(List<String> viewers) {
+        this.viewers = viewers;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -189,6 +206,11 @@ public class Post implements Serializable {
                 ", authorId='" + authorId + '\'' +
                 ", content='" + mContent + '\'' +
                 ", title='" + title + '\'' +
+                ", imgId=" + imgId +
+                ", likeCount=" + likeCount +
+                ", postTimestamp=" + postTimestamp +
+                ", authorName='" + authorName + '\'' +
+                ", imgUUID='" + imgUUID + '\'' +
                 ", isPublic=" + isPublic +
                 '}';
     }

@@ -45,12 +45,12 @@ public class DatabaseTestActivity extends AppCompatActivity {
                 imageView.setImageResource(R.mipmap.sample_avatar_1);
                 Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
                 Post post = new Post("post content", "post title", bitmap, true);
-                Database.savePostData(post, DatabaseTestActivity.this, "savePostData");
+                Database.savePostData(post, DatabaseTestActivity.this, "saveImage");
             }
         });
     }
 
-    public void saveImage(String uuid) {
-        Log.d(TAG, "uuid: " + uuid);
+    public void saveImage(boolean isSuccessful, Post post) {
+        Log.d(TAG, "uuid: " + post.getImgUUID());
     }
 }
