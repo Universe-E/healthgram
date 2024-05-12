@@ -233,10 +233,4 @@ public class Database {
     public static void getPostsByAuthorId(Date time, int limit, String authorId, Object object, String methodName) {
         PostDB.getPostsByAuthorId(time, limit, authorId, object, methodName);
     }
-
-    // File operations
-
-    public static void saveImage(Bitmap bitmap, Object object, String methodName) {
-        FileDB.saveImage(bitmap, object, methodName);
-    }
 }
