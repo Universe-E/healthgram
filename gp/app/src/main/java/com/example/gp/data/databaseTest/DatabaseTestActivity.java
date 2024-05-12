@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import com.example.gp.Items.Post;
 import com.example.gp.data.Database;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -43,7 +44,8 @@ public class DatabaseTestActivity extends AppCompatActivity {
                 ImageView imageView = binding.imageView;
                 imageView.setImageResource(R.mipmap.sample_avatar_1);
                 Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-                Database.saveImage(bitmap, DatabaseTestActivity.this, "saveImage");
+                Post post = new Post("post content", "post title", bitmap, true);
+                Database.savePostData(post, DatabaseTestActivity.this, "savePostData");
             }
         });
     }

@@ -26,7 +26,7 @@ public class FileDB {
         return instance;
     }
 
-    public static void saveImage(Bitmap bitmap, Object object, String methodName) {
+    public static void saveImage(Bitmap bitmap, Object object, String methodName, Object object1, String methodName1) {
         FileDB fileDB = getInstance();
         StorageReference storageReference = storage.getReference();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -39,7 +39,7 @@ public class FileDB {
         uploadTask.addOnFailureListener(e -> {
             MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
         }).addOnSuccessListener(taskSnapshot -> {
-            MethodUtil.invokeMethod(object, methodName, true, uuid);
+            MethodUtil.invokeMethod(object, methodName, true, object1, methodName1, uuid);
         });
     }
 

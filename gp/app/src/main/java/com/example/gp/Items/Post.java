@@ -1,5 +1,7 @@
 package com.example.gp.Items;
 
+import android.graphics.Bitmap;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.ServerTimestamp;
 
@@ -15,14 +17,32 @@ import java.io.Serializable;
 public class Post implements Serializable {
     public String postId;
     public String authorId;
+    public String authorName;
     public String mContent;
     public String title;
     public int imgId;
+    public Bitmap img;
+    public String imgUUID;
     public int likeCount;
     public boolean isPublic;
     public Timestamp postTimestamp;
     @ServerTimestamp
     public Timestamp lastEditTimestamp;
+
+    /**
+     * Please use this constructor when creating a new post.
+     * @author Han Bao
+     * @param mContent
+     * @param title
+     * @param img
+     * @param isPublic
+     */
+    public Post(String mContent, String title, Bitmap img, boolean isPublic) {
+        this.mContent = mContent;
+        this.title = title;
+        this.img = img;
+        this.isPublic = isPublic;
+    }
 
     /**
      * Please use this constructor when creating a new post.
@@ -122,6 +142,45 @@ public class Post implements Serializable {
         return lastEditTimestamp;
     }
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public int getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(int imgId) {
+        this.imgId = imgId;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public Bitmap getImg() {
+        return img;
+    }
+
+    public void setImg(Bitmap img) {
+        this.img = img;
+    }
+
+    public String getImgUUID() {
+        return imgUUID;
+    }
+
+    public void setImgUUID(String imgUUID) {
+        this.imgUUID = imgUUID;
+    }
 
     @Override
     public String toString() {

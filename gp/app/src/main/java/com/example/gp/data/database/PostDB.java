@@ -25,6 +25,18 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
 
+    private static PostDB instance;
+
+    private PostDB() {
+    }
+
+    public static PostDB getInstance() {
+        if (instance == null) {
+            instance = new PostDB();
+        }
+        return instance;
+    }
+
     /**
      * Save post data to firestore
      *
@@ -33,33 +45,8 @@ public class PostDB {
      * @param methodName Callback return true and Post object if success, false and error message if fail
      */
     public static void savePostData(Post post, Object object, String methodName) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        post.setAuthorId(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
-
-        DocumentReference docRef = db.collection("posts").document();
-
-        post.setPostId(docRef.getId());
-        post.setPostTimestamp(TimeUtil.getTimestamp());
-
-        docRef.set(post)
-                .addOnSuccessListener(dRef -> {
-                    /*
-                      Callback
-                      Return true and Post object
-                     */
-                    MethodUtil.invokeMethod(object, methodName, true, post);
-                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                    savePostMap(docRef.getId(), post);
-                })
-                .addOnFailureListener(e -> {
-                    /*
-                      Callback
-                      Return error message
-                     */
-                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
-                    Log.e(TAG, "Error: " + e);
-                });
+        PostDB postDB = getInstance();
+        FileDB.saveImage(post.getImg(), postDB, "savePost", object, methodName);
     }
 
     /**
@@ -285,5 +272,42 @@ public class PostDB {
 
         db.collection("users").document(userId)
                 .set(Map.of("postMap", Map.of(postId, post)), SetOptions.merge());
+    }
+
+    /**
+     * DO NOT USE THIS METHOD
+     * @param post
+     * @param object
+     * @param methodName
+     */
+    public static void savePost(Post post, Object object, String methodName, String uuid) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        post.setAuthorId(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
+
+        DocumentReference docRef = db.collection("posts").document();
+
+        post.setPostId(docRef.getId());
+        post.setPostTimestamp(TimeUtil.getTimestamp());
+        post.setImgUUID(uuid);
+
+        docRef.set(post)
+                .addOnSuccessListener(dRef -> {
+                    /*
+                      Callback
+                      Return true and Post object
+                     */
+                    MethodUtil.invokeMethod(object, methodName, true, post);
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                    savePostMap(docRef.getId(), post);
+                })
+                .addOnFailureListener(e -> {
+                    /*
+                      Callback
+                      Return error message
+                     */
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                    Log.e(TAG, "Error: " + e);
+                });
     }
 }
