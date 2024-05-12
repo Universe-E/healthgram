@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
@@ -36,8 +37,7 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
 
-    private PostCardAdapter postCardAdapter1;
-    private PostCardAdapter postCardAdapter2;
+    private PostCardAdapter postCardAdapter;
     private SearchView searchView;
     private List<Post> postList;
 
@@ -66,26 +66,23 @@ public class HomeFragment extends Fragment {
             postList = (List<Post>) object;
             for (Post post : postList) {
                 int postId = post.getPostId().hashCode();
-                postTree.add(postId, post); // add posts to BTree
+                postTree.add(postId, post);
             }
 
-            //renew UI
-            List<Post> postList1 = new ArrayList<>();
-            List<Post> postList2 = new ArrayList<>();
-            ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
-            for (int i = 0; i < keys.size(); i++) {
-                Post post = (Post) postTree.search(keys.get(i)); // find post by key
-                if (i < keys.size() / 2) {
-                    postList1.add(post);
-                } else {
-                    postList2.add(post);
+            // renew the UI
+            ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
+            List<Post> posts = new ArrayList<>();
+            for (Integer key : keys) {
+                Post post = (Post) postTree.search(key);
+                if (post != null) {
+                    posts.add(post);
                 }
             }
-            postCardAdapter1.setPostList(postList1);
-            postCardAdapter2.setPostList(postList2);
+            postCardAdapter.setPostList(posts);
+
             Log.d("HomeFragment", "Posts loaded successfully");
         } else {
-            // Handle error
+            // handle failure
             ToastUtil.showLong(getContext(), "Failed to load posts");
         }
         return postList;
@@ -97,21 +94,20 @@ public class HomeFragment extends Fragment {
         setupSearchViewListener();
     }
 
+    /**
+     * Initialize the recycler views for the posts.
+     * @param view
+     */
     private void initializeRecyclerViews(View view) {
-        RecyclerView recyclerView1 = view.findViewById(R.id.recycler_view_column1);
-        RecyclerView recyclerView2 = view.findViewById(R.id.recycler_view_column2);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_post_container);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+        postCardAdapter = new PostCardAdapter();
 
-        postCardAdapter1 = new PostCardAdapter();
-        postCardAdapter2 = new PostCardAdapter();
+        recyclerView.setAdapter(postCardAdapter);
 
-        recyclerView1.setAdapter(postCardAdapter1);
-        recyclerView2.setAdapter(postCardAdapter2);
-
-        postCardAdapter1.setOnPostClickListener(this::onPostClick);
-        postCardAdapter2.setOnPostClickListener(this::onPostClick);
+        postCardAdapter.setOnPostClickListener(this::onPostClick);
     }
 
     private void onPostClick(Post post) {
@@ -173,8 +169,7 @@ public class HomeFragment extends Fragment {
                 filteredPosts.add(post);
             }
         }
-        postCardAdapter1.updatePosts(filteredPosts);  // update posts RecyclerView
-        postCardAdapter2.updatePosts(filteredPosts);
+        postCardAdapter.updatePosts(filteredPosts);  // update posts RecyclerView
 
 
     }

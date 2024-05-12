@@ -46,31 +46,17 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = postList.get(position);
 
-        // Set the post data to the views
+        // set the post title and content
         holder.textViewHeading.setText(post.getTitle());
         holder.textViewContent.setText(post.getmContent());
 
-        // Set a random avatar image for the post
-//        int randomNumber = random.nextInt(8) + 1;
-//        String avatarName = "sample_avatar_" + randomNumber;
-//        holder.imageView.setImageResource(holder.itemView.getResources().getIdentifier(avatarName, "drawable", holder.itemView.getContext().getPackageName()));
-        Random random = new Random();
+        // set the post thumbnail image
         int randomNumber = random.nextInt(8) + 1;
         String imageName = "sample_avatar_" + randomNumber;
         int imageResourceId = holder.itemView.getResources().getIdentifier(imageName, "mipmap", holder.itemView.getContext().getPackageName());
         holder.imageView.setImageResource(imageResourceId);
 
-        // set a hard coded avatar image for the post
-//        holder.imageView.setImageResource(R.mipmap.sample_avatar_1);
-
-        // Set a random height for the post card
-        int minHeight = 700;
-        int maxHeight = 900;
-        int randomHeight = random.nextInt(maxHeight - minHeight + 1) + minHeight;
-        holder.itemView.getLayoutParams().height = randomHeight;
-        holder.itemView.requestLayout();
-
-        // Set the click listener for the post card
+        // set the click listener
         holder.itemView.setOnClickListener(v -> {
             if (onPostClickListener != null) {
                 onPostClickListener.onPostClick(post);
