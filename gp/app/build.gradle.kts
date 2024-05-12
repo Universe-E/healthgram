@@ -61,18 +61,14 @@ dependencies {
     implementation("com.google.android.material:material:1.6.0") // material 1.6
     implementation ("androidx.core:core:1.9.0")
 
-    implementation("com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.75.0")
-    implementation("com.amazonaws:aws-android-sdk-core:2.75.0")
-
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
-    implementation("com.google.firebase:firebase-auth")
 
-
-    // TODO: Add the dependencies for Firebase products you want to use
     // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage")
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 

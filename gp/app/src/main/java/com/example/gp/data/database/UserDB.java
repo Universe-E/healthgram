@@ -262,6 +262,12 @@ public class UserDB {
                 });
     }
 
+    public static void processFriendRequest(FriendRequest request, Object object, String methodName) {
+        Log.d(TAG, "Process friend request Reflecting Method: " + methodName);
+
+
+    }
+
     /**
      * Get friend list from firestore
      *
@@ -273,8 +279,8 @@ public class UserDB {
     public static void getFriendList(String nickname, int limit, Object object, String methodName) {
         Log.d(TAG, "Method: " + methodName);
 
-        FirebaseUser FireUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (FireUser == null) {
+        FirebaseUser fireUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fireUser == null) {
             String message = "User does not sign in yet";
             Log.d(TAG, message);
             /*
@@ -284,7 +290,7 @@ public class UserDB {
             MethodUtil.invokeMethod(object, methodName, false, message);
             return;
         }
-        String userId = FireUser.getUid();
+        String userId = fireUser.getUid();
 
         FirebaseFirestore.getInstance()
                 .collection("users")

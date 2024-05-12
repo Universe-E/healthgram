@@ -1,6 +1,7 @@
 package com.example.gp.data;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
@@ -14,6 +15,7 @@ import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.database.FileDB;
 import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
 import com.google.android.gms.tasks.Task;
@@ -230,5 +232,11 @@ public class Database {
      */
     public static void getPostsByAuthorId(Date time, int limit, String authorId, Object object, String methodName) {
         PostDB.getPostsByAuthorId(time, limit, authorId, object, methodName);
+    }
+
+    // File operations
+
+    public static void saveImage(Bitmap bitmap, Object object, String methodName) {
+        FileDB.saveImage(bitmap, object, methodName);
     }
 }
