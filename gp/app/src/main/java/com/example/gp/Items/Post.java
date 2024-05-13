@@ -75,6 +75,7 @@ public class Post implements Parcelable {
     public void setFromModel(PostModel postModel){
         this.postId = postModel.getPostId();
         this.authorId = postModel.getAuthorId();
+        this.authorName = postModel.getAuthorName();
         this.postContent = postModel.getContent();
         this.title = postModel.getTitle();
         this.isPublic = postModel.isPublic();

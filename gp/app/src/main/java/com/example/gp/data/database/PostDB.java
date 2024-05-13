@@ -370,11 +370,12 @@ public class PostDB {
         if (!task.isSuccessful()) {
             Exception e = task.getException();
             MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+            Log.e(TAG, "Error getting documents: ", e);
             return;
         }
 
         if (task.getResult().isEmpty()) {
-            String msg = "No post";
+            String msg = "There are no more new posts to load.";
             MethodUtil.invokeMethod(object, methodName, false, msg);
             return;
         }

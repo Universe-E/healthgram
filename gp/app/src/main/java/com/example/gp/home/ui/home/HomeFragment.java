@@ -91,7 +91,14 @@ public class HomeFragment extends Fragment {
             Log.d("HomeFragment", "Posts loaded successfully");
         } else {
             // handle failure
-            ToastUtil.showLong(getContext(), "Failed to load posts");
+            if (!(object instanceof String)) {
+                ToastUtil.showLong(getContext(), "Failed to load posts");
+                return;
+            }
+            String errorMessage = (String) object;
+            if (errorMessage.equals("There are no more new posts to load.")) {
+                ToastUtil.showLong(getContext(), errorMessage);
+            }
         }
     }
 

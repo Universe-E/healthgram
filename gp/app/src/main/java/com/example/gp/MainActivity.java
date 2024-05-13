@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Check if user is already signed in
-        Database.checkSignedIn(this, "updateStartUI");
+//        Database.checkSignedIn(this, "updateStartUI");
 
         // load the layout using view binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
