@@ -52,10 +52,14 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
 
         // set the post thumbnail image
         // TODO: 0513 replace the random image with the actual image
-        int randomNumber = random.nextInt(8) + 1;
-        String imageName = "sample_avatar_" + randomNumber;
-        int imageResourceId = holder.itemView.getResources().getIdentifier(imageName, "mipmap", holder.itemView.getContext().getPackageName());
-        holder.imageView.setImageResource(imageResourceId);
+//        int randomNumber = random.nextInt(8) + 1;
+//        String imageName = "sample_avatar_" + randomNumber;
+//        int imageResourceId = holder.itemView.getResources().getIdentifier(imageName, "mipmap", holder.itemView.getContext().getPackageName());
+//        holder.imageView.setImageResource(imageResourceId);
+        if (post.getImg() != null)
+            holder.imageView.setImageBitmap(post.getImg());
+        else
+            holder.imageView.setImageResource(R.mipmap.ic_launcher);
 
         // set the click listener
         holder.itemView.setOnClickListener(v -> {
