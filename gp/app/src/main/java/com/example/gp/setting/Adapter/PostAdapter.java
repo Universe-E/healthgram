@@ -86,6 +86,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
+            Log.d(TAG, "onClick: outside");
             if (position != RecyclerView.NO_POSITION) {
                 post = posts.get(position);
                 // Change the state

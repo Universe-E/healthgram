@@ -91,7 +91,10 @@ public class PostDetailActivity extends BaseActivity {
 
         // Set post content: title, image, and content
         tvPostTitle.setText(post.getTitle());
-        ivPostImage.setImageResource(R.mipmap.sample_avatar_1); // TODO: Load post image
+//        ivPostImage.setImageResource(R.mipmap.sample_avatar_1); // TODO: Load post image
+        if (post.getImg() != null) {
+            ivPostImage.setImageBitmap(post.getImg());
+        }
         tvPostContent.setText(post.getPostContent());
 
         // Set share button click listener
