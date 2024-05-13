@@ -367,7 +367,7 @@ public class PostDB {
         Log.d(TAG, "timestamp: " + timestamp);
 
         Timestamp lastPostTimestamp = null;
-        if (postsData.getPosts().size() > 0)
+        if (!postsData.getPosts().isEmpty())
             lastPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
@@ -395,6 +395,45 @@ public class PostDB {
                         post.setFromModel(document.toObject(PostModel.class));
                         posts.add(post);
                     }
+                    FileDB.getImages(posts, 0, object, methodName);
+                });
+    }
+
+    public static void newGetUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
+        String userId = getCurrentUserId();
+
+        newGetPostByAuthorId(timestamp, limit, userId, object, methodName);
+    }
+
+    private static void newGetPostByAuthorId(Timestamp timestamp, int limit, String userId, Object object, String methodName) {
+        timestamp = getTimestamp(timestamp);
+
+        CollectionReference postsRef = getPostRef();
+        postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
+                .whereEqualTo("authorId", userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        return;
+                    }
+
+                    if (task.getResult().isEmpty()) {
+                        String msg = "No post";
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+
+                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    List<Post> posts = new ArrayList<>();
+
+                    for (DocumentSnapshot document : documentSnapshots) {
+                        Post post = new Post();
+                        post.setFromModel(document.toObject(PostModel.class));
+                        posts.add(post);
+                    }
+
                     FileDB.getImages(posts, 0, object, methodName);
                 });
     }

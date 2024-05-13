@@ -228,7 +228,8 @@ public class Database {
      * @param methodName The method name
      */
     public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
-        PostDB.getUserPost(timestamp, limit, object, methodName);
+//        PostDB.getUserPost(timestamp, limit, object, methodName);
+        PostDB.newGetUserPost(timestamp, limit, object, methodName);
     }
 
     /**
