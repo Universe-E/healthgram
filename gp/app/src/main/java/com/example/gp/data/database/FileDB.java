@@ -57,7 +57,10 @@ public class FileDB {
     }
 
     public static void getImage(Post post, Object object, String methodName) {
-        FileDB fileDB = getInstance();
+        if (post.getImgUUID() == null) {
+            MethodUtil.invokeMethod(object, methodName, true, post);
+            return;
+        }
         StorageReference storageReference = storage.getReference();
         StorageReference islandRef = storageReference.child("image/" + post.getImgUUID() + ".jpg");
 
