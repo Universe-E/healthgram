@@ -1,5 +1,6 @@
 package com.example.gp.interaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Items.Post;
 import com.example.gp.R;
+import com.example.gp.data.PostsData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,13 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
 
     public void setPostList(List<Post> postList) {
         this.postList = postList;
+        notifyDataSetChanged();
+    }
+
+    public void setPostList() {
+        PostsData postsData = PostsData.getInstance();
+        this.postList = postsData.getPosts();
+        Log.d("PostCardAdapter", "setPostList: " + postList.size());
         notifyDataSetChanged();
     }
 

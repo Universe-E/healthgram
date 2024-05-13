@@ -21,6 +21,7 @@ import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
 import com.example.gp.data.BTree;
 import com.example.gp.data.Database;
+import com.example.gp.data.PostsData;
 import com.example.gp.interaction.NewPostActivity;
 import com.example.gp.interaction.PostCardAdapter;
 import com.example.gp.interaction.PostDetailActivity;
@@ -40,10 +41,12 @@ import java.util.List;
  * Date: 2024-05-01
  */
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
 
     private PostCardAdapter postCardAdapter;
     private SearchView searchView;
     private List<Post> postList;
+    private static final PostsData postsData = PostsData.getInstance();
 
     //use BTree to store posts
     private BTree postTree;
@@ -66,13 +69,15 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public List<Post> loadPostCards(boolean isSuccess, Object object) {
+    public void loadPostCards(boolean isSuccess, Object object) {
         if (isSuccess) {
+            Log.d(TAG, "loadPostCards: ");
             postList = (List<Post>) object;
             for (Post post : postList) {
                 int postId = post.getPostId().hashCode();
                 postTree.add(postId, post);
             }
+            postsData.addNewPosts(postList);
 
             // renew the UI
             ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
@@ -83,14 +88,15 @@ public class HomeFragment extends Fragment {
                     posts.add(post);
                 }
             }
-            postCardAdapter.setPostList(posts);
+//            postCardAdapter.setPostList(posts);
+            postCardAdapter.setPostList();
+
 
             Log.d("HomeFragment", "Posts loaded successfully");
         } else {
             // handle failure
             ToastUtil.showLong(getContext(), "Failed to load posts");
         }
-        return postList;
     }
 
     private void initializeSearchView(View view) {
