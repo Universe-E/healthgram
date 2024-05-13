@@ -201,9 +201,9 @@ public class Database {
      * @param object     The object that calls the method
      * @param methodName The method name
      */
-    public static void getPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+    public static void getNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
 //        PostDB.getPostsByTime(timestamp, limit, object, methodName);
-        PostDB.newGetPostsByTime(timestamp, limit, object, methodName);
+        PostDB.GetNewPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**

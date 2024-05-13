@@ -10,6 +10,7 @@ import android.util.Log;
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.MethodUtil;
+import com.example.gp.data.PostsData;
 import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
     private static final String POST_PATH = "";
+    private static final PostsData postsData = PostsData.getInstance();
 
     /**
      * Save post data to firestore
@@ -360,13 +362,18 @@ public class PostDB {
                 });
     }
 
-    public static void newGetPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+    public static void GetNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
         timestamp = getTimestamp(timestamp);
         Log.d(TAG, "timestamp: " + timestamp);
+
+        Timestamp lastPostTimestamp = null;
+        if (postsData.getPosts().size() > 0)
+            lastPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
                 .whereLessThan("postTimestamp", timestamp)
+                .endBefore(lastPostTimestamp)
                 .limit(limit)
                 .get()
                 .addOnCompleteListener(task -> {

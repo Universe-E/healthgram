@@ -25,7 +25,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -155,7 +154,7 @@ public class SimpleTestActivity extends AppCompatActivity {
 
     public void testPost() {
         Timestamp timestamp = TimeUtil.getTimestamp();
-        Database.getPostsByTime(timestamp, 1, this, "updateUI");
+        Database.getNewPostsByTime(timestamp, 1, this, "updateUI");
     }
 
     public void testFirebaseFirestore() {
