@@ -34,8 +34,8 @@ public class UserParserActivity extends AppCompatActivity {
         friends.put("f2",f2);
         user.setFriendMap(friends);
         Map<String, Post> posts = new HashMap<>();
-        Post p1 = new Post("p1","a1","content1","title1",true);
-        Post p2 = new Post("p2","a2","content2","title2",false);
+        Post p1 = new Post("p1","a1",true);
+        Post p2 = new Post("p2","a2",false);
         posts.put("p1",p1);
         posts.put("p2",p2);
         user.setPostMap(posts);
