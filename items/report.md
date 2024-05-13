@@ -212,13 +212,35 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 
 Production Rules:
 
-    <Non-Terminal> ::= <some output>
-    <Non-Terminal> ::= <some output>
+    <mention> ::= '@' + <username>
+    <username> ::= <char> + <char>
+    <char> ::= any character except whitespace | empty character
 
+This grammar is designed to be simple and flexible to handle username formats, the advantages of this grammar design are:
+
+1. Simplicity: This grammar consists of only three production rules, which is easy to understand and implement.
+2. Flexibility: Username contains any character except whitespace, the grammar can handle a wide range of username formats, including alphanumeric characters and other special characters commonly used in usernames.
+3. Extensibility: If needed, the grammar can be easily extended to support more complex mention formats, such as '@[Full Name](username)', without requiring significant changes to the existing rules.
 
 ### <u>Tokenizers and Parsers</u>
 
 *[Where do you use tokenisers and parsers? How are they built? What are the advantages of the designs?]*
+
+Tokenizer:
+
+1. The `isMentioningSomeone` method scans the input text character by character, keeping track of the presence of '@' symbols and whitespace. It implicitly tokenizes the input into '@' symbols and non-whitespace characters.
+2. The `parseUserName` method tokenizes the input text by locating the last '@' symbol and the next whitespace character (if present). It extracts the substring between these two positions as the username token.
+
+Parser:
+
+1. The `isMentioningSomeone` method parses the input text to determine if it contains a user mention. It implements a simple state machine that keeps track of the count of '@' symbols encountered and adjusts the count based on the presence of whitespace. If the final count is non-zero, it indicates the presence of a user mention.
+2. The `parseUserName` method parses the input text to extract the username mentioned. It leverages the tokenization process described above to locate the relevant substring and returns it as the parsed username.
+
+The advantages of this design are:
+
+1. Efficiency: By combining the tokenization and parsing processes within the same methods, the code avoids the overhead of creating separate tokenizer and parser objects. This can lead to better performance, especially for small and simple grammars like the one used here.
+2. Simplicity: The code is relatively simple and easy to understand, as it doesn't rely on complex tokenization or parsing techniques. The parsing logic is implemented using basic string manipulation and character checking.
+3. Tailored to the grammar: The tokenization and parsing logic is specifically tailored to the grammar for user mentions. This allows for a more targeted and optimized implementation compared to using general-purpose tokenization and parsing libraries.
 
 <hr>
 
