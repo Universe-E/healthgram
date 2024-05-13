@@ -79,7 +79,7 @@ public class DatabaseTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection(Database.getDatabaseName())
+                db.collection("users")
                         .whereEqualTo("username", "tset")
                         .get()
                         .addOnCompleteListener(task -> {

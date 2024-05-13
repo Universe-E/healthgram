@@ -13,10 +13,20 @@ import java.util.List;
 
 public class Database {
     private static final String TAG = "Database";
-    private static final String DATABASE_NAME = "Database";
+    private static final String USER_PATH = "Users";
+    private static final String POST_PATH = "Posts";
+    private static final String NOTIFICATION_PATH = "Notifications";
 
-    public static String getDatabaseName() {
-        return DATABASE_NAME;
+    public static String getUserCollection() {
+        return USER_PATH;
+    }
+
+    public static String getPostCollection() {
+        return POST_PATH;
+    }
+
+    public static String getNotificationCollection() {
+        return NOTIFICATION_PATH;
     }
 
     // User account operations
@@ -45,7 +55,8 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void signUp(String username, String email, String password, Object object, String methodName) {
-        UserDB.signUp(username, email, password, object, methodName);
+//        UserDB.signUp(username, email, password, object, methodName);
+        UserDB.newSignUp(username, email, password, object, methodName);
     }
 
     /**
@@ -178,7 +189,8 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void savePostData(Post post, Object object, String methodName) {
-        PostDB.savePostData(post, object, methodName);
+//        PostDB.savePostData(post, object, methodName);
+        PostDB.newSavePostData(post, object, methodName);
     }
 
     /**
@@ -191,7 +203,8 @@ public class Database {
      * @param methodName The method name
      */
     public static void getPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
-        PostDB.getPostsByTime(timestamp, limit, object, methodName);
+//        PostDB.getPostsByTime(timestamp, limit, object, methodName);
+        PostDB.newGetPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**

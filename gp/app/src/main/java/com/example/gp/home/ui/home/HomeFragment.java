@@ -60,8 +60,8 @@ public class HomeFragment extends Fragment {
         setupAddNoteButton(view);
 
         // Load post data from the database
-        Timestamp timestamp = new Timestamp(new Date());
-        Database.getPostsByTime(timestamp, 19, this, "loadPostCards");
+//        Timestamp timestamp = new Timestamp(new Date());
+        Database.getPostsByTime(null, 19, this, "loadPostCards");
 
         return view;
     }

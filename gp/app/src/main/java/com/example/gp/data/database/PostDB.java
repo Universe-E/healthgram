@@ -2,7 +2,11 @@ package com.example.gp.data.database;
 
 import static com.example.gp.Utils.TimeUtil.getTimestamp;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
+import static com.example.gp.data.database.FirebaseUtil.getFireUser;
+import static com.example.gp.data.database.FirebaseUtil.getPostRef;
 
+import android.graphics.Bitmap;
+import android.nfc.Tag;
 import android.util.Log;
 
 import com.example.gp.Items.Post;
@@ -13,6 +17,7 @@ import com.example.gp.data.Database;
 import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,7 +36,6 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
     private static final String POST_PATH = "";
-    private static final String DATABASE_NAME = Database.getDatabaseName();
 
     /**
      * Save post data to firestore
@@ -255,14 +259,30 @@ public class PostDB {
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         Log.d(TAG, "userId: " + userId);
 
-        db.collection("newTestUsers").document(userId).update("myPosts", FieldValue.arrayUnion(postId));
+        db.collection("newTestUsers").document(userId).update("myPosts", FieldValue.arrayUnion(postId))
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        return;
+                    }
+                    Log.e(TAG, "Error writing document", task.getException());
+                });
+        Log.d(TAG, "myPosts: " + postModel);
 
         db.collection("users").document(userId)
-                .set(Map.of("postMap", Map.of(postId, postModel)), SetOptions.merge());
+                .set(Map.of("postMap", Map.of(postId, postModel)), SetOptions.merge())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        return;
+                    }
+                    Log.e(TAG, "Error writing document", task.getException());
+                });
     }
 
     /**
      * DO NOT USE THIS METHOD
+     *
      * @param isSuccessful
      * @param result
      * @param object
@@ -301,6 +321,79 @@ public class PostDB {
                      */
                     MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
                     Log.e(TAG, "Error: " + e);
+                });
+    }
+
+    // New APIs
+
+    public static void newSavePostData(Post post, Object object, String methodName) {
+        Log.d(TAG, "newSavePost: " + post.toString());
+
+        FileDB.newSaveImage(post, object, methodName);
+    }
+
+    public static void newSavePost(boolean isSuccessful, Object result, Object object, String methodName) {
+        Log.d(TAG, "newSavePost: " + isSuccessful);
+        if (!isSuccessful) {
+            MethodUtil.invokeMethod(object, methodName, false, result);
+            return;
+        }
+
+        CollectionReference postsRef = getPostRef();
+        FirebaseUser fireUser = getFireUser();
+        Post post = (Post) result;
+        PostModel postModel = new PostModel();
+        postModel.setModelFromPost(post);
+        postModel.setAuthorId(fireUser.getUid());
+        postModel.setPostTimestamp(getTimestamp());
+
+        Log.d(TAG, "postModel: " + postModel.toString());
+
+        DocumentReference docRef = postsRef.document();
+        postModel.setPostId(docRef.getId());
+
+        Log.d(TAG, "docRef: " + docRef);
+
+        docRef.set(postModel)
+                .addOnSuccessListener(dRef -> {
+                    MethodUtil.invokeMethod(object, methodName, true, post);
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                })
+                .addOnFailureListener(e -> {
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                    Log.e(TAG, "Error: " + e);
+                });
+    }
+
+    public static void newGetPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+        timestamp = getTimestamp(timestamp);
+        Log.d(TAG, "timestamp: " + timestamp);
+
+        CollectionReference postsRef = getPostRef();
+        postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
+                .whereLessThan("postTimestamp", timestamp)
+                .limit(limit)
+                .get()
+                .addOnCompleteListener(task -> {
+                    Log.d(TAG, "task: " + task);
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        Log.e(TAG, "Error getting documents: ", e);
+                        return;
+                    }
+                    if (task.getResult() == null) {
+                        MethodUtil.invokeMethod(object, methodName, false, "No post");
+                        return;
+                    }
+                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    List<Post> posts = new ArrayList<>();
+                    for (DocumentSnapshot document : documentSnapshots) {
+                        Post post = new Post();
+                        post.setFromModel(document.toObject(PostModel.class));
+                        posts.add(post);
+                    }
+                    FileDB.getImages(posts, 0, object, methodName);
                 });
     }
 }

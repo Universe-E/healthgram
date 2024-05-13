@@ -10,6 +10,7 @@ import java.util.List;
 public class UserModel {
     private String username;
     private String email;
+    private String userId;
     private String avatarUUID;
     private List<FriendModel> myFriends;
     private List<PostModel> myPosts;
@@ -32,6 +33,14 @@ public class UserModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAvatarUUID() {
