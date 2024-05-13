@@ -21,13 +21,26 @@ public class Tokenizer {
             return new Token(Token.Type.AT, "@");
         }
 
-        if (!Character.isWhitespace(currentChar)) {
-            StringBuilder username = new StringBuilder();
-            while (pos < text.length() && !Character.isWhitespace(text.charAt(pos))) {
-                username.append(text.charAt(pos));
+        if (pos < text.length() - 5 && text.startsWith("title:", pos)) {
+            pos += 6;
+            return new Token(Token.Type.TITLE, "title:");
+        }
+
+        if (pos < text.length() - 6 && text.startsWith("public:", pos)) {
+            pos += 7;
+            return new Token(Token.Type.PUBLIC, "public:");
+        }
+
+        if (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {
+            StringBuilder sb = new StringBuilder();
+            while (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {
+                sb.append(currentChar);
                 pos++;
+                if (pos < text.length()) {
+                    currentChar = text.charAt(pos);
+                }
             }
-            return new Token(Token.Type.USERNAME, username.toString());
+            return new Token(Token.Type.NAME, sb.toString());
         }
 
         pos++;
@@ -36,7 +49,7 @@ public class Tokenizer {
 
     public static class Token {
         public enum Type {
-            AT, USERNAME, EOF
+            AT, NAME, TITLE, PUBLIC, EOF
         }
 
         public Type type;
@@ -48,5 +61,3 @@ public class Tokenizer {
         }
     }
 }
-
-

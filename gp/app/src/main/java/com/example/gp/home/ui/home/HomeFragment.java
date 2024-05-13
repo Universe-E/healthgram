@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.gp.Items.Tokenizer;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
@@ -165,15 +165,43 @@ public class HomeFragment extends Fragment {
             return;
         }
 
+        Tokenizer tokenizer = new Tokenizer(query);
+        Tokenizer.Token token;
+        String titleQuery = null;
+        Boolean publicQuery = null;
+
+        //user can search by starting with:
+        //title:
+        //public:
+        while ((token = tokenizer.nextToken()).type != Tokenizer.Token.Type.EOF) {
+            if (token.type == Tokenizer.Token.Type.TITLE) {
+                StringBuilder sb = new StringBuilder();
+                while ((token = tokenizer.nextToken()).type == Tokenizer.Token.Type.NAME) {
+                    sb.append(token.value);
+                }
+                titleQuery = sb.toString();
+            }
+            else if (token.type == Tokenizer.Token.Type.PUBLIC) {
+                token = tokenizer.nextToken();
+                if (token.type == Tokenizer.Token.Type.NAME) {
+                    String value = token.value.toLowerCase();
+                    if (value.equals("true") || value.equals("false")) {
+                        publicQuery = Boolean.parseBoolean(value);
+                    }
+                }
+            }
+        }
+
         ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
         for (int key : keys) {
-            Post post = (Post) postTree.search(key); // find posts by key
-            if (post.getTitle().toLowerCase().contains(query.toLowerCase())) {
+            Post post = (Post) postTree.search(key);
+            boolean titleMatches = titleQuery == null || post.getTitle().toLowerCase().contains(titleQuery.toLowerCase());
+            boolean publicMatches = publicQuery == null || post.isPublic() == publicQuery;
+
+            if (titleMatches && publicMatches) {
                 filteredPosts.add(post);
             }
         }
         postCardAdapter.updatePosts(filteredPosts);  // update posts RecyclerView
-
-
     }
 }
