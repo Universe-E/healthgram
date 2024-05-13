@@ -10,4 +10,6 @@
     <color name="green">#00FF00</color>
     <color name="accept_green">#4CAF50</color>
     <color name="reject_red">#D32F2F</color>
+    <color name="selected_color">#9ac8e2</color>
+    <color name="unselected_color">#666666</color>
 </resources>
