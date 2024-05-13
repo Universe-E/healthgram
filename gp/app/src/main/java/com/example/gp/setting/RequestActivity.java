@@ -70,6 +70,8 @@ public class RequestActivity extends BaseActivity {
             for (Friend friendRequest : friendRequests) {
                 friends.add(friendRequest);
             }
+            Friend textFriend = new Friend("191918","sen bei suki",R.mipmap.sample_avatar_1);
+            friends.add(textFriend);
             RequestAdapter mRequestAdapter = new RequestAdapter(friends);
             mRecyclerView.setAdapter(mRequestAdapter);
         }

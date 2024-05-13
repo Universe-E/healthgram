@@ -23,6 +23,7 @@ import java.util.List;
 /**
  * Adapter for RecyclerView to display list of friends
  * @author Tianci
+ * {@code @editor} Yulong Chen
  */
 
 public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder> {
@@ -73,7 +74,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private LinearLayout friendContent;
+        private final LinearLayout friendContent;
         public TextView friendName;
         public ImageView friendAvatar;
 
@@ -82,7 +83,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
             friendName = itemView.findViewById(R.id.tv_friend_name);
             friendAvatar = itemView.findViewById(R.id.iv_friend_avatar);
             friendContent = itemView.findViewById(R.id.ll_friend_content);
-            friendContent.setOnClickListener(this);
+            friendAvatar.setOnClickListener(this);
             Log.d("FRVA10000", "inflate");
         }
 
@@ -95,7 +96,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
         @Override
         public void onClick(View v) {
             Log.d("FRVA10000", "onClick: this outside");
-            if (v == friendContent) {
+            if (v == friendAvatar) {
                 // Get the position of the item clicked
                 Log.d("FRVA10000", "onClick: this inside");
                 int position = getAdapterPosition();

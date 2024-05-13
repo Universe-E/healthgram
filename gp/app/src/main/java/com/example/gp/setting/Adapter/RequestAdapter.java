@@ -62,7 +62,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             mRequestAccept = itemView.findViewById(R.id.btn_request_accept);
             mRequestReject = itemView.findViewById(R.id.btn_request_reject);
             mRequestAccept.setOnClickListener(this);
-            mRequestAccept.setOnClickListener(this);
+            mRequestReject.setOnClickListener(this);
         }
 
         public void bind(Friend friend) {
@@ -85,6 +85,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
                 // Delete this message
                 friends.remove(position);
                 notifyItemRemoved(position);
+                ToastUtil.show(v.getContext(), "Friend request rejected!");
             }
         }
 
