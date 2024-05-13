@@ -8,6 +8,7 @@ import java.util.List;
 public class PostModel {
     private String postId;
     private String authorId;
+    private String authorName;
     private String content;
     private String title;
     private String imgUUID;
@@ -22,6 +23,7 @@ public class PostModel {
     public void setModelFromPost(Post post) {
         this.postId = post.getPostId();
         this.authorId = post.getAuthorId();
+        this.authorName = post.getAuthorName();
         this.content = post.getPostContent();
         this.title = post.getTitle();
         this.imgUUID = post.getImgUUID();
@@ -45,6 +47,14 @@ public class PostModel {
 
     public void setAuthorId(String authorId) {
         this.authorId = authorId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public String getContent() {

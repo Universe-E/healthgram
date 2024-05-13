@@ -51,7 +51,7 @@ public class UserDB {
     }
 
     private void setUsername(Object object, String methodName) {
-        if (userId != null) {
+        if (username != null) {
             MethodUtil.invokeMethod(object, methodName, true, username);
             return;
         }
@@ -60,14 +60,14 @@ public class UserDB {
         usersRef.document(userId).get(Source.CACHE)
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
-                        setUsernameFromServer(object, methodName);
+                        setUsernameFromServer(userId, object, methodName);
                     }
                     username = task.getResult().getString("username");
                     MethodUtil.invokeMethod(object, methodName, true, username);
                 });
     }
 
-    private void setUsernameFromServer(Object object, String methodName) {
+    private void setUsernameFromServer(String userId, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
         usersRef.document(userId).get()
                 .addOnCompleteListener(task -> {
@@ -88,6 +88,13 @@ public class UserDB {
         return instance;
     }
 
+    public static void clearUserDB() {
+        username = null;
+        userId = null;
+        email = null;
+        instance = null;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -98,6 +105,10 @@ public class UserDB {
 
     public String getUserId() {
         return userId;
+    }
+
+    public void getUsernameById(String userId, Object object, String methodName) {
+        setUsernameFromServer(userId, object, methodName);
     }
 
     /**
@@ -410,6 +421,8 @@ public class UserDB {
             MethodUtil.invokeMethod(object, methodName, false, message);
             return;
         }
+
+        getInstance();
 
         User userForCallback = new User();
         userForCallback.setUserId(user.getUid());

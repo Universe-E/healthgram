@@ -284,6 +284,8 @@ public class PostDB {
             return;
         }
 
+        UserDB userDB = UserDB.getInstance();
+
         CollectionReference postsRef = getPostRef();
         FirebaseUser fireUser = getFireUser();
         Post post = (Post) result;
@@ -291,6 +293,7 @@ public class PostDB {
         postModel.setModelFromPost(post);
         postModel.setAuthorId(fireUser.getUid());
         postModel.setPostTimestamp(getTimestamp());
+        postModel.setAuthorName(userDB.getUsername());
 
         Log.d(TAG, "postModel: " + postModel.toString());
 
