@@ -22,7 +22,7 @@ public class PostModel {
     public void setModelFromPost(Post post) {
         this.postId = post.getPostId();
         this.authorId = post.getAuthorId();
-        this.content = post.getmContent();
+        this.content = post.getPostContent();
         this.title = post.getTitle();
         this.imgUUID = post.getImgUUID();
         this.likeCount = post.getLikeCount();

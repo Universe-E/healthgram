@@ -74,7 +74,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
          */
         public void bind(Post post) {
             tv_post_title.setText(post.title);
-            tv_post_content.setText(post.mContent);
+            tv_post_content.setText(post.postContent);
             setStatus(post.isPublic);
         }
 
