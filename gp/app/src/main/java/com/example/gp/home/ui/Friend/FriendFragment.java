@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * FriendList fragment
  * The page to show the friends you followed
- * Author: Xingchen Zhang
+ * @author  Xingchen Zhang
  * Date: 2024-05-01
  */
 public class FriendFragment extends Fragment {

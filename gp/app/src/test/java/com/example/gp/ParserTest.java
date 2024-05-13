@@ -4,6 +4,10 @@ import com.example.gp.Items.Parser;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Test parser class
+ * @author Zehua Kong
+ */
 public class ParserTest {
 
     @Test

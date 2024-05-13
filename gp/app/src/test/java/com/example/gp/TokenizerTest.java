@@ -4,6 +4,10 @@ import com.example.gp.Items.Tokenizer;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Test tokenizer class
+ * @author Zehua Kong
+ */
 public class TokenizerTest {
 
     @Test

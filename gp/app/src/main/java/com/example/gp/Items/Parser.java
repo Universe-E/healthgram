@@ -1,16 +1,25 @@
 package com.example.gp.Items;
 
+/**
+ * Parse texts by following multiple grammars for different types of queries
+ * @author Zehua Kong
+ */
 public class Parser {
     private static Parser instance;
 
     private Parser() {}
 
+    /**
+     * User Singleton Pattern to initialize Parser
+     * @return Parser instance
+     */
     public static Parser getInstance() {
         if (instance == null) {
             instance = new Parser();
         }
         return instance;
     }
+
 
     public boolean isMentioningSomeone(String text) {
         Tokenizer tokenizer = new Tokenizer(text);
@@ -25,6 +34,14 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Mention grammar:
+     * <mention> ::= '@' + <name>
+     * <name> ::= <char> + <char>
+     * <char> ::= any alphanumeric character | empty character
+     * @param text text to be parsed
+     * @return parsed result
+     */
     public String parseUserName(String text) {
         Tokenizer tokenizer = new Tokenizer(text);
         Tokenizer.Token token;
@@ -42,6 +59,14 @@ public class Parser {
         return username;
     }
 
+    /**
+     * Title grammar:
+     * <title> ::= 'title:' + <name>
+     * <name> ::= <char> + <char>
+     * <char> ::= any alphanumeric character | empty character
+     * @param text text to be parsed
+     * @return parsed result
+     */
     public String parseTitle(String text) {
         Tokenizer tokenizer = new Tokenizer(text);
         Tokenizer.Token token;
@@ -60,6 +85,13 @@ public class Parser {
         return title;
     }
 
+    /**
+     * Public grammar:
+     * <public> ::= 'public:' + <bool>
+     * <bool> ::= 'true' | 'false'
+     * @param text text to be parsed
+     * @return parsed result
+     */
     public Boolean parsePublic(String text) {
         Tokenizer tokenizer = new Tokenizer(text);
         Tokenizer.Token token;

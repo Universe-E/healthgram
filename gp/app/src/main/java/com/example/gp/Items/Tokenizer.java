@@ -1,5 +1,9 @@
 package com.example.gp.Items;
 
+/**
+ * Tokenizer for search
+ * @author Zehua Kong
+ */
 public class Tokenizer {
     private String text;
     private int pos;
@@ -9,6 +13,10 @@ public class Tokenizer {
         this.pos = 0;
     }
 
+    /**
+     * Get next token
+     * @return next token
+     */
     public Token nextToken() {
         if (pos >= text.length()) {
             return new Token(Token.Type.EOF, null);
@@ -21,16 +29,19 @@ public class Tokenizer {
             return new Token(Token.Type.AT, "@");
         }
 
+        //detect prefix: title
         if (pos < text.length() - 5 && text.startsWith("title:", pos)) {
             pos += 6;
             return new Token(Token.Type.TITLE, "title:");
         }
 
+        //detect prefix: public
         if (pos < text.length() - 6 && text.startsWith("public:", pos)) {
             pos += 7;
             return new Token(Token.Type.PUBLIC, "public:");
         }
 
+        //tokenize content as NAME type
         if (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {
             StringBuilder sb = new StringBuilder();
             while (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {
@@ -47,6 +58,10 @@ public class Tokenizer {
         return nextToken();
     }
 
+    /**
+     * Inner class token
+     * @author Zehua Kong
+     */
     public static class Token {
         public enum Type {
             AT, NAME, TITLE, PUBLIC, EOF

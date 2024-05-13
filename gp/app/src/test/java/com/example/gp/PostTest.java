@@ -10,6 +10,11 @@ import com.google.firebase.Timestamp;
 import org.junit.Test;
 
 import java.util.Calendar;
+
+/**
+ * Test post class
+ * @author Zehua Kong
+ */
 public class PostTest {
     @Test
     public void testPost() {
