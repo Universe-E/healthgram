@@ -17,7 +17,7 @@
         android:layout_below="@id/tb_top_navigation_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Share to..." />
+        android:text="Share with..." />
 
     <EditText
         android:id="@+id/editTextText"
