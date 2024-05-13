@@ -1,10 +1,11 @@
 package com.example.gp.data.database;
 
-import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
+import static com.example.gp.data.database.FirebaseUtil.getDatabseRef;
+import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
+import static com.example.gp.data.database.FirebaseUtil.getFireUser;
 
-import androidx.annotation.Nullable;
+import android.content.Context;
+import android.util.Log;
 
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
@@ -14,20 +15,19 @@ import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
-import com.google.android.gms.tasks.Task;
+import com.example.gp.data.database.model.UserModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -36,6 +36,7 @@ import java.util.Objects;
 public class UserDB {
     // User data
     private static final String TAG = "Database.User";
+    private static final String DATABASE_NAME = Database.getDatabaseName();
 
     //        private static String userId;
 //        public UserDB() {
@@ -427,6 +428,15 @@ public class UserDB {
                 .addOnFailureListener(e -> {
                     Log.w(TAG, "Error writing userData", e);
                 });
+
+        UserModel userModel = new UserModel();
+        userModel.setModelFromUser(user);
+
+        db.collection(DATABASE_NAME).document(userId).set(userModel)
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                });
+
     }
 
     private static User firebaseUserToUser(FirebaseUser user) {
@@ -515,5 +525,53 @@ public class UserDB {
                         Log.e(TAG, "Error getting documents: ", e);
                     }
                 });
+    }
+
+    public static void newSignUp(
+            String username, String email, String password, Object object, String methodName) {
+        Log.d(TAG, "newSignUP username: " + username);
+
+        CollectionReference databaseRef = getDatabseRef();
+        databaseRef
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(queryNameTask -> {
+                    if (!queryNameTask.isSuccessful()) {
+                        Log.e(TAG, "Error getting documents: ", queryNameTask.getException());
+                        MethodUtil.invokeMethod(object, methodName, false, queryNameTask.getException().getMessage());
+                        return;
+                    }
+                    if (!queryNameTask.getResult().isEmpty()) {
+                        String msg = "Username already exist";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+                });
+    }
+
+    private static void fireAuthCreate(String username, String email, String password, Object object, String methodName) {
+        FirebaseAuth mAuth = getFireAuth();
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(authResultTask -> {
+                    if (!authResultTask.isSuccessful()) {
+                        Exception e = authResultTask.getException();
+                    /*
+                      Callback
+                      Return error message
+                     */
+                        MethodUtil.invokeMethod(object, methodName, false, Objects.requireNonNull(e).getMessage());
+                        Log.e(TAG, "Error: " + e);
+                    }
+                    FirebaseUser fireUser = getFireUser();
+                    UserModel userModel = new UserModel();
+                    userModel.setUsername(username);
+                    userModel.setEmail(email);
+
+                });
+    }
+
+    private static void newSaveUserData(UserModel userModel, Object object, String methodName) {
+
     }
 }
