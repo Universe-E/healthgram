@@ -18,6 +18,15 @@
         android:theme="@style/Theme.Gp"
         tools:targetApi="31">
         <activity
+            android:name=".home.ui.notifications.FriendNotificationFragment"
+            android:exported="false" />
+        <activity
+            android:name=".home.ui.notifications.MentionNotificationFragment"
+            android:exported="false" />
+        <activity
+            android:name=".home.ui.notifications.FollowNotificationFragment"
+            android:exported="false" />
+        <activity
             android:name=".data.databaseTest.DatabaseTestActivity"
             android:exported="true"
             android:label="@string/title_activity_database_test"
@@ -28,7 +37,6 @@
         <activity
             android:name=".interaction.NewPostActivity"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".interaction.SharePageActivity"
             android:exported="false" />
@@ -70,8 +78,7 @@
         <activity
             android:name=".SearchActivity"
             android:exported="true" />
-        <activity
-            android:name=".Utils.UserParserActivity" />
+        <activity android:name=".Utils.UserParserActivity" />
     </application>
 
 </manifest>
