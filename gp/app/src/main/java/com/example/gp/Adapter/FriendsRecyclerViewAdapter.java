@@ -28,7 +28,7 @@ import java.util.List;
 
 public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecyclerViewAdapter.ViewHolder> {
 
-    private List<Friend> friends;
+    private static List<Friend> friends;
     private OnItemClickListener listener;
     private Context context;
 
@@ -105,9 +105,9 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
                     // Create an intent to start the FriendDetailActivity
                     Intent intent = new Intent(context, FriendDetailActivity.class);
 
-//                    // pass key info
-//                    Friend friend = friends.get(position);
-//                    intent.putExtra("friend_id", friend.getId());
+                    // pass key info
+                    Friend friend = friends.get(position);
+                    intent.putExtra("friend_id", friend.getId());
 
                     // Start the FriendDetailActivity
                     context.startActivity(intent);

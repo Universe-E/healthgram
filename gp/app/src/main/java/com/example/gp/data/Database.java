@@ -145,7 +145,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void blockUserById(String userId, boolean block, Object object, String methodName) {
-        // TODO: implement this method
+        //TODO: implement this method
         String msg = "Placeholder";
         MethodUtil.invokeMethod(object, methodName, true, (Object) msg);
     }
@@ -159,7 +159,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void checkBlockById(String userId, Object object, String methodName) {
-        // TODO: implement this method
+        //TODO: implement this method
         String msg = "Placeholder";
         MethodUtil.invokeMethod(object, methodName, true, (Object) msg);
     }
@@ -172,7 +172,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void getBlockList(Object object, String methodName) {
-        // TODO: implement this method
+        //TODO: implement this method
         List<Friend> blockList = null;
         MethodUtil.invokeMethod(object, methodName, true, (Object) blockList);
     }
