@@ -1,6 +1,7 @@
 package com.example.gp.Utils;
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.example.gp.R;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public class UserParserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_parser);
-
+        CharSequence currentDate = DateFormat.format("yyyy-MM-dd", new Date());
         User user = new User("u1", "John", "john@example.com");
         user.setDescription("Sample description");
         user.setAvatar("avatar.jpg");
@@ -40,8 +42,8 @@ public class UserParserActivity extends AppCompatActivity {
         posts.put("p2",p2);
         user.setPostMap(posts);
         Map<String, Notification> notis = new HashMap<>();
-        Notification n1 = new Notification(p1,false);
-        Notification n2 = new Notification(p2,true);
+        Notification n1 = new Notification("Vacation","go to Italy",currentDate, Notification.NotificationType.FOLLOW,"123");
+        Notification n2 = new Notification("Vacation","go to Spain",currentDate, Notification.NotificationType.MENTION,"123");
         notis.put("n1",n1);
         notis.put("n2",n2);
         user.setNotificationMap(notis);

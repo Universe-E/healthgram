@@ -18,6 +18,6 @@
         android:paddingVertical="8dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".MainActivity"
-        tools:listitem="@layout/content_notification" />
+        tools:listitem="@layout/content_friend_notification" />
 
 </FrameLayout>
