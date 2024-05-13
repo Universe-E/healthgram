@@ -25,6 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.List;
+
 public class DatabaseTestActivity extends AppCompatActivity {
     private static final String TAG = "DatabaseTestActivity";
 
@@ -89,6 +91,21 @@ public class DatabaseTestActivity extends AppCompatActivity {
                         });
             }
         });
+
+        Button button4 = binding.button4;
+        button4.setOnClickListener(listener -> {
+            Database.getUserPost(null, 0, DatabaseTestActivity.this, "getUserPost");
+        });
+    }
+
+    public void getUserPost(boolean isSuccessful, Object object) {
+        Log.d(TAG, "getUserPost: " + isSuccessful);
+        if (!isSuccessful) {
+            Log.e(TAG, "getUserPost: " + object);
+            return;
+        }
+        List<Post> posts = (List<Post>) object;
+        Log.d(TAG, "posts: " + posts);
     }
 
     public void saveImage(boolean isSuccessful, Post post) {

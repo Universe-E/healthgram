@@ -1,5 +1,6 @@
 package com.example.gp.interaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Items.Post;
 import com.example.gp.R;
+import com.example.gp.data.PostsData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +20,13 @@ import java.util.Random;
 
 public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostViewHolder> {
 
-    private List<Post> postList = new ArrayList<>();
+//    private List<Post> postList = new ArrayList<>();
     private Random random = new Random();
     private OnPostClickListener onPostClickListener;
+    private static final PostsData postsData = PostsData.getInstance();
 
     public interface OnPostClickListener {
-        void onPostClick(Post post);
+        void onPostClick(int position);
     }
 
     public void setOnPostClickListener(OnPostClickListener listener) {
@@ -31,7 +34,13 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     }
 
     public void setPostList(List<Post> postList) {
-        this.postList = postList;
+//        this.postList = postList;
+        notifyDataSetChanged();
+    }
+
+    public void setPostList() {
+//        this.postList = postsData.getPosts();
+        Log.d("PostCardAdapter", "setPostList: " + postsData.getPosts().size());
         notifyDataSetChanged();
     }
 
@@ -44,7 +53,8 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-        Post post = postList.get(position);
+//        Post post = postList.get(position);
+        Post post = postsData.getPosts().get(position);
 
         // set the post title and content
         holder.textViewHeading.setText(post.getTitle());
@@ -64,17 +74,18 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
         // set the click listener
         holder.itemView.setOnClickListener(v -> {
             if (onPostClickListener != null) {
-                onPostClickListener.onPostClick(post);
+                onPostClickListener.onPostClick(position);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return postList.size();
+//        return postList.size();
+        return postsData.getPosts().size();
     }
     public void updatePosts(List<Post> userposts) {
-        this.postList = userposts;
+//        this.postList = userposts;
         notifyDataSetChanged();
     }
 

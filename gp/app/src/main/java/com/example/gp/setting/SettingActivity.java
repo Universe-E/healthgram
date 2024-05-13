@@ -9,6 +9,7 @@ import androidx.activity.EdgeToEdge;
 import com.example.gp.BaseActivity;
 import com.example.gp.MainActivity;
 import com.example.gp.R;
+import com.example.gp.data.Database;
 import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivitySettingBinding;
 
@@ -65,7 +66,7 @@ public class SettingActivity extends BaseActivity {
             Intent intent = new Intent(this, PostVisibilityActivity.class);
             startActivity(intent);
         } else if(v == binding.btnSettingMainQuit) {
-            UserDB.signOut(null,null);
+            Database.signOut(null,null);
             Intent intent = new Intent(this, MainActivity.class);
             //start new activity, clear old tasks
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

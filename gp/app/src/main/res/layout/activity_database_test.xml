@@ -97,4 +97,20 @@
         app:layout_anchor="@+id/textView2"
         app:layout_anchorGravity="bottom|center" />
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="78dp"
+        android:text="TextView"
+        app:layout_anchor="@+id/button2"
+        app:layout_anchorGravity="bottom|center" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testUserPosts"
+        app:layout_anchor="@+id/textView3"
+        app:layout_anchorGravity="bottom|center" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

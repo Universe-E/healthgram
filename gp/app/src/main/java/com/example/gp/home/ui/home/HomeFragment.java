@@ -8,28 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.gp.Items.Parser;
-import com.example.gp.Items.Tokenizer;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
 import com.example.gp.data.BTree;
 import com.example.gp.data.Database;
+import com.example.gp.data.PostsData;
 import com.example.gp.interaction.NewPostActivity;
 import com.example.gp.interaction.PostCardAdapter;
 import com.example.gp.interaction.PostDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.search.SearchView;
-import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,10 +37,12 @@ import java.util.List;
  * Date: 2024-05-01
  */
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
 
     private PostCardAdapter postCardAdapter;
     private SearchView searchView;
     private List<Post> postList;
+    private static final PostsData postsData = PostsData.getInstance();
 
     //use BTree to store posts
     private BTree postTree;
@@ -61,18 +60,20 @@ public class HomeFragment extends Fragment {
 
         // Load post data from the database
 //        Timestamp timestamp = new Timestamp(new Date());
-        Database.getPostsByTime(null, 19, this, "loadPostCards");
+        Database.getNewPostsByTime(null, 19, this, "loadPostCards");
 
         return view;
     }
 
-    public List<Post> loadPostCards(boolean isSuccess, Object object) {
+    public void loadPostCards(boolean isSuccess, Object object) {
         if (isSuccess) {
+            Log.d(TAG, "loadPostCards: ");
             postList = (List<Post>) object;
             for (Post post : postList) {
                 int postId = post.getPostId().hashCode();
                 postTree.add(postId, post);
             }
+            postsData.addNewPosts(postList);
 
             // renew the UI
             ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
@@ -83,14 +84,15 @@ public class HomeFragment extends Fragment {
                     posts.add(post);
                 }
             }
-            postCardAdapter.setPostList(posts);
+//            postCardAdapter.setPostList(posts);
+            postCardAdapter.setPostList();
+
 
             Log.d("HomeFragment", "Posts loaded successfully");
         } else {
             // handle failure
             ToastUtil.showLong(getContext(), "Failed to load posts");
         }
-        return postList;
     }
 
     private void initializeSearchView(View view) {
@@ -115,10 +117,11 @@ public class HomeFragment extends Fragment {
         postCardAdapter.setOnPostClickListener(this::onPostClick);
     }
 
-    private void onPostClick(Post post) {
+    private void onPostClick(int position) {
         Intent intent = new Intent(getContext(), PostDetailActivity.class);
 //        intent.putExtra("postId", post.getPostId());
-        intent.putExtra("post", post);
+//        intent.putExtra("post", post);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 

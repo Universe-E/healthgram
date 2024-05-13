@@ -8,7 +8,6 @@ import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
 import com.google.firebase.Timestamp;
 
-import java.util.Date;
 import java.util.List;
 
 public class Database {
@@ -146,7 +145,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void blockUserById(String userId, boolean block, Object object, String methodName) {
-        // TODO: implement this method
+        //TODO: implement this method
         String msg = "Placeholder";
         MethodUtil.invokeMethod(object, methodName, true, (Object) msg);
     }
@@ -160,7 +159,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void checkBlockById(String userId, Object object, String methodName) {
-        // TODO: implement this method
+        //TODO: implement this method
         String msg = "Placeholder";
         MethodUtil.invokeMethod(object, methodName, true, (Object) msg);
     }
@@ -173,7 +172,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void getBlockList(Object object, String methodName) {
-        // TODO: implement this method
+        //TODO: implement this method
         List<Friend> blockList = null;
         MethodUtil.invokeMethod(object, methodName, true, (Object) blockList);
     }
@@ -202,9 +201,9 @@ public class Database {
      * @param object     The object that calls the method
      * @param methodName The method name
      */
-    public static void getPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+    public static void getNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
 //        PostDB.getPostsByTime(timestamp, limit, object, methodName);
-        PostDB.newGetPostsByTime(timestamp, limit, object, methodName);
+        PostDB.GetNewPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**
@@ -229,7 +228,8 @@ public class Database {
      * @param methodName The method name
      */
     public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
-        PostDB.getUserPost(timestamp, limit, object, methodName);
+//        PostDB.getUserPost(timestamp, limit, object, methodName);
+        PostDB.newGetUserPost(timestamp, limit, object, methodName);
     }
 
     /**

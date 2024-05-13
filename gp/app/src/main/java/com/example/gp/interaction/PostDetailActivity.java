@@ -16,6 +16,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
+import com.example.gp.data.PostsData;
 import com.example.gp.data.UserData;
 import com.example.gp.BaseActivity;
 
@@ -32,6 +33,8 @@ public class PostDetailActivity extends BaseActivity {
     private TextView tvPostContent;
     private Button btnShare;
     private TextView tvAuthorName;
+    private static final PostsData postsData = PostsData.getInstance();
+    private int position;
 
     private Post post;
 
@@ -55,7 +58,9 @@ public class PostDetailActivity extends BaseActivity {
         // Get post data from intent
         Intent intent = getIntent();
 //        String postId = intent.getStringExtra("postId");
-        post = intent.getParcelableExtra("post");
+//        post = intent.getParcelableExtra("post");
+        position = intent.getIntExtra("position", 0);
+        post = postsData.getPosts().get(position);
 
         // Load corresponding post data from database
 //        Database.getPostByPostId(postId, this, "loadPostData");

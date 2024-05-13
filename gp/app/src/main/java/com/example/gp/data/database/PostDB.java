@@ -5,15 +5,12 @@ import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireUser;
 import static com.example.gp.data.database.FirebaseUtil.getPostRef;
 
-import android.graphics.Bitmap;
-import android.nfc.Tag;
 import android.util.Log;
 
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.MethodUtil;
-import com.example.gp.Utils.TimeUtil;
-import com.example.gp.data.Database;
+import com.example.gp.data.PostsData;
 import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +24,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -36,6 +32,7 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
     private static final String POST_PATH = "";
+    private static final PostsData postsData = PostsData.getInstance();
 
     /**
      * Save post data to firestore
@@ -365,13 +362,18 @@ public class PostDB {
                 });
     }
 
-    public static void newGetPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+    public static void GetNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
         timestamp = getTimestamp(timestamp);
         Log.d(TAG, "timestamp: " + timestamp);
+
+        Timestamp lastPostTimestamp = null;
+        if (!postsData.getPosts().isEmpty())
+            lastPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
                 .whereLessThan("postTimestamp", timestamp)
+                .endBefore(lastPostTimestamp)
                 .limit(limit)
                 .get()
                 .addOnCompleteListener(task -> {
@@ -393,6 +395,45 @@ public class PostDB {
                         post.setFromModel(document.toObject(PostModel.class));
                         posts.add(post);
                     }
+                    FileDB.getImages(posts, 0, object, methodName);
+                });
+    }
+
+    public static void newGetUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
+        String userId = getCurrentUserId();
+
+        newGetPostByAuthorId(timestamp, limit, userId, object, methodName);
+    }
+
+    private static void newGetPostByAuthorId(Timestamp timestamp, int limit, String userId, Object object, String methodName) {
+        timestamp = getTimestamp(timestamp);
+
+        CollectionReference postsRef = getPostRef();
+        postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
+                .whereEqualTo("authorId", userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        return;
+                    }
+
+                    if (task.getResult().isEmpty()) {
+                        String msg = "No post";
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+
+                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    List<Post> posts = new ArrayList<>();
+
+                    for (DocumentSnapshot document : documentSnapshots) {
+                        Post post = new Post();
+                        post.setFromModel(document.toObject(PostModel.class));
+                        posts.add(post);
+                    }
+
                     FileDB.getImages(posts, 0, object, methodName);
                 });
     }
