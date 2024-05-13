@@ -16,5 +16,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/content_notification" />
+        tools:listitem="@layout/content_friend_notifcation_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>

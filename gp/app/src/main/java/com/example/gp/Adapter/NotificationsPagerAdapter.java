@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.gp.home.ui.notifications.FollowNotificationFragment;
+import com.example.gp.home.ui.notifications.FollowerNotificationFragment;
 import com.example.gp.home.ui.notifications.FriendNotificationFragment;
 import com.example.gp.home.ui.notifications.MentionNotificationFragment;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationsPagerAdapter extends FragmentStateAdapter {
-    private String[] titles = new String[] { "动态", "@我", "通知" };
+    private String[] titles = new String[] { "friendPosts", "@Me", "friendRequest" };
 
     public NotificationsPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
@@ -23,7 +23,7 @@ public class NotificationsPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new FollowNotificationFragment();
+                return new FollowerNotificationFragment();
             case 1:
                 return new MentionNotificationFragment();
             case 2:

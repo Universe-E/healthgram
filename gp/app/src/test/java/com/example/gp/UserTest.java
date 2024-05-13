@@ -3,6 +3,8 @@ package com.example.gp;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import android.text.format.DateFormat;
+
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.Notification;
 import com.example.gp.Items.Post;
@@ -10,6 +12,7 @@ import com.example.gp.Items.User;
 
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +21,8 @@ import java.util.Map;
  * @author Zehua Kong
  */
 public class UserTest {
+    CharSequence currentDate = DateFormat.format("yyyy-MM-dd", new Date());
+
     @Test
     public void testUser() {
         User user = new User();
@@ -45,8 +50,8 @@ public class UserTest {
         postMap.put("p2",p2);
 
         Map<String, Notification> notificationMap = new HashMap<>();
-        Notification n1 = new Notification(p1,false);
-        Notification n2 = new Notification(p2,true);
+        Notification n1 = new Notification("Vacation","go to Italy",currentDate, Notification.NotificationType.FOLLOW,"123");
+        Notification n2 = new Notification("Vacation","go to Spain",currentDate, Notification.NotificationType.MENTION,"123");
         notificationMap.put("n1",n1);
         notificationMap.put("n2",n2);
 

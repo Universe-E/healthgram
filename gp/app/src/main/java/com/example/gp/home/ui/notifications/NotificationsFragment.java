@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.gp.Adapter.NotificationsPagerAdapter;
 import com.example.gp.databinding.FragmentNotificationsBinding;
@@ -31,7 +29,7 @@ public class NotificationsFragment extends Fragment {
         View root = binding.getRoot();
 
         NotificationsPagerAdapter adapter = new NotificationsPagerAdapter(this);
-        adapter.addFragment(new FollowNotificationFragment(), "Follow Updates");
+        adapter.addFragment(new FollowerNotificationFragment(), "Follow Updates");
         adapter.addFragment(new MentionNotificationFragment(), "@ME");
         adapter.addFragment(new FriendNotificationFragment(), "Friend Requests");
 
