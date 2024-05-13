@@ -7,12 +7,12 @@ import java.util.Date;
 
 public class TimeUtil {
     public static Timestamp getTimestamp() {
-        return new Timestamp(Calendar.getInstance().getTime());
+        return Timestamp.now();
     }
 
     public static Timestamp getTimestamp(Timestamp timestamp) {
         if (timestamp == null) {
-            return getTimestamp();
+            timestamp = Timestamp.now();
         }
         return timestamp;
     }

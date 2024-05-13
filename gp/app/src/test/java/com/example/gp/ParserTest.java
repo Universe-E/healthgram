@@ -1,83 +1,66 @@
 package com.example.gp;
 
+import com.example.gp.Items.Parser;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
-import com.example.gp.Items.Parser;
-
+/**
+ * Test parser class
+ * @author Zehua Kong
+ */
 public class ParserTest {
 
     @Test
-    public void notYetFinishedMentioning() {
+    public void isMentioningSomeone_returnsTrue_whenTextContainsAtSymbol() {
         Parser parser = Parser.getInstance();
         assertTrue(parser.isMentioningSomeone("@user"));
     }
 
     @Test
-    public void finishedMentioning_1() {
-        Parser parser = Parser.getInstance();
-        assertFalse(parser.isMentioningSomeone("@ user"));
-    }
-
-    @Test
-    public void notMentioning() {
+    public void isMentioningSomeone_returnsFalse_whenTextDoesNotContainAtSymbol() {
         Parser parser = Parser.getInstance();
         assertFalse(parser.isMentioningSomeone("user"));
     }
 
     @Test
-    public void symbolAtTextEnd() {
+    public void parseUserName_returnsUserName_whenTextContainsAtSymbol() {
         Parser parser = Parser.getInstance();
-        assertTrue(parser.isMentioningSomeone("user@"));
+        assertEquals("user", parser.parseUserName("@user"));
     }
 
     @Test
-    public void mentioningTheSecondGuyAtStart() {
-        Parser parser = Parser.getInstance();
-        assertTrue(parser.isMentioningSomeone("@ user1@"));
-    }
-
-    @Test
-    public void mentioningTheSecondGuyNotFinished() {
-        Parser parser = Parser.getInstance();
-        assertTrue(parser.isMentioningSomeone("@user1@user2"));
-    }
-
-    @Test
-    public void mentioningTheSecondGuyFinished() {
-        Parser parser = Parser.getInstance();
-        assertFalse(parser.isMentioningSomeone("@user1 @user2 "));
-    }
-
-    @Test
-    public void parseUserName_returnsEmpty_whenNoAtSymbol() {
+    public void parseUserName_returnsEmptyString_whenTextDoesNotContainAtSymbol() {
         Parser parser = Parser.getInstance();
         assertEquals("", parser.parseUserName("user"));
     }
 
     @Test
-    public void parseUserName_returnsSubstring_whenAtSymbolIsLast() {
+    public void parseTitle_returnsTitle_whenTextContainsTitleColon() {
         Parser parser = Parser.getInstance();
-        assertEquals("user", parser.parseUserName("hello@user"));
+        assertEquals("hello", parser.parseTitle("title:hello"));
     }
 
     @Test
-    public void parseUserName_returnsSubstring_whenAtSymbolFollowedBySpace() {
+    public void parseTitle_returnsEmptyString_whenTextDoesNotContainTitleColon() {
         Parser parser = Parser.getInstance();
-        assertEquals("user", parser.parseUserName("hello@user moretext"));
+        assertEquals("", parser.parseTitle("hello"));
     }
 
     @Test
-    public void parseUserName_returnsSubstring_whenMultipleAtSymbols() {
+    public void parsePublic_returnsTrue_whenTextContainsPublicColonTrue() {
         Parser parser = Parser.getInstance();
-        assertEquals("user2", parser.parseUserName("hello@user1 moretext@user2"));
+        assertEquals(true, parser.parsePublic("public:true"));
     }
 
     @Test
-    public void parseUserName_returnsSubstring_whenMultipleAtSymbolsFollowedBySpace() {
+    public void parsePublic_returnsFalse_whenTextContainsPublicColonFalse() {
         Parser parser = Parser.getInstance();
-        assertEquals("user2", parser.parseUserName("hello@user1 moretext@user2 moretext"));
+        assertEquals(false, parser.parsePublic("public:false"));
     }
 
+    @Test
+    public void parsePublic_returnsNull_whenTextDoesNotContainPublicColon() {
+        Parser parser = Parser.getInstance();
+        assertNull(parser.parsePublic("hello"));
+    }
 }

@@ -10,6 +10,10 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test util class
+ * @author Zehua Kong
+ */
 public class UtilTest {
 
     @Test

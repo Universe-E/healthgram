@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -15,8 +16,11 @@ import com.example.gp.Items.Post;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
+import com.example.gp.data.database.PostDB;
 import com.example.gp.databinding.ActivityPostEditingBinding;
 import com.example.gp.home.Fragment_home;
+
+import java.io.IOException;
 
 /**
  * This class represents the activity for creating a new post.
@@ -112,7 +116,7 @@ public class NewPostActivity extends BaseActivity {
     private void setUpFireButtonListener() {
         binding.btnFirePost.setOnClickListener(v -> {
             // 1. Get the information from the components
-            Bitmap img = this.imageUri == null ? null : binding.ivPostImage.getDrawingCache();
+//            Bitmap img = this.imageUri == null ? null : binding.ivPostImage.getDrawingCache();
             String heading = this.heading.getText().toString();
             String content = this.content.getText().toString();
             String visibilityString = this.visibilityString.getText().toString();
@@ -125,18 +129,25 @@ public class NewPostActivity extends BaseActivity {
             }
 
             // 2. Create a new post
-            if (img != null)
-                newPost = new Post(content, heading, img, isPublic);
-            else
-                newPost = new Post(content, heading, isPublic);
+            newPost = new Post(content, heading, isPublic);
+
+            // 2.5 set the image
+            if (imageUri != null) {
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                    newPost.setImg(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
             // TODO: 3. handle visibility
             // parse the visibilityString to a list of user ids
             // for each user id, add it to the visibility list of the post
 
             // 4. Add the post to the database
+//            Database.savePostData(newPost, this, "postOut");
             Database.savePostData(newPost, this, "postOut");
-
         });
     }
 

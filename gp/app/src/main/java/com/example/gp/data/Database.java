@@ -3,6 +3,7 @@ package com.example.gp.data;
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
+import com.example.gp.Utils.MethodUtil;
 import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
 import com.google.firebase.Timestamp;
@@ -12,6 +13,21 @@ import java.util.List;
 
 public class Database {
     private static final String TAG = "Database";
+    private static final String USER_PATH = "Users";
+    private static final String POST_PATH = "Posts";
+    private static final String NOTIFICATION_PATH = "Notifications";
+
+    public static String getUserCollection() {
+        return USER_PATH;
+    }
+
+    public static String getPostCollection() {
+        return POST_PATH;
+    }
+
+    public static String getNotificationCollection() {
+        return NOTIFICATION_PATH;
+    }
 
     // User account operations
 
@@ -39,7 +55,8 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void signUp(String username, String email, String password, Object object, String methodName) {
-        UserDB.signUp(username, email, password, object, methodName);
+//        UserDB.signUp(username, email, password, object, methodName);
+        UserDB.newSignUp(username, email, password, object, methodName);
     }
 
     /**
@@ -94,7 +111,7 @@ public class Database {
      * Get friend request
      * Callback parameters: true and list of FriendRequest object if success, false and error message if fail
      *
-     * @param timpestamp       Don't need this parameter for this stage just use null
+     * @param timpestamp Don't need this parameter for this stage just use null
      * @param limit      The number of request retrieval
      * @param object     The object that calls the method
      * @param methodName Callback method name
@@ -116,31 +133,78 @@ public class Database {
         UserDB.getFriendList(nickname, limit, object, methodName);
     }
 
+    // Block operations
+
+    /**
+     * Block user by id
+     * To block someone
+     * Callback parameters: true and user object if success, false and error message if fail
+     *
+     * @param userId     user id
+     * @param block      true if block, false if unblock
+     * @param object     The object that calls the method
+     * @param methodName Callback method name
+     */
+    public static void blockUserById(String userId, boolean block, Object object, String methodName) {
+        // TODO: implement this method
+        String msg = "Placeholder";
+        MethodUtil.invokeMethod(object, methodName, true, (Object) msg);
+    }
+
+    /**
+     * Check if current user is blocked by userId
+     * Callback parameters: true and user object if success, false and error message if fail
+     *
+     * @param userId     user id
+     * @param object     The object that calls the method
+     * @param methodName Callback method name
+     */
+    public static void checkBlockById(String userId, Object object, String methodName) {
+        // TODO: implement this method
+        String msg = "Placeholder";
+        MethodUtil.invokeMethod(object, methodName, true, (Object) msg);
+    }
+
+    /**
+     * Get your block list
+     * Callback parameters: true and list of Friend object if success, false and error message if fail
+     *
+     * @param object     The object that calls the method
+     * @param methodName Callback method name
+     */
+    public static void getBlockList(Object object, String methodName) {
+        // TODO: implement this method
+        List<Friend> blockList = null;
+        MethodUtil.invokeMethod(object, methodName, true, (Object) blockList);
+    }
+
     // Post operations
 
     /**
      * Save post data to firestore
      * Callback parameters: true and postId if success, false and error message if fail
      *
-     * @param post Post object to be saved
-     * @param object The object that calls the method
+     * @param post       Post object to be saved
+     * @param object     The object that calls the method
      * @param methodName Callback method name
      */
     public static void savePostData(Post post, Object object, String methodName) {
-        PostDB.savePostData(post, object, methodName);
+//        PostDB.savePostData(post, object, methodName);
+        PostDB.newSavePostData(post, object, methodName);
     }
 
     /**
      * Get a list of posts by post timestamp, descending sorted by post timestamp
      * Callback parameters: true and PostMap object, false and error message if fail
      *
-     * @param timestamp   post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
-     * @param limit  The number of post retrieval
-     * @param object The object that calls the method
+     * @param timestamp  post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
+     * @param limit      The number of post retrieval
+     * @param object     The object that calls the method
      * @param methodName The method name
      */
     public static void getPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
-        PostDB.getPostsByTime(timestamp, limit, object, methodName);
+//        PostDB.getPostsByTime(timestamp, limit, object, methodName);
+        PostDB.newGetPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**
@@ -149,7 +213,7 @@ public class Database {
      *
      * @param postId     post id
      * @param object     The object that calls the method
-     * @param methodName  Callback method name
+     * @param methodName Callback method name
      */
     public static void getPostByPostId(String postId, Object object, String methodName) {
         PostDB.getPostByPostId(postId, object, methodName);
@@ -159,9 +223,9 @@ public class Database {
      * Get current user's post
      * Callback parameters: true and PostMap object, false and error message if fail
      *
-     * @param timestamp The timestamp, e.g., if you try to get the list first timestamp, set timestamp to null, or set timestamp to the last post you already got timestamp
-     * @param limit The number of post retrieval
-     * @param object The object that calls the method
+     * @param timestamp  The timestamp, e.g., if you try to get the list first timestamp, set timestamp to null, or set timestamp to the last post you already got timestamp
+     * @param limit      The number of post retrieval
+     * @param object     The object that calls the method
      * @param methodName The method name
      */
     public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
@@ -185,9 +249,9 @@ public class Database {
      * Set allowed viewers
      * Callback parameters: true and postId if success, false and error message if fail
      *
-     * @param postId   post id
-     * @param viewers  list of user id
-     * @param object   The object that calls the method
+     * @param postId  post id
+     * @param viewers list of user id
+     * @param object  The object that calls the method
      */
     public static void setAllowedViewers(String postId, List<String> viewers, Object object, String methodName) {
         PostDB.setAllowedViewers(postId, viewers, object, methodName);
@@ -197,10 +261,10 @@ public class Database {
      * Get a list of posts by author id
      * Callback parameters: true and PostMap object, false and error message if fail
      *
-     * @param timestamp   post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
-     * @param limit  The number of post retrieval
+     * @param timestamp  post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
+     * @param limit      The number of post retrieval
      * @param authorId   author id aka user id
-     * @param object The object that calls the method
+     * @param object     The object that calls the method
      * @param methodName The method name
      */
     public static void getPostsByAuthorId(Timestamp timestamp, int limit, String authorId, Object object, String methodName) {

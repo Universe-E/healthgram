@@ -16,6 +16,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Test user class
+ * @author Zehua Kong
+ */
 public class UserTest {
     CharSequence currentDate = DateFormat.format("yyyy-MM-dd", new Date());
 
@@ -40,8 +44,8 @@ public class UserTest {
         friendMap.put("f2",f2);
 
         Map<String, Post> postMap = new HashMap<>();
-        Post p1 = new Post("p1","a1","content1","title1",true);
-        Post p2 = new Post("p2","a2","content2","title2",false);
+        Post p1 = new Post("content1","title1",true);
+        Post p2 = new Post("content2","title2",false);
         postMap.put("p1",p1);
         postMap.put("p2",p2);
 

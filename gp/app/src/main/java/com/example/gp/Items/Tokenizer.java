@@ -1,5 +1,9 @@
 package com.example.gp.Items;
 
+/**
+ * Tokenizer for search
+ * @author Zehua Kong
+ */
 public class Tokenizer {
     private String text;
     private int pos;
@@ -9,6 +13,10 @@ public class Tokenizer {
         this.pos = 0;
     }
 
+    /**
+     * Get next token
+     * @return next token
+     */
     public Token nextToken() {
         if (pos >= text.length()) {
             return new Token(Token.Type.EOF, null);
@@ -21,22 +29,42 @@ public class Tokenizer {
             return new Token(Token.Type.AT, "@");
         }
 
-        if (!Character.isWhitespace(currentChar)) {
-            StringBuilder username = new StringBuilder();
-            while (pos < text.length() && !Character.isWhitespace(text.charAt(pos))) {
-                username.append(text.charAt(pos));
+        //detect prefix: title
+        if (pos < text.length() - 5 && text.startsWith("title:", pos)) {
+            pos += 6;
+            return new Token(Token.Type.TITLE, "title:");
+        }
+
+        //detect prefix: public
+        if (pos < text.length() - 6 && text.startsWith("public:", pos)) {
+            pos += 7;
+            return new Token(Token.Type.PUBLIC, "public:");
+        }
+
+        //tokenize content as NAME type
+        if (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {
+            StringBuilder sb = new StringBuilder();
+            while (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {
+                sb.append(currentChar);
                 pos++;
+                if (pos < text.length()) {
+                    currentChar = text.charAt(pos);
+                }
             }
-            return new Token(Token.Type.USERNAME, username.toString());
+            return new Token(Token.Type.NAME, sb.toString());
         }
 
         pos++;
         return nextToken();
     }
 
+    /**
+     * Inner class token
+     * @author Zehua Kong
+     */
     public static class Token {
         public enum Type {
-            AT, USERNAME, EOF
+            AT, NAME, TITLE, PUBLIC, EOF
         }
 
         public Type type;
@@ -48,5 +76,3 @@ public class Tokenizer {
         }
     }
 }
-
-

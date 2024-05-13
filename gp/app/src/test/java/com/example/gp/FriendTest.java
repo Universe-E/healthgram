@@ -13,6 +13,10 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
+/**
+ * Test friend class
+ * @author Zehua Kong
+ */
 public class FriendTest {
     @Test
     public void testFriendRequest() {

@@ -2,6 +2,7 @@ package com.example.gp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,7 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
             friendAvatar = itemView.findViewById(R.id.iv_friend_avatar);
             friendContent = itemView.findViewById(R.id.ll_friend_content);
             friendContent.setOnClickListener(this);
+            Log.d("FRVA10000", "inflate");
         }
 
         public void bind(Friend friend) {
@@ -92,11 +94,25 @@ public class FriendsRecyclerViewAdapter extends RecyclerView.Adapter<FriendsRecy
 
         @Override
         public void onClick(View v) {
+            Log.d("FRVA10000", "onClick: this outside");
             if (v == friendContent) {
-                Context context = itemView.getContext();
-                Intent intent = new Intent(context, FriendDetailActivity.class);
-                context.startActivity(intent);
+                // Get the position of the item clicked
+                Log.d("FRVA10000", "onClick: this inside");
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Context context = itemView.getContext();
+                    // Create an intent to start the FriendDetailActivity
+                    Intent intent = new Intent(context, FriendDetailActivity.class);
+
+//                    // pass key info
+//                    Friend friend = friends.get(position);
+//                    intent.putExtra("friend_id", friend.getId());
+
+                    // Start the FriendDetailActivity
+                    context.startActivity(intent);
+                }
             }
+
         }
     }
 }

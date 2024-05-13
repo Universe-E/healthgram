@@ -21,6 +21,7 @@ import android.widget.ImageView;
 
 import com.example.gp.R;
 import com.example.gp.databinding.ActivityDatabaseTestBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -70,6 +71,22 @@ public class DatabaseTestActivity extends AppCompatActivity {
                     // Handle any errors
                     Log.e(TAG, "Error: " + exception);
                 });
+            }
+        });
+
+        Button button2 = binding.button2;
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("users")
+                        .whereEqualTo("username", "tset")
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, String.valueOf(task.getResult().isEmpty()));
+                            }
+                        });
             }
         });
     }

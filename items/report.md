@@ -77,8 +77,65 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
-2. **UID2, Name2**  I have xx% contribution, as follows: <br>
-  - ...
+2. **u7752342, Han Bao**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+
+3. **u7670173, Xingchen Zhang**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+
+4. **u7773219, Tianci Li**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+
+5. **u7756137, Yulong Chen**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
 
 
@@ -92,25 +149,25 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
 
-*A patient names Alice wants to know something about his illnesses, and see a public post by physician Bob on the Healthgram app*
+A patient names Alice wants to know something about his illnesses, and see a public post by physician Bob on the Healthgram app
 
-1. *Alice found that the medicare advice from Bob is useful*
-2. *The post is edited by Bob with the content is mainly about adjust your daily diet to keep away from diseases*
-3. *Alice followed doctor Bob, each time when Bob sends new posts, Alice will receive new notification from him*
-4. *Alice want to inquiry her conditions in privacy with Bob, she set some of her posts private, so that no other people can see these posts*
-5. *After Alice's illnesses were cured, she unfollowed doctor Bob, this operation will let her not to receive notification from doctor Bob*
+1. Alice found that the medicare advice from Bob is useful
+2. The post is edited by Bob with the content is mainly about adjust your daily diet to keep away from diseases
+3. Alice followed doctor Bob, each time when Bob sends new posts, Alice will receive new notification from him
+4. Alice want to inquiry her conditions in privacy with Bob, she set some of her posts private, so that no other people can see these posts
+5. After Alice's illnesses were cured, she unfollowed doctor Bob, this operation will let her not to receive notification from doctor Bob
 
-*Here is a map navigation application example*
+Here is a map navigation application example
 
-*Targets Users: Patients
+*Targets Users: Patients*
 
-* *Patients can use it to search for useful posts by keywords*
-* *Patients can add their own posts to share recent progress on their conditions*
-* *Patients can learn the knowledge from public posts*
-* *Patients can set visibility of posts to private to protect their privacy* 
+* Patients can use it to search for useful posts by keywords
+* Patients can add their own posts to share recent progress on their conditions
+* Patients can learn the knowledge from public posts
+* Patients can set visibility of posts to private to protect their privacy 
 * Patients can follow other patients, or doctors to trace their status
 
-*Target Users: Doctors
+*Target Users: Doctors*
 
 * Doctors can publish professional suggestions
 * Doctors can follow other doctors and patients for better medical treatment inquiry
@@ -178,14 +235,13 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 *[What design patterns did your team utilise? Where and why?]*
 
 1. *Singleton Pattern*
-   
-   * *Objective: used for initialize User and Post.*
+   * *Objective: used for initialize Parser
    
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
    
    * *Reasons:*
      
-      *  Ensure that only one instance of the Database class is created, preventing multiple connections to Firebase and reducing redundant performance consumption.
+      *  Ensure that only one instance of the Parser class is created, preventing multiple connections to Firebase and reducing redundant performance consumption.
       * Singleton Pattern helps maintain data consistency by ensuring all parts of the application use the same instance of the Database class.
       
    
@@ -195,12 +251,12 @@ Here is a partial (short) example for the subsection `Data Structures`:*
    * *Reasons:*
      * Observer pattern provides a solution for handling notifications of users.
      * Observer pattern allows publishers and observers interact normally, making app more flexible and maintainable.
-3. *Adaptor Pattern*
-   * *Objective: used for initialize User and Post.*
+3. *State Pattern*
+   * *Objective: used for login and check the state of user.*
    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
    * *Reasons:*
-     * Adapter pattern allows for the reuse of classes that have incompatible interfaces.
-     * provides an organized way to focus on their specific functionality, improves the capability of app functions.
+     * State Pattern allows the application to alter its login status based on user's authentication, this will simplify the manage and control access to different features and resources.
+     * The State Pattern makes code more readable and maintainable, and eliminates the need for complex conditional statements to handle different authentication.
 
 <hr>
 
@@ -210,17 +266,36 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 *[How do you design the grammar? What are the advantages of your designs?]*
 *If there are several grammars, list them all under this section and what they relate to.*
 
-Production Rules:
+Parser class supports multiple grammars for different types of queries:
 
-    <mention> ::= '@' + <username>
-    <username> ::= <char> + <char>
-    <char> ::= any character except whitespace | empty character
+1. Mention Grammar:
+
+   ```
+   Copy code<mention> ::= '@' + <name>
+   <name> ::= <char> + <char>
+   <char> ::= any alphanumeric character | empty character
+   ```
+
+2. Title Grammar:
+
+   ```
+   Copy code<title> ::= 'title:' + <name>
+   <name> ::= <char> + <char>
+   <char> ::= any alphanumeric character | empty character
+   ```
+
+3. Public Grammar:
+
+   ```
+   Copy code<public> ::= 'public:' + <bool>
+   <bool> ::= 'true' | 'false'
+   ```
 
 This grammar is designed to be simple and flexible to handle username formats, the advantages of this grammar design are:
 
-1. Simplicity: This grammar consists of only three production rules, which is easy to understand and implement.
-2. Flexibility: Username contains any character except whitespace, the grammar can handle a wide range of username formats, including alphanumeric characters and other special characters commonly used in usernames.
-3. Extensibility: If needed, the grammar can be easily extended to support more complex mention formats, such as '@[Full Name](username)', without requiring significant changes to the existing rules.
+1. Simplicity: This grammar consists of at most three production rules, which is easy to understand and implement.
+2. Flexibility: Name contains any character except whitespace, the grammar can handle a wide range of name formats, including alphanumeric characters and other special characters commonly used in names, to determine titles or public status.
+3. Reusability: The `` <name> `` and ``<char>`` production rules are shared among the Mention and Title grammars, promoting reusability.
 
 ### <u>Tokenizers and Parsers</u>
 
@@ -228,19 +303,23 @@ This grammar is designed to be simple and flexible to handle username formats, t
 
 Tokenizer:
 
-1. The `isMentioningSomeone` method scans the input text character by character, keeping track of the presence of '@' symbols and whitespace. It implicitly tokenizes the input into '@' symbols and non-whitespace characters.
-2. The `parseUserName` method tokenizes the input text by locating the last '@' symbol and the next whitespace character (if present). It extracts the substring between these two positions as the username token.
+1. The Tokenizer class is used to break down the input text into a sequence of tokens.
+2. It recognizes five types of tokens: AT, NAME, TITLE, PUBLIC, and EOF.
+3. The tokenization process is implemented using specific rules that translate the current character to the defined token types.
+4. The advantages of this tokenizer design are:
+   - Efficient: The tokenizer reads the input text only once, minimized the cost of time.
+   - Understandable: The grammar is easy to understand and implement.
 
 Parser:
 
-1. The `isMentioningSomeone` method parses the input text to determine if it contains a user mention. It implements a simple state machine that keeps track of the count of '@' symbols encountered and adjusts the count based on the presence of whitespace. If the final count is non-zero, it indicates the presence of a user mention.
-2. The `parseUserName` method parses the input text to extract the username mentioned. It leverages the tokenization process described above to locate the relevant substring and returns it as the parsed username.
-
-The advantages of this design are:
-
-1. Efficiency: By combining the tokenization and parsing processes within the same methods, the code avoids the overhead of creating separate tokenizer and parser objects. This can lead to better performance, especially for small and simple grammars like the one used here.
-2. Simplicity: The code is relatively simple and easy to understand, as it doesn't rely on complex tokenization or parsing techniques. The parsing logic is implemented using basic string manipulation and character checking.
-3. Tailored to the grammar: The tokenization and parsing logic is specifically tailored to the grammar for user mentions. This allows for a more targeted and optimized implementation compared to using general-purpose tokenization and parsing libraries.
+1. The Parser class uses Tokenizer class to analyze the structure of the input text according to the defined grammars.
+2. Each method for different parsing tasks, such as handling name, title, and public status.
+3. It consumes tokens from the Tokenizer and applies the corresponding grammar rules to extract the desired information.
+4. The advantages of this parser design are:
+   - Each parsing method focuses on a specific task, make it easy to maintain the code framework.
+   - The parser can handle different query types by following the appropriate grammar rules.
+   - Detect error easily: Detect and handle invalid or incomplete input to avoid parsing problems.
+   - Easy-to-call: Use Singleton Pattern to initialize Parser, and the parser relies on the Tokenizer for input processing, this will promote code reuse and separation of concerns.
 
 <hr>
 
@@ -356,9 +435,48 @@ Privacy
 ### Surprise Features
 
 - If implemented, explain how your solution addresses the task (any detail requirements will be released with the surprise feature specifications).
-- State that "Suprised feature is not implemented" otherwise.
 
-<br> <hr>
+- State that "Surprised feature is not implemented" otherwise.
+
+  
+
+(i) Existing Code Smells (before May 1st, 2024):
+
+1. Code Smell 1:
+   - Relevant git commits, files, and line numbers:
+     - [git commit hash], [file path], [line numbers]
+     - ...
+2. Code Smell 2:
+   - Relevant git commits, files, and line numbers:
+     - [git commit hash], [file path], [line numbers]
+     - ...
+3. Code Smell 3: 
+   - Relevant git commits, files, and line numbers:
+     - [git commit hash], [file path], [line numbers]
+     - ...
+4. Code Smell 4: 
+   - Relevant git commits, files, and line numbers:
+     - [git commit hash], [file path], [line numbers]
+     - ...
+
+(ii) Corrections Made (after May 1st, 2024):
+
+1. Correction for Code Smell :
+   - Description of the correction: 
+   - Relevant git commits, files, and line numbers:
+     - [git commit hash], [file path], [line numbers]
+     - ...
+2. Correction for Code Smell :
+   - Description of the correction: 
+   - Relevant git commits, files, and line numbers:
+     - [git commit hash], [file path], [line numbers]
+     - ...
+
+(iii) Detailed Description:
+
+
+
+
 
 ## Summary of Known Errors and Bugs
 
@@ -388,7 +506,7 @@ Privacy
 
 
 
-<br> <hr>
+ <hr>
 
 
 ## Testing Summary
@@ -398,13 +516,67 @@ Privacy
 
 *Here is an example:*
 
-1. Tests for Search
-   - Code: [TokenizerTest Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java) for the [Tokenizer Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43)
-   - *Number of test cases: ...*
-   - *Code coverage: ...*
-   - *Types of tests created and descriptions: ...*
-
-2. xxx
+1. Tests for User Management
+   - Code: UserTest.java, covering the User class
+   - Number of test cases: 3
+   - Code coverage: The tests cover the User class constructors and setter/getter methods
+   - Types of tests created and descriptions:
+  - testUser(): Tests the setter and getter methods of the User class
+     - testUserConstructorWithFullParams(): Tests the User class constructor with all parameters
+     - testUserConstructorWithRequiredParams(): Tests the User class constructor with required parameters only
+2. Tests for Post Management
+   - Code: PostTest.java, covering the Post class
+   - Number of test cases: 3
+   - Code coverage: The tests cover the Post class constructors and setter/getter methods
+   - Types of tests created and descriptions:
+     - testPost(): Tests the setter and getter methods of the Post class
+     - testPostConstructorWithContent(): Tests the Post class constructor with content, title, and isPublic parameters
+     - testPostSetters(): Tests all the setter methods of the Post class
+3. Tests for Friend Management
+   - Code: FriendTest.java, covering the Friend and FriendRequest classes
+   - Number of test cases: 4
+   - Code coverage: The tests cover the Friend and FriendRequest class constructors and setter/getter methods
+   - Types of tests created and descriptions:
+     - testFriendRequest(): Tests the setter and getter methods of the FriendRequest class
+     - testFriendConstructor(): Tests the Friend class constructor
+     - testFriendSetters(): Tests the setter methods of the Friend class
+     - testFriendGetters(): Tests the getter methods of the Friend class
+4. Tests for Notification Management
+   - Code: NotificationTest.java, covering the Notification class
+   - Number of test cases: 2
+   - Code coverage: The tests cover the Notification class constructor and setter/getter methods
+   - Types of tests created and descriptions:
+     - testNotificationConstructor(): Tests the Notification class constructor
+     - testNotificationSetters(): Tests the setter methods of the Notification class
+5. Tests for Utility Classes
+   - Code: UtilTest.java, covering the AuthUtil and TimeUtil classes
+   - Number of test cases: 7
+   - Code coverage: The tests cover various methods of the AuthUtil and TimeUtil classes
+   - Types of tests created and descriptions:
+     - testAuthUtil(): Tests the isValidEmail() and isValidUsername() methods of the AuthUtil class
+     - testAuthUtil_EmailVariations(): Tests different variations of email formats using the isValidEmail() method
+     - testAuthUtil_UsernameVariations(): Tests different variations of username formats using the isValidUsername() method
+     - testAuthUtil_EmailSubDomain(): Tests email formats with subdomains using the isValidEmail() method
+     - testAuthUtil_isEmail(): Tests the isEmail() method of the AuthUtil class
+     - testTimeUtil_getTimestamp(): Tests the getTimestamp() method of the TimeUtil class
+6. Tests for Tokenizer
+   - Code: TokenizerTest.java, covering the Tokenizer class
+   - Number of test cases: 9
+   - Code coverage: The tests cover various scenarios and edge cases for the nextToken() method of the Tokenizer class
+   - Types of tests created and descriptions:
+     - Tests for different token types (AT, TITLE, PUBLIC, NAME)
+     - Tests for handling whitespace
+     - Tests for handling empty input
+     - Tests for handling multiple tokens in a single input string
+7. Tests for Parser
+   - Code: ParserTest.java, covering the Parser class
+   - Number of test cases: 10
+   - Code coverage: The tests cover various methods of the Parser class
+   - Types of tests created and descriptions:
+     - Tests for the isMentioningSomeone() method with different inputs
+     - Tests for the parseUserName() method with different inputs
+     - Tests for the parseTitle() method with different inputs
+     - Tests for the parsePublic() method with different inputs
 
 ...
 

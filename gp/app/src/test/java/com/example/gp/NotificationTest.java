@@ -8,6 +8,10 @@ import com.example.gp.Items.Post;
 
 import org.junit.Test;
 
+/**
+ * Test notification class
+ * @author Zehua Kong
+ */
 public class NotificationTest {
 //    @Test
 //    public void testNotificationConstructor() {

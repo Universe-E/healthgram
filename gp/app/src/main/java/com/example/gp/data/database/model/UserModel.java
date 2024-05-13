@@ -1,16 +1,20 @@
 package com.example.gp.data.database.model;
 
-import com.example.gp.Items.Post;
+import androidx.annotation.NonNull;
 
+import com.example.gp.Items.User;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserModel {
     private String username;
     private String email;
+    private String userId;
     private String avatarUUID;
     private List<FriendModel> myFriends;
     private List<PostModel> myPosts;
-    private List<RequestModel> myRequests;
+    private List<NotificationModel> myNotifications;
 
     public UserModel() {
     }
@@ -29,6 +33,14 @@ public class UserModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAvatarUUID() {
@@ -55,11 +67,20 @@ public class UserModel {
         this.myPosts = myPosts;
     }
 
-    public List<RequestModel> getMyRequests() {
-        return myRequests;
+    public List<NotificationModel> getMyNotifications() {
+        return myNotifications;
     }
 
-    public void setMyRequests(List<RequestModel> myRequests) {
-        this.myRequests = myRequests;
+    public void setMyNotifications(List<NotificationModel> myNotifications) {
+        this.myNotifications = myNotifications;
+    }
+
+    public void setModelFromUser(@NonNull User user) {
+        this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.avatarUUID = user.getAvatarUUID();
+        this.myFriends = new ArrayList<>();
+        this.myPosts = new ArrayList<>();
+        this.myNotifications = new ArrayList<>();
     }
 }
