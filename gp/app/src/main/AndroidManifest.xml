@@ -24,7 +24,7 @@
             android:name=".home.ui.notifications.MentionNotificationFragment"
             android:exported="false" />
         <activity
-            android:name=".home.ui.notifications.FollowNotificationFragment"
+            android:name=".home.ui.notifications.FollowerNotificationFragment"
             android:exported="false" />
         <activity
             android:name=".data.databaseTest.DatabaseTestActivity"

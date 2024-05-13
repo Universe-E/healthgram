@@ -1,8 +1,8 @@
 package com.example.gp.data.database;
 
-import static com.example.gp.data.database.FirebaseUtil.getDatabseRef;
 import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
 import static com.example.gp.data.database.FirebaseUtil.getFireUser;
+import static com.example.gp.data.database.FirebaseUtil.getUsersRef;
 
 import android.content.Context;
 import android.util.Log;
@@ -36,7 +36,6 @@ import java.util.Objects;
 public class UserDB {
     // User data
     private static final String TAG = "Database.User";
-    private static final String DATABASE_NAME = Database.getDatabaseName();
 
     //        private static String userId;
 //        public UserDB() {
@@ -432,7 +431,7 @@ public class UserDB {
         UserModel userModel = new UserModel();
         userModel.setModelFromUser(user);
 
-        db.collection(DATABASE_NAME).document(userId).set(userModel)
+        db.collection("users").document(userId).set(userModel)
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
                 });
@@ -527,11 +526,15 @@ public class UserDB {
                 });
     }
 
+    // New APIs
+
+    // Sign up
+
     public static void newSignUp(
             String username, String email, String password, Object object, String methodName) {
         Log.d(TAG, "newSignUP username: " + username);
 
-        CollectionReference databaseRef = getDatabseRef();
+        CollectionReference databaseRef = getUsersRef();
         databaseRef
                 .whereEqualTo("username", username)
                 .get()
@@ -547,6 +550,7 @@ public class UserDB {
                         MethodUtil.invokeMethod(object, methodName, false, msg);
                         return;
                     }
+                    fireAuthCreate(username, email, password, object, methodName);
                 });
     }
 
@@ -567,11 +571,22 @@ public class UserDB {
                     UserModel userModel = new UserModel();
                     userModel.setUsername(username);
                     userModel.setEmail(email);
+                    userModel.setUserId(fireUser.getUid());
 
+                    newSaveUserData(userModel, object, methodName);
                 });
     }
 
     private static void newSaveUserData(UserModel userModel, Object object, String methodName) {
-
+        CollectionReference databaseRef = getUsersRef();
+        databaseRef.document(userModel.getUserId()).set(userModel)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "UserData successfully written!");
+                    MethodUtil.invokeMethod(object, methodName, true, null);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
     }
 }

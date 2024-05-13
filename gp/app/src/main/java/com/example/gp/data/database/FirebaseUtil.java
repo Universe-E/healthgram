@@ -21,8 +21,22 @@ public class FirebaseUtil {
         return auth.getCurrentUser().getUid();
     }
 
-    public static CollectionReference getDatabseRef() {
-        return FirebaseFirestore.getInstance().collection(Database.getDatabaseName());
+    public static CollectionReference getUsersRef() {
+        return FirebaseFirestore
+                .getInstance()
+                .collection(Database.getUserCollection());
+    }
+
+    public static CollectionReference getPostRef() {
+        return FirebaseFirestore
+                .getInstance()
+                .collection(Database.getPostCollection());
+    }
+
+    public static CollectionReference getNotificationRef() {
+        return FirebaseFirestore
+                .getInstance()
+                .collection(Database.getNotificationCollection());
     }
 
     public static FirebaseAuth getFireAuth() {

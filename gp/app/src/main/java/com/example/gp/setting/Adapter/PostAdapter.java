@@ -41,7 +41,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.PostViewHolder holder, int position) {
         Post post = posts.get(position);
-        Log.d(TAG,post.getPostId());
+        Log.d(TAG,post.getPostId() == null ? "null" : post.getPostId());
         holder.bind(post);
     }
 

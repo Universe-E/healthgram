@@ -70,7 +70,7 @@ public class Parser {
     public String parseTitle(String text) {
         Tokenizer tokenizer = new Tokenizer(text);
         Tokenizer.Token token;
-        String title = "";
+        String title = null;
 
         while ((token = tokenizer.nextToken()).type != Tokenizer.Token.Type.EOF) {
             if (token.type == Tokenizer.Token.Type.TITLE) {

@@ -1,6 +1,7 @@
 package com.example.gp.Utils;
 
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.gp.R;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,8 @@ import java.util.Map;
  * @author Zehua Kong
  */
 public class UserParserActivity extends AppCompatActivity {
+
+    static CharSequence currentDate = DateFormat.format("yyyy-MM-dd", new Date());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +69,8 @@ public class UserParserActivity extends AppCompatActivity {
         posts.put("p2",p2);
         user.setPostMap(posts);
         Map<String, Notification> notis = new HashMap<>();
-        Notification n1 = new Notification(p1,false);
-        Notification n2 = new Notification(p2,true);
+        Notification n1 = new Notification("Vacation","Go to italy",currentDate, Notification.NotificationType.FOLLOW,"123");
+        Notification n2 = new Notification("Vacation","Go to italy",currentDate, Notification.NotificationType.FOLLOW,"123");
         notis.put("n1",n1);
         notis.put("n2",n2);
         user.setNotificationMap(notis);

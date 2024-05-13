@@ -192,7 +192,7 @@ public class SimpleTestActivity extends AppCompatActivity {
     }
 
     void testSavePost(Post post) {
-        Database.savePostData(post, null, null);
+//        Database.savePostData(post, null, null);
     }
 
     void testGetPost() {
