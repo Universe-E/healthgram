@@ -38,10 +38,6 @@ public class UserDB {
     private static final String TAG = "Database.User";
 
     //        private static String userId;
-    private static String username;
-    private static String email;
-    private static Uri photoUri;
-
 //        public UserDB() {
 //            Log.d(TAG, "UserDB");
 //            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,6 +63,7 @@ public class UserDB {
 
     /**
      * Allow user to sign in
+     *
      * @param input
      * @param password
      * @param object
@@ -82,6 +79,7 @@ public class UserDB {
 
     /**
      * Allow user to sign up
+     *
      * @param username
      * @param email
      * @param password
@@ -218,11 +216,11 @@ public class UserDB {
     /**
      * Get friend request from firestore
      *
-     * @param date   Don't need this parameter for this stage just use null
-     * @param limit  not used
+     * @param timestamp Don't need this parameter for this stage just use null
+     * @param limit     not used
      * @param object
      */
-    public static void getFriendRequest(Date date, int limit, Object object, String methodName) {
+    public static void getFriendRequest(Timestamp timestamp, int limit, Object object, String methodName) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
@@ -230,35 +228,36 @@ public class UserDB {
                 .whereEqualTo("receiverId", userId)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        if (task.getResult() == null) {
-                            /*
-                              Callback
-                              Return error message
-                             */
-                            MethodUtil.invokeMethod(object, methodName, false, "No friend request");
-                            Log.d(TAG, "No friend request");
-                            return;
-                        }
-                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
-                        List<FriendRequest> friendRequests = new ArrayList<>();
-                        for (DocumentSnapshot document : documents) {
-                            friendRequests.add(document.toObject(FriendRequest.class));
-                        }
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
                         /*
                           Callback
-                          Return true and list of FriendRequest object
+                          Return error message
                          */
-                        MethodUtil.invokeMethod(object, methodName, true, friendRequests);
-                        Log.d(TAG, "FriendRequests: " + friendRequests.toString());
+                        MethodUtil.invokeMethod(object, methodName, false, Objects.requireNonNull(e).getMessage());
+                        Log.e(TAG, "Error getting documents: ", e);
+                        return;
                     }
-                    Exception e = task.getException();
+                    if (task.getResult() == null) {
+                        /*
+                          Callback
+                          Return error message
+                         */
+                        MethodUtil.invokeMethod(object, methodName, false, "No friend request");
+                        Log.d(TAG, "No friend request");
+                        return;
+                    }
+                    List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                    List<FriendRequest> friendRequests = new ArrayList<>();
+                    for (DocumentSnapshot document : documents) {
+                        friendRequests.add(document.toObject(FriendRequest.class));
+                    }
                     /*
                       Callback
-                      Return error message
+                      Return true and list of FriendRequest object
                      */
-                    MethodUtil.invokeMethod(object, methodName, false, Objects.requireNonNull(e).getMessage());
-                    Log.e(TAG, "Error getting documents: ", e);
+                    MethodUtil.invokeMethod(object, methodName, true, friendRequests);
+                    Log.d(TAG, "FriendRequests: " + friendRequests.toString());
                 });
     }
 
@@ -382,59 +381,6 @@ public class UserDB {
           Return true and User object
          */
         MethodUtil.invokeMethod(object, methodName, true, userForCallback);
-    }
-
-    private String getUsername() {
-        return UserDB.username;
-    }
-
-    private String getEmail() {
-        return UserDB.email;
-    }
-
-    @Nullable
-    private static String getEmailByUsername(String username) {
-        // Get User email by username
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Log.d(TAG, "Username: " + username);
-
-        ArrayList<String> email = new ArrayList<>();
-
-        DocumentReference docRef = db.collection("users").document(username);
-        Log.d(TAG, "DocumentRef: " + docRef);
-
-        return null;
-    }
-
-    private static Task<Boolean> isUsernameExist(String username) {
-        // Check if username exist
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        DocumentReference docRef = db.collection("users").document(username);
-        return docRef.get().continueWith(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                return document.exists();
-            } else {
-                Log.e(TAG, "get failed with ", task.getException());
-                throw Objects.requireNonNull(task.getException());
-            }
-        });
-    }
-
-    private static Task<Boolean> isEmailExist(String email) {
-        // Check if email exist
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Query query = db.collection("users").whereEqualTo("email", email);
-        return query.get().continueWith(task -> {
-            if (task.isSuccessful()) {
-                return !task.getResult().isEmpty();
-            } else {
-                throw Objects.requireNonNull(task.getException());
-            }
-        });
     }
 
     private static void getEmailByUsername(String username, Object object, Method method) {

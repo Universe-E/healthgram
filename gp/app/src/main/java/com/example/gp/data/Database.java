@@ -94,13 +94,13 @@ public class Database {
      * Get friend request
      * Callback parameters: true and list of FriendRequest object if success, false and error message if fail
      *
-     * @param date       Don't need this parameter for this stage just use null
+     * @param timpestamp       Don't need this parameter for this stage just use null
      * @param limit      The number of request retrieval
      * @param object     The object that calls the method
      * @param methodName Callback method name
      */
-    public static void getFriendRequest(Date date, int limit, Object object, String methodName) {
-        UserDB.getFriendRequest(date, limit, object, methodName);
+    public static void getFriendRequest(Timestamp timpestamp, int limit, Object object, String methodName) {
+        UserDB.getFriendRequest(timpestamp, limit, object, methodName);
     }
 
     /**
