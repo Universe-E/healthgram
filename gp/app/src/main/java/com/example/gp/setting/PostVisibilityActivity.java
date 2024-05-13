@@ -78,13 +78,13 @@ public class PostVisibilityActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mPostAdapter != null) {
-            mPostAdapter = null;
-        }
-
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        if (mPostAdapter != null) {
+//            mPostAdapter = null;
+//        }
+//
+//    }
 }
 

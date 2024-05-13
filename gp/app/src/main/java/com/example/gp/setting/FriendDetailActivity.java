@@ -18,6 +18,10 @@ import com.example.gp.R;
 import com.example.gp.databinding.ActivityFriendDetailBinding;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+/**
+ * @author Yulong Chen
+ * @since 2024-05-07
+ */
 public class FriendDetailActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
 
     private com.example.gp.databinding.ActivityFriendDetailBinding binding;
