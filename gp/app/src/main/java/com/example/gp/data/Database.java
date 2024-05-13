@@ -214,7 +214,7 @@ public class Database {
      * @param object     The object that calls the method
      * @param methodName Callback method name
      */
-    public static void getPostByPostId(String postId, Object object, String methodName) {
+    private static void getPostByPostId(String postId, Object object, String methodName) {
         PostDB.getPostByPostId(postId, object, methodName);
     }
 
@@ -242,7 +242,8 @@ public class Database {
      * @param methodName The method name
      */
     public static void setPublic(String postId, Boolean isPublic, Object object, String methodName) {
-        PostDB.setPublic(postId, isPublic, object, methodName);
+//        PostDB.setPublic(postId, isPublic, object, methodName);
+        PostDB.newSetPublic(postId, isPublic, object, methodName);
     }
 
     /**
@@ -268,6 +269,6 @@ public class Database {
      * @param methodName The method name
      */
     public static void getPostsByAuthorId(Timestamp timestamp, int limit, String authorId, Object object, String methodName) {
-        PostDB.getPostsByAuthorId(timestamp, limit, authorId, object, methodName);
+        PostDB.newGetPostByAuthorId(timestamp, limit, authorId, object, methodName);
     }
 }

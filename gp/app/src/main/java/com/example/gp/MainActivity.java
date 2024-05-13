@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-//        Database.checkSignedIn(this, "updateStartUI");
-//        Log.d(TAG, "onStart: checkSignedIn");
+        Database.checkSignedIn(this, "updateStartUI");
+        Log.d(TAG, "onStart: checkSignedIn");
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.example.gp.Items.User;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.data.PostsData;
 import com.example.gp.data.database.model.PostModel;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
@@ -34,16 +36,6 @@ public class PostDB {
     private static final String POST_PATH = "";
     private static final PostsData postsData = PostsData.getInstance();
 
-    /**
-     * Save post data to firestore
-     *
-     * @param post
-     * @param object
-     * @param methodName Callback return true and Post object if success, false and error message if fail
-     */
-    public static void savePostData(Post post, Object object, String methodName) {
-        FileDB.saveImage(post, object, methodName);
-    }
 
     /**
      * Get a list of posts by post timestamp, descending sorted by post timestamp
@@ -277,50 +269,6 @@ public class PostDB {
                 });
     }
 
-    /**
-     * DO NOT USE THIS METHOD
-     *
-     * @param isSuccessful
-     * @param result
-     * @param object
-     * @param methodName
-     */
-    public static void savePost(boolean isSuccessful, Object result, Object object, String methodName) {
-        if (!isSuccessful) {
-            /*
-              Callback
-              Return error message
-             */
-            MethodUtil.invokeMethod(object, methodName, false, result);
-            return;
-        }
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("posts").document();
-        Post post = (Post) result;
-        PostModel postModel = new PostModel();
-        postModel.setModelFromPost(post);
-        Log.d(TAG, "postModel: " + postModel.toString());
-
-        docRef.set(postModel)
-                .addOnSuccessListener(dRef -> {
-                    /*
-                      Callback
-                      Return true and Post object
-                     */
-                    MethodUtil.invokeMethod(object, methodName, true, post);
-                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                    savePostMap(docRef.getId(), postModel);
-                })
-                .addOnFailureListener(e -> {
-                    /*
-                      Callback
-                      Return error message
-                     */
-                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
-                    Log.e(TAG, "Error: " + e);
-                });
-    }
-
     // New APIs
 
     public static void newSavePostData(Post post, Object object, String methodName) {
@@ -378,24 +326,7 @@ public class PostDB {
                 .get()
                 .addOnCompleteListener(task -> {
                     Log.d(TAG, "task: " + task);
-                    if (!task.isSuccessful()) {
-                        Exception e = task.getException();
-                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
-                        Log.e(TAG, "Error getting documents: ", e);
-                        return;
-                    }
-                    if (task.getResult() == null) {
-                        MethodUtil.invokeMethod(object, methodName, false, "No post");
-                        return;
-                    }
-                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
-                    List<Post> posts = new ArrayList<>();
-                    for (DocumentSnapshot document : documentSnapshots) {
-                        Post post = new Post();
-                        post.setFromModel(document.toObject(PostModel.class));
-                        posts.add(post);
-                    }
-                    FileDB.getImages(posts, 0, object, methodName);
+                    query2postList(task, object, methodName);
                 });
     }
 
@@ -405,7 +336,7 @@ public class PostDB {
         newGetPostByAuthorId(timestamp, limit, userId, object, methodName);
     }
 
-    private static void newGetPostByAuthorId(Timestamp timestamp, int limit, String userId, Object object, String methodName) {
+    public static void newGetPostByAuthorId(Timestamp timestamp, int limit, String userId, Object object, String methodName) {
         timestamp = getTimestamp(timestamp);
 
         CollectionReference postsRef = getPostRef();
@@ -413,28 +344,47 @@ public class PostDB {
                 .whereEqualTo("authorId", userId)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Exception e = task.getException();
-                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
-                        return;
-                    }
-
-                    if (task.getResult().isEmpty()) {
-                        String msg = "No post";
-                        MethodUtil.invokeMethod(object, methodName, false, msg);
-                        return;
-                    }
-
-                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
-                    List<Post> posts = new ArrayList<>();
-
-                    for (DocumentSnapshot document : documentSnapshots) {
-                        Post post = new Post();
-                        post.setFromModel(document.toObject(PostModel.class));
-                        posts.add(post);
-                    }
-
-                    FileDB.getImages(posts, 0, object, methodName);
+                    query2postList(task, object, methodName);
                 });
+    }
+
+    public static void newSetPublic(String postId, Boolean isPublic, Object object, String methodName) {
+        CollectionReference postsRef = getPostRef();
+        postsRef.document(postId)
+                .update("public", isPublic)
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, postId);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing document", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    // Private Utils
+
+    private static void query2postList(Task<QuerySnapshot> task, Object object, String methodName) {
+        if (!task.isSuccessful()) {
+            Exception e = task.getException();
+            MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+            return;
+        }
+
+        if (task.getResult().isEmpty()) {
+            String msg = "No post";
+            MethodUtil.invokeMethod(object, methodName, false, msg);
+            return;
+        }
+
+        List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+        List<Post> posts = new ArrayList<>();
+
+        for (DocumentSnapshot document : documentSnapshots) {
+            Post post = new Post();
+            post.setFromModel(document.toObject(PostModel.class));
+            posts.add(post);
+        }
+
+        FileDB.getImages(posts, 0, object, methodName);
     }
 }

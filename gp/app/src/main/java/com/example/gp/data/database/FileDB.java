@@ -31,32 +31,6 @@ public class FileDB {
         return instance;
     }
 
-    public static void saveImage(Post post, Object object, String methodName) {
-        FileDB fileDB = getInstance();
-        StorageReference storageReference = storage.getReference();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Bitmap bitmap = post.getImg();
-
-        if (bitmap == null) {
-            post.setImgUUID(null);
-            PostDB.savePost(true, post, object, methodName);
-            return;
-        }
-
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
-
-        String uuid = fileDB.getUUID();
-        post.setImgUUID(uuid);
-
-        UploadTask uploadTask = storageReference.child("image/" + uuid + ".jpg").putBytes(data);
-        uploadTask.addOnFailureListener(e -> {
-            PostDB.savePost(false, e.getMessage(), object, methodName);
-        }).addOnSuccessListener(taskSnapshot -> {
-            PostDB.savePost(true, post, object, methodName);
-        });
-    }
-
     public static void getImage(Post post, Object object, String methodName) {
         if (post.getImgUUID() == null) {
             MethodUtil.invokeMethod(object, methodName, true, post);
@@ -94,7 +68,7 @@ public class FileDB {
         }
 
         StorageReference islandRef = storageReference.child("image/" + uuid + ".jpg");
-        islandRef.getBytes(1024 * 1024)
+        islandRef.getBytes(1024 * 1024 * 5)
                 .addOnSuccessListener(bytes -> {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                     posts.get(position).setImg(bitmap);
@@ -125,7 +99,9 @@ public class FileDB {
         String uuid = fileDB.getUUID();
         post.setImgUUID(uuid);
 
-        UploadTask uploadTask = storageReference.child("image/" + uuid + ".jpg").putBytes(data);
+        UploadTask uploadTask = storageReference
+                .child("image/" + uuid + ".jpg")
+                .putBytes(data);
         uploadTask.addOnFailureListener(e -> {
             PostDB.newSavePost(false, e.getMessage(), object, methodName);
         }).addOnSuccessListener(taskSnapshot -> {

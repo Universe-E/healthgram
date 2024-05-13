@@ -27,6 +27,11 @@ public class FirebaseUtil {
                 .collection(Database.getUserCollection());
     }
 
+    public static String getCurrentEmail() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        return auth.getCurrentUser().getEmail();
+    }
+
     public static CollectionReference getPostRef() {
         return FirebaseFirestore
                 .getInstance()

@@ -1,5 +1,7 @@
 package com.example.gp.data.database;
 
+import static com.example.gp.data.database.FirebaseUtil.getCurrentEmail;
+import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
 import static com.example.gp.data.database.FirebaseUtil.getFireUser;
 import static com.example.gp.data.database.FirebaseUtil.getUsersRef;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.Source;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -36,30 +39,66 @@ import java.util.Objects;
 public class UserDB {
     // User data
     private static final String TAG = "Database.User";
+    private static String username;
+    private static UserDB instance;
+    private static String userId;
+    private static String email;
 
-    //        private static String userId;
-//        public UserDB() {
-//            Log.d(TAG, "UserDB");
-//            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//            if (user != null) {
-//                UserDB.userId = user.getUid();
-//                UserDB.email = user.getEmail();
-//                FirebaseFirestore.getInstance().collection("users")
-//                    .document(userId)
-//                    .get()
-//                    .addOnCompleteListener(task -> {
-//                        if (task.isSuccessful()) {
-//                            DocumentSnapshot document = task.getResult();
-//                            if (document.exists()) {
-//                                setUsername((String) document.get("username"));
-//                                Log.d(TAG, "Username: " + UserDB.username);
-//                            } else {
-//                                Log.d(TAG, "No such document");
-//                            }
-//                        }
-//                    });
-//            }
-//        }
+    private UserDB() {
+        userId = getCurrentUserId();
+        email = getCurrentEmail();
+        setUsername(null, null);
+    }
+
+    private void setUsername(Object object, String methodName) {
+        if (userId != null) {
+            MethodUtil.invokeMethod(object, methodName, true, username);
+            return;
+        }
+
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(userId).get(Source.CACHE)
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        setUsernameFromServer(object, methodName);
+                    }
+                    username = task.getResult().getString("username");
+                    MethodUtil.invokeMethod(object, methodName, true, username);
+                });
+    }
+
+    private void setUsernameFromServer(Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(userId).get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.e(TAG, "Error getting documents: ", task.getException());
+                        MethodUtil.invokeMethod(object, methodName, false, task.getException().getMessage());
+                        return;
+                    }
+                    username = task.getResult().getString("username");
+                    MethodUtil.invokeMethod(object, methodName, true, username);
+                });
+    }
+
+    public static UserDB getInstance() {
+        if (instance == null) {
+            instance = new UserDB();
+        }
+        return instance;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
 
     /**
      * Allow user to sign in
