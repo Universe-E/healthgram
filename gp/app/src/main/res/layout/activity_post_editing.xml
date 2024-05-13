@@ -21,6 +21,18 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <ImageView
+                android:id="@+id/iv_post_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_upload_image"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:text="Upload Image... or not!" />
+
             <EditText
                 android:id="@+id/et_edit_post_heading"
                 android:layout_width="match_parent"

@@ -1,6 +1,8 @@
 package com.example.gp.interaction;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +28,9 @@ public class NewPostActivity extends BaseActivity {
     private final String activityName = "New Post";
     private ActivityPostEditingBinding binding;
 
+    private static final int PICK_IMAGE = 1;
+    private Uri imageUri;
+    private Post newPost;
     EditText heading;
     EditText content;
     EditText visibilityString;
@@ -49,6 +54,7 @@ public class NewPostActivity extends BaseActivity {
         setupVisibilityCheckboxListener();
 
         // Set up the button listener
+        setUpUploadImageButtonListener();
         setUpFireButtonListener();
     }
 
@@ -80,9 +86,33 @@ public class NewPostActivity extends BaseActivity {
 
     }
 
+    private void setUpUploadImageButtonListener() {
+        binding.btnUploadImage.setOnClickListener(v -> {
+            openFileChooser();
+        });
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            binding.ivPostImage.setImageURI(imageUri);
+        }
+    }
+
     private void setUpFireButtonListener() {
         binding.btnFirePost.setOnClickListener(v -> {
             // 1. Get the information from the components
+            Bitmap img = this.imageUri == null ? null : binding.ivPostImage.getDrawingCache();
             String heading = this.heading.getText().toString();
             String content = this.content.getText().toString();
             String visibilityString = this.visibilityString.getText().toString();
@@ -90,12 +120,15 @@ public class NewPostActivity extends BaseActivity {
 
             // 1.5 Check if the heading and content are empty
             if (heading.isEmpty() || content.isEmpty()) {
-                ToastUtil.showLong(this, "Empty Post Cannot Be Fired!");
+                ToastUtil.showLong(this, "An empty post? Think it twice!");
                 return;
             }
 
             // 2. Create a new post
-            Post newPost = new Post(content, heading, isPublic);
+            if (img != null)
+                newPost = new Post(content, heading, img, isPublic);
+            else
+                newPost = new Post(content, heading, isPublic);
 
             // TODO: 3. handle visibility
             // parse the visibilityString to a list of user ids
