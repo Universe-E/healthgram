@@ -9,12 +9,14 @@ import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
+import com.example.gp.data.Database;
 import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
@@ -29,6 +31,7 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
     private static final String POST_PATH = "";
+    private static final String DATABASE_NAME = Database.getDatabaseName();
 
     /**
      * Save post data to firestore
@@ -245,14 +248,17 @@ public class PostDB {
                 });
     }
 
-    private static void savePostMap(String postId, PostModel post) {
+    private static void savePostMap(String postId, PostModel postModel) {
+        Log.d(TAG, "savePostMap: " + postId);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         Log.d(TAG, "userId: " + userId);
 
+        db.collection("newTestUsers").document(userId).update("myPosts", FieldValue.arrayUnion(postId));
+
         db.collection("users").document(userId)
-                .set(Map.of("postMap", Map.of(postId, post)), SetOptions.merge());
+                .set(Map.of("postMap", Map.of(postId, postModel)), SetOptions.merge());
     }
 
     /**
@@ -276,6 +282,7 @@ public class PostDB {
         Post post = (Post) result;
         PostModel postModel = new PostModel();
         postModel.setModelFromPost(post);
+        Log.d(TAG, "postModel: " + postModel.toString());
 
         docRef.set(postModel)
                 .addOnSuccessListener(dRef -> {
