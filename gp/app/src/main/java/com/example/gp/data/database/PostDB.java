@@ -28,6 +28,7 @@ import java.util.Objects;
 public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
+    private static final String POST_PATH = "";
 
     /**
      * Save post data to firestore
@@ -87,6 +88,7 @@ public class PostDB {
      * @param methodName Callback return true and Post object if success, false and error message if fail
      */
     public static void getPostByPostId(String postId, Object object, String methodName) {
+        Log.d(TAG, "getPostByPostId: " + postId);
         FirebaseFirestore.getInstance().collection("posts").document(postId).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
