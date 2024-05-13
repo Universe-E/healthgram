@@ -114,7 +114,8 @@ public class HomeFragment extends Fragment {
 
     private void onPostClick(Post post) {
         Intent intent = new Intent(getContext(), PostDetailActivity.class);
-        intent.putExtra("postId", post.getPostId());
+//        intent.putExtra("postId", post.getPostId());
+        intent.putExtra("post", post);
         startActivity(intent);
     }
 

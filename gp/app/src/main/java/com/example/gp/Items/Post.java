@@ -1,9 +1,14 @@
 package com.example.gp.Items;
 
 import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,7 +20,7 @@ import java.util.List;
  * @author : Yulong Chen
  * @since : 2024-05-05
  */
-public class Post implements Serializable {
+public class Post implements Parcelable {
     public String postId;
     public String authorId;
     public String authorName;
@@ -197,5 +202,54 @@ public class Post implements Serializable {
                 ", imgUUID='" + imgUUID + '\'' +
                 ", isPublic=" + isPublic +
                 '}';
+    }
+
+    public static final Parcelable.Creator<Post> CREATOR = new Parcelable.Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
+
+    protected Post(Parcel in) {
+        postId = in.readString();
+        authorId = in.readString();
+        authorName = in.readString();
+        postContent = in.readString();
+        title = in.readString();
+        imgId = in.readInt();
+        img = in.readParcelable(Bitmap.class.getClassLoader());
+        imgUUID = in.readString();
+        likeCount = in.readInt();
+        isPublic = in.readByte() != 0;
+        postTimestamp = in.readParcelable(Timestamp.class.getClassLoader());
+        viewers = in.createStringArrayList();
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(this.postId);
+        dest.writeString(this.authorId);
+        dest.writeString(this.authorName);
+        dest.writeString(this.postContent);
+        dest.writeString(this.title);
+        dest.writeInt(this.imgId);
+        dest.writeParcelable(this.img, flags);
+        dest.writeString(this.imgUUID);
+        dest.writeInt(this.likeCount);
+        dest.writeByte(this.isPublic ? (byte) 1 : (byte) 0);
+        dest.writeParcelable(this.postTimestamp, flags);
+        dest.writeStringList(this.viewers);
     }
 }
