@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.gp.Items.Parser;
 import com.example.gp.Items.Tokenizer;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
@@ -165,32 +166,12 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        Tokenizer tokenizer = new Tokenizer(query);
-        Tokenizer.Token token;
-        String titleQuery = null;
-        Boolean publicQuery = null;
-
         //user can search by starting with:
         //title:
         //public:
-        while ((token = tokenizer.nextToken()).type != Tokenizer.Token.Type.EOF) {
-            if (token.type == Tokenizer.Token.Type.TITLE) {
-                StringBuilder sb = new StringBuilder();
-                while ((token = tokenizer.nextToken()).type == Tokenizer.Token.Type.NAME) {
-                    sb.append(token.value);
-                }
-                titleQuery = sb.toString();
-            }
-            else if (token.type == Tokenizer.Token.Type.PUBLIC) {
-                token = tokenizer.nextToken();
-                if (token.type == Tokenizer.Token.Type.NAME) {
-                    String value = token.value.toLowerCase();
-                    if (value.equals("true") || value.equals("false")) {
-                        publicQuery = Boolean.parseBoolean(value);
-                    }
-                }
-            }
-        }
+        String titleQuery = Parser.getInstance().parseTitle(query);
+        Boolean publicQuery = Parser.getInstance().parsePublic(query);
+
 
         ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
         for (int key : keys) {
