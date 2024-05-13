@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 
 import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Post implements Serializable {
     public String postId;
     public String authorId;
     public String authorName;
-    public String mContent;
+    public String postContent;
     public String title;
     public int imgId;
     public Bitmap img;
@@ -33,13 +32,13 @@ public class Post implements Serializable {
     /**
      * Please use this constructor when creating a new post.
      * @author Han Bao
-     * @param mContent
+     * @param postContent
      * @param title
      * @param img
      * @param isPublic
      */
-    public Post(String mContent, String title, Bitmap img, boolean isPublic) {
-        this.mContent = mContent;
+    public Post(String postContent, String title, Bitmap img, boolean isPublic) {
+        this.postContent = postContent;
         this.title = title;
         this.img = img;
         this.isPublic = isPublic;
@@ -48,29 +47,14 @@ public class Post implements Serializable {
     /**
      * Please use this constructor when creating a new post.
      * @author Han Bao
-     * @param mContent
+     * @param postContent
      * @param title
      * @param isPublic
      */
-    public Post(String mContent, String title, boolean isPublic) {
-        this.mContent = mContent;
+    public Post(String postContent, String title, boolean isPublic) {
+        this.postContent = postContent;
         this.title = title;
         this.isPublic = isPublic;
-    }
-
-    public Post(String postId, String authorId, String content, String title, boolean isPublic) {
-        this.postId = postId;
-        this.authorId = authorId;
-        this.mContent = content;
-        this.title = title;
-        this.isPublic = isPublic;
-    }
-    public Post(String postId, String authorId, String content, String title){
-        this.postId = postId;
-        this.authorId = authorId;
-        this.mContent = content;
-        this.title = title;
-        this.isPublic = true;
     }
 
     /**
@@ -86,7 +70,7 @@ public class Post implements Serializable {
     public void setFromModel(PostModel postModel){
         this.postId = postModel.getPostId();
         this.authorId = postModel.getAuthorId();
-        this.mContent = postModel.getContent();
+        this.postContent = postModel.getContent();
         this.title = postModel.getTitle();
         this.isPublic = postModel.isPublic();
         this.postTimestamp = postModel.getPostTimestamp();
@@ -115,12 +99,12 @@ public class Post implements Serializable {
         this.authorId = authorId;
     }
 
-    public String getmContent() {
-        return mContent;
+    public String getPostContent() {
+        return postContent;
     }
 
-    public void setmContent(String mContent) {
-        this.mContent = mContent;
+    public void setPostContent(String postContent) {
+        this.postContent = postContent;
     }
 
     public String getTitle() {
@@ -204,7 +188,7 @@ public class Post implements Serializable {
         return "Post{" +
                 "postId='" + postId + '\'' +
                 ", authorId='" + authorId + '\'' +
-                ", content='" + mContent + '\'' +
+                ", content='" + postContent + '\'' +
                 ", title='" + title + '\'' +
                 ", imgId=" + imgId +
                 ", likeCount=" + likeCount +
