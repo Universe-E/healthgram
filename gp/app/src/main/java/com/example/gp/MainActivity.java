@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //If not root task, cannot go back to previous page
+        // If not root task, cannot go back to previous page
         if (!isTaskRoot()) {
             final Intent intent = getIntent();
             final String intentAction = intent.getAction();
@@ -99,6 +99,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Validate username, email, and password
+     * @param usernameOrEmail username, email
+     * @param password password
+     * @return true if valid
+     */
     private boolean validateForm(String usernameOrEmail, String password) {
         if (usernameOrEmail.isEmpty() || password.isEmpty()) {
             ToastUtil.showLong(this, "Please fill in all fields");

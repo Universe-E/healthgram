@@ -15,7 +15,18 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
 
+/**
+ * This class parses user to json or xml files, and store in android devices
+ * @author Zehua Kong
+ */
 public class UserParser {
+
+    /**
+     * Parse user to json file
+     * @param context context
+     * @param user user
+     * @param fileName output file name
+     */
     public static void parseToJSON(Context context, User user, String fileName) throws JSONException, IllegalAccessException, IOException {
         JSONObject userJson = new JSONObject();
 
@@ -33,6 +44,12 @@ public class UserParser {
         fos.close();
     }
 
+    /**
+     * Parse user to xml file
+     * @param context context
+     * @param user user
+     * @param fileName output file name
+     */
     public static void parseToXML(Context context, User user, String fileName) throws IllegalAccessException, IOException {
         XmlSerializer xmlSerializer = Xml.newSerializer();
         StringWriter writer = new StringWriter();

@@ -3,6 +3,7 @@ package com.example.gp.Utils;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.Items.Friend;
@@ -18,12 +19,36 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Parser user in Android UI pages
+ * @author Zehua Kong
+ */
 public class UserParserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_parser);
 
+        User user = getCurrentUser();
+
+        try {
+            //Parse current user to json and xml file
+            UserParser.parseToJSON(getApplicationContext(), user, "user.json");
+            UserParser.parseToXML(getApplicationContext(), user, "user.xml");
+
+            Toast.makeText(this, "User parsed successfully", Toast.LENGTH_SHORT).show();
+        } catch (IOException | IllegalAccessException | JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error occurred while parsing user", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Create a user to parse
+     * @return current user
+     */
+    @NonNull
+    private static User getCurrentUser() {
         User user = new User("u1", "John", "john@example.com");
         user.setDescription("Sample description");
         user.setAvatar("avatar.jpg");
@@ -45,15 +70,6 @@ public class UserParserActivity extends AppCompatActivity {
         notis.put("n1",n1);
         notis.put("n2",n2);
         user.setNotificationMap(notis);
-
-        try {
-            UserParser.parseToJSON(getApplicationContext(), user, "user.json");
-            UserParser.parseToXML(getApplicationContext(), user, "user.xml");
-
-            Toast.makeText(this, "User parsed successfully", Toast.LENGTH_SHORT).show();
-        } catch (IOException | IllegalAccessException | JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error occurred while parsing user", Toast.LENGTH_SHORT).show();
-        }
+        return user;
     }
 }

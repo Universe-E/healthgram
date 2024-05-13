@@ -128,4 +128,8 @@ public class User {
     public void setNotificationMap(Map<String, Notification> notificationMap) {
         User.notificationMap = notificationMap;
     }
+
+    public String getAvatarUUID() {
+        return avatar;
+    }
 }

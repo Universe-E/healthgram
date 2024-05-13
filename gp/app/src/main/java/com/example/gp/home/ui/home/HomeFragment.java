@@ -10,10 +10,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.example.gp.Items.Parser;
+import com.example.gp.Items.Tokenizer;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
@@ -33,7 +34,8 @@ import java.util.List;
 /**
  * Home fragment
  * The page to show home page of posts sent by all other users you followed
- * Author: Xingchen Zhang
+ * @author  Xingchen Zhang
+ * {@code @editor} Zehua Kong
  * Date: 2024-05-01
  */
 public class HomeFragment extends Fragment {
@@ -98,7 +100,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * Initialize the recycler views for the posts.
-     * @param view
+     * @param view view
      */
     private void initializeRecyclerViews(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.rv_post_container);
@@ -156,6 +158,10 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    /**
+     * Search by input query string, or input token as prefix
+     * @param query query string
+     */
     private void performSearch(String query) {
         List<Post> filteredPosts = new ArrayList<>();
 
@@ -165,15 +171,24 @@ public class HomeFragment extends Fragment {
             return;
         }
 
+        //User can search by starting with:
+        //title:
+        //public:
+        String titleQuery = Parser.getInstance().parseTitle(query);
+        Boolean publicQuery = Parser.getInstance().parsePublic(query);
+
+
         ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
         for (int key : keys) {
-            Post post = (Post) postTree.search(key); // find posts by key
-            if (post.getTitle().toLowerCase().contains(query.toLowerCase())) {
+            Post post = (Post) postTree.search(key);
+            // Check if user input token, if yes, query by token
+            boolean titleMatches = titleQuery == null || post.getTitle().toLowerCase().contains(titleQuery.toLowerCase());
+            boolean publicMatches = publicQuery == null || post.isPublic() == publicQuery;
+
+            if (titleMatches && publicMatches) {
                 filteredPosts.add(post);
             }
         }
         postCardAdapter.updatePosts(filteredPosts);  // update posts RecyclerView
-
-
     }
 }

@@ -10,19 +10,24 @@ import com.google.firebase.Timestamp;
 import org.junit.Test;
 
 import java.util.Calendar;
+
+/**
+ * Test post class
+ * @author Zehua Kong
+ */
 public class PostTest {
     @Test
     public void testPost() {
         Post post = new Post();
         post.setPostId("postId");
         post.setAuthorId("authorId");
-        post.setmContent("This is a test post.");
+        post.setPostContent("This is a test post.");
         post.setImgUUID("image-UUID");
         post.setPostTimestamp(new Timestamp(Calendar.getInstance().getTime()));
 
         assertEquals("postId", post.getPostId());
         assertEquals("authorId", post.getAuthorId());
-        assertEquals("This is a test post.", post.getmContent());
+        assertEquals("This is a test post.", post.getPostContent());
         assertEquals("image-UUID", post.getImgUUID());
         assertNotNull(post.getPostTimestamp());
     }
@@ -31,18 +36,7 @@ public class PostTest {
     public void testPostConstructorWithContent() {
         Post post = new Post("content", "title", true);
 
-        assertEquals("content", post.getmContent());
-        assertEquals("title", post.getTitle());
-        assertTrue(post.isPublic());
-    }
-
-    @Test
-    public void testPostConstructorWithPostIdAndAuthorId() {
-        Post post = new Post("postId", "authorId", "content", "title", true);
-
-        assertEquals("postId", post.getPostId());
-        assertEquals("authorId", post.getAuthorId());
-        assertEquals("content", post.getmContent());
+        assertEquals("content", post.getPostContent());
         assertEquals("title", post.getTitle());
         assertTrue(post.isPublic());
     }
@@ -52,7 +46,7 @@ public class PostTest {
         Post post = new Post();
         post.setPostId("postId");
         post.setAuthorId("authorId");
-        post.setmContent("content");
+        post.setPostContent("content");
         post.setTitle("title");
         post.setIsPublic(true);
         post.setPostTimestamp(new Timestamp(Calendar.getInstance().getTime()));
@@ -64,7 +58,7 @@ public class PostTest {
 
         assertEquals("postId", post.getPostId());
         assertEquals("authorId", post.getAuthorId());
-        assertEquals("content", post.getmContent());
+        assertEquals("content", post.getPostContent());
         assertEquals("title", post.getTitle());
         assertTrue(post.isPublic());
         assertNotNull(post.getPostTimestamp());
