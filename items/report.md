@@ -77,8 +77,65 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
-2. **UID2, Name2**  I have xx% contribution, as follows: <br>
-  - ...
+2. **u7752342, Han Bao**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+
+3. **u7670173, Xingchen Zhang**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+
+4. **u7773219, Tianci Li**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+
+5. **u7756137, Yulong Chen**  I have 20% contribution, as follows: <br>
+
+  - **Code Contribution in the final App**
+    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+
+  - **Code and App Design** 
+    - [What design patterns, data structures, did the involved member propose?]*
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - [Report Writing?] [Slides preparation?]*
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
 
 
@@ -92,25 +149,25 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
 
-*A patient names Alice wants to know something about his illnesses, and see a public post by physician Bob on the Healthgram app*
+A patient names Alice wants to know something about his illnesses, and see a public post by physician Bob on the Healthgram app
 
-1. *Alice found that the medicare advice from Bob is useful*
-2. *The post is edited by Bob with the content is mainly about adjust your daily diet to keep away from diseases*
-3. *Alice followed doctor Bob, each time when Bob sends new posts, Alice will receive new notification from him*
-4. *Alice want to inquiry her conditions in privacy with Bob, she set some of her posts private, so that no other people can see these posts*
-5. *After Alice's illnesses were cured, she unfollowed doctor Bob, this operation will let her not to receive notification from doctor Bob*
+1. Alice found that the medicare advice from Bob is useful
+2. The post is edited by Bob with the content is mainly about adjust your daily diet to keep away from diseases
+3. Alice followed doctor Bob, each time when Bob sends new posts, Alice will receive new notification from him
+4. Alice want to inquiry her conditions in privacy with Bob, she set some of her posts private, so that no other people can see these posts
+5. After Alice's illnesses were cured, she unfollowed doctor Bob, this operation will let her not to receive notification from doctor Bob
 
-*Here is a map navigation application example*
+Here is a map navigation application example
 
-*Targets Users: Patients
+*Targets Users: Patients*
 
-* *Patients can use it to search for useful posts by keywords*
-* *Patients can add their own posts to share recent progress on their conditions*
-* *Patients can learn the knowledge from public posts*
-* *Patients can set visibility of posts to private to protect their privacy* 
+* Patients can use it to search for useful posts by keywords
+* Patients can add their own posts to share recent progress on their conditions
+* Patients can learn the knowledge from public posts
+* Patients can set visibility of posts to private to protect their privacy 
 * Patients can follow other patients, or doctors to trace their status
 
-*Target Users: Doctors
+*Target Users: Doctors*
 
 * Doctors can publish professional suggestions
 * Doctors can follow other doctors and patients for better medical treatment inquiry
