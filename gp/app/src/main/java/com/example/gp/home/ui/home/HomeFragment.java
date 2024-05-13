@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -181,13 +182,33 @@ public class HomeFragment extends Fragment {
         ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
         for (int key : keys) {
             Post post = (Post) postTree.search(key);
-            // Check if user input token, if yes, query by token
-            boolean titleMatches = titleQuery == null || post.getTitle().toLowerCase().contains(titleQuery.toLowerCase());
-            boolean publicMatches = publicQuery == null || post.isPublic() == publicQuery;
 
-            if (titleMatches && publicMatches) {
-                filteredPosts.add(post);
+            // If no token used, use title query in default
+            if (titleQuery == null && publicQuery == null) {
+                if (post.getTitle().toLowerCase().contains(query.toLowerCase())) {
+                    filteredPosts.add(post);
+                }
             }
+            // If only one token used, filter by token
+            else if (titleQuery == null || publicQuery == null) {
+                // Use public
+                if (titleQuery == null) {
+                    if (post.isPublic() == Boolean.TRUE.equals(publicQuery)) {
+                        filteredPosts.add(post);
+                    }
+                }
+                // Use title
+                else {
+                    if (post.getTitle().toLowerCase().contains(titleQuery.toLowerCase())) {
+                        filteredPosts.add(post);
+                    }
+                }
+            }
+            //Use more than 1 token is an invalid operation
+            else {
+                return;
+            }
+
         }
         postCardAdapter.updatePosts(filteredPosts);  // update posts RecyclerView
     }
