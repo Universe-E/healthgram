@@ -117,11 +117,11 @@ public class HomeFragment extends Fragment {
         postCardAdapter.setOnPostClickListener(this::onPostClick);
     }
 
-    private void onPostClick(Post post) {
+    private void onPostClick(int position) {
         Intent intent = new Intent(getContext(), PostDetailActivity.class);
-        intent.putExtra("postId", post.getPostId());
-
-        intent.putExtra("post", post);
+//        intent.putExtra("postId", post.getPostId());
+//        intent.putExtra("post", post);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 

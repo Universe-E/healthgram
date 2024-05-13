@@ -26,7 +26,7 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     private static final PostsData postsData = PostsData.getInstance();
 
     public interface OnPostClickListener {
-        void onPostClick(Post post);
+        void onPostClick(int position);
     }
 
     public void setOnPostClickListener(OnPostClickListener listener) {
@@ -74,8 +74,7 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
         // set the click listener
         holder.itemView.setOnClickListener(v -> {
             if (onPostClickListener != null) {
-
-                onPostClickListener.onPostClick(post);
+                onPostClickListener.onPostClick(position);
             }
         });
     }
