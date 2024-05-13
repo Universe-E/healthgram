@@ -5,15 +5,11 @@ import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireUser;
 import static com.example.gp.data.database.FirebaseUtil.getPostRef;
 
-import android.graphics.Bitmap;
-import android.nfc.Tag;
 import android.util.Log;
 
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.MethodUtil;
-import com.example.gp.Utils.TimeUtil;
-import com.example.gp.data.Database;
 import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +23,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;

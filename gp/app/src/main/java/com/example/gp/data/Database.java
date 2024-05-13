@@ -8,7 +8,6 @@ import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
 import com.google.firebase.Timestamp;
 
-import java.util.Date;
 import java.util.List;
 
 public class Database {
