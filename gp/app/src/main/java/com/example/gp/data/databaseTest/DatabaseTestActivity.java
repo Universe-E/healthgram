@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
+import com.example.gp.Items.Friend;
 import com.example.gp.Items.Post;
 import com.example.gp.data.Database;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -21,11 +22,14 @@ import android.widget.ImageView;
 
 import com.example.gp.R;
 import com.example.gp.databinding.ActivityDatabaseTestBinding;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseTestActivity extends AppCompatActivity {
     private static final String TAG = "DatabaseTestActivity";
@@ -96,6 +100,15 @@ public class DatabaseTestActivity extends AppCompatActivity {
         button4.setOnClickListener(listener -> {
             Database.getUserPost(null, 0, DatabaseTestActivity.this, "getUserPost");
         });
+
+        Button button5 = binding.button5;
+        button5.setOnClickListener(listener -> {
+            Friend friend = new Friend("3", "Samuel", 2);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("Test1")
+                    .document("1")
+                    .set(Map.of("friendMap", Map.of(friend.getId(), friend)));
+        });
     }
 
     public void getUserPost(boolean isSuccessful, Object object) {
@@ -106,6 +119,11 @@ public class DatabaseTestActivity extends AppCompatActivity {
         }
         List<Post> posts = (List<Post>) object;
         Log.d(TAG, "posts: " + posts);
+    }
+
+    public void getFollowList(boolean isSuccessful, Object object) {
+        List<Friend> friends = (List<Friend>) object;
+        Log.d(TAG, "friends: " + friends);
     }
 
     public void saveImage(boolean isSuccessful, Post post) {

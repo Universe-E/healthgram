@@ -120,7 +120,6 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void getFriendRequestList(Timestamp timpestamp, int limit, Object object, String methodName) {
-//        UserDB.getFriendRequest(timpestamp, limit, object, methodName);
         UserDB.getFriendRequestList(timpestamp, limit, object, methodName);
     }
 
@@ -138,7 +137,6 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void getFollowList(String nickname, Integer limit, Object object, String methodName) {
-//        UserDB.getFriendList(nickname, limit, object, methodName);
         UserDB.newGetFollowList(nickname, limit, object, methodName);
     }
 

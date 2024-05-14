@@ -113,14 +113,6 @@ public class User {
         User.friendMap = friendMap;
     }
 
-    public Map<String, Post> getPostMap() {
-        return postMap;
-    }
-
-    public void setPostMap(Map<String, Post> postMap) {
-        User.postMap = postMap;
-    }
-
     public Map<String, Notification> getNotificationMap() {
         return notificationMap;
     }

@@ -64,7 +64,6 @@ public class UserTest {
         assertEquals("description", user.getDescription());
         assertEquals("avatar", user.getAvatar());
         assertEquals(friendMap, user.getFriendMap());
-        assertEquals(postMap, user.getPostMap());
         assertEquals(notificationMap, user.getNotificationMap());
     }
 
@@ -78,7 +77,6 @@ public class UserTest {
         assertEquals("set description", user.getDescription());
         assertEquals("set avatar", user.getAvatar());
         assertNotNull(user.getFriendMap());
-        assertNotNull(user.getPostMap());
         assertNotNull(user.getNotificationMap());
     }
 }

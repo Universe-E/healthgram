@@ -5,16 +5,17 @@ import androidx.annotation.NonNull;
 import com.example.gp.Items.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserModel {
     private String username;
     private String email;
     private String userId;
     private String avatarUUID;
-    private List<FriendModel> myFriends;
-    private List<PostModel> myPosts;
-    private List<NotificationModel> myNotifications;
+    private Map<String, FriendModel> myFriends;
+    private Map<String, NotificationModel> myNotifications;
 
     public UserModel() {
     }
@@ -51,27 +52,19 @@ public class UserModel {
         this.avatarUUID = avatarUUID;
     }
 
-    public List<FriendModel> getMyFriends() {
+    public Map<String, FriendModel> getMyFriends() {
         return myFriends;
     }
 
-    public void setMyFriends(List<FriendModel> myFriends) {
+    public void setMyFriends(Map<String, FriendModel> myFriends) {
         this.myFriends = myFriends;
     }
 
-    public List<PostModel> getMyPosts() {
-        return myPosts;
-    }
-
-    public void setMyPosts(List<PostModel> myPosts) {
-        this.myPosts = myPosts;
-    }
-
-    public List<NotificationModel> getMyNotifications() {
+    public Map<String, NotificationModel> getMyNotifications() {
         return myNotifications;
     }
 
-    public void setMyNotifications(List<NotificationModel> myNotifications) {
+    public void setMyNotifications(Map<String, NotificationModel> myNotifications) {
         this.myNotifications = myNotifications;
     }
 
@@ -79,8 +72,7 @@ public class UserModel {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.avatarUUID = user.getAvatarUUID();
-        this.myFriends = new ArrayList<>();
-        this.myPosts = new ArrayList<>();
-        this.myNotifications = new ArrayList<>();
+        this.myFriends = new HashMap<>();
+        this.myNotifications = new HashMap<>();
     }
 }

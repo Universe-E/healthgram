@@ -50,13 +50,37 @@ public class UserDB {
     private static UserDB instance;
     private static String userId;
     private static String email;
+    private static List<String> friendIdList;
 
     private UserDB() {
         userId = getCurrentUserId();
         email = getCurrentEmail();
         setUsername(null, null);
+//        getFollowList(null, null);
     }
 
+    private void getFollowList(Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(userId)
+                .get(Source.CACHE)
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful() || task.getResult() == null) {
+                        Exception e = task.getException();
+                        Log.e(TAG, "Error getting documents: ", e);
+                        return;
+                    }
+                    UserModel userModel = task.getResult().toObject(UserModel.class);
+
+                });
+    }
+
+    private static void setFollowList(boolean isSuccessful, Object object) {
+        if (!isSuccessful) {
+            return;
+        }
+        Map<String, Friend> friendMap = (Map<String, Friend>) object;
+
+    }
 
     private void setUsername(Object object, String methodName) {
         if (username != null) {
@@ -617,14 +641,15 @@ public class UserDB {
 
     public static void follow(Friend friend, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
-        String userId = getCurrentUserId();
         FriendModel friendModel = new FriendModel(friend);
+        Map<String, Object> update = new HashMap<>();
+        update.put("myFriends", Map.of(friend.getId(), friendModel));
 
-        usersRef.document(userId)
-                .update("friendList", FieldValue.arrayUnion(friendModel))
+        usersRef.document(getCurrentUserId())
+                .set(update, SetOptions.merge())
                 .addOnSuccessListener(aVoid -> {
                     Log.d(TAG, "new follow successfully written!");
-                    setFollowNotification(username, object, methodName);
+                    setFollowNotification(friend.getId(), object, methodName);
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
@@ -671,14 +696,18 @@ public class UserDB {
                     }
 
                     UserModel userModel = task.getResult().toObject(UserModel.class);
-                    List< FriendModel> friendList = userModel.getMyFriends();
+                    Map<String, FriendModel> friendMapList = userModel.getMyFriends();
 
-                    if (friendList == null) {
+
+                    if (friendMapList == null) {
                         String msg = "No friend";
                         Log.d(TAG, msg);
                         MethodUtil.invokeMethod(object, methodName, false, msg);
                         return;
                     }
+
+                    List<Friend> friendList = new ArrayList<>();
+                    // TODO: implement this
 
                     MethodUtil.invokeMethod(object, methodName, true, friendList);
                     Log.d(TAG, "FriendList: " + friendList.toString());
@@ -753,8 +782,8 @@ public class UserDB {
                 .addOnSuccessListener(aVoid -> {
                     if (friendRequest.isAccepted()) {
                         Friend friend = new Friend();
-                        friend.setId(friendRequest.getSenderId());
-                        friend.setNickname(friendRequest.getSenderName());
+                        friend.setId(friendRequest.getReceiverId());
+                        friend.setNickname(friendRequest.getRequestId());
                         follow(friend, object, methodName);
                     }
                 })
@@ -766,14 +795,18 @@ public class UserDB {
 
     // Private Utils
 
-    private static void setFollowNotification(String senderName, Object object, String methodName) {
+    private static void setFollowNotification(String receiverId, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
         NotificationModel notificationModel = new NotificationModel();
-        String msg = "New follower: " + senderName;
+        String msg = "New follower: " + username;
+        DocumentReference documentReference = usersRef.document();
         notificationModel.setMessage(msg);
+        notificationModel.setNotificationId(documentReference.getId());
+        Map<String, Object> myNotifications = new HashMap<>();
+        myNotifications.put("myNotifications", Map.of(documentReference.getId(), notificationModel));
 
-        usersRef.document(getCurrentUserId())
-                .update("myNotifications", FieldValue.arrayUnion(notificationModel))
+        usersRef.document(receiverId)
+                .set(myNotifications, SetOptions.merge())
                 .addOnSuccessListener(aVoid -> {
                     MethodUtil.invokeMethod(object, methodName, true, notificationModel);
                 })
@@ -785,8 +818,14 @@ public class UserDB {
 
     private static void setFriendReqNotification(FriendRequestModel friendRequestModel, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
+        NotificationModel notificationModel = friendRequestModel.notification();
+        notificationModel.setNotificationId(friendRequestModel.getRequestId());
+        notificationModel.setMessage(friendRequestModel.getSenderName() + " sent you a friend request");
+        Map<String, Object> update = new HashMap<>();
+        update.put("myNotifications", Map.of(friendRequestModel.getRequestId(), notificationModel));
+
         usersRef.document(friendRequestModel.getReceiverId())
-                .update("myNotifications", FieldValue.arrayUnion(friendRequestModel.notification()))
+                .set(update, SetOptions.merge())
                 .addOnSuccessListener(aVoid -> {
                     MethodUtil.invokeMethod(object, methodName, true, friendRequestModel);
                 })
@@ -862,6 +901,7 @@ public class UserDB {
                     userModel.setUsername(username);
                     userModel.setEmail(email);
                     userModel.setUserId(fireUser.getUid());
+                    UserDB userDB = getInstance();
 
                     newSaveUserData(userModel, object, methodName);
                 });

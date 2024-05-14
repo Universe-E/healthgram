@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
 import com.example.gp.R;
@@ -19,6 +20,7 @@ import com.example.gp.data.Database;
 import com.example.gp.data.PostsData;
 import com.example.gp.data.UserData;
 import com.example.gp.BaseActivity;
+import com.example.gp.data.database.UserDB;
 
 import java.util.Objects;
 
@@ -118,6 +120,10 @@ public class PostDetailActivity extends BaseActivity {
                 btnFollow.setText("Follow");
             } else {
                 // Show follow confirmation dialog
+                Friend newFriend = new Friend();
+                newFriend.setId(post.getAuthorId());
+                newFriend.setNickname(post.getAuthorName());
+                Database.follow(newFriend, null, null);
                 showAddFriendDialog();
                 btnFollow.setText("Unfollow");
             }
@@ -146,7 +152,9 @@ public class PostDetailActivity extends BaseActivity {
         return false;
     }
     private boolean isAuthorMyself() {
-        return Objects.equals(this.post.getAuthorId(), UserData.userId.getValue());
+        UserDB userDB = UserDB.getInstance();
+        String currentUserId = userDB.getUserId();
+        return Objects.equals(this.post.getAuthorId(), currentUserId);
     }
 
     private void showAddFriendDialog() {

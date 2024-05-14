@@ -192,7 +192,7 @@ public class PostDB {
                     List<String> viewers = post.getViewers();
                     List<FriendModel> friendModels = null;
                     if (userModel != null) {
-                        friendModels = userModel.getMyFriends();
+
                     } else {
                         getViewers(posts, position + 1, object, methodName);
                         return;

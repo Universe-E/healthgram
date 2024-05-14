@@ -67,7 +67,6 @@ public class UserParserActivity extends AppCompatActivity {
         Post p2 = new Post("p2","a2",false);
         posts.put("p1",p1);
         posts.put("p2",p2);
-        user.setPostMap(posts);
         Map<String, Notification> notis = new HashMap<>();
         Notification n1 = new Notification("Vacation","Go to italy",currentDate, Notification.NotificationType.FOLLOW,"123");
         Notification n2 = new Notification("Vacation","Go to italy",currentDate, Notification.NotificationType.FOLLOW,"123");
