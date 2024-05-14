@@ -16,15 +16,19 @@ import com.example.gp.data.database.UserDB;
 import com.example.gp.home.Fragment_home;
 
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends BaseActivity {
 
     private static final String TAG = SignUpActivity.class.getSimpleName();
+    private String activityName = "Sign Up";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up);
+
+        // initialize top bar
+        setUpTitleBar(R.layout.activity_new_post, activityName);
     }
 
     public void createUserAccount(View view) {
