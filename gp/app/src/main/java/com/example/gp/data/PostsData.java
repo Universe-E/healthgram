@@ -27,6 +27,7 @@ public class PostsData {
     }
 
     public static void clearPostsData() {
+        instance = null;
         _allPosts = null;
     }
 
@@ -51,6 +52,9 @@ public class PostsData {
     }
 
     public List<Post> getPosts() {
+        if (_allPosts == null) {
+            _allPosts = new ArrayList<>();
+        }
         return _allPosts;
     }
 }

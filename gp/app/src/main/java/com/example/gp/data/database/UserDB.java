@@ -1,5 +1,6 @@
 package com.example.gp.data.database;
 
+import static com.example.gp.data.FriendsData.clearFriendsData;
 import static com.example.gp.data.PostsData.clearPostsData;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentEmail;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
@@ -405,6 +406,8 @@ public class UserDB {
     public static void signOut(Object object, String methodName) {
         FirebaseAuth.getInstance().signOut();
         clearUserDB();
+        clearPostsData();
+        clearFriendsData();
 
         try {
             /*

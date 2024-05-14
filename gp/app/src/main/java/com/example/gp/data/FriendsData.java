@@ -28,6 +28,7 @@ public class FriendsData {
     }
 
     public static void clearFriendsData() {
+        instance = null;
         _allFriends = null;
     }
 

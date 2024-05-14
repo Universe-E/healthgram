@@ -36,6 +36,14 @@ public class Database {
     // User account operations
 
     /**
+     * Clear all data
+     */
+    public static void clearAll() {
+        PostsData.clearPostsData();
+        FriendsData.clearFriendsData();
+    }
+
+    /**
      * Allow user to sign in
      * Callback parameters: true and User object if success, false and error message if fail
      *
@@ -70,6 +78,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void signOut(Object object, String methodName) {
+        clearAll();
         UserDB.signOut(object, methodName);
     }
 

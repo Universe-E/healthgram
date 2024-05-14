@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class PostDB {
     // Aka Note's complete version
@@ -82,6 +83,7 @@ public class PostDB {
         Log.d(TAG, "timestamp: " + timestamp);
 
         Timestamp lastPostTimestamp = null;
+        PostsData postsData = PostsData.getInstance();
         if (!postsData.getPosts().isEmpty())
             lastPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
 
@@ -168,6 +170,7 @@ public class PostDB {
         }
 
         String authorId = posts.get(position).getAuthorId();
+        Log.d(TAG, "authorId: " + authorId);
         String userId = getCurrentUserId();
         CollectionReference usersRef = getUsersRef();
         usersRef.document(authorId)
@@ -187,22 +190,24 @@ public class PostDB {
 
                     Post post = posts.get(position);
 
+                    // Get user model
                     UserModel userModel = task.getResult().toObject(UserModel.class);
                     Log.d(TAG, "userModel: " + userModel);
                     List<String> viewers = post.getViewers();
-                    List<FriendModel> friendModels = null;
-                    if (userModel != null) {
-
-                    } else {
+                    List<FriendModel> friendModels = new ArrayList<>();
+                    if (userModel == null) {
                         getViewers(posts, position + 1, object, methodName);
                         return;
                     }
+                    Map<String, FriendModel> myFriends = userModel.getMyFriends();
+                    if (myFriends != null) {
+                        for (Map.Entry<String, FriendModel> entry : myFriends.entrySet()) {
+                            friendModels.add(entry.getValue());
+                        }
+                    }
                     Log.d(TAG, "friendModels: " + friendModels);
-                    if (friendModels == null) {
-                        post.setPostContent("Only " + post.getAuthorName() + "'s followings can see this post.");
-                        post.setImgUUID(null);
-                        getViewers(posts, position + 1, object, methodName);
-                        return;
+                    if (viewers == null) {
+                        viewers = new ArrayList<>();
                     }
                     for (FriendModel friendModel : friendModels) {
                         viewers.add(friendModel.getUserId());

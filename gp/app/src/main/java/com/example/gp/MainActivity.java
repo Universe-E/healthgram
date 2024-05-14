@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Database.clearAll();
 
         // If not root task, cannot go back to previous page
         if (!isTaskRoot()) {
