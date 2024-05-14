@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gp.BaseActivity;
+import com.example.gp.DirectMessageActivity;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
@@ -55,7 +56,9 @@ public class FriendDetailActivity extends BaseActivity implements CompoundButton
     public void onClick(View v) {
         super.onClick(v);
         if (v == binding.llFriendDetailDirectMessageLayout) {
-            // TODO: Jump to Direct Message Activity(P2P part)
+            // Jump to Direct Message Activity(P2P part)
+            Intent intent = new Intent(this, DirectMessageActivity.class);
+            startActivity(intent);
 
         }
     }

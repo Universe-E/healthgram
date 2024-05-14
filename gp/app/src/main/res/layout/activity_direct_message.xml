@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include
+        android:id="@+id/tb_top_navigation_bar"
+        layout="@layout/top_navigation_bar" />
+
+    <!-- Direct Message -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_direct_message_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tb_top_navigation_bar"
+        android:layout_above="@id/ll_direct_message_input" />
+
+    <!-- Message input -->
+    <LinearLayout
+        android:id="@+id/ll_direct_message_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/et_message_input"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:hint="Type your message here" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginEnd="5dp"
+                android:background="@color/black" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_send_message"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_pressed_effect"
+            android:text="Send" />
+    </LinearLayout>
+
+</RelativeLayout>
