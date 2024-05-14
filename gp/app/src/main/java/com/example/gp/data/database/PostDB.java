@@ -24,7 +24,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -36,13 +35,13 @@ public class PostDB {
 
     // New APIs
 
-    public static void newSavePostData(Post post, Object object, String methodName) {
+    public static void savePostData(Post post, Object object, String methodName) {
         Log.d(TAG, "newSavePost: " + post.toString());
 
         FileDB.newSaveImage(post, object, methodName);
     }
 
-    public static void newSavePost(boolean isSuccessful, Object result, Object object, String methodName) {
+    public static void savePost(boolean isSuccessful, Object result, Object object, String methodName) {
         Log.d(TAG, "newSavePost: " + isSuccessful);
         if (!isSuccessful) {
             MethodUtil.invokeMethod(object, methodName, false, result);
@@ -78,19 +77,56 @@ public class PostDB {
                 });
     }
 
-    public static void GetNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
-        timestamp = getTimestamp(timestamp);
-        Log.d(TAG, "timestamp: " + timestamp);
+    public static void deletePost(String postId, Object object, String methodName) {
+        CollectionReference postsRef = getPostRef();
 
-        Timestamp lastPostTimestamp = null;
+        postsRef.document(postId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, postId);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error delete document", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    public static void GetNewPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
+        timestamp = getTimestamp(timestamp);
+        if (limit == null) {
+            limit = 9;
+        }
+
+        Timestamp lastestPostTimestamp = null;
         PostsData postsData = PostsData.getInstance();
         if (!postsData.getPosts().isEmpty())
-            lastPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
+            lastestPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
-                .whereLessThan("postTimestamp", timestamp)
-                .endBefore(lastPostTimestamp)
+                .endBefore(lastestPostTimestamp)
+                .limit(limit)
+                .get()
+                .addOnCompleteListener(task -> {
+                    Log.d(TAG, "task: " + task);
+                    query2postList(task, object, methodName);
+                });
+    }
+
+    public static void GetPreviousPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
+        timestamp = getTimestamp(timestamp);
+        if (limit == null) {
+            limit = 9;
+        }
+
+        Timestamp oldestPostTimestamp = null;
+        PostsData postsData = PostsData.getInstance();
+        if (!postsData.getPosts().isEmpty())
+            oldestPostTimestamp = postsData.getPosts().get(postsData.getPosts().size() - 1).getPostTimestamp();
+
+        CollectionReference postsRef = getPostRef();
+        postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
+                .startAfter(oldestPostTimestamp)
                 .limit(limit)
                 .get()
                 .addOnCompleteListener(task -> {

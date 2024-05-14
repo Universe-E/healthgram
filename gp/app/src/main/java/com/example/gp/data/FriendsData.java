@@ -1,11 +1,8 @@
 package com.example.gp.data;
 
-import com.example.gp.Items.Friend;
 import com.example.gp.data.database.model.FriendModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +37,14 @@ public class FriendsData {
             return;
         }
         _allFriends.putAll(friends);
+    }
+
+    public FriendModel getFriendById(String id) {
+        return _allFriends.get(id);
+    }
+
+    public void removeFriendById(String id) {
+        _allFriends.remove(id);
     }
 
     public Map<String, FriendModel> getAllFriends() {

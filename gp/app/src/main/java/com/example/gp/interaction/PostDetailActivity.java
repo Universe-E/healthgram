@@ -118,6 +118,7 @@ public class PostDetailActivity extends BaseActivity {
             if (isAuthorFollowed()) {
                 // Unfollow the author
                 // ...
+                Database.unfollow(post.getAuthorId(), null, null);
                 btnFollow.setText("Follow");
             } else {
                 // Show follow confirmation dialog

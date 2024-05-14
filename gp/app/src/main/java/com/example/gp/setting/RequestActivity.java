@@ -64,7 +64,7 @@ public class RequestActivity extends BaseActivity {
             if (object == null) {
                 ToastUtil.show(this, "No Friend Request");
             } else {
-                ToastUtil.show(this, "Please check your network!");
+                ToastUtil.show(this, "No Friend Request");
             }
         } else {
             List<FriendRequest> friendRequests = (List<FriendRequest>) object;
