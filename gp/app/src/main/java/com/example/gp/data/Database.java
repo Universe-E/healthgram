@@ -142,6 +142,10 @@ public class Database {
         UserDB.newGetFollowList(nickname, limit, object, methodName);
     }
 
+    public static void processFriendRequest(FriendRequest friendRequest, Object object, String methodName) {
+        UserDB.processFriendRequest(friendRequest, object, methodName);
+    }
+
     // Block operations
 
     /**

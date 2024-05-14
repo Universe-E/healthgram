@@ -35,6 +35,7 @@ import com.google.firebase.firestore.Source;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -53,6 +54,7 @@ public class UserDB {
         email = getCurrentEmail();
         setUsername(null, null);
     }
+
 
     private void setUsername(Object object, String methodName) {
         if (username != null) {
@@ -318,10 +320,26 @@ public class UserDB {
                 });
     }
 
-    public static void processFriendRequest(FriendRequest request, Object object, String methodName) {
-        Log.d(TAG, "Process friend request Reflecting Method: " + methodName);
+    public static void processFriendRequest(FriendRequest friendRequest, Object object, String methodName) {
+        CollectionReference friendRequestsRef = getFriendRequestRef();
 
-
+        Map<String, Object> update = new HashMap<>();
+        update.put("accepted", friendRequest.isAccepted());
+        update.put("read", friendRequest.isRead());
+        friendRequestsRef.document(friendRequest.getRequestId())
+                .update(update)
+                .addOnSuccessListener(aVoid -> {
+                    if (friendRequest.isAccepted()) {
+                        Friend friend = new Friend();
+                        friend.setId(friendRequest.getSenderId());
+                        friend.setNickname(friendRequest.getSenderName());
+                        follow(friend, object, methodName);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing updated friend request", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
     }
 
     /**
