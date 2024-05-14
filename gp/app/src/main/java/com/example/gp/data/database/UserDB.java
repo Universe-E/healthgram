@@ -722,6 +722,27 @@ public class UserDB {
                 });
     }
 
+    public static void getFriendRequestById(String requestId, Object object, String methodName) {
+        CollectionReference friendRequestsRef = getFriendRequestRef();
+
+        friendRequestsRef.document(requestId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        Log.e(TAG, "Error getting documents: ", e);
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        return;
+                    }
+
+                    FriendRequestModel friendRequestModel = task.getResult().toObject(FriendRequestModel.class);
+                    FriendRequest friendRequest = new FriendRequest(friendRequestModel);
+
+                    MethodUtil.invokeMethod(object, methodName, true, friendRequest);
+                    Log.d(TAG, "FriendRequest: " + friendRequest.toString());
+                });
+    }
+
     // Private Utils
 
     private static void setFriendReqNotification(FriendRequestModel friendRequestModel, Object object, String methodName) {

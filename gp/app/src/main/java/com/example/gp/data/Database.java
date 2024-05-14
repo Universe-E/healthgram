@@ -125,7 +125,7 @@ public class Database {
     }
 
     public static void getFriendRequestById(String requestId, Object object, String methodName) {
-
+        UserDB.getFriendRequestById(requestId, object, methodName);
     }
 
     /**
