@@ -19,6 +19,7 @@ import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.database.model.FriendModel;
 import com.example.gp.data.database.model.FriendRequestModel;
+import com.example.gp.data.database.model.NotificationModel;
 import com.example.gp.data.database.model.UserModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -317,28 +318,6 @@ public class UserDB {
                      */
                     MethodUtil.invokeMethod(object, methodName, true, friendRequests);
                     Log.d(TAG, "FriendRequests: " + friendRequests.toString());
-                });
-    }
-
-    public static void processFriendRequest(FriendRequest friendRequest, Object object, String methodName) {
-        CollectionReference friendRequestsRef = getFriendRequestRef();
-
-        Map<String, Object> update = new HashMap<>();
-        update.put("accepted", friendRequest.isAccepted());
-        update.put("read", friendRequest.isRead());
-        friendRequestsRef.document(friendRequest.getRequestId())
-                .update(update)
-                .addOnSuccessListener(aVoid -> {
-                    if (friendRequest.isAccepted()) {
-                        Friend friend = new Friend();
-                        friend.setId(friendRequest.getSenderId());
-                        friend.setNickname(friendRequest.getSenderName());
-                        follow(friend, object, methodName);
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error writing updated friend request", e);
-                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
                 });
     }
 
@@ -643,7 +622,7 @@ public class UserDB {
                 .update("friendList", FieldValue.arrayUnion(friendModel))
                 .addOnSuccessListener(aVoid -> {
                     Log.d(TAG, "new follow successfully written!");
-                    MethodUtil.invokeMethod(object, methodName, true, friend);
+                    setFollowNotification(username, object, methodName);
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
@@ -761,7 +740,46 @@ public class UserDB {
                 });
     }
 
+    public static void processFriendRequest(FriendRequest friendRequest, Object object, String methodName) {
+        CollectionReference friendRequestsRef = getFriendRequestRef();
+
+        Map<String, Object> update = new HashMap<>();
+        update.put("accepted", friendRequest.isAccepted());
+        update.put("read", friendRequest.isRead());
+        friendRequestsRef.document(friendRequest.getRequestId())
+                .update(update)
+                .addOnSuccessListener(aVoid -> {
+                    if (friendRequest.isAccepted()) {
+                        Friend friend = new Friend();
+                        friend.setId(friendRequest.getSenderId());
+                        friend.setNickname(friendRequest.getSenderName());
+                        follow(friend, object, methodName);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing updated friend request", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
     // Private Utils
+
+    private static void setFollowNotification(String senderName, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        NotificationModel notificationModel = new NotificationModel();
+        String msg = "New follower: " + senderName;
+        notificationModel.setMessage(msg);
+
+        usersRef.document(getCurrentUserId())
+                .update("myNotifications", FieldValue.arrayUnion(notificationModel))
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, notificationModel);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error send follow notification", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
 
     private static void setFriendReqNotification(FriendRequestModel friendRequestModel, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
