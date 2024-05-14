@@ -96,22 +96,8 @@ public class FriendFragment extends Fragment {
             return;
         }
 
-        if (object instanceof Map) {
-            Map<String, Friend> outerMap = (Map<String, Friend>) object;
-            List<Friend> newFriends = new ArrayList<>();
-            for (Map.Entry<String, Friend> entry : outerMap.entrySet()) {
-                Friend friendDetails = entry.getValue();
-                try {
-                    String id = friendDetails.getId();
-                    String nickname = friendDetails.getNickname();
-                    int avatar = friendDetails.getAvatar();  // Note that this assumes that avatar has been correctly stored as an integer type
-
-                    Friend friend = new Friend(id, nickname, avatar);
-                    newFriends.add(friend);
-                } catch (ClassCastException e) {
-                    Log.e("UpdateUI", "Error casting friend details", e);
-                }
-            }
+        if (object instanceof List) {
+            List<Friend> newFriends = (List<Friend>) object;
 
             if (!newFriends.isEmpty()) {
                 friends = newFriends;  //Assign the new friend list to the friends variable
