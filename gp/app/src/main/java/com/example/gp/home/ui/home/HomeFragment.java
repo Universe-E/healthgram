@@ -34,7 +34,8 @@ import java.util.List;
 /**
  * Home fragment
  * The page to show home page of posts sent by all other users you followed
- * @author  Xingchen Zhang
+ *
+ * @author Xingchen Zhang
  * {@code @editor} Zehua Kong
  * Date: 2024-05-01
  */
@@ -45,6 +46,8 @@ public class HomeFragment extends Fragment {
     private SearchView searchView;
     private List<Post> postList;
     private static final PostsData postsData = PostsData.getInstance();
+    // flag to get new post or old post
+    private static boolean getNewPost = true;
 
     //use BTree to store posts
     private BTree postTree;
@@ -64,8 +67,10 @@ public class HomeFragment extends Fragment {
 
         // Load post data from the database
 //        Timestamp timestamp = new Timestamp(new Date());
-        Database.getNewPostsByTime(null, 9, this, "loadPostCards");
 
+        // set the flag to true to get new post
+        getNewPost = true;
+        Database.getNewPostsByTime(null, 9, this, "loadPostCards");
 
 
         return view;
@@ -102,7 +107,13 @@ public class HomeFragment extends Fragment {
                 int postId = post.getPostId().hashCode();
                 postTree.add(postId, post);
             }
-            postsData.addNewPosts(postList);
+            // add posts to postsData
+            // check the flag to get post either new or old
+            if (getNewPost) {
+                postsData.addNewPosts(postList);
+            } else {
+                postsData.addPreviousPosts(postList);
+            }
 
             // renew the UI
             ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
@@ -139,6 +150,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * Initialize the recycler views for the posts.
+     *
      * @param view view
      */
     private void initializeRecyclerViews(View view) {
@@ -176,7 +188,8 @@ public class HomeFragment extends Fragment {
         // Use TextWatcher to monitor content changes in the input box
         searchView.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -184,7 +197,8 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(android.text.Editable s) {}
+            public void afterTextChanged(android.text.Editable s) {
+            }
         });
         // Close SearchView after search is complete
         searchView.getEditText().setOnEditorActionListener((v, actionId, event) -> {
@@ -200,6 +214,7 @@ public class HomeFragment extends Fragment {
 
     /**
      * Search by input query string, or input token as prefix
+     *
      * @param query query string
      */
     private void performSearch(String query) {

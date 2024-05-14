@@ -225,12 +225,24 @@ public class Database {
      * Callback parameters: true and PostMap object, false and error message if fail
      *
      * @param timestamp  post timestamp, e.g., if you try to get the list first time, set time to null, or set time to the last post you already got timestamp
-     * @param limit      The number of post retrieval
+     * @param limit      The number of post retrieval, you can leave it as null for default 9 limit
      * @param object     The object that calls the method
      * @param methodName The method name
      */
     public static void getNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
         PostDB.GetNewPostsByTime(timestamp, limit, object, methodName);
+    }
+
+    /**
+     * Get a list of posts by post timestamp, descending sorted by post timestamp
+     *
+     * @param timestamp  we are not using it for now just leave it null;
+     * @param limit      The number of post retrieval, you can leave it as null for default 9 limit
+     * @param object     The object that calls the method
+     * @param methodName The method name
+     */
+    public static void getPreviousPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
+        PostDB.GetPreviousPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**
