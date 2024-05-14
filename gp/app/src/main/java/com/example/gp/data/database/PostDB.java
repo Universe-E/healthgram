@@ -162,7 +162,7 @@ public class PostDB {
             return;
         }
 
-        if (posts.get(position).isPublic()) {
+        if (posts.get(position).isPublic() || posts.get(position).getAuthorId().equals(getCurrentUserId())) {
             getViewers(posts, position + 1, object, methodName);
             return;
         }

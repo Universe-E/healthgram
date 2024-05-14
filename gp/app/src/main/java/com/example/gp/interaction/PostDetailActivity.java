@@ -17,6 +17,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
+import com.example.gp.data.FriendsData;
 import com.example.gp.data.PostsData;
 import com.example.gp.data.UserData;
 import com.example.gp.BaseActivity;
@@ -149,7 +150,8 @@ public class PostDetailActivity extends BaseActivity {
         // TODO: Implement this method
 //        UserData.
 //        return Objects.equals(this.post.getAuthorId(), UserData.);
-        return false;
+        FriendsData friends = FriendsData.getInstance();
+        return friends.getAllFriends().containsKey(this.post.getAuthorId());
     }
     private boolean isAuthorMyself() {
         UserDB userDB = UserDB.getInstance();

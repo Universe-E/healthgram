@@ -40,7 +40,7 @@ public class PostsData {
         _allPosts.addAll(0, posts);
     }
 
-    public void getPreviousPosts(List<Post> posts) {
+    public void addPreviousPosts(List<Post> posts) {
         if (_allPosts == null) {
             _allPosts = new ArrayList<>();
         }

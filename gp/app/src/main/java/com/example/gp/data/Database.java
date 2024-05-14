@@ -99,7 +99,7 @@ public class Database {
     }
 
     /**
-     * Get friend request
+     * Send friend request to user
      * Callback parameters: true and list of FriendRequest object if success, false and error message if fail
      *
      * @param friendRequest friend request object to be added

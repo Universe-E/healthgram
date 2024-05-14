@@ -18,6 +18,7 @@ import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.FriendsData;
 import com.example.gp.data.database.model.FriendModel;
 import com.example.gp.data.database.model.FriendRequestModel;
 import com.example.gp.data.database.model.NotificationModel;
@@ -29,7 +30,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
@@ -50,39 +50,15 @@ public class UserDB {
     private static UserDB instance;
     private static String userId;
     private static String email;
-    private static List<String> friendIdList;
+    private static final FriendsData friendsData = FriendsData.getInstance();
 
     private UserDB() {
         userId = getCurrentUserId();
         email = getCurrentEmail();
-        setUsername(null, null);
-//        getFollowList(null, null);
+        setUserData(null, null);
     }
 
-    private void getFollowList(Object object, String methodName) {
-        CollectionReference usersRef = getUsersRef();
-        usersRef.document(userId)
-                .get(Source.CACHE)
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful() || task.getResult() == null) {
-                        Exception e = task.getException();
-                        Log.e(TAG, "Error getting documents: ", e);
-                        return;
-                    }
-                    UserModel userModel = task.getResult().toObject(UserModel.class);
-
-                });
-    }
-
-    private static void setFollowList(boolean isSuccessful, Object object) {
-        if (!isSuccessful) {
-            return;
-        }
-        Map<String, Friend> friendMap = (Map<String, Friend>) object;
-
-    }
-
-    private void setUsername(Object object, String methodName) {
+    private void setUserData(Object object, String methodName) {
         if (username != null) {
             MethodUtil.invokeMethod(object, methodName, true, username);
             return;
@@ -96,6 +72,10 @@ public class UserDB {
                         return;
                     }
                     username = task.getResult().getString("username");
+                    Map<String, FriendModel> myFriends = (Map<String, FriendModel>) task.getResult().getData().get("myFriends");
+                    friendsData.addNewFriends(myFriends);
+                    Log.d(TAG, "username: " + username);
+                    Log.d(TAG, "myFriends: " + myFriends);
                     MethodUtil.invokeMethod(object, methodName, true, username);
                 });
     }
