@@ -124,6 +124,10 @@ public class Database {
         UserDB.getFriendRequestList(timpestamp, limit, object, methodName);
     }
 
+    public static void getFriendRequestById(String requestId, Object object, String methodName) {
+
+    }
+
     /**
      * Get friend list
      * Callback parameters: true and list of Friend object if success, false and error message if fail

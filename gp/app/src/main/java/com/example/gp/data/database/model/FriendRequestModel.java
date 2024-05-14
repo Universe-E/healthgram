@@ -6,6 +6,7 @@ import com.google.firebase.Timestamp;
 public class FriendRequestModel {
     private String requestId;
     private String senderId;
+    private String senderName;
     private String receiverId;
     private boolean isRead;
     private boolean isAccepted;
@@ -37,6 +38,14 @@ public class FriendRequestModel {
 
     public void setSenderId(String senderId) {
         this.senderId = senderId;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 
     public String getReceiverId() {
