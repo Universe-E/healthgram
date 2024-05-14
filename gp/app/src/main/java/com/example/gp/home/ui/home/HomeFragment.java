@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
 
         // Load post data from the database
 //        Timestamp timestamp = new Timestamp(new Date());
-        Database.getNewPostsByTime(null, 19, this, "loadPostCards");
+        Database.getNewPostsByTime(null, 9, this, "loadPostCards");
 
 
 
