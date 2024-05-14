@@ -59,7 +59,6 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void signUp(String username, String email, String password, Object object, String methodName) {
-//        UserDB.signUp(username, email, password, object, methodName);
         UserDB.newSignUp(username, email, password, object, methodName);
     }
 
@@ -108,7 +107,6 @@ public class Database {
      * @param methodName    Callback method name
      */
     public static void sendFriendRequestTo(FriendRequest friendRequest, Object object, String methodName) {
-//        UserDB.sendFriendRequestTo(friendRequest, object, methodName);
         UserDB.newSendFriendRequestTo(friendRequest, object, methodName);
     }
 
@@ -195,7 +193,6 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void savePostData(Post post, Object object, String methodName) {
-//        PostDB.savePostData(post, object, methodName);
         PostDB.newSavePostData(post, object, methodName);
     }
 
@@ -209,20 +206,7 @@ public class Database {
      * @param methodName The method name
      */
     public static void getNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
-//        PostDB.getPostsByTime(timestamp, limit, object, methodName);
         PostDB.GetNewPostsByTime(timestamp, limit, object, methodName);
-    }
-
-    /**
-     * Get post by postId, note that postId is unique
-     * Callback parameters: true and Post object if success, false and error message if fail
-     *
-     * @param postId     post id
-     * @param object     The object that calls the method
-     * @param methodName Callback method name
-     */
-    private static void getPostByPostId(String postId, Object object, String methodName) {
-        PostDB.getPostByPostId(postId, object, methodName);
     }
 
     /**
@@ -235,7 +219,6 @@ public class Database {
      * @param methodName The method name
      */
     public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
-//        PostDB.getUserPost(timestamp, limit, object, methodName);
         PostDB.newGetUserPost(timestamp, limit, object, methodName);
     }
 
@@ -249,20 +232,7 @@ public class Database {
      * @param methodName The method name
      */
     public static void setPublic(String postId, Boolean isPublic, Object object, String methodName) {
-//        PostDB.setPublic(postId, isPublic, object, methodName);
         PostDB.newSetPublic(postId, isPublic, object, methodName);
-    }
-
-    /**
-     * Set allowed viewers
-     * Callback parameters: true and postId if success, false and error message if fail
-     *
-     * @param postId  post id
-     * @param viewers list of user id
-     * @param object  The object that calls the method
-     */
-    public static void setAllowedViewers(String postId, List<String> viewers, Object object, String methodName) {
-        PostDB.setAllowedViewers(postId, viewers, object, methodName);
     }
 
     /**
