@@ -9,7 +9,6 @@ import static com.example.gp.data.database.FirebaseUtil.getFireUser;
 import static com.example.gp.data.database.FirebaseUtil.getFriendRequestRef;
 import static com.example.gp.data.database.FirebaseUtil.getUsersRef;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.gp.Items.Friend;
@@ -18,7 +17,6 @@ import com.example.gp.Items.User;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
-import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.FriendsData;
 import com.example.gp.data.database.model.FriendModel;
 import com.example.gp.data.database.model.FriendRequestModel;
@@ -27,16 +25,14 @@ import com.example.gp.data.database.model.UserModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +99,9 @@ public class UserDB {
                     }
                     username = task.getResult().getString("username");
                     Map<String, FriendModel> myFriends = (Map<String, FriendModel>) task.getResult().getData().get("myFriends");
-                    friendsData.addNewFriends(myFriends);
+                    if (myFriends != null) {
+                        friendsData.addNewFriends(myFriends);
+                    }
                     Log.d(TAG, "username: " + username);
                     Log.d(TAG, "myFriends: " + myFriends);
                     MethodUtil.invokeMethod(object, methodName, true, username);
@@ -274,6 +272,32 @@ public class UserDB {
                 .addOnSuccessListener(aVoid -> {
                     Log.d(TAG, "new follow successfully written!");
                     setFollowNotification(friend.getId(), object, methodName);
+                    friendsData.addNewFriends(Map.of(friend.getId(), friendModel));
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    public static void unfollow(String userId, Object object, String methodName) {
+        Log.d(TAG, "unfollow: " + userId);
+        FriendModel friendModel = friendsData.getFriendById(userId);
+        if (friendModel == null) {
+            String msg = "Friend does not exist";
+            Log.d(TAG, msg);
+            MethodUtil.invokeMethod(object, methodName, false, msg);
+            return;
+        }
+        Map<String, FriendModel> friendModelMap = friendsData.getAllFriends();
+        friendModelMap.remove(userId);
+
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(getCurrentUserId())
+                .update("myFriends", friendModelMap)
+                .addOnSuccessListener(aVoid -> {
+                    friendsData.removeFriendById(userId);
+                    MethodUtil.invokeMethod(object, methodName, true);
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
@@ -320,19 +344,20 @@ public class UserDB {
                     }
 
                     UserModel userModel = task.getResult().toObject(UserModel.class);
-                    Map<String, FriendModel> friendMapList = userModel.getMyFriends();
+                    Map<String, FriendModel> friendsMap = userModel.getMyFriends();
 
-
-                    if (friendMapList == null) {
+                    if (friendsMap == null) {
                         String msg = "No friend";
                         Log.d(TAG, msg);
                         MethodUtil.invokeMethod(object, methodName, false, msg);
                         return;
                     }
+                    FriendsData friendsData = FriendsData.getInstance();
+                    friendsData.addNewFriends(friendsMap);
 
                     List<Friend> friendList = new ArrayList<>();
                     // TODO: implement this
-                    for (Map.Entry<String, FriendModel> entry : friendMapList.entrySet()) {
+                    for (Map.Entry<String, FriendModel> entry : friendsMap.entrySet()) {
                         friendList.add(new Friend(entry.getValue()));
                     }
 

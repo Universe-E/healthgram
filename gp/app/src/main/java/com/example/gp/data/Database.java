@@ -107,6 +107,10 @@ public class Database {
         UserDB.follow(friend, object, methodName);
     }
 
+    public static void unfollow(String userId, Object object, String methodName) {
+        UserDB.unfollow(userId, object, methodName);
+    }
+
     /**
      * Send friend request to user
      * Callback parameters: true and list of FriendRequest object if success, false and error message if fail
