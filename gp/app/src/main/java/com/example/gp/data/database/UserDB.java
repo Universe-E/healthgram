@@ -638,6 +638,7 @@ public class UserDB {
 
         String userId = getCurrentUserId();
         FriendRequestModel friendRequestModel = new FriendRequestModel(friendRequest);
+        friendRequestModel.setSenderName(username);
         friendRequestModel.setSenderId(userId);
         friendRequestModel.setRead(false);
         friendRequestModel.setAccepted(false);
@@ -712,9 +713,9 @@ public class UserDB {
                         return;
                     }
 
-                    List<FriendRequestModel> friendRequests = new ArrayList<>();
+                    List<FriendRequest> friendRequests = new ArrayList<>();
                     for (DocumentSnapshot document : documents) {
-                        friendRequests.add(document.toObject(FriendRequestModel.class));
+                        friendRequests.add(new FriendRequest(document.toObject(FriendRequestModel.class)));
                     }
                     MethodUtil.invokeMethod(object, methodName, true, friendRequests);
                     Log.d(TAG, "FriendRequests: " + friendRequests.toString());
