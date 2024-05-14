@@ -10,6 +10,7 @@ import com.example.gp.BaseActivity;
 import com.example.gp.MainActivity;
 import com.example.gp.R;
 import com.example.gp.data.Database;
+import com.example.gp.data.UserData;
 import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivitySettingBinding;
 
@@ -41,6 +42,14 @@ public class SettingActivity extends BaseActivity {
         binding.llSettingVisibilityLayout.setOnClickListener(this);
         // quit
         binding.btnSettingMainQuit.setOnClickListener(this);
+
+        // Get the user info
+        String username = UserDB.getInstance().getUsername();
+        int userAvatar = R.mipmap.sample_avatar_1;
+
+        // initialize the user info layout
+        binding.ivSettingAvatar.setImageResource(userAvatar);
+        binding.tvSettingNickname.setText(username);
 
     }
 

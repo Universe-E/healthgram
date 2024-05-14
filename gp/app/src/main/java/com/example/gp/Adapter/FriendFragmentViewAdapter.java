@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gp.Items.Friend;
 import com.example.gp.Items.Notification;
 import com.example.gp.R;
 
@@ -37,6 +38,10 @@ public class FriendFragmentViewAdapter extends RecyclerView.Adapter<FriendFragme
         holder.timeTextView.setText(notification.getDate());
         holder.headlineTextView.setText(notification.getTitle());
 
+    }
+    public void updateFriends(List<Notification> notification) {
+        this.notifications = notification;
+        notifyDataSetChanged();
     }
 
     @Override

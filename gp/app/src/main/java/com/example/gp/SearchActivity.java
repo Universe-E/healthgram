@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 /**
  * Search activity function example code to implement
  * You can implement search component following this code file
@@ -35,16 +34,6 @@ public class SearchActivity extends AppCompatActivity {
         searchBar = findViewById(R.id.search_bar);
         searchView = findViewById(R.id.search_view);
         searchResults = new ArrayList<>(); // 初始化搜索结果
-//        Date time = TimeUtil.getCurDate();
-//        Database.PostDB.getUserPost(time,10,this,"searchPosts");
-//        // 从 Intent 获取初始查询
-//        String initialQuery = getIntent().getStringExtra("Note1");
-//        if (initialQuery != null && !initialQuery.isEmpty()) {
-//            searchBar.setText(initialQuery);
-//            performSearch(initialQuery);
-//        }
-//        //listener
-//        setupSearchListeners();
     }
 
     private void setupSearchListeners() {
@@ -62,30 +51,5 @@ public class SearchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
     }
-
-//    private void performSearch(String query) {
-//        // 假设 searchNotes 是实现搜索逻辑的一个函数
-//        searchResults = searchPosts(query);
-//        Log.d(TAG, "Searching for: " + query);
-//
-//        // 当查询结束后，将结果返回给调用的 Activity
-//        Intent resultIntent = new Intent();
-//        resultIntent.putParcelableArrayListExtra("searchResults", (ArrayList<? extends Parcelable>) new ArrayList<Post>(searchResults));
-//        setResult(RESULT_OK, resultIntent);
-//    }
-//
-//    private List<Post> searchPosts(String query) {
-//        List<Post> results = new ArrayList<>();
-//
-//        // filter
-//        for (Post post : Database.PostDB.getAllPosts()) {
-//            if (post.getTitle().toLowerCase().contains(query) ||
-//                    post.getmContent().toLowerCase().contains(query)) {
-//                results.add(post);
-//            }
-//        }
-//
-//        return results;
-//    }
 
 }
