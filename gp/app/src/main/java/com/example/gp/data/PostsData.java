@@ -26,6 +26,10 @@ public class PostsData {
         return instance;
     }
 
+    public static void clearPostsData() {
+        _allPosts = null;
+    }
+
     public void addNewPosts(List<Post> posts) {
         if (_allPosts == null) {
             _allPosts = new ArrayList<>();

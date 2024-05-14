@@ -4,31 +4,28 @@ import static com.example.gp.Utils.TimeUtil.getTimestamp;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireUser;
 import static com.example.gp.data.database.FirebaseUtil.getPostRef;
+import static com.example.gp.data.database.FirebaseUtil.getUsersRef;
 
 import android.util.Log;
 
 import com.example.gp.Items.Post;
-import com.example.gp.Items.User;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.data.PostsData;
+import com.example.gp.data.database.model.FriendModel;
 import com.example.gp.data.database.model.PostModel;
+import com.example.gp.data.database.model.UserModel;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class PostDB {
     // Aka Note's complete version
@@ -156,6 +153,60 @@ public class PostDB {
             posts.add(post);
         }
 
-        FileDB.getImages(posts, 0, object, methodName);
+        getViewers(posts, 0, object, methodName);
+    }
+
+    private static void getViewers(List<Post> posts, int position, Object object, String methodName) {
+        if (position >= posts.size()) {
+            FileDB.getImages(posts, 0, object, methodName);
+            return;
+        }
+
+        if (posts.get(position).isPublic()) {
+            getViewers(posts, position + 1, object, methodName);
+            return;
+        }
+
+        String authorId = posts.get(position).getAuthorId();
+        String userId = getCurrentUserId();
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(authorId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        Log.e(TAG, "Error getting documents: ", e);
+                        return;
+                    }
+
+                    if (task.getResult() == null) {
+                        getViewers(posts, position + 1, object, methodName);
+                        return;
+                    }
+
+                    Post post = posts.get(position);
+
+                    UserModel userModel = task.getResult().toObject(UserModel.class);
+                    Log.d(TAG, "userModel: " + userModel);
+                    List<String> viewers = post.getViewers();
+                    List<FriendModel> friendModels = null;
+                    if (userModel != null) {
+                        friendModels = userModel.getMyFriends();
+                    }
+                    if (friendModels == null) {
+                        getViewers(posts, position + 1, object, methodName);
+                        return;
+                    }
+                    for (FriendModel friendModel : friendModels) {
+                        viewers.add(friendModel.getUserId());
+                    }
+                    posts.get(position).setViewers(viewers);
+                    if (!viewers.contains(userId)) {
+                        post.setPostContent("Only " + post.getAuthorName() + "'s followings can see this post.");
+                        post.setImgUUID(null);
+                    }
+                    getViewers(posts, position + 1, object, methodName);
+                });
     }
 }

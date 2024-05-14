@@ -80,10 +80,10 @@ public class FriendRequestModel {
         this.requestTimestamp = requestTimestamp;
     }
 
-    public NotificationModel getNotificationModel() {
+    public NotificationModel notification() {
         NotificationModel notificationModel = new NotificationModel();
         notificationModel.setNotificationId(this.requestId);
-        notificationModel.setMessage("New friend request");
+        notificationModel.setMessage("New friend request from: " + this.senderName);
         return notificationModel;
     }
 }

@@ -784,7 +784,7 @@ public class UserDB {
     private static void setFriendReqNotification(FriendRequestModel friendRequestModel, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
         usersRef.document(friendRequestModel.getReceiverId())
-                .update("myNotifications", FieldValue.arrayUnion(friendRequestModel.getNotificationModel()))
+                .update("myNotifications", FieldValue.arrayUnion(friendRequestModel.notification()))
                 .addOnSuccessListener(aVoid -> {
                     MethodUtil.invokeMethod(object, methodName, true, friendRequestModel);
                 })
