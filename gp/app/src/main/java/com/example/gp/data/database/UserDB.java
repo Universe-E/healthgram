@@ -13,6 +13,7 @@ import android.util.Log;
 
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
+import com.example.gp.Items.Notification;
 import com.example.gp.Items.User;
 import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
@@ -75,9 +76,9 @@ public class UserDB {
                         MethodUtil.invokeMethod(object, methodName, false, msg);
                         return;
                     }
-                    List<NotificationModel> notificationList = new ArrayList<>();
+                    List<Notification> notificationList = new ArrayList<>();
                     for (Map.Entry<String, NotificationModel> entry : notificationMapList.entrySet()) {
-                        notificationList.add(entry.getValue());
+                        notificationList.add(new Notification(entry.getValue()));
                     }
                     MethodUtil.invokeMethod(object, methodName, true, notificationList);
                     Log.d(TAG, "NotificationList: " + notificationList.toString());

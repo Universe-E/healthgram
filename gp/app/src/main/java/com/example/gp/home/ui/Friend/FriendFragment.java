@@ -110,6 +110,7 @@ public class FriendFragment extends Fragment {
             ToastUtil.showLong(getContext(), "Incorrect data type received");
         }
     }
+
     // Set up SearchView listener
     private void setupSearchViewListener() {
         // Use TextWatcher to monitor changes in the content of the input box
