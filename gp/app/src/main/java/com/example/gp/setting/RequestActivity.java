@@ -16,6 +16,7 @@ import com.example.gp.Items.FriendRequest;
 import com.example.gp.R;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.Database;
 import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivityRequestBinding;
 import com.example.gp.setting.Adapter.RequestAdapter;
@@ -49,7 +50,7 @@ public class RequestActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         friends = new ArrayList<>();
         Timestamp time = TimeUtil.getTimestamp();
-        UserDB.getFriendRequest(time,10,this,"updateUI");
+        Database.getFriendRequestList(time,10,this,"updateUI");
     }
 
 

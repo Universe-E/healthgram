@@ -29,6 +29,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;
 
@@ -681,6 +682,42 @@ public class UserDB {
 
                     MethodUtil.invokeMethod(object, methodName, true, friendList);
                     Log.d(TAG, "FriendList: " + friendList.toString());
+                });
+    }
+
+    public static void getFriendRequestList(Timestamp timestamp, Integer limit, Object object, String methodName) {
+        CollectionReference friendRequestsRef = getFriendRequestRef();
+        String userId = getCurrentUserId();
+        timestamp = TimeUtil.getTimestamp(timestamp);
+        if (limit == null)
+            limit = 10;
+
+        friendRequestsRef.whereEqualTo("receiverId", userId)
+                .orderBy("requestTimestamp", Query.Direction.DESCENDING)
+                .limit(limit)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        Log.e(TAG, "Error getting documents: ", e);
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        return;
+                    }
+
+                    List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                    if (documents.isEmpty()) {
+                        String msg = "No friend request";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+
+                    List<FriendRequestModel> friendRequests = new ArrayList<>();
+                    for (DocumentSnapshot document : documents) {
+                        friendRequests.add(document.toObject(FriendRequestModel.class));
+                    }
+                    MethodUtil.invokeMethod(object, methodName, true, friendRequests);
+                    Log.d(TAG, "FriendRequests: " + friendRequests.toString());
                 });
     }
 
