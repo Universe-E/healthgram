@@ -1,5 +1,7 @@
 package com.example.gp.Items;
 
+import com.example.gp.data.database.model.FriendModel;
+
 public class Friend {
     private String id;
     private String nickname;
@@ -21,6 +23,12 @@ public class Friend {
      * DO NOT DELETE THIS CONSTRUCTOR
      */
     public Friend() {
+    }
+
+    public Friend(FriendModel value) {
+        this.id = value.getUserId();
+        this.nickname = value.getNickname();
+        this.avatar = 0;
     }
 
     public String getName(){

@@ -153,6 +153,10 @@ public class Database {
         UserDB.processFriendRequest(friendRequest, object, methodName);
     }
 
+    public static void getNotificationList(Object object, String methodName) {
+        UserDB.getNotificationList(object, methodName);
+    }
+
     // Block operations
 
     /**

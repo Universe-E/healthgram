@@ -195,10 +195,12 @@ public class PostDB {
                     Log.d(TAG, "userModel: " + userModel);
                     List<String> viewers = post.getViewers();
                     List<FriendModel> friendModels = new ArrayList<>();
+                    // user account deleted
                     if (userModel == null) {
                         getViewers(posts, position + 1, object, methodName);
                         return;
                     }
+                    // Get myFriends
                     Map<String, FriendModel> myFriends = userModel.getMyFriends();
                     if (myFriends != null) {
                         for (Map.Entry<String, FriendModel> entry : myFriends.entrySet()) {
@@ -206,6 +208,7 @@ public class PostDB {
                         }
                     }
                     Log.d(TAG, "friendModels: " + friendModels);
+                    // Get post viewers
                     if (viewers == null) {
                         viewers = new ArrayList<>();
                     }
