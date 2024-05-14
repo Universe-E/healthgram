@@ -1,5 +1,6 @@
 package com.example.gp.Items;
 
+import com.example.gp.data.database.model.FriendRequestModel;
 import com.google.firebase.Timestamp;
 
 public class FriendRequest {
@@ -17,7 +18,16 @@ public class FriendRequest {
     public FriendRequest() {
     }
 
-    /**
+    public FriendRequest(FriendRequestModel friendRequestModel) {
+        this.RequestId = friendRequestModel.getRequestId();
+        this.senderId = friendRequestModel.getSenderId();
+        this.receiverId = friendRequestModel.getReceiverId();
+        this.isRead = friendRequestModel.isRead();
+        this.isAccepted = friendRequestModel.isAccepted();
+        this.requestTimestamp = friendRequestModel.getRequestTimestamp();
+    }
+
+                         /**
      * Only use this constructor
      * Don't use getters and setters
      * @param receiverId

@@ -15,6 +15,7 @@ public class Database {
     private static final String USER_PATH = "Users";
     private static final String POST_PATH = "Posts";
     private static final String NOTIFICATION_PATH = "Notifications";
+    private static final String FRIEND_REQUEST_PATH = "FriendRequests";
 
     public static String getUserCollection() {
         return USER_PATH;
@@ -26,6 +27,10 @@ public class Database {
 
     public static String getNotificationCollection() {
         return NOTIFICATION_PATH;
+    }
+
+    public static String getFriendRequestCollection() {
+        return FRIEND_REQUEST_PATH;
     }
 
     // User account operations
@@ -103,7 +108,8 @@ public class Database {
      * @param methodName    Callback method name
      */
     public static void sendFriendRequestTo(FriendRequest friendRequest, Object object, String methodName) {
-        UserDB.sendFriendRequestTo(friendRequest, object, methodName);
+//        UserDB.sendFriendRequestTo(friendRequest, object, methodName);
+        UserDB.newSendFriendRequestTo(friendRequest, object, methodName);
     }
 
     /**
@@ -128,8 +134,9 @@ public class Database {
      * @param object     The object that calls the method
      * @param methodName Callback method name
      */
-    public static void getFriendList(String nickname, int limit, Object object, String methodName) {
-        UserDB.getFriendList(nickname, limit, object, methodName);
+    public static void getFollowList(String nickname, Integer limit, Object object, String methodName) {
+//        UserDB.getFriendList(nickname, limit, object, methodName);
+        UserDB.newGetFollowList(nickname, limit, object, methodName);
     }
 
     // Block operations

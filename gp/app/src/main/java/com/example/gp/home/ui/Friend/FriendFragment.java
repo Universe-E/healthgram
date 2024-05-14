@@ -19,7 +19,7 @@ import com.example.gp.Adapter.FriendsRecyclerViewAdapter;
 import com.example.gp.R;
 import com.example.gp.Items.Friend;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.database.UserDB;
+import com.example.gp.data.Database;
 import com.example.gp.databinding.ActivityFriendDetailBinding;
 import com.example.gp.databinding.FragmentFriendboardBinding;
 import com.google.android.material.search.SearchView;
@@ -52,7 +52,7 @@ public class FriendFragment extends Fragment {
 
 
         initializeSearchView(view);
-        UserDB.getFriendList("",100,this, "updateUI");
+        Database.getFollowList(null, null, this, "updateUI");
         // Load friends
         initializeRecyclerViews(view);
 

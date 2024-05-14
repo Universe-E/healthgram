@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gp"
-        tools:targetApi="31">
+        tools:targetApi="30">
         <activity
             android:name=".home.ui.notifications.FriendNotificationFragment"
             android:exported="false" />
@@ -42,30 +42,30 @@
             android:exported="false" />
         <activity
             android:name=".setting.PostVisibilityActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".interaction.PostDetailActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".SimpleTestActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Activity_note_detail"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".setting.RequestActivity"
             android:exported="false" />
         <activity
             android:name=".home.Fragment_home"
             android:enableOnBackInvokedCallback="true"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_fragment_home" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".setting.SettingActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -77,7 +77,7 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity android:name=".Utils.UserParserActivity" />
     </application>
 

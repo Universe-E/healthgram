@@ -4,6 +4,7 @@ import static com.example.gp.data.database.FirebaseUtil.getCurrentEmail;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
 import static com.example.gp.data.database.FirebaseUtil.getFireUser;
+import static com.example.gp.data.database.FirebaseUtil.getFriendRequestRef;
 import static com.example.gp.data.database.FirebaseUtil.getUsersRef;
 
 import android.content.Context;
@@ -16,7 +17,8 @@ import com.example.gp.Utils.AuthUtil;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
-import com.example.gp.data.Database;
+import com.example.gp.data.database.model.FriendModel;
+import com.example.gp.data.database.model.FriendRequestModel;
 import com.example.gp.data.database.model.UserModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +27,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;
@@ -59,8 +62,9 @@ public class UserDB {
         CollectionReference usersRef = getUsersRef();
         usersRef.document(userId).get(Source.CACHE)
                 .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
+                    if (!task.isSuccessful() || task.getResult() == null) {
                         setUsernameFromServer(userId, object, methodName);
+                        return;
                     }
                     username = task.getResult().getString("username");
                     MethodUtil.invokeMethod(object, methodName, true, username);
@@ -81,18 +85,18 @@ public class UserDB {
                 });
     }
 
+    private static void clearUserDB() {
+        username = null;
+        userId = null;
+        email = null;
+        instance = null;
+    }
+
     public static UserDB getInstance() {
         if (instance == null) {
             instance = new UserDB();
         }
         return instance;
-    }
-
-    public static void clearUserDB() {
-        username = null;
-        userId = null;
-        email = null;
-        instance = null;
     }
 
     public String getUsername() {
@@ -121,9 +125,11 @@ public class UserDB {
      */
     public static void signIn(String input, String password, Object object, String methodName) {
         if (AuthUtil.isEmail(input)) {
-            signInWithEmail(input, password, object, methodName);
+//            signInWithEmail(input, password, object, methodName);
+            newSignInWithEmail(input, password, object, methodName);
         } else {
-            signInWithUsername(input, password, object, methodName);
+//            signInWithUsername(input, password, object, methodName);
+            newSignInWithUsername(input, password, object, methodName);
         }
     }
 
@@ -158,7 +164,7 @@ public class UserDB {
                                             FirebaseUser user = authResultTask.getResult().getUser();
 
                                             String userId = Objects.requireNonNull(user).getUid();
-                                            saveUserData(userId, username, email);
+//                                            saveUserData(userId, username, email);
                                             Objects.requireNonNull(mAuth.getCurrentUser())
                                                     .updateProfile(new UserProfileChangeRequest
                                                             .Builder().setDisplayName(username).build());
@@ -395,6 +401,7 @@ public class UserDB {
      */
     public static void signOut(Object object, String methodName) {
         FirebaseAuth.getInstance().signOut();
+        clearUserDB();
 
         try {
             /*
@@ -408,10 +415,10 @@ public class UserDB {
     }
 
     public static void checkSignedIn(Object object, String methodName) {
-        // Check if user is signed in
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        // Check if fireUser is signed in
+        FirebaseUser fireUser = getFireUser();
 
-        if (user == null) {
+        if (fireUser == null) {
             String message = "User does not sign in yet";
             Log.d(TAG, message);
             /*
@@ -425,8 +432,8 @@ public class UserDB {
         getInstance();
 
         User userForCallback = new User();
-        userForCallback.setUserId(user.getUid());
-        userForCallback.setEmail(user.getEmail());
+        userForCallback.setUserId(fireUser.getUid());
+        userForCallback.setEmail(fireUser.getEmail());
 
         /*
           Callback
@@ -603,6 +610,140 @@ public class UserDB {
                         return;
                     }
                     fireAuthCreate(username, email, password, object, methodName);
+                });
+    }
+
+    // Friend operations
+
+    public static void follow(Friend friend, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        String userId = getCurrentUserId();
+        FriendModel friendModel = new FriendModel(friend);
+
+        usersRef.document(userId)
+                .update("friendList", FieldValue.arrayUnion(friendModel))
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "new follow successfully written!");
+                    MethodUtil.invokeMethod(object, methodName, true, friend);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    public static void newSendFriendRequestTo(FriendRequest friendRequest, Object object, String methodName) {
+        CollectionReference friendRequestsRef = getFriendRequestRef();
+
+        String userId = getCurrentUserId();
+        FriendRequestModel friendRequestModel = new FriendRequestModel(friendRequest);
+        friendRequestModel.setSenderId(userId);
+        friendRequestModel.setRead(false);
+        friendRequestModel.setAccepted(false);
+        friendRequestModel.setRequestTimestamp(TimeUtil.getTimestamp());
+
+        DocumentReference docRef = friendRequestsRef.document();
+        friendRequestModel.setRequestId(docRef.getId());
+
+        docRef.set(friendRequestModel)
+                .addOnSuccessListener(aVoid -> {
+                    setFriendReqNotification(friendRequestModel, object, methodName);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    public static void newGetFollowList(String nickname, Integer limit, Object object, String methodName) {
+        String userId = getCurrentUserId();
+
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        Log.e(TAG, "Error getting documents: ", e);
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        return;
+                    }
+
+                    UserModel userModel = task.getResult().toObject(UserModel.class);
+                    List< FriendModel> friendList = userModel.getMyFriends();
+
+                    if (friendList == null) {
+                        String msg = "No friend";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+
+                    MethodUtil.invokeMethod(object, methodName, true, friendList);
+                    Log.d(TAG, "FriendList: " + friendList.toString());
+                });
+    }
+
+    // Private Utils
+
+    private static void setFriendReqNotification(FriendRequestModel friendRequestModel, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(friendRequestModel.getReceiverId())
+                .update("myNotifications", FieldValue.arrayUnion(friendRequestModel.getNotificationModel()))
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, friendRequestModel);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    private static void newSignInWithEmail(String email, String password, Object object, String methodName) {
+        FirebaseAuth mAuth = getFireAuth();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        Log.e(TAG, "Error: " + e);
+                        return;
+                    }
+
+                    User user = firebaseUserToUser(getFireUser());
+                    MethodUtil.invokeMethod(object, methodName, true, user);
+                });
+    }
+
+    private static void newSignInWithUsername(String username, String password, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        usersRef.whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        Log.e(TAG, "Error: " + e);
+                        return;
+                    }
+
+                    if (task.getResult().isEmpty() || task.getResult().getDocuments().isEmpty()) {
+                        String msg = "Username does not exist";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+
+                    DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                    if (!document.exists()) {
+                        String msg = "Username does not exist";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+
+                    String email = document.getString("email");
+                    newSignInWithEmail(email, password, object, methodName);
                 });
     }
 

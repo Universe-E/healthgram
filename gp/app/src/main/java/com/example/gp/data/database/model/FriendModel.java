@@ -1,10 +1,17 @@
 package com.example.gp.data.database.model;
 
+import com.example.gp.Items.Friend;
+
 public class FriendModel {
     private String userId;
     private String nickname;
 
     public FriendModel() {
+    }
+
+    public FriendModel(Friend friend) {
+        this.userId = friend.getId();
+        this.nickname = friend.getNickname();
     }
 
     public String getUserId() {

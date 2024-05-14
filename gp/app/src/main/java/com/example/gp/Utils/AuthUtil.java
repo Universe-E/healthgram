@@ -32,7 +32,7 @@ public class AuthUtil {
     }
 
     // TODO: finish it and make it public
-    private static User getCurrentUser() {
+    public static User getCurrentUser() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (firebaseUser == null) {

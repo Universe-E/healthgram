@@ -130,7 +130,7 @@ public class PostDB {
         Log.d(TAG, "object: " + object);
         String userId = getCurrentUserId();
 
-        getPostsByAuthorId(timestamp, limit, userId, object, methodName);
+//        getPostsByAuthorId(timestamp, limit, userId, object, methodName);
     }
 
     /**

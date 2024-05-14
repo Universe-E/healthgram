@@ -44,6 +44,12 @@ public class FirebaseUtil {
                 .collection(Database.getNotificationCollection());
     }
 
+    public static CollectionReference getFriendRequestRef() {
+        return FirebaseFirestore
+                .getInstance()
+                .collection(Database.getFriendRequestCollection());
+    }
+
     public static FirebaseAuth getFireAuth() {
         return FirebaseAuth.getInstance();
     }

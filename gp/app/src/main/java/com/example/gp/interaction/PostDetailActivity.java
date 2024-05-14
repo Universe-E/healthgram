@@ -154,7 +154,7 @@ public class PostDetailActivity extends BaseActivity {
         builder.setMessage("Do you want to send a friend request？")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        FriendRequest fr = new FriendRequest("user1@gmail.com");
+                        FriendRequest fr = new FriendRequest(post.getAuthorId());
                         Database.sendFriendRequestTo(fr,null,null);
                     }
                 })

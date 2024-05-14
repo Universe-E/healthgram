@@ -138,7 +138,7 @@ public class SimpleTestActivity extends AppCompatActivity {
     }
 
     private void testGetFriendList() {
-        Database.getFriendList("", 10, this, "getFriendList");
+        Database.getFollowList("", 10, this, "getFriendList");
     }
 
     public void getFriendList(boolean isSuccess, Object object) {
@@ -221,7 +221,7 @@ public class SimpleTestActivity extends AppCompatActivity {
 
     public void testGetFriend() {
         List<Friend> friends = new ArrayList<>();
-        Database.getFriendList("", 10, this, "getFriend");
+        Database.getFollowList("", 10, this, "getFriend");
     }
 
     /**
