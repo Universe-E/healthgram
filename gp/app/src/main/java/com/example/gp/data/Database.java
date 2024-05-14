@@ -217,7 +217,18 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void savePostData(Post post, Object object, String methodName) {
-        PostDB.newSavePostData(post, object, methodName);
+        PostDB.savePostData(post, object, methodName);
+    }
+
+    /**
+     * Delete post
+     *
+     * @param postId
+     * @param object
+     * @param methodName
+     */
+    public static void deletePost(String postId, Object object, String methodName) {
+        PostDB.deletePost(postId, object, methodName);
     }
 
     /**

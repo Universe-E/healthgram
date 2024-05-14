@@ -23,9 +23,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -37,13 +35,13 @@ public class PostDB {
 
     // New APIs
 
-    public static void newSavePostData(Post post, Object object, String methodName) {
+    public static void savePostData(Post post, Object object, String methodName) {
         Log.d(TAG, "newSavePost: " + post.toString());
 
         FileDB.newSaveImage(post, object, methodName);
     }
 
-    public static void newSavePost(boolean isSuccessful, Object result, Object object, String methodName) {
+    public static void savePost(boolean isSuccessful, Object result, Object object, String methodName) {
         Log.d(TAG, "newSavePost: " + isSuccessful);
         if (!isSuccessful) {
             MethodUtil.invokeMethod(object, methodName, false, result);
@@ -76,6 +74,20 @@ public class PostDB {
                 .addOnFailureListener(e -> {
                     MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
                     Log.e(TAG, "Error: " + e);
+                });
+    }
+
+    public static void deletePost(String postId, Object object, String methodName) {
+        CollectionReference postsRef = getPostRef();
+
+        postsRef.document(postId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, postId);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error delete document", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
                 });
     }
 

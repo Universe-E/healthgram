@@ -5,13 +5,11 @@ import android.graphics.BitmapFactory;
 
 import com.example.gp.Items.Post;
 import com.example.gp.Utils.MethodUtil;
-import com.example.gp.data.database.model.PostModel;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.security.spec.PSSParameterSpec;
 import java.util.List;
 import java.util.UUID;
 
@@ -89,7 +87,7 @@ public class FileDB {
 
         if (bitmap == null) {
             post.setImgUUID(null);
-            PostDB.newSavePost(true, post, object, methodName);
+            PostDB.savePost(true, post, object, methodName);
             return;
         }
 
@@ -103,9 +101,9 @@ public class FileDB {
                 .child("image/" + uuid + ".jpg")
                 .putBytes(data);
         uploadTask.addOnFailureListener(e -> {
-            PostDB.newSavePost(false, e.getMessage(), object, methodName);
+            PostDB.savePost(false, e.getMessage(), object, methodName);
         }).addOnSuccessListener(taskSnapshot -> {
-            PostDB.newSavePost(true, post, object, methodName);
+            PostDB.savePost(true, post, object, methodName);
         });
     }
 
