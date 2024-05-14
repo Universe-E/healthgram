@@ -27,11 +27,10 @@ import java.util.List;
  * @since 2024-05-07
  */
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder> {
-    private List<Friend> friends;
+
     private List<FriendRequest> friendRequests;
 
-    public RequestAdapter(List<Friend> friends,  List<FriendRequest> friendRequests){
-        this.friends = friends;
+    public RequestAdapter(List<FriendRequest> friendRequests){
         this.friendRequests = friendRequests;
     }
     @NonNull
@@ -43,15 +42,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
 
     @Override
     public void onBindViewHolder(@NonNull RequestAdapter.RequestViewHolder holder, int position) {
-        Friend friend = friends.get(position);
         FriendRequest friendRequest = friendRequests.get(position);
-        holder.bind(friend,friendRequest);
+        holder.bind(friendRequest);
 
     }
 
     @Override
     public int getItemCount() {
-        return friends.size();
+        return friendRequests.size();
     }
 
     public class RequestViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -70,9 +68,9 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             mRequestReject.setOnClickListener(this);
         }
 
-        public void bind(Friend friend, FriendRequest friendRequest) {
-            mRequestFriendName.setText(friend.getNickname());
-            mRequestFriendAvatar.setImageResource(friend.getAvatar());
+        public void bind(FriendRequest friendRequest) {
+            mRequestFriendName.setText(friendRequest.getSenderName());
+            mRequestFriendAvatar.setImageResource(R.mipmap.user_avatar);
         }
 
         @Override
@@ -81,17 +79,20 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             FriendRequest awaitFriendRequest = friendRequests.get(position);
             if (v == mRequestAccept) {
                 // Update friend list
-                Friend awaitFriend = friends.get(position);
-                Database.follow(awaitFriend, this, "updateUI");
-                Database.processFriendRequest(awaitFriendRequest,null,null);
+//                Database.follow(awaitFriend, this, "updateUI");
+                awaitFriendRequest.setRead(true);
+                awaitFriendRequest.setAccepted(true);
+                Database.processFriendRequest(awaitFriendRequest,this,"updateUI");
                 // Delete this message
-                friends.remove(position);
+                friendRequests.remove(position);
                 notifyItemRemoved(position);
             } else if (v == mRequestReject) {
                 // Delete this message
-                friends.remove(position);
+                friendRequests.remove(position);
                 notifyItemRemoved(position);
                 ToastUtil.show(v.getContext(), "Friend request rejected!");
+                awaitFriendRequest.setRead(true);
+                awaitFriendRequest.setAccepted(false);
                 Database.processFriendRequest(awaitFriendRequest,null,null);
             }
         }
