@@ -16,8 +16,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
-import com.example.gp.data.database.PostDB;
-import com.example.gp.databinding.ActivityPostEditingBinding;
+import com.example.gp.databinding.ActivityNewPostBinding;
 import com.example.gp.home.Fragment_home;
 
 import java.io.IOException;
@@ -30,7 +29,7 @@ import java.io.IOException;
 public class NewPostActivity extends BaseActivity {
 
     private final String activityName = "New Post";
-    private ActivityPostEditingBinding binding;
+    private ActivityNewPostBinding binding;
 
     private static final int PICK_IMAGE = 1;
     private Uri imageUri;
@@ -45,11 +44,11 @@ public class NewPostActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivityPostEditingBinding.inflate(getLayoutInflater());
+        binding = ActivityNewPostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // initialize top bar
-        setUpTitleBar(R.layout.activity_post_editing, activityName);
+        setUpTitleBar(R.layout.activity_new_post, activityName);
 
         // Set up the components on the page
         setUpComponent();
