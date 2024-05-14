@@ -1,5 +1,7 @@
 package com.example.gp.Items;
 
+import com.example.gp.data.database.model.NotificationModel;
+
 import java.util.Date;
 
 public class Notification {
@@ -21,6 +23,10 @@ public class Notification {
         this.date = date;
         this.type = type;
         this.userId = userId;
+    }
+
+    public Notification(NotificationModel notificationModel) {
+        this.message = notificationModel.getMessage();
     }
 
     // Getter and Setter
