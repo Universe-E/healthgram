@@ -62,6 +62,30 @@ public class UserDB {
     public static void getNotificationList(Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
 
+        usersRef.document(getCurrentUserId())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        Log.e(TAG, "Error getting documents: ", e);
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        return;
+                    }
+                    UserModel userModel = task.getResult().toObject(UserModel.class);
+                    Map<String, NotificationModel> notificationMapList = userModel.getMyNotifications();
+                    if (notificationMapList == null) {
+                        String msg = "No notification";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+                    List<NotificationModel> notificationList = new ArrayList<>();
+                    for (Map.Entry<String, NotificationModel> entry : notificationMapList.entrySet()) {
+                        notificationList.add(entry.getValue());
+                    }
+                    MethodUtil.invokeMethod(object, methodName, true, notificationList);
+                    Log.d(TAG, "NotificationList: " + notificationList.toString());
+                });
     }
 
     private void setUserData(Object object, String methodName) {
