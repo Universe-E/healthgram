@@ -12,6 +12,11 @@ public class Friend {
         this.avatar = avatar;
     }
 
+    public Friend(String id, String nickname) {
+        this.id = id;
+        this.nickname = nickname;
+    }
+
     /**
      * DO NOT DELETE THIS CONSTRUCTOR
      */

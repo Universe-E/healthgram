@@ -193,14 +193,21 @@ public class PostDB {
                     List<FriendModel> friendModels = null;
                     if (userModel != null) {
                         friendModels = userModel.getMyFriends();
+                    } else {
+                        getViewers(posts, position + 1, object, methodName);
+                        return;
                     }
+                    Log.d(TAG, "friendModels: " + friendModels);
                     if (friendModels == null) {
+                        post.setPostContent("Only " + post.getAuthorName() + "'s followings can see this post.");
+                        post.setImgUUID(null);
                         getViewers(posts, position + 1, object, methodName);
                         return;
                     }
                     for (FriendModel friendModel : friendModels) {
                         viewers.add(friendModel.getUserId());
                     }
+                    Log.d(TAG, "viewers: " + viewers);
                     posts.get(position).setViewers(viewers);
                     if (!viewers.contains(userId)) {
                         post.setPostContent("Only " + post.getAuthorName() + "'s followings can see this post.");
