@@ -20,6 +20,11 @@ import com.example.gp.databinding.ActivityDirectMessageBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity class for direct message sending
+ * @author Yulong Chen
+ * @since 2024-05-14
+ */
 public class DirectMessageActivity extends BaseActivity implements TextView.OnEditorActionListener {
 
     private com.example.gp.databinding.ActivityDirectMessageBinding binding;

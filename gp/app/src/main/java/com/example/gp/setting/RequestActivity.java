@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Activity class for showing the friend requests
  * @author Yulong Chen
  * @since 2024-05-13
  */

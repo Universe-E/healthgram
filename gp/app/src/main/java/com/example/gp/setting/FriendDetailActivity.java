@@ -24,6 +24,7 @@ import com.example.gp.databinding.ActivityFriendDetailBinding;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 /**
+ * Activity class for friend interaction(p2p and privacy)
  * @author Yulong Chen
  * @since 2024-05-07
  */

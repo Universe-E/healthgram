@@ -14,6 +14,11 @@ import com.example.gp.R;
 
 import java.util.List;
 
+/**
+ * Adapter class to populate a RecyclerView with a list of message which two users sent to each other
+ * @author Yulong Chen
+ * @since 2024-05-14
+ */
 public class DirectMessageAdapter extends RecyclerView.Adapter<DirectMessageAdapter.DirectMessageViewHolder> {
 
     private List<String> messages;

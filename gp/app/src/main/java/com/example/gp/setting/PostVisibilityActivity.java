@@ -23,6 +23,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Activity class for adjusting the visibility of the posts
+ * @author Yulong Chen
+ * @since 2024-05-04
+ */
 public class PostVisibilityActivity extends BaseActivity {
     private static String TAG = "PVA1000000";
     private com.example.gp.databinding.ActivityPostVisibilityBinding binding;

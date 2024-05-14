@@ -73,6 +73,12 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             mRequestFriendAvatar.setImageResource(R.mipmap.user_avatar);
         }
 
+        /**
+         * Click the accept to call the add friend method
+         * Click the reject to call the refuse request method
+         * and delete the content after being clicked
+         * @param v The view that was clicked.
+         */
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
@@ -97,6 +103,11 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             }
         }
 
+        /**
+         * Call back method
+         * @param isSuccess the process is successful or not
+         * @param object the friendRequest
+         */
         public void updateUI(boolean isSuccess,Object object){
             Log.d("Accept request", "isSuccess: " + isSuccess);
             if (!isSuccess) {
