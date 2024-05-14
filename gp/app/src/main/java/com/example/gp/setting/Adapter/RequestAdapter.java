@@ -78,7 +78,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             if (v == mRequestAccept) {
                 // Update friend list
                 Friend awaitFriend = friends.get(position);
-                Database.follow(friends.get(position), this, "updateUI");
+                Database.follow(awaitFriend, this, "updateUI");
                 // Delete this message
                 friends.remove(position);
                 notifyItemRemoved(position);
