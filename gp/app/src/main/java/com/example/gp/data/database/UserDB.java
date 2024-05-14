@@ -1,5 +1,6 @@
 package com.example.gp.data.database;
 
+import static com.example.gp.data.PostsData.clearPostsData;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentEmail;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
@@ -415,6 +416,7 @@ public class UserDB {
     public static void checkSignedIn(Object object, String methodName) {
         // Check if fireUser is signed in
         FirebaseUser fireUser = getFireUser();
+        clearPostsData();
 
         if (fireUser == null) {
             String message = "User does not sign in yet";
