@@ -67,13 +67,15 @@ public class RequestActivity extends BaseActivity {
                 ToastUtil.show(this, "Please check your network!");
             }
         } else {
-            List<Friend> friendRequests = (List<Friend>) object;
-            for (Friend friendRequest : friendRequests) {
-                friends.add(friendRequest);
+            List<FriendRequest> friendRequests = (List<FriendRequest>) object;
+            for (FriendRequest friendRequest : friendRequests) {
+                Friend friend = new Friend(friendRequest.getSenderId(),friendRequest.getSenderName(),R.mipmap.user_avatar);
+                friends.add(friend);
             }
-            Friend textFriend = new Friend("191918","sen bei suki",R.mipmap.sample_avatar_1);
-            friends.add(textFriend);
-            RequestAdapter mRequestAdapter = new RequestAdapter(friends);
+//
+//            Friend textFriend = new Friend("191918","sen bei suki",R.mipmap.sample_avatar_1);
+//            friends.add(textFriend);
+            RequestAdapter mRequestAdapter = new RequestAdapter(friends,friendRequests);
             mRecyclerView.setAdapter(mRequestAdapter);
         }
     }

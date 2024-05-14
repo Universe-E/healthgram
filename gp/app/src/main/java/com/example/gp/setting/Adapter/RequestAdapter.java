@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Items.Friend;
+import com.example.gp.Items.FriendRequest;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
@@ -27,9 +28,11 @@ import java.util.List;
  */
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder> {
     private List<Friend> friends;
+    private List<FriendRequest> friendRequests;
 
-    public RequestAdapter(List<Friend> friends){
+    public RequestAdapter(List<Friend> friends,  List<FriendRequest> friendRequests){
         this.friends = friends;
+        this.friendRequests = friendRequests;
     }
     @NonNull
     @Override
@@ -41,7 +44,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     @Override
     public void onBindViewHolder(@NonNull RequestAdapter.RequestViewHolder holder, int position) {
         Friend friend = friends.get(position);
-        holder.bind(friend);
+        FriendRequest friendRequest = friendRequests.get(position);
+        holder.bind(friend,friendRequest);
 
     }
 
@@ -66,19 +70,20 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             mRequestReject.setOnClickListener(this);
         }
 
-        public void bind(Friend friend) {
+        public void bind(Friend friend, FriendRequest friendRequest) {
             mRequestFriendName.setText(friend.getNickname());
             mRequestFriendAvatar.setImageResource(friend.getAvatar());
-
         }
 
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
+            FriendRequest awaitFriendRequest = friendRequests.get(position);
             if (v == mRequestAccept) {
                 // Update friend list
                 Friend awaitFriend = friends.get(position);
                 Database.follow(awaitFriend, this, "updateUI");
+                Database.processFriendRequest(awaitFriendRequest,null,null);
                 // Delete this message
                 friends.remove(position);
                 notifyItemRemoved(position);
@@ -87,6 +92,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
                 friends.remove(position);
                 notifyItemRemoved(position);
                 ToastUtil.show(v.getContext(), "Friend request rejected!");
+                Database.processFriendRequest(awaitFriendRequest,null,null);
             }
         }
 
