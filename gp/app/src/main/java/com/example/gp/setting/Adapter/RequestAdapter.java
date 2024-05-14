@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.Items.Friend;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
+import com.example.gp.data.Database;
 import com.example.gp.data.database.UserDB;
 
 import java.util.List;
@@ -77,7 +78,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             if (v == mRequestAccept) {
                 // Update friend list
                 Friend awaitFriend = friends.get(position);
-                UserDB.addFriend(awaitFriend,this,"updateUI");
+                Database.follow(friends.get(position), this, "updateUI");
                 // Delete this message
                 friends.remove(position);
                 notifyItemRemoved(position);

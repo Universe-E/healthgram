@@ -124,7 +124,6 @@ public class SimpleTestActivity extends AppCompatActivity {
 //        testTag(view);
 //        testGetPost();
 //        testGetPost();
-//        testAddFriend();
 //        testGetFriendList();
         Log.e("Button","Button was wrong");
         testUserParserActivity();
@@ -209,14 +208,6 @@ public class SimpleTestActivity extends AppCompatActivity {
             editText.setText(post.title);
             editText.setTag(post.postId);
         }
-    }
-
-    void testAddFriend() {
-        Friend friend = new Friend();
-        friend.setId(String.valueOf(friend.hashCode()));
-        friend.setNickname("test" + friend.hashCode());
-        friend.setAvatar(1);
-        Database.addFriend(friend, null, null);
     }
 
     public void testGetFriend() {

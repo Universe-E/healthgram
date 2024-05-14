@@ -94,8 +94,8 @@ public class Database {
      * @param object     The object that calls the method
      * @param methodName Callback method name
      */
-    public static void addFriend(Friend friend, Object object, String methodName) {
-        UserDB.addFriend(friend, object, methodName);
+    public static void follow(Friend friend, Object object, String methodName) {
+        UserDB.follow(friend, object, methodName);
     }
 
     /**
@@ -119,8 +119,9 @@ public class Database {
      * @param object     The object that calls the method
      * @param methodName Callback method name
      */
-    public static void getFriendRequest(Timestamp timpestamp, int limit, Object object, String methodName) {
-        UserDB.getFriendRequest(timpestamp, limit, object, methodName);
+    public static void getFriendRequestList(Timestamp timpestamp, int limit, Object object, String methodName) {
+//        UserDB.getFriendRequest(timpestamp, limit, object, methodName);
+        UserDB.getFriendRequestList(timpestamp, limit, object, methodName);
     }
 
     /**
