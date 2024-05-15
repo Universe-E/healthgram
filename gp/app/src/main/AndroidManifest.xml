@@ -24,9 +24,7 @@
         <activity
             android:name=".home.ui.notifications.FriendNotificationFragment"
             android:exported="false" />
-        <activity
-            android:name=".home.ui.notifications.MentionNotificationFragment"
-            android:exported="false" />
+
         <activity
             android:name=".home.ui.notifications.FollowerNotificationFragment"
             android:exported="false" />
