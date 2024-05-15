@@ -66,7 +66,6 @@ public class PostDetailActivity extends BaseActivity {
         post = postsData.getPosts().get(position);
 
         // Load corresponding post data from database
-//        Database.getPostByPostId(postId, this, "loadPostData");
         loadPostData(true, post);
 
     }

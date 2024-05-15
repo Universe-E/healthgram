@@ -48,6 +48,7 @@ public class UserDB {
     private static UserDB instance;
     private static String userId;
     private static String email;
+    private static String avatarUUID;
     private static final FriendsData friendsData = FriendsData.getInstance();
 
     private UserDB() {
@@ -97,6 +98,10 @@ public class UserDB {
                 });
     }
 
+    public static String getAvatarUUID() {
+        return avatarUUID;
+    }
+
     private void setUserData(Object object, String methodName) {
         if (username != null) {
             MethodUtil.invokeMethod(object, methodName, true, username);
@@ -111,6 +116,7 @@ public class UserDB {
                         return;
                     }
                     username = task.getResult().getString("username");
+                    avatarUUID = task.getResult().getString("avatarUUID");
                     Map<String, FriendModel> myFriends;
                     if (task.getResult().getData() == null) {
                         String msg = "No friend, friend data is null";
