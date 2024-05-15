@@ -24,9 +24,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +73,14 @@ public class PostDB {
 
         docRef.set(postModel)
                 .addOnSuccessListener(dRef -> {
+                    NotificationModel notificationModel = new NotificationModel();
+                    notificationModel.setSenderId(userDB.getUserId());
+                    notificationModel.setUsername(userDB.getUsername());
+                    notificationModel.setType("post_update");
+                    notificationModel.setMessage("New post from " + userDB.getUsername());
+                    notificationModel.setTimestamp(getTimestamp());
+                    notificationModel.setRead(false);
+                    notificationModel.setNotificationId(docRef.getId());
 //                    notifyNewPostToFollowers(new NotificationModel(), object, methodName);
                     MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
                     Log.d(TAG, "DocumentSnapshot successfully written!");
@@ -202,7 +212,7 @@ public class PostDB {
         CollectionReference usersRef = getUsersRef();
         UserDB userDB = UserDB.getInstance();
 
-        usersRef.whereArrayContains("myFriends", userDB.getUserId())
+        usersRef.whereArrayContains("myFriends", notificationModel.getSenderId())
                 .get()
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
@@ -212,15 +222,20 @@ public class PostDB {
                         return;
                     }
                     if (task.getResult() == null) {
-//                        MethodUtil.invokeMethod(object, methodName, true, postId);
+                        Log.d(TAG, "No followers");
+                        MethodUtil.invokeMethod(object, methodName, true, notificationModel.getNotificationId());
                         return;
                     }
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     WriteBatch batch = db.batch();
                     List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
                     for (DocumentSnapshot document : documentSnapshots) {
-//                        batch.update(document.getReference(), "myNotifications", notificationModel, Merge);
+                        Map<String, Object> update = new HashMap<>();
+                        update.put("myNotifications", Map.of(notificationModel.getNotificationId(), notificationModel));
+                        batch.set(document.getReference(), update, SetOptions.merge());
                     }
+                    batch.commit();
+                    MethodUtil.invokeMethod(object, methodName, true, notificationModel.getNotificationId());
                 });
     }
 

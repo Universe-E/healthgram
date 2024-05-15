@@ -14,6 +14,16 @@ public class NotificationModel {
     public NotificationModel() {
     }
 
+    public NotificationModel(String message, String username, String notificationId, String senderId, String type, Timestamp timestamp, boolean isRead) {
+        this.message = message;
+        this.username = username;
+        this.notificationId = notificationId;
+        this.senderId = senderId;
+        this.type = type;
+        this.timestamp = timestamp;
+        this.isRead = isRead;
+    }
+
     public String getMessage() {
         return message;
     }
