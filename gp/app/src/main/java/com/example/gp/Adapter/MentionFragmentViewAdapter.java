@@ -34,7 +34,7 @@ public class MentionFragmentViewAdapter  extends RecyclerView.Adapter<MentionFra
 
         // 设置 holder 中的视图
         holder.usernameTextView.setText(notification.getUserId());
-        holder.timeTextView.setText(notification.getDate());
+        holder.timeTextView.setText(notification.getTimestamp().toString());
         holder.headlineTextView.setText(notification.getTitle());
 
     }

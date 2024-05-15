@@ -42,7 +42,7 @@ public class FollowerFragmentViewAdapter extends RecyclerView.Adapter<FollowerFr
         Notification notification = notifications.get(position);
 
         holder.usernameTextView.setText(notification.getUserId());
-        holder.timeTextView.setText(notification.getDate());
+        holder.timeTextView.setText(notification.getTimestamp().toString());
         holder.headlineTextView.setText(notification.getTitle());
 
     }

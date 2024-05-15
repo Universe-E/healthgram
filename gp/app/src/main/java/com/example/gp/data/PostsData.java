@@ -57,4 +57,14 @@ public class PostsData {
         }
         return _allPosts;
     }
+
+    public void deletePostAt(int position) {
+        if (_allPosts == null) {
+            _allPosts = new ArrayList<>();
+        }
+        if (position < 0 || position >= _allPosts.size()) {
+            return;
+        }
+        _allPosts.remove(position);
+    }
 }

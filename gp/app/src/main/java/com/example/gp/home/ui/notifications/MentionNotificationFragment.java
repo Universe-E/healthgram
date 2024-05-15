@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.gp.Adapter.FollowerFragmentViewAdapter;
 import com.example.gp.Items.Notification;
 import com.example.gp.R;
+import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,8 +55,8 @@ public class MentionNotificationFragment extends Fragment {
     private List<Notification> loadNotifications() {
 
         List<Notification> data = new ArrayList<>();
-        currentDate = DateFormat.format("yyyy-MM-dd", new Date());
-        data.add(createMentionNotification("@you","",currentDate,"Rick"));
+        Timestamp timestamp = Timestamp.now();
+        data.add(createMentionNotification("@you","",timestamp,"Rick"));
 
         return data;
     }

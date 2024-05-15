@@ -1,10 +1,14 @@
 package com.example.gp.data.database.model;
 
+import com.google.firebase.Timestamp;
+
 public class NotificationModel {
     private String message;
+    private String username;
     private String notificationId;
     private String senderId;
     private String type;
+    private Timestamp timestamp;
     private boolean isRead;
 
     public NotificationModel() {
@@ -48,5 +52,21 @@ public class NotificationModel {
 
     public void setRead(boolean read) {
         isRead = read;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }
