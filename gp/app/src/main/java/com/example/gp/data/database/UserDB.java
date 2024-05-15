@@ -450,11 +450,16 @@ public class UserDB {
 
     private static void setFollowNotification(String receiverId, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
+
         NotificationModel notificationModel = new NotificationModel();
         String msg = "New follower: " + username;
         DocumentReference documentReference = usersRef.document();
         notificationModel.setMessage(msg);
         notificationModel.setNotificationId(documentReference.getId());
+        notificationModel.setSenderId(getCurrentUserId());
+        notificationModel.setType("follow");
+        notificationModel.setRead(false);
+
         Map<String, Object> myNotifications = new HashMap<>();
         myNotifications.put("myNotifications", Map.of(documentReference.getId(), notificationModel));
 
@@ -471,9 +476,14 @@ public class UserDB {
 
     private static void setFriendReqNotification(FriendRequestModel friendRequestModel, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
+
         NotificationModel notificationModel = friendRequestModel.notification();
         notificationModel.setNotificationId(friendRequestModel.getRequestId());
         notificationModel.setMessage(friendRequestModel.getSenderName() + " sent you a friend request");
+        notificationModel.setSenderId(getCurrentUserId());
+        notificationModel.setType("friend_request");
+        notificationModel.setRead(false);
+
         Map<String, Object> update = new HashMap<>();
         update.put("myNotifications", Map.of(friendRequestModel.getRequestId(), notificationModel));
 

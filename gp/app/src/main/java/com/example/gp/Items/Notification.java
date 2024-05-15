@@ -7,7 +7,7 @@ import java.util.Date;
 public class Notification {
 
     public enum NotificationType {
-        FOLLOW, MENTION, POST_UPDATE
+        FOLLOW, MENTION, POST_UPDATE, FRIEND_REQUEST
     }
 
     private String title;
@@ -15,6 +15,8 @@ public class Notification {
     private CharSequence date;
     private NotificationType type;
     private String userId;
+    private String notificationId;
+    private boolean isRead;
 
     // Constructor, now includes notification type and user ID
     public Notification(String title, String message, CharSequence date, NotificationType type, String userId) {
@@ -27,6 +29,24 @@ public class Notification {
 
     public Notification(NotificationModel notificationModel) {
         this.message = notificationModel.getMessage();
+        this.notificationId = notificationModel.getNotificationId();
+        this.userId = notificationModel.getSenderId();
+        this.isRead = notificationModel.getRead();
+        if (notificationModel.getType() == null) {
+            return;
+        }
+        if (notificationModel.getType().equals("follow")) {
+            this.type = NotificationType.FOLLOW;
+        }
+        else if (notificationModel.getType().equals("mention")) {
+            this.type = NotificationType.MENTION;
+        }
+        else if (notificationModel.getType().equals("post_update")) {
+            this.type = NotificationType.POST_UPDATE;
+        }
+        else if (notificationModel.getType().equals("friend_request")) {
+            this.type = NotificationType.FRIEND_REQUEST;
+        }
     }
 
     // Getter and Setter
@@ -70,7 +90,21 @@ public class Notification {
         this.userId = userId;
     }
 
+    public String getNotificationId() {
+        return notificationId;
+    }
 
+    public void setNotificationId(String notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
 }
 
 

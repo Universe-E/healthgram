@@ -55,7 +55,7 @@ public class UserParserActivity extends AppCompatActivity {
     private static User getCurrentUser() {
         User user = new User("u1", "John", "john@example.com");
         user.setDescription("Sample description");
-        user.setAvatar("avatar.jpg");
+        user.setAvatar(1);
         HashMap<String, Friend> friends = new HashMap<>();
         Friend f1 = new Friend("f1","Alice",1);
         Friend f2 = new Friend("f2","Bob",2);

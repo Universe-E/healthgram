@@ -15,9 +15,9 @@ public class User {
     private static String username;
     private static String email;
     private static String description;
-    private static String avatar;
+    private static int avatar;
+    private static String avatarUUID;
     private static Map<String, Friend> friendMap;
-    private static Map<String, Post> postMap;
     private static Map<String, Notification> notificationMap;
 
     /**
@@ -29,11 +29,10 @@ public class User {
      * @param description     user description
      * @param avatar          user avatar
      * @param friendMap       user friend map
-     * @param postMap         user post map
      * @param notificationMap user notification map
      */
     public User(String userId, String username, String email, String description,
-                String avatar, Map<String, Friend> friendMap, Map<String, Post> postMap,
+                int avatar, Map<String, Friend> friendMap,
                 Map<String, Notification> notificationMap) {
         User.userId = userId;
         User.username = username;
@@ -41,7 +40,6 @@ public class User {
         User.description = description;
         User.avatar = avatar;
         User.friendMap = friendMap;
-        User.postMap = postMap;
         User.notificationMap = notificationMap;
     }
 
@@ -53,9 +51,8 @@ public class User {
         User.username = username;
         User.email = email;
         User.description = "set description";
-        User.avatar = "set avatar";
+        User.avatar = 0;
         User.friendMap = new HashMap<>();
-        User.postMap = new HashMap<>();
         User.notificationMap = new HashMap<>();
     }
 
@@ -97,11 +94,11 @@ public class User {
         User.description = description;
     }
 
-    public String getAvatar() {
+    public int getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(int avatar) {
         User.avatar = avatar;
     }
 
@@ -121,7 +118,11 @@ public class User {
         User.notificationMap = notificationMap;
     }
 
+    public void setAvatarUUID(String avatarUUID) {
+        User.avatarUUID = avatarUUID;
+    }
+
     public String getAvatarUUID() {
-        return avatar;
+        return avatarUUID;
     }
 }
