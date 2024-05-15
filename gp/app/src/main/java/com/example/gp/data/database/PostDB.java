@@ -221,7 +221,7 @@ public class PostDB {
                     for (DocumentSnapshot document : documentSnapshots) {
 //                        batch.update(document.getReference(), "myNotifications", notificationModel, Merge);
                     }
-                }
+                });
     }
 
     private static void getViewers(List<Post> posts, int position, Object object, String methodName) {
