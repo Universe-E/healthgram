@@ -99,7 +99,16 @@ public class UserDB {
                         return;
                     }
                     username = task.getResult().getString("username");
-                    Map<String, FriendModel> myFriends = (Map<String, FriendModel>) task.getResult().getData().get("myFriends");
+                    Map<String, FriendModel> myFriends;
+                    if (task.getResult().getData() == null) {
+                        String msg = "No friend, friend data is null";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
+                    else {
+                        myFriends = (Map<String, FriendModel>) task.getResult().getData().get("myFriends");
+                    }
                     if (myFriends != null) {
                         friendsData.addNewFriends(myFriends);
                     }
@@ -345,6 +354,12 @@ public class UserDB {
                     }
 
                     UserModel userModel = task.getResult().toObject(UserModel.class);
+                    if (userModel == null) {
+                        String msg = "No friend, user model is null";
+                        Log.d(TAG, msg);
+                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        return;
+                    }
                     Map<String, FriendModel> friendsMap = userModel.getMyFriends();
 
                     if (friendsMap == null) {
