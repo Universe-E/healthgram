@@ -13,6 +13,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
 import com.example.gp.Items.UserParser;
 import com.example.gp.R;
+import com.google.firebase.Timestamp;
 
 import org.json.JSONException;
 
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 public class UserParserActivity extends AppCompatActivity {
 
-    static CharSequence currentDate = DateFormat.format("yyyy-MM-dd", new Date());
+    private static Timestamp currentDate = Timestamp.now();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

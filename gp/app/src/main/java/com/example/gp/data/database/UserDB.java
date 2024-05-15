@@ -85,6 +85,18 @@ public class UserDB {
                 });
     }
 
+    public static void changeAvatar(String avatarUUID, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(getCurrentUserId())
+                .update("avatarUUID", avatarUUID)
+                .addOnSuccessListener(aVoid ->
+                        MethodUtil.invokeMethod(object, methodName, true))
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
     private void setUserData(Object object, String methodName) {
         if (username != null) {
             MethodUtil.invokeMethod(object, methodName, true, username);
@@ -474,6 +486,8 @@ public class UserDB {
         notificationModel.setSenderId(getCurrentUserId());
         notificationModel.setType("follow");
         notificationModel.setRead(false);
+        notificationModel.setUsername(username);
+        notificationModel.setTimestamp(Timestamp.now());
 
         Map<String, Object> myNotifications = new HashMap<>();
         myNotifications.put("myNotifications", Map.of(documentReference.getId(), notificationModel));
@@ -498,6 +512,8 @@ public class UserDB {
         notificationModel.setSenderId(getCurrentUserId());
         notificationModel.setType("friend_request");
         notificationModel.setRead(false);
+        notificationModel.setUsername(username);
+        notificationModel.setTimestamp(Timestamp.now());
 
         Map<String, Object> update = new HashMap<>();
         update.put("myNotifications", Map.of(friendRequestModel.getRequestId(), notificationModel));
@@ -576,9 +592,11 @@ public class UserDB {
                     }
                     FirebaseUser fireUser = getFireUser();
                     UserModel userModel = new UserModel();
+                    userModel.setAvatarUUID("1");
                     userModel.setUsername(username);
                     userModel.setEmail(email);
                     userModel.setUserId(fireUser.getUid());
+
                     UserDB userDB = getInstance();
 
                     newSaveUserData(userModel, object, methodName);

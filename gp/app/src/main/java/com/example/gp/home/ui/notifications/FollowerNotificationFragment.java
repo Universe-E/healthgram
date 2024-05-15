@@ -21,6 +21,7 @@ import com.example.gp.Items.User;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
+import com.google.firebase.Timestamp;
 
 import java.util.*;
 
@@ -53,9 +54,9 @@ public class FollowerNotificationFragment extends Fragment {
 
     private List<Notification> loadNotifications() {
         List<Notification> data = new ArrayList<>();
-        currentDate = DateFormat.format("yyyy-MM-dd", new Date());
+        Timestamp timestamp = Timestamp.now();
         //using factory method
-        data.add(createFollowNotification("Vacation","go to Italy",currentDate,"Lin"));
+        data.add(createFollowNotification("Vacation","go to Italy", timestamp,"Lin"));
         // 添加更多数据
         return data;
     }
