@@ -10,18 +10,18 @@ import java.util.List;
 /**
  * Posts data class
  */
-public class PostsData {
+public class PostsRepository {
     private static final String TAG = "PostData";
     private static List<Post> _allPosts;
-    private static PostsData instance;
+    private static PostsRepository instance;
 
-    private PostsData() {
+    private PostsRepository() {
         _allPosts = new ArrayList<>();
     }
 
-    public static PostsData getInstance() {
+    public static PostsRepository getInstance() {
         if (instance == null) {
-            instance = new PostsData();
+            instance = new PostsRepository();
         }
         return instance;
     }

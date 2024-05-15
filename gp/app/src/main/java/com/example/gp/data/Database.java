@@ -39,7 +39,7 @@ public class Database {
      * Clear all data
      */
     public static void clearAll() {
-        PostsData.clearPostsData();
+        PostsRepository.clearPostsData();
         FriendsData.clearFriendsData();
     }
 

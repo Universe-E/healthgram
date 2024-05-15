@@ -18,8 +18,7 @@ import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.FriendsData;
-import com.example.gp.data.PostsData;
-import com.example.gp.data.UserData;
+import com.example.gp.data.PostsRepository;
 import com.example.gp.BaseActivity;
 import com.example.gp.data.database.UserDB;
 
@@ -36,7 +35,7 @@ public class PostDetailActivity extends BaseActivity {
     private TextView tvPostContent;
     private Button btnShare;
     private TextView tvAuthorName;
-    private static final PostsData postsData = PostsData.getInstance();
+    private static final PostsRepository POSTS_REPOSITORY = PostsRepository.getInstance();
     private int position;
 
     private Post post;
@@ -63,7 +62,7 @@ public class PostDetailActivity extends BaseActivity {
 //        String postId = intent.getStringExtra("postId");
 //        post = intent.getParcelableExtra("post");
         position = intent.getIntExtra("position", 0);
-        post = postsData.getPosts().get(position);
+        post = POSTS_REPOSITORY.getPosts().get(position);
 
         // Load corresponding post data from database
 //        Database.getPostByPostId(postId, this, "loadPostData");

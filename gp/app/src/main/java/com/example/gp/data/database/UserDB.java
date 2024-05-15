@@ -1,7 +1,7 @@
 package com.example.gp.data.database;
 
 import static com.example.gp.data.FriendsData.clearFriendsData;
-import static com.example.gp.data.PostsData.clearPostsData;
+import static com.example.gp.data.PostsRepository.clearPostsData;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentEmail;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
@@ -29,7 +29,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;

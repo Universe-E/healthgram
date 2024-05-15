@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.example.gp.Items.Post;
 import com.example.gp.Utils.MethodUtil;
-import com.example.gp.data.PostsData;
+import com.example.gp.data.PostsRepository;
 import com.example.gp.data.database.model.FriendModel;
 import com.example.gp.data.database.model.PostModel;
 import com.example.gp.data.database.model.UserModel;
@@ -31,7 +31,7 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
     private static final String POST_PATH = "";
-    private static final PostsData postsData = PostsData.getInstance();
+    private static final PostsRepository POSTS_REPOSITORY = PostsRepository.getInstance();
 
     // New APIs
 
@@ -98,9 +98,9 @@ public class PostDB {
         }
 
         Timestamp lastestPostTimestamp = null;
-        PostsData postsData = PostsData.getInstance();
-        if (!postsData.getPosts().isEmpty())
-            lastestPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
+        PostsRepository postsRepository = PostsRepository.getInstance();
+        if (!postsRepository.getPosts().isEmpty())
+            lastestPostTimestamp = postsRepository.getPosts().get(0).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
@@ -120,9 +120,9 @@ public class PostDB {
         }
 
         Timestamp oldestPostTimestamp = null;
-        PostsData postsData = PostsData.getInstance();
-        if (!postsData.getPosts().isEmpty())
-            oldestPostTimestamp = postsData.getPosts().get(postsData.getPosts().size() - 1).getPostTimestamp();
+        PostsRepository postsRepository = PostsRepository.getInstance();
+        if (!postsRepository.getPosts().isEmpty())
+            oldestPostTimestamp = postsRepository.getPosts().get(postsRepository.getPosts().size() - 1).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
