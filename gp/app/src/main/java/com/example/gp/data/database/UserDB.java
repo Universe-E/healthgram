@@ -91,8 +91,10 @@ public class UserDB {
         CollectionReference usersRef = getUsersRef();
         usersRef.document(getCurrentUserId())
                 .update("avatarUUID", avatarUUID)
-                .addOnSuccessListener(aVoid ->
-                        MethodUtil.invokeMethod(object, methodName, true, avatarUUID))
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, avatarUUID);
+                    UserDB.avatarUUID = avatarUUID;
+                })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
                     MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
@@ -124,8 +126,7 @@ public class UserDB {
                         Log.d(TAG, msg);
                         MethodUtil.invokeMethod(object, methodName, false, msg);
                         return;
-                    }
-                    else {
+                    } else {
                         myFriends = (Map<String, FriendModel>) task.getResult().getData().get("myFriends");
                     }
                     if (myFriends != null) {

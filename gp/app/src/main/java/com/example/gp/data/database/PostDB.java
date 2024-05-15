@@ -21,8 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
@@ -81,8 +83,8 @@ public class PostDB {
                     notificationModel.setTimestamp(getTimestamp());
                     notificationModel.setRead(false);
                     notificationModel.setNotificationId(docRef.getId());
-//                    notifyNewPostToFollowers(new NotificationModel(), object, methodName);
-                    MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
+                    notifyNewPostToFollowers(notificationModel, object, methodName);
+//                    MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
                     Log.d(TAG, "DocumentSnapshot successfully written!");
                 })
                 .addOnFailureListener(e -> {
@@ -211,8 +213,11 @@ public class PostDB {
     private static void notifyNewPostToFollowers(NotificationModel notificationModel, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
         UserDB userDB = UserDB.getInstance();
+        Log.d(TAG, "NotificationModel: " + notificationModel.getSenderId());
+        String query = "myFriends." + notificationModel.getSenderId() + ".userId";
 
-        usersRef.whereArrayContains("myFriends", notificationModel.getSenderId())
+
+        usersRef.where(Filter.greaterThanOrEqualTo(query, notificationModel.getSenderId()))
                 .get()
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
@@ -229,7 +234,9 @@ public class PostDB {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     WriteBatch batch = db.batch();
                     List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    Log.d(TAG, "documentSnapshots: " + documentSnapshots);
                     for (DocumentSnapshot document : documentSnapshots) {
+                        Log.d(TAG, "document: " + document.toString());
                         Map<String, Object> update = new HashMap<>();
                         update.put("myNotifications", Map.of(notificationModel.getNotificationId(), notificationModel));
                         batch.set(document.getReference(), update, SetOptions.merge());
