@@ -8,7 +8,7 @@ import java.util.Date;
 public class Notification {
 
     public enum NotificationType {
-        FOLLOW, MENTION, POST_UPDATE, FRIEND_REQUEST
+        FOLLOW,  POST_UPDATE, FRIEND_REQUEST
     }
 
     private String title;
@@ -41,9 +41,6 @@ public class Notification {
         }
         if (notificationModel.getType().equals("follow")) {
             this.type = NotificationType.FOLLOW;
-        }
-        else if (notificationModel.getType().equals("mention")) {
-            this.type = NotificationType.MENTION;
         }
         else if (notificationModel.getType().equals("post_update")) {
             this.type = NotificationType.POST_UPDATE;
