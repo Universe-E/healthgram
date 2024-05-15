@@ -6,13 +6,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.gp.home.ui.notifications.FollowerNotificationFragment;
 import com.example.gp.home.ui.notifications.FriendNotificationFragment;
-import com.example.gp.home.ui.notifications.MentionNotificationFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationsPagerAdapter extends FragmentStateAdapter {
-    private String[] titles = new String[] { "friendPosts", "@Me", "friendRequest" };
+    private String[] titles = new String[] { "friendPosts",  "friendRequest" };
 
     public NotificationsPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
@@ -25,8 +24,6 @@ public class NotificationsPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new FollowerNotificationFragment();
             case 1:
-                return new MentionNotificationFragment();
-            case 2:
                 return new FriendNotificationFragment();
             default:
                 throw new IllegalStateException("Unexpected position: " + position);

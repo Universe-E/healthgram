@@ -69,7 +69,6 @@ public class FriendNotificationFragment extends Fragment {
         } else {
             if (object instanceof List) {
                 List<Notification> friendRequests = (List<Notification>) object;
-
                 if (!friendRequests.isEmpty()) {
                     notifications = friendRequests;  //Assign the new friend list to the friends variable
                     adapter.updateFriends(notifications);
