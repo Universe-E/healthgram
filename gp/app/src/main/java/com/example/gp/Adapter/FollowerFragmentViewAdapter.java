@@ -43,6 +43,9 @@ public class FollowerFragmentViewAdapter extends RecyclerView.Adapter<FollowerFr
     public void onBindViewHolder(@NonNull FollowerFragmentViewAdapter.ViewHolder holder, int position) {
         Notification notification = notifications.get(position);
 
+
+
+
         // Set the view in the holder
         holder.usernameTextView.setText(notification.getSenderName());
 
