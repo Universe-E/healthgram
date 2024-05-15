@@ -61,7 +61,8 @@ public class SettingActivity extends BaseActivity {
     public void onClick(View v) {
         super.onClick(v);
         if(v == binding.llSettingChangeAvatarLayout) {
-//            Intent intent = new Intent(this,ChangeAvatarActivity.class);
+            Intent intent = new Intent(this,ChangeAvatarActivity.class);
+            startActivity(intent);
         } else if(v == binding.llSettingNickNameLayout) {
 
         } else if(v == binding.llSettingChangePhoneNumberLayout) {
