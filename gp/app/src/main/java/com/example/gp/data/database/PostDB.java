@@ -12,6 +12,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.data.PostsData;
 import com.example.gp.data.database.model.FriendModel;
+import com.example.gp.data.database.model.NotificationModel;
 import com.example.gp.data.database.model.PostModel;
 import com.example.gp.data.database.model.UserModel;
 import com.google.android.gms.tasks.Task;
@@ -20,8 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +71,8 @@ public class PostDB {
 
         docRef.set(postModel)
                 .addOnSuccessListener(dRef -> {
-                    MethodUtil.invokeMethod(object, methodName, true, post);
+//                    notifyNewPostToFollowers(new NotificationModel(), object, methodName);
+                    MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
                     Log.d(TAG, "DocumentSnapshot successfully written!");
                 })
                 .addOnFailureListener(e -> {
@@ -192,6 +196,32 @@ public class PostDB {
         }
 
         getViewers(posts, 0, object, methodName);
+    }
+
+    private static void notifyNewPostToFollowers(NotificationModel notificationModel, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        UserDB userDB = UserDB.getInstance();
+
+        usersRef.whereArrayContains("myFriends", userDB.getUserId())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        Log.e(TAG, "Error getting documents: ", e);
+                        return;
+                    }
+                    if (task.getResult() == null) {
+//                        MethodUtil.invokeMethod(object, methodName, true, postId);
+                        return;
+                    }
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    WriteBatch batch = db.batch();
+                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    for (DocumentSnapshot document : documentSnapshots) {
+//                        batch.update(document.getReference(), "myNotifications", notificationModel, Merge);
+                    }
+                }
     }
 
     private static void getViewers(List<Post> posts, int position, Object object, String methodName) {
