@@ -54,12 +54,7 @@ public class FriendNotificationFragment extends Fragment {
         return view;
     }
 
-//    private List<Notification> loadNotifications() {
-//        notifications= new ArrayList<>();
-//        currentDate = DateFormat.format("yyyy-MM-dd", new Date());
-//        notifications.add(createFriendNotification("followed you","who followed you",currentDate, "Wallace"));
-//        return notifications;
-//    }
+
 
 
     public void updateUI(boolean isSuccess, Object object){
@@ -71,11 +66,18 @@ public class FriendNotificationFragment extends Fragment {
             }
         } else {
             if (object instanceof List) {
-                List<Notification> friendRequests = (List<Notification>) object;
+                List<Notification> allNotifications = (List<Notification>) object;
+                List<Notification> followNotifications = new ArrayList<>();
 
+                // filter type
+                for (Notification notification : allNotifications) {
+                    if (notification.getType() == Notification.NotificationType.FOLLOW) {
+                        followNotifications.add(notification);
+                    }
+                }
 
-                if (!friendRequests.isEmpty()) {
-                    notifications = friendRequests;
+                if (!followNotifications.isEmpty()) {
+                    notifications = followNotifications;
 
 
                     adapter.updateFriends(notifications);
@@ -95,7 +97,9 @@ public class FriendNotificationFragment extends Fragment {
                         Log.d("UpdateUI", "---");
                     }
                 } else {
-                    Log.d("UpdateUI", "Friends list is empty after update.");
+                    Log.d("UpdateUI", "No FOLLOW notifications found.");
+                    notifications.clear();
+                    adapter.updateFriends(notifications);
                 }
             } else {
                 ToastUtil.showLong(getContext(), "Incorrect data type received");
@@ -107,8 +111,7 @@ public class FriendNotificationFragment extends Fragment {
     private void initializeRecyclerViews(View view) {
         recyclerView = view.findViewById(R.id.recycler_view_follow);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        // Initialization data
-//        notifications = loadNotifications(); // load data
+
         notifications= new ArrayList<>();
 
         adapter = new FriendFragmentViewAdapter(notifications);

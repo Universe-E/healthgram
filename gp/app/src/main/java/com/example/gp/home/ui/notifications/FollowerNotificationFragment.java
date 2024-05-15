@@ -38,9 +38,6 @@ public class FollowerNotificationFragment extends Fragment {
     private FollowerFragmentViewAdapter followerNotificationAdapter;
     private List<Notification> notifications;
 
-
-
-    private CharSequence currentDate;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_follower_notification_fragment, container, false);
@@ -50,7 +47,7 @@ public class FollowerNotificationFragment extends Fragment {
         return view;
     }
 
-    public void updateUI(boolean isSuccess, Object object){
+    public void updateUI(boolean isSuccess, Object object) {
         if (!isSuccess) {
             if (object == null) {
                 ToastUtil.show(getContext(), "No Notification Yet");
@@ -59,21 +56,27 @@ public class FollowerNotificationFragment extends Fragment {
             }
         } else {
             if (object instanceof List) {
-                List<Notification> friendRequests = (List<Notification>) object;
+                List<Notification> allNotifications = (List<Notification>) object;
+                List<Notification> followerPostNotifications = new ArrayList<>();
 
+                // filter type
+                for (Notification notification : allNotifications) {
+                    if (notification.getType() == Notification.NotificationType.POST_UPDATE) {
+                        followerPostNotifications.add(notification);
+                    }
+                }
 
-                if (!friendRequests.isEmpty()) {
-                    notifications = friendRequests;
-
+                if (!followerPostNotifications.isEmpty()) {
+                    notifications = followerPostNotifications;
                     followerNotificationAdapter.updateFriends(notifications);
-                    Log.d("UpdateUI", "Sended posts, count: " + notifications.size());
+                    Log.d("UpdateUI", "Notifications updated, count: " + notifications.size());
 
                     // 打印 notifications 列表的内容
                     Log.d("UpdateUI", "Notifications:");
                     for (Notification notification : notifications) {
                         Log.d("UpdateUI", "Title: " + notification.getTitle());
                         Log.d("UpdateUI", "Message: " + notification.getMessage());
-                        Log.d("UpdateUI", "Date: " + (convertTimestampToString(notification.getTimestamp()) ));
+                        Log.d("UpdateUI", "Date: " + (notification.getTimestamp() != null ? notification.getTimestamp().toString() : "null"));
                         Log.d("UpdateUI", "Type: " + notification.getType());
                         Log.d("UpdateUI", "User ID: " + notification.getUserId());
                         Log.d("UpdateUI", "Notification ID: " + notification.getNotificationId());
@@ -82,7 +85,9 @@ public class FollowerNotificationFragment extends Fragment {
                         Log.d("UpdateUI", "---");
                     }
                 } else {
-                    Log.d("UpdateUI", "Friends list is empty after update.");
+                    Log.d("UpdateUI", "No POST_UPDATE notifications found.");
+                    notifications.clear();
+                    followerNotificationAdapter.updateFriends(notifications);
                 }
             } else {
                 ToastUtil.showLong(getContext(), "Incorrect data type received");
