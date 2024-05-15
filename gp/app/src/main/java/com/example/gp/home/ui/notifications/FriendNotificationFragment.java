@@ -2,6 +2,8 @@ package com.example.gp.home.ui.notifications;
 
 import static com.example.gp.Items.NotificationFactory.createFriendNotification;
 
+import static com.example.gp.Utils.TimeUtil.convertTimestampToString;
+
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gp.Adapter.FriendFragmentViewAdapter;
+import com.example.gp.Items.NotificationFactory;
 import com.example.gp.Utils.ToastUtil;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -69,13 +72,28 @@ public class FriendNotificationFragment extends Fragment {
         } else {
             if (object instanceof List) {
                 List<Notification> friendRequests = (List<Notification>) object;
+
+
                 if (!friendRequests.isEmpty()) {
-                    notifications = friendRequests;  //Assign the new friend list to the friends variable
+                    notifications = friendRequests;
+
+
                     adapter.updateFriends(notifications);
                     Log.d("UpdateUI", "Friends updated, count: " + notifications.size());
 
                     // 打印 notifications 列表的内容
-                    Log.d("UpdateUI", "Notifications: " + notifications.toString());
+                    Log.d("UpdateUI", "Notifications:");
+                    for (Notification notification : notifications) {
+                        Log.d("UpdateUI", "Title: " + notification.getTitle());
+                        Log.d("UpdateUI", "Message: " + notification.getMessage());
+                        Log.d("UpdateUI", "Date: " + (convertTimestampToString(notification.getTimestamp()) ));
+                        Log.d("UpdateUI", "Type: " + notification.getType());
+                        Log.d("UpdateUI", "User ID: " + notification.getUserId());
+                        Log.d("UpdateUI", "Notification ID: " + notification.getNotificationId());
+                        Log.d("UpdateUI", "Is Read: " + notification.isRead());
+                        Log.d("UpdateUI", "User: " + notification.getSenderName());
+                        Log.d("UpdateUI", "---");
+                    }
                 } else {
                     Log.d("UpdateUI", "Friends list is empty after update.");
                 }

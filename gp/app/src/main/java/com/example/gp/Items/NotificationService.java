@@ -14,12 +14,7 @@ public class NotificationService {
                 "user123"
         );
 
-        Notification mentionNotif = NotificationFactory.createMentionNotification(
-                "@Mention",
-                "You were mentioned by Alice in a comment.",
-                Timestamp.now(),
-                "user456"
-        );
+
 
         Notification postUpdateNotif = NotificationFactory.createFriendNotification(
                 "New Post",

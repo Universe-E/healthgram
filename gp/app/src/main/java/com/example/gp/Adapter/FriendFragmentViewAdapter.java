@@ -14,7 +14,7 @@ import com.example.gp.Items.Notification;
 import com.example.gp.R;
 
 import java.util.List;
-
+import static com.example.gp.Utils.TimeUtil.convertTimestampToString;
 public class FriendFragmentViewAdapter extends RecyclerView.Adapter<FriendFragmentViewAdapter.ViewHolder> {
     private List<Notification> notifications;
 
@@ -33,10 +33,17 @@ public class FriendFragmentViewAdapter extends RecyclerView.Adapter<FriendFragme
     public void onBindViewHolder(@NonNull FriendFragmentViewAdapter.ViewHolder holder, int position) {
         Notification notification = notifications.get(position);
 
-        // 设置 holder 中的视图
-        holder.usernameTextView.setText(notification.getUserId());
-        holder.timeTextView.setText(notification.getTimestamp().toString());
-        holder.headlineTextView.setText(notification.getTitle());
+        // Set the view in the holder
+        holder.usernameTextView.setText(notification.getSenderName());
+
+        // check null value
+        if (notification.getTimestamp() != null) {
+            holder.timeTextView.setText(convertTimestampToString(notification.getTimestamp()));
+        } else {
+            holder.timeTextView.setText("");  // or set a default value
+        }
+
+        holder.headlineTextView.setText(notification.getMessage());
 
     }
     public void updateFriends(List<Notification> notification) {
