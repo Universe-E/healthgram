@@ -87,11 +87,12 @@ public class UserDB {
     }
 
     public static void changeAvatar(String avatarUUID, Object object, String methodName) {
+        Log.d(TAG, object.toString());
         CollectionReference usersRef = getUsersRef();
         usersRef.document(getCurrentUserId())
                 .update("avatarUUID", avatarUUID)
                 .addOnSuccessListener(aVoid ->
-                        MethodUtil.invokeMethod(object, methodName, true))
+                        MethodUtil.invokeMethod(object, methodName, true, avatarUUID))
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
                     MethodUtil.invokeMethod(object, methodName, false, e.getMessage());

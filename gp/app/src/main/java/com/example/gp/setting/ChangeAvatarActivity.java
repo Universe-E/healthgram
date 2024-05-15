@@ -73,11 +73,12 @@ public class ChangeAvatarActivity extends BaseActivity {
      * @param avatar Avatar waiting to be changed
      */
     private void showConfirmationDialog(int avatar) {
+        Object object = this;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Do you want to change avatar?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Database.changeAvatar(String.valueOf(avatar),this,"showResult");
+                        Database.changeAvatar(String.valueOf(avatar),object,"showResult");
                         Log.d(TAG, "onClick: call method");
                     }
                 })
