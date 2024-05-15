@@ -32,7 +32,9 @@ public class ChangeAvatarActivity extends BaseActivity {
         setContentView(binding.getRoot());
         setUpTitleBar(R.layout.activity_change_avatar,"Avatar");
 
-//        UserDB.getInstance().get
+        String avatarUUID = UserDB.getAvatarUUID();
+        int avatar = Integer.parseInt(avatarUUID);
+        binding.ivCurrentAvatar.setImageResource(avatar);
 
 
         binding.ivSampleAvatar1.setOnClickListener(this);
@@ -80,6 +82,8 @@ public class ChangeAvatarActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         Database.changeAvatar(String.valueOf(avatar), object,"showResult");
                         Log.d(TAG, "onClick: call method");
+                        // Working when the call back method goes wrong
+                        binding.ivCurrentAvatar.setImageResource(avatar);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

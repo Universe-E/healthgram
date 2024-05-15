@@ -45,7 +45,8 @@ public class SettingActivity extends BaseActivity {
 
         // Get the user info
         String username = UserDB.getInstance().getUsername();
-        int userAvatar = R.mipmap.sample_avatar_1;
+        String avatarUUID = UserDB.getAvatarUUID();
+        int userAvatar = Integer.parseInt(avatarUUID);
 
         // initialize the user info layout
         binding.ivSettingAvatar.setImageResource(userAvatar);
