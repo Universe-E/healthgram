@@ -107,7 +107,7 @@ public class FriendFragment extends Fragment {
                 Log.d("UpdateUI", "Friends list is empty after update.");
             }
         } else {
-            ToastUtil.showLong(getContext(), "Incorrect data type received");
+//            ToastUtil.showLong(getContext(), "Incorrect data type received");
         }
     }
 

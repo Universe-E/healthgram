@@ -102,7 +102,7 @@ public class FriendNotificationFragment extends Fragment {
                     adapter.updateFriends(notifications);
                 }
             } else {
-                ToastUtil.showLong(getContext(), "Incorrect data type received");
+//                ToastUtil.showLong(getContext(), "Incorrect data type received");
             }
         }
     }

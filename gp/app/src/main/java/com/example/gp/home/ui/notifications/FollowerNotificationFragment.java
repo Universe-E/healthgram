@@ -90,7 +90,7 @@ public class FollowerNotificationFragment extends Fragment {
                     followerNotificationAdapter.updateFriends(notifications);
                 }
             } else {
-                ToastUtil.showLong(getContext(), "Incorrect data type received");
+//                ToastUtil.showLong(getContext(), "Incorrect data type received");
             }
         }
     }
