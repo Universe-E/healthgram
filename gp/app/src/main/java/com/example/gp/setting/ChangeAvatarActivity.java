@@ -78,7 +78,7 @@ public class ChangeAvatarActivity extends BaseActivity {
         builder.setMessage("Do you want to change avatar?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Database.changeAvatar(String.valueOf(avatar),object,"showResult");
+                        Database.changeAvatar(String.valueOf(avatar), object,"showResult");
                         Log.d(TAG, "onClick: call method");
                     }
                 })
