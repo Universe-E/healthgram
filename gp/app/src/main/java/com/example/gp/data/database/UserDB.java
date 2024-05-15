@@ -74,7 +74,7 @@ public class UserDB {
                     if (notificationMapList == null) {
                         String msg = "No notification";
                         Log.d(TAG, msg);
-                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        MethodUtil.invokeMethod(object, methodName, true, msg);
                         return;
                     }
                     List<Notification> notificationList = new ArrayList<>();
@@ -87,7 +87,6 @@ public class UserDB {
     }
 
     public static void changeAvatar(String avatarUUID, Object object, String methodName) {
-        Log.d(TAG, object.toString());
         CollectionReference usersRef = getUsersRef();
         usersRef.document(getCurrentUserId())
                 .update("avatarUUID", avatarUUID)
@@ -101,7 +100,7 @@ public class UserDB {
                 });
     }
 
-    public static String getAvatarUUID() {
+    public String getAvatarUUID() {
         return avatarUUID;
     }
 

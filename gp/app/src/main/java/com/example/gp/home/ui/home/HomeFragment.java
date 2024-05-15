@@ -116,14 +116,14 @@ public class HomeFragment extends Fragment {
             }
 
             // renew the UI
-            ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
-            List<Post> posts = new ArrayList<>();
-            for (Integer key : keys) {
-                Post post = (Post) postTree.search(key);
-                if (post != null) {
-                    posts.add(post);
-                }
-            }
+//            ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
+//            List<Post> posts = new ArrayList<>();
+//            for (Integer key : keys) {
+//                Post post = (Post) postTree.search(key);
+//                if (post != null) {
+//                    posts.add(post);
+//                }
+//            }
 //            postCardAdapter.setPostList(posts);
             postCardAdapter.setPostList();
 

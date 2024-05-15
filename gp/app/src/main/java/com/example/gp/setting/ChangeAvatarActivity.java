@@ -32,7 +32,8 @@ public class ChangeAvatarActivity extends BaseActivity {
         setContentView(binding.getRoot());
         setUpTitleBar(R.layout.activity_change_avatar,"Avatar");
 
-        String avatarUUID = UserDB.getAvatarUUID();
+        UserDB userDB = UserDB.getInstance();
+        String avatarUUID = userDB.getAvatarUUID();
         int avatar = Integer.parseInt(avatarUUID);
         binding.ivCurrentAvatar.setImageResource(avatar);
 

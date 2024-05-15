@@ -40,7 +40,6 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
 
     public void setPostList() {
 //        this.postList = postsData.getPosts();
-        Log.d("PostCardAdapter", "setPostList: " + postsData.getPosts().size());
         notifyDataSetChanged();
     }
 
@@ -86,6 +85,8 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     }
     public void updatePosts(List<Post> userposts) {
 //        this.postList = userposts;
+        postsData.clearPostsData();
+        postsData.addNewPosts(userposts);
         notifyDataSetChanged();
     }
 
