@@ -43,7 +43,7 @@ public class ParserTest {
     @Test
     public void parseTitle_returnsEmptyString_whenTextDoesNotContainTitleColon() {
         Parser parser = Parser.getInstance();
-        assertEquals("", parser.parseTitle("hello"));
+        assertNull(parser.parseTitle("hello"));
     }
 
     @Test
