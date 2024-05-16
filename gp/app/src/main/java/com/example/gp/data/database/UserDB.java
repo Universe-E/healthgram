@@ -90,8 +90,8 @@ public class UserDB {
         usersRef.document(getCurrentUserId())
                 .update("avatarUUID", avatarUUID)
                 .addOnSuccessListener(aVoid -> {
-                    MethodUtil.invokeMethod(object, methodName, true, avatarUUID);
                     UserDB.avatarUUID = avatarUUID;
+                    MethodUtil.invokeMethod(object, methodName, true, avatarUUID);
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
