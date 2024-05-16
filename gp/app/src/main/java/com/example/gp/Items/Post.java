@@ -17,7 +17,8 @@ import java.util.List;
  * Post class
  * Each post has a unique identifier (postId), an author identifier (authorId),
  * content, title, and a flag indicating whether the post is public or private.
- * @author : Yulong Chen
+ * @author : Tianci Li
+ * {@code @author}: Yulong Chen, Han Bao
  * @since : 2024-05-05
  */
 public class Post implements Parcelable {

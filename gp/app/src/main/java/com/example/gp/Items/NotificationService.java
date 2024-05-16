@@ -4,8 +4,15 @@ import com.google.firebase.Timestamp;
 
 import java.util.Date;
 
+/**
+ * NotificationFactory class
+ * The class to create notifications
+ */
 public class NotificationService {
 
+    /**
+     * Process notifications
+     */
     public void processNotifications() {
         Notification followNotif = NotificationFactory.createFollowNotification(
                 "New follower",
@@ -14,15 +21,11 @@ public class NotificationService {
                 "user123"
         );
 
-
-
         Notification postUpdateNotif = NotificationFactory.createFriendNotification(
                 "New Post",
                 "A new post from someone you follow.",
                 Timestamp.now(),
                 "user789"
         );
-
-        // Here you can add notifications to the database or perform other processing
     }
 }

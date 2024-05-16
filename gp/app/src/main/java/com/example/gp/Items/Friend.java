@@ -2,6 +2,10 @@ package com.example.gp.Items;
 
 import com.example.gp.data.database.model.FriendModel;
 
+/**
+ * Friend class
+ * The class to store the information of a friend
+ */
 public class Friend {
     private String id;
     private String nickname;

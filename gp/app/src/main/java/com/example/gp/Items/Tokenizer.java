@@ -29,19 +29,19 @@ public class Tokenizer {
             return new Token(Token.Type.AT, "@");
         }
 
-        //detect prefix: title
+        // detect prefix: title
         if (pos < text.length() - 5 && text.startsWith("title:", pos)) {
             pos += 6;
             return new Token(Token.Type.TITLE, "title:");
         }
 
-        //detect prefix: public
+        // detect prefix: public
         if (pos < text.length() - 6 && text.startsWith("public:", pos)) {
             pos += 7;
             return new Token(Token.Type.PUBLIC, "public:");
         }
 
-        //tokenize content as NAME type
+        // tokenize content as NAME type
         if (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {
             StringBuilder sb = new StringBuilder();
             while (pos < text.length() && (Character.isAlphabetic(currentChar) || Character.isDigit(currentChar))) {

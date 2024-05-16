@@ -3,8 +3,10 @@ package com.example.gp.Items;
 import com.example.gp.data.database.model.NotificationModel;
 import com.google.firebase.Timestamp;
 
-import java.util.Date;
-
+/**
+ * Notification class
+ * The class to store the information of a notification
+ */
 public class Notification {
 
     public enum NotificationType {
@@ -20,7 +22,9 @@ public class Notification {
     private Timestamp timestamp;
     private String senderName;
 
-    // Constructor, now includes notification type and user ID
+    /**
+     * Constructor, now includes notification type and user ID
+     */
     public Notification(String title, String message, Timestamp timestamp, NotificationType type, String userId) {
         this.title = title;
         this.message = message;
