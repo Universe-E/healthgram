@@ -48,6 +48,9 @@ public class SettingActivity extends BaseActivity {
         UserDB userDB = UserDB.getInstance();
         String username = userDB.getUsername();
         String avatarUUID = userDB.getAvatarUUID();
+        if (avatarUUID == null) {
+            avatarUUID = "1";
+        }
         int userAvatar = Integer.parseInt(avatarUUID);
         Log.d("SettingActivity", "avatarUUID: " + avatarUUID);
         if (userAvatar == 1) {
