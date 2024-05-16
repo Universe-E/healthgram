@@ -11,6 +11,8 @@ import java.util.Map;
 
 /**
  * A user model for Firebase Firestore
+ *
+ * @author Han Bao
  */
 public class UserModel {
     private String username;

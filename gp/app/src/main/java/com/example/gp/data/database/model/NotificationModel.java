@@ -4,6 +4,8 @@ import com.google.firebase.Timestamp;
 
 /**
  * A notification model class for firebase firestore
+ *
+ * @author Han Bao
  */
 public class NotificationModel {
     private String message;

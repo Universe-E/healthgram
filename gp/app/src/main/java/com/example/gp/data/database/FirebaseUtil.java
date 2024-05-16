@@ -10,6 +10,8 @@ import com.google.firebase.storage.StorageReference;
 
 /**
  * A utility class for basic Firebase operations
+ *
+ * @author Han Bao
  */
 public class FirebaseUtil {
     private static final String TAG = "FirebaseUtil";

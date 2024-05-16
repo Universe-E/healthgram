@@ -4,6 +4,8 @@ import com.example.gp.Items.Friend;
 
 /**
  * A friend data model for firebase firestore
+ *
+ * @author Han Bao
  */
 public class FriendModel {
     private String userId;
