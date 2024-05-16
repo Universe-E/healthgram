@@ -299,4 +299,11 @@ public class Database {
     public static void getPostsByAuthorId(Timestamp timestamp, int limit, String authorId, Object object, String methodName) {
         PostDB.newGetPostByAuthorId(timestamp, limit, authorId, object, methodName);
     }
+
+    // Search operations
+    public static void search(String keyword, Boolean isPublic, boolean isTitle, Object object, String methodName) {
+        if (isPublic == null) {
+
+        }
+    }
 }

@@ -32,10 +32,9 @@ public class ChangeAvatarActivity extends BaseActivity {
         setContentView(binding.getRoot());
         setUpTitleBar(R.layout.activity_change_avatar,"Avatar");
 
-        UserDB userDB = UserDB.getInstance();
-        String avatarUUID = userDB.getAvatarUUID();
-        int avatar = Integer.parseInt(avatarUUID);
-        binding.ivCurrentAvatar.setImageResource(avatar);
+//        String avatarUUID = UserDB.getAvatarUUID();
+//        int avatar = Integer.parseInt(avatarUUID);
+//        binding.ivCurrentAvatar.setImageResource(avatar);
 
 
         binding.ivSampleAvatar1.setOnClickListener(this);
@@ -110,5 +109,18 @@ public class ChangeAvatarActivity extends BaseActivity {
             int newAvatar = Integer.parseInt(newAvatarUUID);
             binding.ivCurrentAvatar.setImageResource(newAvatar);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadAvatarData();
+    }
+
+    private void loadAvatarData() {
+        String avatarUUID = UserDB.getInstance().getAvatarUUID();
+        int userAvatar = Integer.parseInt(avatarUUID);
+        Log.d("loadAvatarData", "loadAvatarData: "+ avatarUUID);
+        binding.ivCurrentAvatar.setImageResource(userAvatar);
     }
 }

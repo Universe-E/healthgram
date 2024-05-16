@@ -49,6 +49,7 @@ public class UserDB {
     private static String email;
     private static String avatarUUID;
     private static final FriendsData friendsData = FriendsData.getInstance();
+    private OnAvatarUUIDChangedListener listener;
 
     private UserDB() {
         userId = getCurrentUserId();
@@ -90,8 +91,8 @@ public class UserDB {
         usersRef.document(getCurrentUserId())
                 .update("avatarUUID", avatarUUID)
                 .addOnSuccessListener(aVoid -> {
-                    MethodUtil.invokeMethod(object, methodName, true, avatarUUID);
                     UserDB.avatarUUID = avatarUUID;
+                    MethodUtil.invokeMethod(object, methodName, true, avatarUUID);
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
@@ -148,6 +149,22 @@ public class UserDB {
                     username = task.getResult().getString("username");
                     MethodUtil.invokeMethod(object, methodName, true, username);
                 });
+    }
+    public interface OnAvatarUUIDChangedListener {
+        void onAvatarUUIDChanged(String newAvatarUUID);
+    }
+
+
+    public void setOnAvatarUUIDChangedListener(OnAvatarUUIDChangedListener listener) {
+        this.listener = listener;
+        notifyAvatarUUIDChanged();
+    }
+
+
+    private void notifyAvatarUUIDChanged() {
+        if (listener != null) {
+            listener.onAvatarUUIDChanged(avatarUUID);
+        }
     }
 
     private static void clearUserDB() {

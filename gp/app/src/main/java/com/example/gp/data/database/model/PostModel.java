@@ -5,6 +5,9 @@ import com.google.firebase.Timestamp;
 
 import java.util.List;
 
+/**
+ * A post model for Firebase firestore
+ */
 public class PostModel {
     private String postId;
     private String authorId;

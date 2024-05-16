@@ -101,8 +101,9 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Validate username, email, and password
+     *
      * @param usernameOrEmail username, email
-     * @param password password
+     * @param password        password
      * @return true if valid
      */
     private boolean validateForm(String usernameOrEmail, String password) {
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Debug
-    public void superToken(View v){
+    public void superToken(View v) {
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);
     }

@@ -292,7 +292,6 @@ public class HomeFragment extends Fragment {
             else {
                 return;
             }
-
         }
         postCardAdapter.updatePosts(filteredPosts);  // update posts RecyclerView
     }
