@@ -6,6 +6,8 @@ import com.google.firebase.Timestamp;
 /**
  * FriendRequest class
  * The class to store the information of a friend request
+ *
+ * @author Han Bao
  */
 public class FriendRequest {
     private String RequestId;

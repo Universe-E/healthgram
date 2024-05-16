@@ -6,6 +6,8 @@ import com.google.firebase.Timestamp;
 /**
  * Notification class
  * The class to store the information of a notification
+ *
+ * @author Han Bao
  */
 public class Notification {
 

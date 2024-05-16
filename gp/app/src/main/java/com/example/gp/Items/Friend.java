@@ -5,6 +5,8 @@ import com.example.gp.data.database.model.FriendModel;
 /**
  * Friend class
  * The class to store the information of a friend
+ *
+ * @author Han Bao
  */
 public class Friend {
     private String id;
