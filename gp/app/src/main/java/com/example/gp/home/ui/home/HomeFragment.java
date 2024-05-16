@@ -85,6 +85,18 @@ public class HomeFragment extends Fragment {
     }
 
     /**
+     * Load the posts when the fragment is resumed
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (postList == null) {
+            postList = postRepo.getPostsByPage(PAGE, PAGE_SIZE);
+        }
+        showPostCards();
+    }
+
+    /**
      * Callback method for getting initial posts
      *
      * @param isSuccess whether the operation is successful

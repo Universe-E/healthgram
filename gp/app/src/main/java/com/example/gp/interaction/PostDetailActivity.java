@@ -26,6 +26,9 @@ import com.example.gp.data.database.UserDB;
 
 import java.util.Objects;
 
+/**
+ * This class represents the activity for displaying the details of a post.
+ */
 public class PostDetailActivity extends BaseActivity {
 
     public static final String EXTRA_POST = "extra_post";
@@ -38,7 +41,6 @@ public class PostDetailActivity extends BaseActivity {
     private Button btnShare;
     private TextView tvAuthorName;
     private static final PostRepository POSTS_REPOSITORY = PostRepository.getInstance();
-    private int position;
 
     private Post post;
     private ImageView ivLikePost;
@@ -65,9 +67,6 @@ public class PostDetailActivity extends BaseActivity {
         // Get post data from intent
         Intent intent = getIntent();
         String postId = intent.getStringExtra("postId");
-//        post = intent.getParcelableExtra("post");
-//        position = intent.getIntExtra("position", 0);
-//        post = POSTS_REPOSITORY.getAllPosts().get(position);
         post = POSTS_REPOSITORY.getPostById(postId);
 
         // Load corresponding post data from database
@@ -121,7 +120,7 @@ public class PostDetailActivity extends BaseActivity {
         btnFollow.setOnClickListener(v -> {
             if (isAuthorMyself()) {
                 Database.deletePost(post.getPostId(), null, null);
-                POSTS_REPOSITORY.deletePostAt(position);
+                POSTS_REPOSITORY.deletePostAt(post.getPostId());
                 startActivity(new Intent(this, LoginActivity.class));
                 return;
             } else if (isAuthorFollowed()) {

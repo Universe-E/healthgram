@@ -40,6 +40,9 @@ public class NewPostActivity extends BaseActivity {
     CheckBox isPublic;
     Button fireButton;
 
+    /**
+     * Called when the activity is starting.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,9 @@ public class NewPostActivity extends BaseActivity {
         setUpFireButtonListener();
     }
 
+    /**
+     * Set up the components on the page.
+     */
     private void setUpComponent() {
         this.heading = binding.etEditPostHeading;
         this.content = binding.etEditPostContent;
@@ -69,6 +75,9 @@ public class NewPostActivity extends BaseActivity {
         this.fireButton = binding.btnFirePost;
     }
 
+    /**
+     * Set up the visibility checkbox listener.
+     */
     private void setupVisibilityCheckboxListener() {
 
         // When the checkbox is checked, it means the post is public
@@ -89,12 +98,18 @@ public class NewPostActivity extends BaseActivity {
 
     }
 
+    /**
+     * Set up the upload image button listener.
+     */
     private void setUpUploadImageButtonListener() {
         binding.btnUploadImage.setOnClickListener(v -> {
             openFileChooser();
         });
     }
 
+    /**
+     * Open the file chooser.
+     */
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -102,6 +117,10 @@ public class NewPostActivity extends BaseActivity {
         startActivityForResult(intent, PICK_IMAGE);
     }
 
+    /**
+     * Called when an activity you launched exits, giving you the requestCode you started it with,
+     * the resultCode it returned, and any additional data from it.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -112,10 +131,12 @@ public class NewPostActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Set up the fire button listener.
+     */
     private void setUpFireButtonListener() {
         binding.btnFirePost.setOnClickListener(v -> {
             // 1. Get the information from the components
-//            Bitmap img = this.imageUri == null ? null : binding.ivPostImage.getDrawingCache();
             String heading = this.heading.getText().toString();
             String content = this.content.getText().toString();
             String visibilityString = this.visibilityString.getText().toString();
@@ -140,16 +161,16 @@ public class NewPostActivity extends BaseActivity {
                 }
             }
 
-            // TODO: 3. handle visibility
-            // parse the visibilityString to a list of user ids
-            // for each user id, add it to the visibility list of the post
-
             // 4. Add the post to the database
-//            Database.savePostData(newPost, this, "postOut");
             Database.savePostData(newPost, this, "postOut");
         });
     }
 
+    /**
+     * Called when the post is successfully posted.
+     * @param isSuccess whether the post is successfully posted
+     * @param object the object
+     */
     public void postOut(boolean isSuccess, Object object) {
         if (!isSuccess) {
             ToastUtil.showLong(this, "Failed to post the new post");

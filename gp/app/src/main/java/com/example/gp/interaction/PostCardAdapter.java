@@ -18,14 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class represents the adapter for the post card
+ */
 public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostViewHolder> {
 
     private List<Post> postList = new ArrayList<>();
     private OnPostClickListener onPostClickListener;
-//    private static final PostRepository POSTS_REPOSITORY = PostRepository.getInstance();
-
-    public void clearPosts() {
-    }
 
     public PostCardAdapter(List<Post> postList) {
         this.postList = postList;
@@ -46,12 +45,6 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
         notifyDataSetChanged();
     }
 
-//    public void setPostList() {
-////        this.postList = POSTS_REPOSITORY.getPosts();
-//        Log.d("PostCardAdapter", "setPostList: " + POSTS_REPOSITORY.getAllPosts().size());
-//        notifyDataSetChanged();
-//    }
-
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,7 +56,6 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = postList.get(position);
         String postId = post.getPostId();
-//        Post post = POSTS_REPOSITORY.getAllPosts().get(position);
 
         // set the post title and content
         holder.textViewHeading.setText(post.getTitle());
@@ -90,6 +82,7 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
         return postList.size();
 //        return POSTS_REPOSITORY.getAllPosts().size();
     }
+
     public void updatePosts(List<Post> userposts) {
 //        this.postList = userposts;
         // TODO: what is this?
