@@ -17,34 +17,13 @@ and I am aware of the relevant
   We may use data related to this assignment, including this statement, for research purposes to improve computing education and student experience. Your participation is entirely voluntary and any personal information will be anonymized and kept confidential. Your identity will not be disclosed in any research reports or publications. To opt out of this research, uncheck below.
 - [X] I consent to use my data for research purposes.
 
-
 declaration: >-
   I declare that everything I have submitted in this assignment is entirely our
   own work, with the following exceptions:
 
 
-# add as many "name+comment" entries as necessary
-# (or remove it altogether if you haven't collaborated with anyone outside your group)
-collaboration:
-  - name:
-    comment: >-
 
 
-# add as many "url+licence+comment" entries as necessary
-# (or remove it altogether if you haven't used any external code)
-code:
-  - comment:
-    url:
-    licence:
-
-
-# add as many "url+licence+comment" entries as necessary
-# (or remove it altogether if you haven't used any external assets)
-assets:
-  # NOTE: "Bliss" is just here as an example, you SHOULD REMOVE IT
-  - comment: "_Bliss_ by Charles O'Rear"
-    url: https://en.wikipedia.org/wiki/Bliss_(image)
-    licence: fair use
 
 
 ### Questions (answer before final submission):
@@ -57,10 +36,10 @@ assets:
   - Tool(s): <tools used here>
 
 3. How did they contribute to the completion of this assignment?
-  - All of us contributes 20% in average
+  - Han Bao contributes approximately 24%, All of other members contribute 19% in average
 
 4. How long did it take to complete this assignment (approximately, in hours)?
-  - 120 hours
+  - 180 hours
 
 
 
