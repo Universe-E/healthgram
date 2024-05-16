@@ -116,7 +116,7 @@ public class PostDetailActivity extends BaseActivity {
         btnFollow.setOnClickListener(v -> {
             if (isAuthorMyself()) {
                 Database.deletePost(post.getPostId(), null, null);
-                postsData.deletePostAt(position);
+                POSTS_REPOSITORY.deletePostAt(position);
                 startActivity(new Intent(this, MainActivity.class));
                 return;
             } else if (isAuthorFollowed()) {

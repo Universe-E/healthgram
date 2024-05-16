@@ -114,6 +114,17 @@ public class PostRepository {
         }
     }
 
+    public void deletePostAt(int position) {
+        if (_allPosts == null) {
+            _allPosts = new ArrayList<>();
+        }
+        if (position < 0 || position >= _allPosts.size()) {
+            return;
+        }
+        _allPosts.remove(position);
+    }
+
+
     private int numberChecker(int number) {
         if (number < 0) {
             return 0;
