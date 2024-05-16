@@ -27,6 +27,12 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     public void clearPosts() {
     }
 
+    public PostCardAdapter(List<Post> postList) {
+        this.postList = postList;
+    }
+    public PostCardAdapter() {
+    }
+
     public interface OnPostClickListener {
         void onPostClick(String position);
     }
