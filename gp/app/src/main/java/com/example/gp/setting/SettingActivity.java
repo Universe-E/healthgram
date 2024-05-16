@@ -67,10 +67,13 @@ public class SettingActivity extends BaseActivity {
             Intent intent = new Intent(this,ChangeAvatarActivity.class);
             startActivity(intent);
         } else if(v == binding.llSettingNickNameLayout) {
+            // extensive function
 
         } else if(v == binding.llSettingChangePhoneNumberLayout) {
+            // extensive function
 
         } else if(v == binding.llSettingChangePasswordLayout) {
+            // extensive function
 
         } else if(v == binding.llSettingRequestLayout) {
             Intent intent = new Intent(this, RequestActivity.class);
