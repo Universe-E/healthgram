@@ -1,13 +1,10 @@
 package com.example.gp.data;
 
-import static java.security.AccessController.getContext;
-
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.gp.Items.Post;
-import com.example.gp.Utils.ToastUtil;
 import com.google.firebase.Timestamp;
+
 import java.util.ArrayList;
 import java.util.List;
 

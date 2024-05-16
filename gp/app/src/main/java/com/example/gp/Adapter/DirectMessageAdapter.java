@@ -1,6 +1,5 @@
 package com.example.gp.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gp.DirectMessageActivity;
 import com.example.gp.R;
 
 import java.util.List;

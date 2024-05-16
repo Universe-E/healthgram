@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.BaseActivity;
-import com.example.gp.R;
 import com.example.gp.Items.Post;
+import com.example.gp.R;
 import com.example.gp.Utils.TimeUtil;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
@@ -19,9 +19,7 @@ import com.example.gp.setting.Adapter.PostAdapter;
 import com.google.firebase.Timestamp;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Activity class for adjusting the visibility of the posts
