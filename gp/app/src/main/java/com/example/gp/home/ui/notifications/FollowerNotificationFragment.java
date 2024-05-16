@@ -1,10 +1,6 @@
 package com.example.gp.home.ui.notifications;
 
-import static com.example.gp.Items.NotificationFactory.createFollowNotification;
-import static com.example.gp.Utils.TimeUtil.convertTimestampToString;
-
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Adapter.FollowerFragmentViewAdapter;
-import com.example.gp.Adapter.FriendFragmentViewAdapter;
 import com.example.gp.Items.Notification;
-import com.example.gp.Items.User;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
-import com.google.firebase.Timestamp;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Follower notification fragment

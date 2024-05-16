@@ -1,13 +1,8 @@
 package com.example.gp.Utils;
 
-import androidx.annotation.Nullable;
-
 import com.example.gp.Items.User;
-import com.example.gp.data.Database;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.jetbrains.annotations.Contract;
 
 /**
  * Util class for authentication

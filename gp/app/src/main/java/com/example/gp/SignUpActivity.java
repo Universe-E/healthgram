@@ -6,13 +6,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Utils.AuthUtil;
-
+import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
-import com.example.gp.data.database.UserDB;
 import com.example.gp.home.Fragment_home;
 
 /**

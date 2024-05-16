@@ -1,7 +1,6 @@
 package com.example.gp.Items;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 

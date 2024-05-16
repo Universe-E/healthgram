@@ -1,27 +1,18 @@
 package com.example.gp.setting;
 
-import static androidx.databinding.DataBindingUtil.setContentView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gp.BaseActivity;
 import com.example.gp.DirectMessageActivity;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
-import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivityFriendDetailBinding;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 
 /**
  * Activity class for friend interaction(p2p and privacy)

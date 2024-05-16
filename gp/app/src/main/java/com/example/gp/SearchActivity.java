@@ -1,16 +1,14 @@
 package com.example.gp;
+
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.gp.Items.Post;
-import com.example.gp.databinding.ActivityFragmentHomeBinding;
-import com.example.gp.databinding.ActivitySearchBinding;
-import com.google.android.material.search.SearchBar;
-import com.google.android.material.search.SearchView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+
+import com.example.gp.Items.Post;
+import com.example.gp.databinding.ActivitySearchBinding;
+import com.google.android.material.search.SearchBar;
+import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
