@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:paddingEnd="10dp"
                 android:layout_gravity="end"
-                android:src="@drawable/baseline_favorite_border_24"/>
+                android:src="@drawable/heart_pressed_effect"/>
 
             <Button
                 android:id="@+id/btn_post_detail_page_share"

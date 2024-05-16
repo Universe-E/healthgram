@@ -203,6 +203,7 @@ public class PostDetailActivity extends BaseActivity {
         } else {
             // Turn the like on
             ivLikePost.setImageResource(R.drawable.baseline_favorite_24);
+            ToastUtil.show(this,"Oh yeah, your likes make the post shine even more");
         }
     }
 }
