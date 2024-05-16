@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <include
         android:id="@+id/tb_top_navigation_bar"
@@ -80,13 +81,28 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <ImageView
-                android:id="@+id/iv_post_detail_like_post"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="10dp"
                 android:layout_gravity="end"
-                android:src="@drawable/heart_pressed_effect"/>
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_post_detail_like_post"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="5dp"
+                    android:src="@drawable/heart_pressed_effect" />
+
+                <TextView
+                    android:id="@+id/tv_post_detail_like_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="5dp"
+                    tools:text="10" />
+
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/btn_post_detail_page_share"

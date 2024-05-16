@@ -23,6 +23,7 @@ import com.example.gp.data.Database;
 import com.example.gp.data.FriendsData;
 import com.example.gp.data.PostRepository;
 import com.example.gp.BaseActivity;
+import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
 
 import java.util.List;
@@ -46,6 +47,8 @@ public class PostDetailActivity extends BaseActivity {
 
     private Post post;
     private ImageView ivLikePost;
+    private TextView tvLikeAmount;
+    private int likeCount;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -61,6 +64,7 @@ public class PostDetailActivity extends BaseActivity {
         btnShare = findViewById(R.id.btn_post_detail_page_share);
         tvAuthorName = findViewById(R.id.tv_post_detail_page_author_username);
         ivLikePost = findViewById(R.id.iv_post_detail_like_post);
+        tvLikeAmount = findViewById(R.id.tv_post_detail_like_amount);
         ivLikePost.setOnClickListener(this);
 
         // Set up the title bar
@@ -79,7 +83,16 @@ public class PostDetailActivity extends BaseActivity {
         // Load corresponding post data from database
         loadPostData(true, post);
 
+        // load the post likes
+        updateLikeCount(post.getLikeCount());
+
     }
+
+    private void updateLikeCount(int likeCount) {
+        String likeAmount = String.valueOf(likeCount);
+        tvLikeAmount.setText(likeAmount);
+    }
+
 
     @SuppressLint("SetTextI18n")
     private void showPostData() {
@@ -213,6 +226,10 @@ public class PostDetailActivity extends BaseActivity {
             // Turn the like on
             ivLikePost.setImageResource(R.drawable.baseline_favorite_24);
             ToastUtil.show(this,"Oh yeah, your likes make the post shine even more");
+
+            // Update the like count
+            post.likeCount++;
+            updateLikeCount(post.getLikeCount());
         }
     }
 }
