@@ -18,6 +18,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.gp.Items.Parser;
 import com.example.gp.R;
+import com.example.gp.SearchActivity;
+import com.example.gp.SearchPostsActivity;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
 import com.example.gp.data.BTree;
@@ -27,6 +29,7 @@ import com.example.gp.interaction.NewPostActivity;
 import com.example.gp.interaction.PostCardAdapter;
 import com.example.gp.interaction.PostDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.search.SearchBar;
 import com.google.android.material.search.SearchView;
 
 import java.util.ArrayList;
@@ -49,6 +52,8 @@ public class HomeFragment extends Fragment {
     // skeleton
     private PostCardAdapter postCardAdapter;
     private SearchView searchView;
+
+    private SearchBar searchBar;
     private SwipeRefreshLayout swipeRefreshLayout;
     Object thisActivity;
 
@@ -179,7 +184,6 @@ public class HomeFragment extends Fragment {
     }
 
     public void cbmAddRefreshedPosts(boolean isSuccess, Object args) {
-
         if (isSuccess) {
             Log.d(TAG, "cbmAddRefreshedPosts: Successfully get new posts");
             List<Post> posts = (List<Post>) args;
@@ -223,7 +227,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                performSearch(s.toString());
+//                performSearch(s.toString());
             }
 
             @Override
@@ -232,67 +236,21 @@ public class HomeFragment extends Fragment {
         });
         // Close SearchView after search is complete
         searchView.getEditText().setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 String query = v.getText().toString();
-                performSearch(query);
+//                performSearch(query);
                 searchView.hide();
+
+                // 创建 Intent 并传递搜索查询到 SearchPostsActivity
+                Intent intent = new Intent(getContext(), SearchPostsActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+
                 return true;
             }
             return false;
         });
     }
 
-    /**
-     * Search by input query string, or input token as prefix
-     *
-     * @param query query string
-     */
-    private void performSearch(String query) {
-        List<Post> filteredPosts = new ArrayList<>();
 
-        if (postList == null) {
-            // Handle the case when post data is not loaded yet
-            Log.e("HomeFragment", "Post data is not loaded yet");
-            return;
-        }
-
-        //User can search by starting with:
-        //title:
-        //public:
-        String titleQuery = Parser.getInstance().parseTitle(query);
-        Boolean publicQuery = Parser.getInstance().parsePublic(query);
-
-
-        ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode); // get all keys
-        for (int key : keys) {
-            Post post = (Post) postTree.search(key);
-
-            // If no token used, use title query in default
-            if (titleQuery == null && publicQuery == null) {
-                if (post.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                    filteredPosts.add(post);
-                }
-            }
-            // If only one token used, filter by token
-            else if (titleQuery == null || publicQuery == null) {
-                // Use public
-                if (titleQuery == null) {
-                    if (post.isPublic() == Boolean.TRUE.equals(publicQuery)) {
-                        filteredPosts.add(post);
-                    }
-                }
-                // Use title
-                else {
-                    if (post.getTitle().toLowerCase().contains(titleQuery.toLowerCase())) {
-                        filteredPosts.add(post);
-                    }
-                }
-            }
-            //Use more than 1 token is an invalid operation
-            else {
-                return;
-            }
-        }
-        postCardAdapter.updatePosts(filteredPosts);  // update posts RecyclerView
-    }
 }

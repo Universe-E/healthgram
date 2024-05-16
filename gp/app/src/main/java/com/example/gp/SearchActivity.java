@@ -3,6 +3,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gp.Items.Post;
+import com.example.gp.databinding.ActivityFragmentHomeBinding;
+import com.example.gp.databinding.ActivitySearchBinding;
 import com.google.android.material.search.SearchBar;
 import com.google.android.material.search.SearchView;
 
@@ -20,8 +22,10 @@ import java.util.List;
  * Author: Xingchen Zhang
  * Date: 2024-05-03
  */
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity  extends BaseActivity {
     private static final String TAG = "SearchActivity";
+
+    private ActivitySearchBinding binding;
     private SearchBar searchBar;
     private SearchView searchView; // to show the search list
     private List<Post> searchResults; // store the search result
@@ -30,6 +34,10 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        // use view binding to bind the layout
+        binding = ActivitySearchBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setUpTitleBar(R.layout.activity_fragment_home,TAG);
 
         searchBar = findViewById(R.id.search_bar);
         searchView = findViewById(R.id.search_view);
