@@ -19,14 +19,15 @@ import java.util.List;
 public class PostRepository {
     private static final String TAG = "PostData";
     private static List<Post> _allPosts;
-    private List<Post> filteredPosts;
+    private static List<Post> filteredPosts;
     private static PostRepository instance;
-    private Timestamp newestPostTime;
-    private Timestamp oldestPostTime;
+    private static Timestamp newestPostTime;
+    private static Timestamp oldestPostTime;
     private final int LOAD_SIZE = 10;
 
     private PostRepository() {
         _allPosts = new ArrayList<>();
+        filteredPosts = new ArrayList<>();
     }
 
     public static PostRepository getInstance() {
@@ -39,6 +40,7 @@ public class PostRepository {
     public static void clearPostsData() {
         instance = null;
         _allPosts = null;
+        filteredPosts = null;
     }
 
     public void addNewPosts(List<Post> posts) {

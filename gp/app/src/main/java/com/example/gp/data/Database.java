@@ -300,10 +300,11 @@ public class Database {
         PostDB.newGetPostByAuthorId(timestamp, limit, authorId, object, methodName);
     }
 
-    // Search operations
-    public static void search(String keyword, Boolean isPublic, boolean isTitle, Object object, String methodName) {
-        if (isPublic == null) {
+    public static void getNewestFiftyPosts(Object object, String methodName) {
+        PostDB.getNewestFiftyPosts(object, methodName);
+    }
 
-        }
+    public static void likePost(String postId, Object object, String methodName) {
+        PostDB.likePost(postId, object, methodName);
     }
 }
