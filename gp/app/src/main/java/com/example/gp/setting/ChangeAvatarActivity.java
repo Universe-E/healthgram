@@ -118,7 +118,7 @@ public class ChangeAvatarActivity extends BaseActivity {
     }
 
     private void loadAvatarData() {
-        String avatarUUID = UserDB.getAvatarUUID();
+        String avatarUUID = UserDB.getInstance().getAvatarUUID();
         int userAvatar = Integer.parseInt(avatarUUID);
         Log.d("loadAvatarData", "loadAvatarData: "+ avatarUUID);
         binding.ivCurrentAvatar.setImageResource(userAvatar);
