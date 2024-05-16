@@ -8,10 +8,9 @@ import android.view.View;
 import androidx.activity.EdgeToEdge;
 
 import com.example.gp.BaseActivity;
-import com.example.gp.MainActivity;
+import com.example.gp.LoginActivity;
 import com.example.gp.R;
 import com.example.gp.data.Database;
-import com.example.gp.data.UserData;
 import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivitySettingBinding;
 
@@ -89,7 +88,7 @@ public class SettingActivity extends BaseActivity {
             startActivity(intent);
         } else if(v == binding.btnSettingMainQuit) {
             Database.signOut(null,null);
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             //start new activity, clear old tasks
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

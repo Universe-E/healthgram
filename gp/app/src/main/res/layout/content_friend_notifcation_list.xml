@@ -17,7 +17,7 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="8dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context=".MainActivity"
+        tools:context=".LoginActivity"
         tools:listitem="@layout/content_friend_notification" />
 
 </FrameLayout>

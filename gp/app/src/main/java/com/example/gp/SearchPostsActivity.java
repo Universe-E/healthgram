@@ -4,33 +4,30 @@ package com.example.gp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.gp.Items.Parser;
 import com.example.gp.Items.Post;
 import com.example.gp.data.BTree;
 import com.example.gp.data.Database;
 import com.example.gp.data.PostRepository;
-import com.example.gp.databinding.ActivityFragmentHomeBinding;
-import com.example.gp.databinding.ActivitySearchBinding;
+
 import com.example.gp.databinding.ActivitySearchPostsBinding;
 import com.example.gp.interaction.PostCardAdapter;
 import com.example.gp.interaction.PostDetailActivity;
 import com.google.android.material.search.SearchBar;
 import com.google.android.material.search.SearchView;
-
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Search the results of posts to show on this activity
+ * All the posts are stored in the BTree then show up in this activity then clearAll
+ * Author: Xingchen Zhang
+ * Date: 2024-05-16
+ */
 
 public class SearchPostsActivity extends BaseActivity {
 
@@ -59,10 +56,6 @@ public class SearchPostsActivity extends BaseActivity {
         setContentView(binding.getRoot());
         setUpTitleBar(R.layout.activity_search_posts,TAG);
 
-//
-//        initializeRecyclerViews(view);
-//        initializeSwipeRefreshLayout(view);
-//        initializePageButtons(view);
 
         recyclerView = findViewById(R.id.rv_post_container);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -79,31 +72,6 @@ public class SearchPostsActivity extends BaseActivity {
 
     }
 
-
-
-
-
-//    private void initializeRecyclerViews(View view) {
-//        RecyclerView recyclerView = view.findViewById(R.id.rv_post_container);
-//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        postCardAdapter = new PostCardAdapter();
-//
-//        recyclerView.setAdapter(postCardAdapter);
-//
-//        postCardAdapter.setOnPostClickListener(this::onPostClick);
-//    }
-//
-//    public void initializeSwipeRefreshLayout(View view) {
-//        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                Database.getNewPostsByTime(null, PAGE_SIZE, thisActivity, "cbmAddRefreshedPosts");
-//            }
-//        });
-//    }
     /**
      * Search by input query string, or input token as prefix
      *

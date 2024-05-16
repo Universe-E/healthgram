@@ -15,14 +15,13 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
-import com.example.gp.MainActivity;
+import com.example.gp.LoginActivity;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.FriendsData;
 import com.example.gp.data.PostRepository;
 import com.example.gp.BaseActivity;
-import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
 
 import java.util.Objects;
@@ -123,7 +122,7 @@ public class PostDetailActivity extends BaseActivity {
             if (isAuthorMyself()) {
                 Database.deletePost(post.getPostId(), null, null);
                 POSTS_REPOSITORY.deletePostAt(position);
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 return;
             } else if (isAuthorFollowed()) {
                 // Unfollow the author
