@@ -58,8 +58,7 @@ public class HomeFragment extends Fragment {
     private SearchBar searchBar;
     private SwipeRefreshLayout swipeRefreshLayout;
     Object thisActivity;
-    private Button prev_button;
-    private Button next_button;
+    FloatingActionButton fabLoadMore;
 
 
     // show posts
@@ -157,24 +156,24 @@ public class HomeFragment extends Fragment {
     }
 
     private void initializePageButtons(View view) {
-        prev_button = view.findViewById(R.id.btn_previous_page);
-        next_button = view.findViewById(R.id.btn_next_page);
+//        prev_button = view.findViewById(R.id.btn_previous_page);
+        fabLoadMore = view.findViewById(R.id.fab_load_more);
 
-        prev_button.setOnClickListener(v -> {
-            prev_button.setEnabled(false);
-            if (PAGE == 1)
-                ToastUtil.showLong(getContext(), "This is the first page");
-            else {
-                this.postList = postRepo.getPostsByPage(--PAGE, PAGE_SIZE);
-                showPostCards();
-            }
-            prev_button.setEnabled(true);
+//        prev_button.setOnClickListener(v -> {
+//            prev_button.setEnabled(false);
+//            if (PAGE == 1)
+//                ToastUtil.showLong(getContext(), "This is the first page");
+//            else {
+//                this.postList = postRepo.getPostsByPage(--PAGE, PAGE_SIZE);
+//                showPostCards();
+//            }
+//            prev_button.setEnabled(true);
+//
+//        });
 
-        });
-
-        next_button.setOnClickListener(v -> {
+        fabLoadMore.setOnClickListener(v -> {
             Log.d(TAG, "initializePageButtons: Next page");
-            next_button.setEnabled(false);
+            fabLoadMore.setEnabled(false);
             thisActivity = this;
             Database.getPreviousPostsByTime(null, PAGE_SIZE, thisActivity, "cbmNextPage");
         });
@@ -193,7 +192,7 @@ public class HomeFragment extends Fragment {
             Log.e(TAG, "cbmNextPage: Failed to get new posts");
             ToastUtil.showLong(getContext(), (String) args);
         }
-        next_button.setEnabled(true);
+        fabLoadMore.setEnabled(true);
     }
 
     private void initializeSearchView(View view) {
