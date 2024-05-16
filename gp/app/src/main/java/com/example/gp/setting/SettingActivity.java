@@ -46,16 +46,6 @@ public class SettingActivity extends BaseActivity {
         // Get the user info
         UserDB userDB = UserDB.getInstance();
         String username = userDB.getUsername();
-//        if (avatarUUID == null) {
-//            avatarUUID = "1";
-//        }
-//        int userAvatar = Integer.parseInt(avatarUUID);
-//        Log.d("SettingActivity", "avatarUUID: " + avatarUUID);
-//        if (userAvatar == 1) {
-//            userAvatar = R.drawable.user_avatar;
-//            Log.d("SettingActivity", "userAvatar: " + String.valueOf(userAvatar));
-//            Database.changeAvatar(String.valueOf(userAvatar),null,null);
-//        }
 
         // initialize the user info layout
         binding.tvSettingNickname.setText(username);
@@ -109,6 +99,16 @@ public class SettingActivity extends BaseActivity {
     private void loadAvatarData() {
         String avatarUUID = UserDB.getInstance().getAvatarUUID();
         int userAvatar = Integer.parseInt(avatarUUID);
+
+        if (avatarUUID == null) {
+            avatarUUID = "0";
+        }
+        Log.d("SettingActivity", "avatarUUID: " + avatarUUID);
+        if (userAvatar == 0 || userAvatar == 1) {
+            userAvatar = R.drawable.user_avatar;
+            Log.d("SettingActivity", "userAvatar: " + String.valueOf(userAvatar));
+            Database.changeAvatar(String.valueOf(userAvatar),null,null);
+        }
         Log.d("loadAvatarData", "loadAvatarData: "+ avatarUUID);
         binding.ivSettingAvatar.setImageResource(userAvatar);
     }

@@ -25,14 +25,11 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.Transaction;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -208,14 +205,22 @@ public class PostDB {
      * @param object     object calls this function
      * @param methodName method name for callback
      */
-    public static void newGetUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
+    public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
         String userId = getCurrentUserId();
 
-        newGetPostByAuthorId(timestamp, limit, userId, object, methodName);
+        getPostByAuthorId(timestamp, limit, userId, object, methodName);
     }
 
-    public static void newGetPostByAuthorId(Timestamp timestamp, int limit, String userId, Object object, String methodName) {
-        timestamp = getTimestamp(timestamp);
+    /**
+     * Get posts by author id
+     *
+     * @param timestamp  timestamp
+     * @param limit      limit
+     * @param userId     author id
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
+    public static void getPostByAuthorId(Timestamp timestamp, int limit, String userId, Object object, String methodName) {
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
@@ -226,6 +231,13 @@ public class PostDB {
                 });
     }
 
+    /**
+     *
+     * @param postId
+     * @param isPublic
+     * @param object
+     * @param methodName
+     */
     public static void newSetPublic(String postId, Boolean isPublic, Object object, String methodName) {
         CollectionReference postsRef = getPostRef();
         postsRef.document(postId)

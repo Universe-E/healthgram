@@ -270,7 +270,7 @@ public class Database {
      * @param methodName The method name
      */
     public static void getUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
-        PostDB.newGetUserPost(timestamp, limit, object, methodName);
+        PostDB.getUserPost(timestamp, limit, object, methodName);
     }
 
     /**
@@ -297,7 +297,7 @@ public class Database {
      * @param methodName The method name
      */
     public static void getPostsByAuthorId(Timestamp timestamp, int limit, String authorId, Object object, String methodName) {
-        PostDB.newGetPostByAuthorId(timestamp, limit, authorId, object, methodName);
+        PostDB.getPostByAuthorId(timestamp, limit, authorId, object, methodName);
     }
 
     public static void getPostById(String postId, Object object, String methodName) {
