@@ -596,8 +596,8 @@ public class UserDB {
                 .addOnSuccessListener(aVoid -> {
                     if (friendRequest.isAccepted()) {
                         Friend friend = new Friend();
-                        friend.setId(friendRequest.getReceiverId());
-                        friend.setNickname(friendRequest.getRequestId());
+                        friend.setId(friendRequest.getSenderId());
+                        friend.setNickname(friendRequest.getSenderName());
                         follow(friend, object, methodName);
                     }
                 })
