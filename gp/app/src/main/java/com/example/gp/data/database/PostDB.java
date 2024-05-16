@@ -37,6 +37,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A utility class for post operation in Firebase Firestore
+ *
+ * @author Han Bao
+ */
 public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
@@ -165,6 +170,14 @@ public class PostDB {
                 });
     }
 
+    /**
+     * Get previous posts by time
+     *
+     * @param timestamp  Timestamp
+     * @param limit      Integer
+     * @param object     Object
+     * @param methodName String
+     */
     public static void GetPreviousPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
         timestamp = getTimestamp(timestamp);
         if (limit == null) {
@@ -187,6 +200,14 @@ public class PostDB {
                 });
     }
 
+    /**
+     * Get posts by author id
+     *
+     * @param timestamp  timestamp
+     * @param limit      limit
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void newGetUserPost(Timestamp timestamp, int limit, Object object, String methodName) {
         String userId = getCurrentUserId();
 
@@ -224,7 +245,7 @@ public class PostDB {
         postsRef.document(postId)
                 .update("likeCount", FieldValue.increment(1))
                 .addOnSuccessListener(aVoid ->
-                    MethodUtil.invokeMethod(object, methodName, true, postId)
+                        MethodUtil.invokeMethod(object, methodName, true, postId)
                 )
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing document", e);

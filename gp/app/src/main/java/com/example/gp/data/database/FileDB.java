@@ -15,6 +15,8 @@ import java.util.UUID;
 
 /**
  * A class to handle file operations in Firebase Storage.
+ *
+ * @author Han Bao
  */
 public class FileDB {
     private final String TAG = "database.fileDB";

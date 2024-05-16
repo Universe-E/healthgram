@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * A post model for Firebase firestore
+ *
+ * @author Han Bao
  */
 public class PostModel {
     private String postId;

@@ -5,6 +5,8 @@ import com.google.firebase.Timestamp;
 
 /**
  * A friend request model class for firebase firestore
+ *
+ * @author Han Bao
  */
 public class FriendRequestModel {
     private String requestId;
