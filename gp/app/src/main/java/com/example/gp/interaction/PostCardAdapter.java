@@ -66,6 +66,10 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
         // set the post thumbnail image
         if (post.getImg() != null)
             holder.imageView.setImageBitmap(post.getImg());
+        else {
+            // set a default image
+            holder.imageView.setImageResource(R.mipmap.default_post_image);
+        }
 
         // set the click listener
         holder.itemView.setOnClickListener(v -> {
