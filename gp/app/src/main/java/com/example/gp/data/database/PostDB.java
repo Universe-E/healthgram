@@ -234,7 +234,7 @@ public class PostDB {
 
     // Search
 
-    public static void getNewestFiftyPosts(String keyword, Object object, String methodName) {
+    public static void getNewestFiftyPosts(Object object, String methodName) {
         CollectionReference postsRef = getPostRef();
 
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
