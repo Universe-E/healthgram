@@ -3,6 +3,10 @@ package com.example.gp.Items;
 import com.example.gp.data.database.model.FriendRequestModel;
 import com.google.firebase.Timestamp;
 
+/**
+ * FriendRequest class
+ * The class to store the information of a friend request
+ */
 public class FriendRequest {
     private String RequestId;
     private String senderId;
@@ -29,7 +33,7 @@ public class FriendRequest {
         this.requestTimestamp = friendRequestModel.getRequestTimestamp();
     }
 
-                         /**
+    /**
      * Only use this constructor
      * Don't use getters and setters
      * @param receiverId

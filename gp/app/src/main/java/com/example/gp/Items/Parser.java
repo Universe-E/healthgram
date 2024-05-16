@@ -20,7 +20,11 @@ public class Parser {
         return instance;
     }
 
-
+    /**
+     * Tokenizer class to tokenize the text
+     * @param text: text to be tokenized
+     * @return: tokenized text
+     */
     public boolean isMentioningSomeone(String text) {
         Tokenizer tokenizer = new Tokenizer(text);
         Tokenizer.Token token;

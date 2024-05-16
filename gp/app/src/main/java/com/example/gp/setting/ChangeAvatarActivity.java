@@ -20,6 +20,11 @@ import com.example.gp.data.Database;
 import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivityChangeAvatarBinding;
 
+/**
+ * Activity class for changing the avatar
+ * @author Yulong Chen
+ * @since 2024-05-14
+ */
 public class ChangeAvatarActivity extends BaseActivity {
     private final String TAG  = "CAA1000000";
     private com.example.gp.databinding.ActivityChangeAvatarBinding binding;
@@ -31,10 +36,6 @@ public class ChangeAvatarActivity extends BaseActivity {
         binding = ActivityChangeAvatarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setUpTitleBar(R.layout.activity_change_avatar,"Avatar");
-
-//        String avatarUUID = UserDB.getAvatarUUID();
-//        int avatar = Integer.parseInt(avatarUUID);
-//        binding.ivCurrentAvatar.setImageResource(avatar);
 
 
         binding.ivSampleAvatar1.setOnClickListener(this);
@@ -95,6 +96,12 @@ public class ChangeAvatarActivity extends BaseActivity {
         dialog.show();
     }
 
+    /**
+     * call back method
+     * show the changing operation result. If succeed, set the new avatar
+     * @param isSuccess if the changing operation is successful or not
+     * @param object the new avatarUUID
+     */
     public void showResult(boolean isSuccess, Object object){
         if (!isSuccess) {
             if (object == null) {
@@ -111,12 +118,18 @@ public class ChangeAvatarActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Reload the avatar to ensure activity shows the latest avatar
+     */
     @Override
     protected void onResume() {
         super.onResume();
         loadAvatarData();
     }
 
+    /**
+     * get the avatar data from the firebase
+     */
     private void loadAvatarData() {
         String avatarUUID = UserDB.getInstance().getAvatarUUID();
         int userAvatar = Integer.parseInt(avatarUUID);

@@ -54,7 +54,12 @@ public class PostVisibilityActivity extends BaseActivity {
 
     }
 
-    // Call back method
+    /**
+     * call back method
+     * put this user's post list into the PostAdapter
+     * @param isSuccess if the getting posts operation is successful or not
+     * @param object the post list belongs to this user
+     */
     public void updateUI(boolean isSuccess, Object object){
         Log.d(TAG, "updateUI");
         if (!isSuccess) {
@@ -76,13 +81,5 @@ public class PostVisibilityActivity extends BaseActivity {
         }
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (mPostAdapter != null) {
-//            mPostAdapter = null;
-//        }
-//
-//    }
 }
 

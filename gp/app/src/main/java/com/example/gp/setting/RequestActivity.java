@@ -56,6 +56,7 @@ public class RequestActivity extends BaseActivity {
 
 
     /**
+     * call back method
      * load the friend requests list
      * @param isSuccess if the right info is successfully returned
      * @param object the friend request info
@@ -69,13 +70,6 @@ public class RequestActivity extends BaseActivity {
             }
         } else {
             List<FriendRequest> friendRequests = (List<FriendRequest>) object;
-//            for (FriendRequest friendRequest : friendRequests) {
-//                Friend friend = new Friend(friendRequest.getSenderId(),friendRequest.getSenderName(),R.mipmap.user_avatar);
-//                friends.add(friend);
-//            }
-//
-//            Friend textFriend = new Friend("191918","sen bei suki",R.mipmap.sample_avatar_1);
-//            friends.add(textFriend);
             RequestAdapter mRequestAdapter = new RequestAdapter(friendRequests);
             mRecyclerView.setAdapter(mRequestAdapter);
         }
