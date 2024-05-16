@@ -253,6 +253,7 @@ public class PostDB {
                         PostModel postModel = documentSnapshot.toObject(PostModel.class);
                         Post post = new Post();
                         post.setFromModel(postModel);
+                        post.setImg(null);
                         posts.add(post);
                     });
                     MethodUtil.invokeMethod(object, methodName, true, posts);
@@ -260,6 +261,16 @@ public class PostDB {
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error getting documents: ", e);
                     MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    public static void getPostById(String postId, Object object, String methodName) {
+        CollectionReference postsRef = getPostRef();
+
+        postsRef.whereEqualTo("postId", postId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    query2postList(task, object, methodName);
                 });
     }
 

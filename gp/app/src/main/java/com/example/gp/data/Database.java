@@ -300,6 +300,10 @@ public class Database {
         PostDB.newGetPostByAuthorId(timestamp, limit, authorId, object, methodName);
     }
 
+    public static void getPostById(String postId, Object object, String methodName) {
+        PostDB.getPostById(postId, object, methodName);
+    }
+
     public static void getNewestFiftyPosts(Object object, String methodName) {
         PostDB.getNewestFiftyPosts(object, methodName);
     }
