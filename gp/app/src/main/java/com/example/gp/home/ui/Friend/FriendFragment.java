@@ -56,15 +56,6 @@ public class FriendFragment extends Fragment {
         // Load friends
         initializeRecyclerViews(view);
 
-        // Set click listener to navigate to friend's profile
-//        adapter.setOnItemClickListener(new FriendsRecyclerViewAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(Friend friend) {
-//                openFriendProfile(friend);
-//            }
-//        });
-
-
         return view;
     }
     private void initializeSearchView(View view) {

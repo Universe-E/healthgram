@@ -17,7 +17,7 @@ import java.util.List;
 
 
 /**
- * Search activity function example code to implement
+ * Search activity function example code to implement (tests)
  * You can implement search component following this code file
  * Author: Xingchen Zhang
  * Date: 2024-05-03
