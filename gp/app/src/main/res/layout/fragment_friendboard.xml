@@ -17,7 +17,6 @@
         android:id="@+id/recycler_view_friend"
         android:layout_width="match_parent"
         android:layout_height="600dp"
-
         android:onClick="test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

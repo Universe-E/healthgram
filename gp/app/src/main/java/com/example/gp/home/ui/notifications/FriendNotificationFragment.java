@@ -54,9 +54,6 @@ public class FriendNotificationFragment extends Fragment {
         return view;
     }
 
-
-
-
     public void updateUI(boolean isSuccess, Object object){
         if (!isSuccess) {
             if (object == null) {
