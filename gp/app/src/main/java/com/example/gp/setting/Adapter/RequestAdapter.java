@@ -105,6 +105,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
 
         /**
          * Call back method
+         * Shows whether the request which sent to other user is successfully sent or not
          * @param isSuccess the process is successful or not
          * @param object the friendRequest
          */

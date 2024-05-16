@@ -46,20 +46,18 @@ public class SettingActivity extends BaseActivity {
         // Get the user info
         UserDB userDB = UserDB.getInstance();
         String username = userDB.getUsername();
-        String avatarUUID = userDB.getAvatarUUID();
-        if (avatarUUID == null) {
-            avatarUUID = "1";
-        }
-        int userAvatar = Integer.parseInt(avatarUUID);
-        Log.d("SettingActivity", "avatarUUID: " + avatarUUID);
-        if (userAvatar == 1) {
-            userAvatar = R.drawable.user_avatar;
-            Log.d("SettingActivity", "userAvatar: " + String.valueOf(userAvatar));
-            Database.changeAvatar(String.valueOf(userAvatar),null,null);
-        }
+//        if (avatarUUID == null) {
+//            avatarUUID = "1";
+//        }
+//        int userAvatar = Integer.parseInt(avatarUUID);
+//        Log.d("SettingActivity", "avatarUUID: " + avatarUUID);
+//        if (userAvatar == 1) {
+//            userAvatar = R.drawable.user_avatar;
+//            Log.d("SettingActivity", "userAvatar: " + String.valueOf(userAvatar));
+//            Database.changeAvatar(String.valueOf(userAvatar),null,null);
+//        }
 
         // initialize the user info layout
-        binding.ivSettingAvatar.setImageResource(userAvatar);
         binding.tvSettingNickname.setText(username);
 
     }
@@ -89,10 +87,29 @@ public class SettingActivity extends BaseActivity {
         } else if(v == binding.btnSettingMainQuit) {
             Database.signOut(null,null);
             Intent intent = new Intent(this, LoginActivity.class);
-            //start new activity, clear old tasks
+            // start new activity, clear old tasks
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
+    }
+
+    /**
+     * Reload the avatar to ensure activity shows the latest avatar
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadAvatarData();
+    }
+
+    /**
+     * get the avatar data from the firebase
+     */
+    private void loadAvatarData() {
+        String avatarUUID = UserDB.getInstance().getAvatarUUID();
+        int userAvatar = Integer.parseInt(avatarUUID);
+        Log.d("loadAvatarData", "loadAvatarData: "+ avatarUUID);
+        binding.ivSettingAvatar.setImageResource(userAvatar);
     }
 }
