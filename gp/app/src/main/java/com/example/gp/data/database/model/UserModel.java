@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A user model for Firebase Firestore
+ */
 public class UserModel {
     private String username;
     private String email;

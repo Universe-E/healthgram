@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Friends data class
+ * A singleton class holds current user's friends data
  */
 public class FriendsData {
     private static final String TAG = "FriendsData";

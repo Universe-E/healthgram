@@ -2,6 +2,9 @@ package com.example.gp.data.database.model;
 
 import com.example.gp.Items.Friend;
 
+/**
+ * A friend data model for firebase firestore
+ */
 public class FriendModel {
     private String userId;
     private String nickname;
