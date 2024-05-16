@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment {
 
     // show posts
     private List<Post> postList;
+    private List<Post> postMemo = new ArrayList<>();
     private static final PostRepository postRepo = PostRepository.getInstance();
 
     // search
@@ -82,7 +83,7 @@ public class HomeFragment extends Fragment {
         postTree = new BTree();
 
         // load posts
-        Database.getNewPostsByTime(null, 2 * PAGE_SIZE, this, "cbmAddInitialPosts");
+        Database.getNewPostsByTime(null, (int)((0.5) * PAGE_SIZE), this, "cbmAddInitialPosts");
 
         postRepo.refreshPostMemory();
         postList = postRepo.getAllPosts();
@@ -135,22 +136,22 @@ public class HomeFragment extends Fragment {
         // show log
         Log.d(TAG, "loadPostCards: ");
 
-        // get posts from postList
-        for (Post post : postList) {
-            int postId = post.getPostId().hashCode();
-            postTree.add(postId, post);
-        }
-
-        // renew the UI
-        ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
-        List<Post> posts = new ArrayList<>();
-        for (Integer key : keys) {
-            Post post = (Post) postTree.search(key);
-            if (post != null) {
-                posts.add(post);
-            }
-        }
-        postCardAdapter.setPostList(posts);
+//        // get posts from postList
+//        for (Post post : postList) {
+//            int postId = post.getPostId().hashCode();
+//            postTree.add(postId, post);
+//        }
+//
+//        // renew the UI
+//        ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
+//        List<Post> posts = new ArrayList<>();
+//        for (Integer key : keys) {
+//            Post post = (Post) postTree.search(key);
+//            if (post != null) {
+//                posts.add(post);
+//            }
+//        }
+        postCardAdapter.setPostList(postList);
 
         Log.d("HomeFragment", "Posts loaded successfully");
     }
@@ -184,7 +185,9 @@ public class HomeFragment extends Fragment {
             Log.d(TAG, "cbmNextPage: Successfully get new posts");
             List<Post> posts = (List<Post>) args;
             postRepo.addPreviousPosts(posts);
-            this.postList = postRepo.getPostsByPage(++PAGE, PAGE_SIZE);
+
+            postList = postRepo.getAllPosts();
+
             showPostCards();
         } else {
             Log.e(TAG, "cbmNextPage: Failed to get new posts");
