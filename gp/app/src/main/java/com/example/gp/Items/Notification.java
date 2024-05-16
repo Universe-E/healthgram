@@ -33,6 +33,9 @@ public class Notification {
         this.userId = userId;
     }
 
+    /**
+     * Initialize Notification with model
+     */
     public Notification(NotificationModel notificationModel) {
         this.message = notificationModel.getMessage();
         this.notificationId = notificationModel.getNotificationId();

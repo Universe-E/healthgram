@@ -1,4 +1,4 @@
-package com.example.gp; // 确保你的包名正确
+package com.example.gp;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +30,13 @@ public class SearchActivity  extends BaseActivity {
     private SearchView searchView; // to show the search list
     private List<Post> searchResults; // store the search result
 
+    /**
+     * Initialize search result
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +48,7 @@ public class SearchActivity  extends BaseActivity {
 
         searchBar = findViewById(R.id.search_bar);
         searchView = findViewById(R.id.search_view);
-        searchResults = new ArrayList<>(); // 初始化搜索结果
+        searchResults = new ArrayList<>();
     }
 
     private void setupSearchListeners() {
@@ -51,7 +58,6 @@ public class SearchActivity  extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // 当搜索查询改变时打印输入内容
                 Log.d(TAG, "User entered: " + s.toString());
             }
 

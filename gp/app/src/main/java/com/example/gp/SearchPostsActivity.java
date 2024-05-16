@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Search the results of posts to show on this activity
  * All the posts are stored in the BTree then show up in this activity then clearAll
- * Author: Xingchen Zhang
+ * @author Xingchen Zhang
  * Date: 2024-05-16
  */
 

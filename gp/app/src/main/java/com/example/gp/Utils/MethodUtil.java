@@ -5,6 +5,10 @@ import android.util.Log;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+/**
+ * Util class, use invocation to call method
+ * @author Han Bao
+ */
 public class MethodUtil {
     private static final String TAG = "MethodUtil";
 
@@ -40,6 +44,12 @@ public class MethodUtil {
         throw new NoSuchMethodException();
     }
 
+    /**
+     * Use java invocation to invoke method
+     * @param obj object
+     * @param methodName method name
+     * @param args other args (can skip)
+     */
     public static void invokeMethod(Object obj, String methodName, Object... args) {
         if (obj == null) {
             return;

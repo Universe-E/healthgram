@@ -73,6 +73,9 @@ public class FriendDetailActivity extends BaseActivity implements CompoundButton
         }
     }
 
+    /**
+     * Unblock user message
+     */
     private void unBlockUserMessage() {
         if (friendId != null) {
             Database.blockUserById(friendId,false,this,"toastResult");
@@ -82,6 +85,9 @@ public class FriendDetailActivity extends BaseActivity implements CompoundButton
 
     }
 
+    /**
+     * Block user message
+     */
     private void blockUserMessage() {
         if (friendId != null) {
             Database.blockUserById(friendId,true,this,"toastResult");

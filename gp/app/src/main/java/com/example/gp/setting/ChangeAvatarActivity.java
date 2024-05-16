@@ -49,6 +49,10 @@ public class ChangeAvatarActivity extends BaseActivity {
 
     }
 
+    /**
+     * Set avatar by choosing sample
+     * @param v which button is clicked
+     */
     @Override
     public void onClick(View v) {
         super.onClick(v);

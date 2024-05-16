@@ -2,27 +2,12 @@ package com.example.gp.data;
 
 import java.util.ArrayList;
 
-/*
- * Unlike a binary search tree, each node of a B-tree may have a variable number of keys and children.
+/**
+ * Implementation of B-tree.
+ * B-tree may have a variable number of keys and children.
  * The keys are stored in non-decreasing order. Each node either is a leaf node or
  * it has some associated children that are the root nodes of subtrees.
- * The left child node of a node's element contains all nodes (elements) with keys less than or equal to the node element's key
- * but greater than the preceding node element's key.
- * If a node becomes full, a split operation is performed during the insert operation.
- * The split operation transforms a full node with 2*T-1 elements into two nodes with T-1 elements each
- * and moves the median key of the two nodes into its parent node.
- * The elements left of the median (middle) element of the split node remain in the original node.
- * The new node becomes the child node immediately to the right of the median element that was moved to the parent node.
- *
- * Example (T = 4):
- * 1.  R = | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
- *
- * 2.  Add key 8
- *
- * 3.  R =         | 4 |
- *                 /   \
- *     | 1 | 2 | 3 |   | 5 | 6 | 7 | 8 |
- *
+ * @author Zehua Kong
  */
 
 public class BTree {
@@ -129,8 +114,7 @@ public class BTree {
         }
     }
 
-    // Split the node, node, of a B-Tree into two nodes that both contain T-1 elements and move node's median key up to the parentNode.
-    // This method will only be called if node is full; node is the i-th child of parentNode.
+    // Split the node, node
     void splitChildNode(Node parentNode, int i, Node node) {
         Node newNode = new Node();
         newNode.mIsLeafNode = node.mIsLeafNode;
@@ -169,7 +153,7 @@ public class BTree {
         parentNode.mNumKeys++;
     }
 
-    // Insert an element into a B-Tree. (The element will ultimately be inserted into a leaf node).
+    // Insert an element into a B-Tree.
     void insertIntoNonFullNode(Node node, int key, Object object) {
         int i = node.mNumKeys - 1;
         if (node.mIsLeafNode) {

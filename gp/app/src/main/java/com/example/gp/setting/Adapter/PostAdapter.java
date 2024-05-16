@@ -51,7 +51,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
 
-
+    /**
+     * Post view holder, view on title, public, content, and state
+     */
     public static class PostViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tv_is_public;

@@ -9,6 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Util class to get time stamp
+ * @author Xingchen Zhang
+ */
 public class TimeUtil {
     public static Timestamp getTimestamp() {
         return Timestamp.now();

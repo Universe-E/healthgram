@@ -12,12 +12,18 @@ public class Friend {
 
     private int avatar; // avatar id
 
+    /**
+     * Construct Friend with id, name, avatar
+     */
     public Friend(String id, String nickname, int avatar) {
         this.id = id;
         this.nickname = nickname;
         this.avatar = avatar;
     }
 
+    /**
+     * Construct Friend with id, name
+     */
     public Friend(String id, String nickname) {
         this.id = id;
         this.nickname = nickname;
@@ -29,6 +35,9 @@ public class Friend {
     public Friend() {
     }
 
+    /**
+     * Initialize Friend with model
+     */
     public Friend(FriendModel value) {
         this.id = value.getUserId();
         this.nickname = value.getNickname();

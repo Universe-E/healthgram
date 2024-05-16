@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Posts data class
+ * @author Tianci Li
  */
 public class PostRepository {
     private static final String TAG = "PostData";

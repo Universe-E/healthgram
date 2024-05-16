@@ -14,6 +14,10 @@ import com.example.gp.data.Database;
 import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivitySettingBinding;
 
+/**
+ * Setting page, showing user settings
+ * @author Yulong Chen
+ */
 public class SettingActivity extends BaseActivity {
 
     private final String activityName = "Settings";

@@ -18,11 +18,13 @@ public class FriendRequest {
 
     /**
      * DO NOT USE THIS CONSTRUCTOR
-     * DO NOT DELETE THIS CONSTRUCTOR
      */
     public FriendRequest() {
     }
 
+    /**
+     * Initialize friend request with model
+     */
     public FriendRequest(FriendRequestModel friendRequestModel) {
         this.RequestId = friendRequestModel.getRequestId();
         this.senderId = friendRequestModel.getSenderId();
@@ -36,7 +38,6 @@ public class FriendRequest {
     /**
      * Only use this constructor
      * Don't use getters and setters
-     * @param receiverId
      */
     public FriendRequest(String receiverId) {
         this.receiverId = receiverId;
@@ -48,9 +49,6 @@ public class FriendRequest {
 
     /**
      * Getters and Setters
-     * <p>
-     * DO NOT MODIFY THIS
-     *
      */
     public void setRequestId(String requestId) {
         RequestId = requestId;

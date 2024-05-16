@@ -16,8 +16,8 @@ import com.example.gp.data.database.UserDB;
 import com.example.gp.home.Fragment_home;
 
 /**
- * Sigh Up activity page
- * Author: Baohan
+ * Sign Up activity page
+ * Author: Han Bao
  * Date: 2024-05-03
  */
 

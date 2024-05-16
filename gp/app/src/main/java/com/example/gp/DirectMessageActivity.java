@@ -55,6 +55,9 @@ public class DirectMessageActivity extends BaseActivity implements TextView.OnEd
         }
     }
 
+    /**
+     * send message to other users
+     */
     private void sendMessage() {
         String message = binding.etMessageInput.getText().toString();
         messages.add(message);

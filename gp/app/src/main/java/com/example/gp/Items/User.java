@@ -102,6 +102,9 @@ public class User {
         User.avatar = avatar;
     }
 
+    /**
+     * Get friend map
+     */
     public Map<String, Friend> getFriendMap() {
         return friendMap;
     }
