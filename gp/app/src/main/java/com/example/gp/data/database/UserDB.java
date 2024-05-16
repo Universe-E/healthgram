@@ -1,7 +1,7 @@
 package com.example.gp.data.database;
 
 import static com.example.gp.data.FriendsData.clearFriendsData;
-import static com.example.gp.data.PostsRepository.clearPostsData;
+import static com.example.gp.data.PostRepository.clearPostsData;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentEmail;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
