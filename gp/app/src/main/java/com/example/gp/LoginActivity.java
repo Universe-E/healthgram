@@ -14,7 +14,15 @@ import com.example.gp.databinding.ActivityMainBinding;
 import com.example.gp.home.Fragment_home;
 import com.example.gp.setting.SettingActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+/**
+ * The first activity of user login in
+ * You can implement search component following this code file
+ * Author: Chenyu long/ Bao Han
+ * Date: 2024-04-20
+ */
+
+public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private ActivityMainBinding binding;
@@ -54,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void createAccount(View view) {
         Intent intent = new Intent();
-        intent.setClass(MainActivity.this, SignUpActivity.class);
+        intent.setClass(LoginActivity.this, SignUpActivity.class);
         startActivity(intent);
     }
 
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "updateStartUI: " + isSuccess);
         if (isSuccess) {
             Log.d(TAG, "updateStartUI: " + args.toString());
-            Intent intent = new Intent(MainActivity.this, Fragment_home.class);
+            Intent intent = new Intent(LoginActivity.this, Fragment_home.class);
             startActivity(intent);
         }
     }
@@ -88,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "updateUI: " + isSuccess);
         if (isSuccess) {
             Log.d(TAG, "updateUI: " + args.toString());
-            Intent intent = new Intent(MainActivity.this, Fragment_home.class);
+            Intent intent = new Intent(LoginActivity.this, Fragment_home.class);
             startActivity(intent);
         } else {
             if (args != null) {
