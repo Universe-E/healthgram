@@ -19,6 +19,7 @@ import java.util.List;
 public class PostRepository {
     private static final String TAG = "PostData";
     private static List<Post> _allPosts;
+    private List<Post> filteredPosts;
     private static PostRepository instance;
     private Timestamp newestPostTime;
     private Timestamp oldestPostTime;
