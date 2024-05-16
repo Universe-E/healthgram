@@ -9,6 +9,7 @@ import com.example.gp.Items.Friend;
 import com.example.gp.Items.Notification;
 import com.example.gp.Items.Post;
 import com.example.gp.Items.User;
+import com.google.firebase.Timestamp;
 
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ import java.util.Map;
  * @author Zehua Kong
  */
 public class UserTest {
-    CharSequence currentDate = DateFormat.format("yyyy-MM-dd", new Date());
+    Timestamp currentDate = new Timestamp(new Date());
 
     @Test
     public void testUser() {
@@ -45,7 +46,7 @@ public class UserTest {
 
         Map<String, Notification> notificationMap = new HashMap<>();
         Notification n1 = new Notification("Vacation","go to Italy",currentDate, Notification.NotificationType.FOLLOW,"123");
-        Notification n2 = new Notification("Vacation","go to Spain",currentDate, Notification.NotificationType.MENTION,"123");
+        Notification n2 = new Notification("Vacation","go to Spain",currentDate, Notification.NotificationType.FOLLOW,"123");
         notificationMap.put("n1",n1);
         notificationMap.put("n2",n2);
 
@@ -56,7 +57,7 @@ public class UserTest {
         assertEquals("username", user.getUsername());
         assertEquals("user@example.com", user.getEmail());
         assertEquals("description", user.getDescription());
-        assertEquals("avatar", user.getAvatar());
+        assertEquals(0, user.getAvatar());
         assertEquals(friendMap, user.getFriendMap());
         assertEquals(notificationMap, user.getNotificationMap());
     }
@@ -69,7 +70,7 @@ public class UserTest {
         assertEquals("username", user.getUsername());
         assertEquals("user@example.com", user.getEmail());
         assertEquals("set description", user.getDescription());
-        assertEquals("set avatar", user.getAvatar());
+        assertEquals(0, user.getAvatar());
         assertNotNull(user.getFriendMap());
         assertNotNull(user.getNotificationMap());
     }
