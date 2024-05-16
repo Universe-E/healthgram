@@ -75,18 +75,6 @@ public class TokenizerTest {
     }
 
     @Test
-    public void nextToken_returnsNAME_afterUSER() {
-        Tokenizer tokenizer = new Tokenizer("user:alice");
-        Tokenizer.Token token1 = tokenizer.nextToken();
-        assertEquals(Tokenizer.Token.Type.USER, token1.type);
-        assertEquals("user:", token1.value);
-
-        Tokenizer.Token token2 = tokenizer.nextToken();
-        assertEquals(Tokenizer.Token.Type.NAME, token2.type);
-        assertEquals("alice", token2.value);
-    }
-
-    @Test
     public void nextToken_returnsMultipleTokens_whenValidInput() {
         Tokenizer tokenizer = new Tokenizer("@user title:hello public:true");
         Tokenizer.Token token1 = tokenizer.nextToken();

@@ -9,6 +9,7 @@
 Stand up Procedure: 
 - Each team member shared their idea about project construction, and the select of topic
 - Discussed the task requirement
+- Discussed conflict solution
 
 
 ## Agenda Items
@@ -23,6 +24,7 @@ Stand up Procedure:
 - [Summary of the progress reports, discussions, decisions, and matters to be confirmed from the meeting.]
 - We decided to focus on the back-end programming first, confirmed to use B-Tree as the data structure to store, add, and delete data from client
 - We discussed about each basic features, assigned them to the corresponding member
+- We regulated conflict solution, each conflict will be discussed case by case by the correlated members, not merge the conflict code directly
 - Give an implementation on basic features before the checkpoint 1 and have next meeting on week 7
 
 
