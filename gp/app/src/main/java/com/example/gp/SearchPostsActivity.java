@@ -1,5 +1,7 @@
 package com.example.gp;
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.example.gp.databinding.ActivityFragmentHomeBinding;
 import com.example.gp.databinding.ActivitySearchBinding;
 import com.example.gp.databinding.ActivitySearchPostsBinding;
 import com.example.gp.interaction.PostCardAdapter;
+import com.example.gp.interaction.PostDetailActivity;
 import com.google.android.material.search.SearchBar;
 import com.google.android.material.search.SearchView;
 
@@ -162,14 +165,16 @@ public class SearchPostsActivity extends BaseActivity {
         postCardAdapter.updatePosts(retList);  // update posts RecyclerView
 
 
-//        postCardAdapter.setOnPostClickListener(this::onPostClick);
+        postCardAdapter.setOnPostClickListener(this::onPostClick);
 
         searchResults.clear();
         searchResults.addAll(retList);
         postCardAdapter.notifyDataSetChanged();
 
-
-
     }
-
+    private void onPostClick(String postId) {
+        Intent intent = new Intent(this, PostDetailActivity.class);
+        intent.putExtra("postId", postId);
+        startActivity(intent);
+    }
 }
