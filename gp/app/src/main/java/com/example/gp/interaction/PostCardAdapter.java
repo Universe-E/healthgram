@@ -28,7 +28,7 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     }
 
     public interface OnPostClickListener {
-        void onPostClick(int position);
+        void onPostClick(String position);
     }
 
     public void setOnPostClickListener(OnPostClickListener listener) {
@@ -56,6 +56,7 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = postList.get(position);
+        String postId = post.getPostId();
 //        Post post = POSTS_REPOSITORY.getAllPosts().get(position);
 
         // set the post title and content
@@ -63,20 +64,13 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
         holder.textViewContent.setText(post.getPostContent());
 
         // set the post thumbnail image
-        // TODO: 0513 replace the random image with the actual image
-//        int randomNumber = random.nextInt(8) + 1;
-//        String imageName = "sample_avatar_" + randomNumber;
-//        int imageResourceId = holder.itemView.getResources().getIdentifier(imageName, "mipmap", holder.itemView.getContext().getPackageName());
-//        holder.imageView.setImageResource(imageResourceId);
         if (post.getImg() != null)
             holder.imageView.setImageBitmap(post.getImg());
-//        else
-//            holder.imageView.setImageResource(R.mipmap.ic_launcher);
 
         // set the click listener
         holder.itemView.setOnClickListener(v -> {
             if (onPostClickListener != null) {
-                onPostClickListener.onPostClick(position);
+                onPostClickListener.onPostClick(postId);
             }
         });
     }
