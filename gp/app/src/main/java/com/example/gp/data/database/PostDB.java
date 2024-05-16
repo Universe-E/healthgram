@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.example.gp.Items.Post;
 import com.example.gp.Utils.MethodUtil;
-import com.example.gp.data.PostsData;
+import com.example.gp.data.PostRepository;
 import com.example.gp.data.database.model.FriendModel;
 import com.example.gp.data.database.model.NotificationModel;
 import com.example.gp.data.database.model.PostModel;
@@ -21,8 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
@@ -36,7 +38,7 @@ public class PostDB {
     // Aka Note's complete version
     private static final String TAG = "Database.Post";
     private static final String POST_PATH = "";
-    private static final PostsData postsData = PostsData.getInstance();
+    private static final PostRepository POSTS_REPOSITORY = PostRepository.getInstance();
 
     // New APIs
 
@@ -81,8 +83,8 @@ public class PostDB {
                     notificationModel.setTimestamp(getTimestamp());
                     notificationModel.setRead(false);
                     notificationModel.setNotificationId(docRef.getId());
-//                    notifyNewPostToFollowers(new NotificationModel(), object, methodName);
-                    MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
+                    notifyNewPostToFollowers(notificationModel, object, methodName);
+//                    MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
                     Log.d(TAG, "DocumentSnapshot successfully written!");
                 })
                 .addOnFailureListener(e -> {
@@ -112,9 +114,9 @@ public class PostDB {
         }
 
         Timestamp lastestPostTimestamp = null;
-        PostsData postsData = PostsData.getInstance();
-        if (!postsData.getPosts().isEmpty())
-            lastestPostTimestamp = postsData.getPosts().get(0).getPostTimestamp();
+        PostRepository postRepository = PostRepository.getInstance();
+        if (!postRepository.getAllPosts().isEmpty())
+            lastestPostTimestamp = postRepository.getAllPosts().get(0).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
@@ -134,9 +136,9 @@ public class PostDB {
         }
 
         Timestamp oldestPostTimestamp = null;
-        PostsData postsData = PostsData.getInstance();
-        if (!postsData.getPosts().isEmpty())
-            oldestPostTimestamp = postsData.getPosts().get(postsData.getPosts().size() - 1).getPostTimestamp();
+        PostRepository postRepository = PostRepository.getInstance();
+        if (!postRepository.getAllPosts().isEmpty())
+            oldestPostTimestamp = postRepository.getAllPosts().get(postRepository.getAllPosts().size() - 1).getPostTimestamp();
 
         CollectionReference postsRef = getPostRef();
         postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
@@ -211,8 +213,11 @@ public class PostDB {
     private static void notifyNewPostToFollowers(NotificationModel notificationModel, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
         UserDB userDB = UserDB.getInstance();
+        Log.d(TAG, "NotificationModel: " + notificationModel.getSenderId());
+        String query = "myFriends." + notificationModel.getSenderId() + ".userId";
 
-        usersRef.whereArrayContains("myFriends", notificationModel.getSenderId())
+
+        usersRef.where(Filter.greaterThanOrEqualTo(query, notificationModel.getSenderId()))
                 .get()
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
@@ -229,7 +234,9 @@ public class PostDB {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     WriteBatch batch = db.batch();
                     List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    Log.d(TAG, "documentSnapshots: " + documentSnapshots);
                     for (DocumentSnapshot document : documentSnapshots) {
+                        Log.d(TAG, "document: " + document.toString());
                         Map<String, Object> update = new HashMap<>();
                         update.put("myNotifications", Map.of(notificationModel.getNotificationId(), notificationModel));
                         batch.set(document.getReference(), update, SetOptions.merge());

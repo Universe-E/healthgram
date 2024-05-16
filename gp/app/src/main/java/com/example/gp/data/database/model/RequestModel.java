@@ -1,5 +1,8 @@
 package com.example.gp.data.database.model;
 
+/**
+ * A request model for firebase firestore
+ */
 public class RequestModel extends NotificationModel {
     private String senderId;
 

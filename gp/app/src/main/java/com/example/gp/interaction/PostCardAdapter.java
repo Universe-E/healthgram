@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gp.Items.Post;
 import com.example.gp.R;
-import com.example.gp.data.PostsData;
+import com.example.gp.data.PostRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,12 @@ import java.util.Random;
 
 public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostViewHolder> {
 
-//    private List<Post> postList = new ArrayList<>();
-    private Random random = new Random();
+    private List<Post> postList = new ArrayList<>();
     private OnPostClickListener onPostClickListener;
-    private static final PostsData postsData = PostsData.getInstance();
+//    private static final PostRepository POSTS_REPOSITORY = PostRepository.getInstance();
+
+    public void clearPosts() {
+    }
 
     public interface OnPostClickListener {
         void onPostClick(int position);
@@ -34,15 +36,15 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     }
 
     public void setPostList(List<Post> postList) {
-//        this.postList = postList;
+        this.postList = postList;
         notifyDataSetChanged();
     }
 
-    public void setPostList() {
-//        this.postList = postsData.getPosts();
-        Log.d("PostCardAdapter", "setPostList: " + postsData.getPosts().size());
-        notifyDataSetChanged();
-    }
+//    public void setPostList() {
+////        this.postList = POSTS_REPOSITORY.getPosts();
+//        Log.d("PostCardAdapter", "setPostList: " + POSTS_REPOSITORY.getAllPosts().size());
+//        notifyDataSetChanged();
+//    }
 
     @NonNull
     @Override
@@ -53,8 +55,8 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-//        Post post = postList.get(position);
-        Post post = postsData.getPosts().get(position);
+        Post post = postList.get(position);
+//        Post post = POSTS_REPOSITORY.getAllPosts().get(position);
 
         // set the post title and content
         holder.textViewHeading.setText(post.getTitle());
@@ -81,11 +83,14 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
 
     @Override
     public int getItemCount() {
-//        return postList.size();
-        return postsData.getPosts().size();
+        return postList.size();
+//        return POSTS_REPOSITORY.getAllPosts().size();
     }
     public void updatePosts(List<Post> userposts) {
 //        this.postList = userposts;
+        // TODO: what is this?
+        // postsData.clearPostsData();
+        // postsData.addNewPosts(userposts);
         notifyDataSetChanged();
     }
 

@@ -1,7 +1,7 @@
 package com.example.gp.data.database;
 
 import static com.example.gp.data.FriendsData.clearFriendsData;
-import static com.example.gp.data.PostsData.clearPostsData;
+import static com.example.gp.data.PostRepository.clearPostsData;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentEmail;
 import static com.example.gp.data.database.FirebaseUtil.getCurrentUserId;
 import static com.example.gp.data.database.FirebaseUtil.getFireAuth;
@@ -29,7 +29,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.Source;
@@ -75,7 +74,7 @@ public class UserDB {
                     if (notificationMapList == null) {
                         String msg = "No notification";
                         Log.d(TAG, msg);
-                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        MethodUtil.invokeMethod(object, methodName, true, msg);
                         return;
                     }
                     List<Notification> notificationList = new ArrayList<>();
@@ -88,19 +87,20 @@ public class UserDB {
     }
 
     public static void changeAvatar(String avatarUUID, Object object, String methodName) {
-        Log.d(TAG, object.toString());
         CollectionReference usersRef = getUsersRef();
         usersRef.document(getCurrentUserId())
                 .update("avatarUUID", avatarUUID)
-                .addOnSuccessListener(aVoid ->
-                        MethodUtil.invokeMethod(object, methodName, true, avatarUUID))
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, avatarUUID);
+                    UserDB.avatarUUID = avatarUUID;
+                })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error writing NewTestUsers", e);
                     MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
                 });
     }
 
-    public static String getAvatarUUID() {
+    public String getAvatarUUID() {
         return avatarUUID;
     }
 
@@ -125,8 +125,7 @@ public class UserDB {
                         Log.d(TAG, msg);
                         MethodUtil.invokeMethod(object, methodName, false, msg);
                         return;
-                    }
-                    else {
+                    } else {
                         myFriends = (Map<String, FriendModel>) task.getResult().getData().get("myFriends");
                     }
                     if (myFriends != null) {

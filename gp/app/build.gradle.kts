@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.navigation.runtime)
     implementation(libs.preference)
+    implementation(libs.swiperefreshlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -31,6 +31,11 @@ public class SignUpActivity extends BaseActivity {
         setUpTitleBar(R.layout.activity_new_post, activityName);
     }
 
+    /**
+     * Get user inputs
+     *
+     * @param view current view
+     */
     public void createUserAccount(View view) {
         // Initialize views
         EditText usernameEditText = findViewById(R.id.user_name_text);
@@ -50,6 +55,12 @@ public class SignUpActivity extends BaseActivity {
 
     }
 
+    /**
+     * Update UI for reflection in Database.signUp
+     *
+     * @param isSuccess service call success or not
+     * @param args      service call result
+     */
     public void updateUI(Boolean isSuccess, Object args) {
         if (isSuccess) {
             Intent intent = new Intent(this, Fragment_home.class);
@@ -64,28 +75,42 @@ public class SignUpActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Validate user inputs
+     *
+     * @param username        username
+     * @param email           email
+     * @param password        password
+     * @param repeat_password repeat password
+     * @return validation result
+     */
     private boolean validateForm(String username, String email, String password, String repeat_password) {
 
         if (!password.equals(repeat_password)) {
             // Passwords don't match
             ToastUtil.showLong(this, "Repeat password doesn't match");
-        } else if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            return false;
+        }
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             // Fields are empty
             ToastUtil.showLong(this, "Please fill all fields");
-        } else if (password.length() < 6) {
+            return false;
+        }
+        if (password.length() < 6) {
             // Password is too short
             ToastUtil.showLong(this, "Password must be at least 6 characters");
-        } else if (!AuthUtil.isValidEmail(email)) {
+            return false;
+        }
+        if (!AuthUtil.isValidEmail(email)) {
             // Email is invalid
             ToastUtil.showLong(this, "Invalid email address, eg: ABCabc123@example.com, or ABCabc123@uni.edu.com");
-        } else if (!AuthUtil.isValidUsername(username)) {
+            return false;
+        }
+        if (!AuthUtil.isValidUsername(username)) {
             // Username is already taken
             ToastUtil.showLong(this, "Invalid username: contains space, or length not range from 3 to 18");
-        } else {
-            // All fields are valid
-            return true;
+            return false;
         }
-
-        return false;
+        return true;
     }
 }

@@ -2,6 +2,9 @@ package com.example.gp.data.database.model;
 
 import com.google.firebase.Timestamp;
 
+/**
+ * A notification model class for firebase firestore
+ */
 public class NotificationModel {
     private String message;
     private String username;

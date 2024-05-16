@@ -19,7 +19,7 @@ import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
 import com.example.gp.data.FriendsData;
-import com.example.gp.data.PostsData;
+import com.example.gp.data.PostRepository;
 import com.example.gp.BaseActivity;
 import com.example.gp.data.database.UserDB;
 
@@ -36,7 +36,7 @@ public class PostDetailActivity extends BaseActivity {
     private TextView tvPostContent;
     private Button btnShare;
     private TextView tvAuthorName;
-    private static final PostsData postsData = PostsData.getInstance();
+    private static final PostRepository POSTS_REPOSITORY = PostRepository.getInstance();
     private int position;
 
     private Post post;
@@ -63,7 +63,7 @@ public class PostDetailActivity extends BaseActivity {
 //        String postId = intent.getStringExtra("postId");
 //        post = intent.getParcelableExtra("post");
         position = intent.getIntExtra("position", 0);
-        post = postsData.getPosts().get(position);
+        post = POSTS_REPOSITORY.getAllPosts().get(position);
 
         // Load corresponding post data from database
         loadPostData(true, post);
@@ -116,7 +116,7 @@ public class PostDetailActivity extends BaseActivity {
         btnFollow.setOnClickListener(v -> {
             if (isAuthorMyself()) {
                 Database.deletePost(post.getPostId(), null, null);
-                postsData.deletePostAt(position);
+                POSTS_REPOSITORY.deletePostAt(position);
                 startActivity(new Intent(this, MainActivity.class));
                 return;
             } else if (isAuthorFollowed()) {

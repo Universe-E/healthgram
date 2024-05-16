@@ -13,6 +13,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * A class to handle file operations in Firebase Storage.
+ */
 public class FileDB {
     private final String TAG = "database.fileDB";
     private static FileDB instance;
@@ -29,6 +32,13 @@ public class FileDB {
         return instance;
     }
 
+    /**
+     * Get image for post
+     *
+     * @param post       the post object
+     * @param object     the object that calls this method
+     * @param methodName the method name that calls this method
+     */
     public static void getImage(Post post, Object object, String methodName) {
         if (post.getImgUUID() == null) {
             MethodUtil.invokeMethod(object, methodName, true, post);
@@ -50,21 +60,32 @@ public class FileDB {
                 });
     }
 
+    /**
+     * Get images from firebase storage
+     *
+     * @param posts      the list of posts
+     * @param position   the position of the post in the list
+     * @param object     the object that calls this method
+     * @param methodName the method name that calls this method
+     */
     public static void getImages(List<Post> posts, int position, Object object, String methodName) {
         FileDB fileDB = getInstance();
         StorageReference storageReference = storage.getReference();
 
+        // No more posts to put image in
         if (position >= posts.size()) {
             MethodUtil.invokeMethod(object, methodName, true, posts);
             return;
         }
 
+        // get image from firebase storage by uuid
         String uuid = posts.get(position).getImgUUID();
         if (uuid == null) {
             getImages(posts, position + 1, object, methodName);
             return;
         }
 
+        // Download image from firebase storage
         StorageReference islandRef = storageReference.child("image/" + uuid + ".jpg");
         islandRef.getBytes(1024 * 1024 * 5)
                 .addOnSuccessListener(bytes -> {
@@ -77,14 +98,20 @@ public class FileDB {
                 });
     }
 
-    // New APIs
-
+    /**
+     * Save image to firebase storage
+     *
+     * @param post       the post object
+     * @param object     the object that calls this method
+     * @param methodName the method name that calls this method
+     */
     public static void newSaveImage(Post post, Object object, String methodName) {
         FileDB fileDB = getInstance();
         StorageReference storageReference = storage.getReference();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Bitmap bitmap = post.getImg();
 
+        // No image to save
         if (bitmap == null) {
             post.setImgUUID(null);
             PostDB.savePost(true, post, object, methodName);
@@ -94,9 +121,11 @@ public class FileDB {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
+        // Get uuid
         String uuid = fileDB.getUUID();
         post.setImgUUID(uuid);
 
+        // Upload image to firebase storage and name it by uuid
         UploadTask uploadTask = storageReference
                 .child("image/" + uuid + ".jpg")
                 .putBytes(data);
@@ -107,6 +136,11 @@ public class FileDB {
         });
     }
 
+    /**
+     * Get a random uuid
+     *
+     * @return a random uuid
+     */
     private String getUUID() {
         return UUID.randomUUID().toString();
     }

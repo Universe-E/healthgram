@@ -3,6 +3,9 @@ package com.example.gp.data.database.model;
 import com.example.gp.Items.FriendRequest;
 import com.google.firebase.Timestamp;
 
+/**
+ * A friend request model class for firebase firestore
+ */
 public class FriendRequestModel {
     private String requestId;
     private String senderId;
