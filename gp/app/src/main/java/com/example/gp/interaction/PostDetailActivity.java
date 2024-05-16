@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.gp.data.Database;
 import com.example.gp.data.FriendsData;
 import com.example.gp.data.PostRepository;
 import com.example.gp.BaseActivity;
+import com.example.gp.data.database.PostDB;
 import com.example.gp.data.database.UserDB;
 
 import java.util.Objects;
@@ -40,6 +42,7 @@ public class PostDetailActivity extends BaseActivity {
     private int position;
 
     private Post post;
+    private ImageView ivLikePost;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -54,6 +57,8 @@ public class PostDetailActivity extends BaseActivity {
         tvPostContent = findViewById(R.id.tv_post_detail_page_post_content);
         btnShare = findViewById(R.id.btn_post_detail_page_share);
         tvAuthorName = findViewById(R.id.tv_post_detail_page_author_username);
+        ivLikePost = findViewById(R.id.iv_post_detail_like_post);
+        ivLikePost.setOnClickListener(this);
 
         // Set up the title bar
         setUpTitleBar(R.layout.activity_post_detail, "Post Detail");
@@ -182,5 +187,22 @@ public class PostDetailActivity extends BaseActivity {
         // Show the dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        if (v == ivLikePost) {
+            Database.likePost(post.getPostId(),this,"processLikeResult");
+        }
+    }
+
+    public void processLikeResult(boolean isSuccess, Object object){
+        if (!isSuccess) {
+           ToastUtil.show(this,"Like failed, please try again");
+        } else {
+            // Turn the like on
+            ivLikePost.setImageResource(R.drawable.baseline_favorite_24);
+        }
     }
 }
