@@ -36,7 +36,7 @@ import java.util.List;
  * The page to show home page of posts sent by all other users you followed
  *
  * @author Tianci Li
- * @editor Zehua Kong, Xingchen Zhang, Han Bao
+ * {@code @editor} Zehua Kong, Xingchen Zhang, Han Bao
  * Date: 2024-05-01
  */
 public class HomeFragment extends Fragment {

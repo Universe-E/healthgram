@@ -15,6 +15,13 @@ import com.example.gp.R;
 
 import java.util.List;
 import static com.example.gp.Utils.TimeUtil.convertTimestampToString;
+
+/**
+ * The fragment to show notifications of friend requests
+ * Author: Xingchen Zhang
+ * Date: 2024-05-13
+ */
+
 public class FriendFragmentViewAdapter extends RecyclerView.Adapter<FriendFragmentViewAdapter.ViewHolder> {
     private List<Notification> notifications;
 
