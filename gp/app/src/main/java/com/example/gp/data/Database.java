@@ -10,6 +10,11 @@ import com.google.firebase.Timestamp;
 
 import java.util.List;
 
+/**
+ * A utility class for database operation for front end
+ *
+ * @author Han Bao
+ */
 public class Database {
     private static final String TAG = "Database";
     private static final String USER_PATH = "Users";
@@ -93,6 +98,13 @@ public class Database {
         UserDB.checkSignedIn(object, methodName);
     }
 
+    /**
+     * Change avatar
+     *
+     * @param avatarUUID avatarUUID
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void changeAvatar(String avatarUUID, Object object, String methodName) {
         UserDB.changeAvatar(avatarUUID, object, methodName);
     }
@@ -111,6 +123,13 @@ public class Database {
         UserDB.follow(friend, object, methodName);
     }
 
+    /**
+     * unfollow user
+     *
+     * @param userId     userId
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void unfollow(String userId, Object object, String methodName) {
         UserDB.unfollow(userId, object, methodName);
     }
@@ -300,14 +319,34 @@ public class Database {
         PostDB.getPostByAuthorId(timestamp, limit, authorId, object, methodName);
     }
 
+    /**
+     * Get a list of post by post id
+     *
+     * @param postId     post id
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void getPostById(String postId, Object object, String methodName) {
         PostDB.getPostById(postId, object, methodName);
     }
 
+    /**
+     * get newest fifty posts
+     *
+     * @param object     object
+     * @param methodName method name
+     */
     public static void getNewestFiftyPosts(Object object, String methodName) {
         PostDB.getNewestFiftyPosts(object, methodName);
     }
 
+    /**
+     * Like a post
+     *
+     * @param postId     post id
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void likePost(String postId, Object object, String methodName) {
         PostDB.likePost(postId, object, methodName);
     }
