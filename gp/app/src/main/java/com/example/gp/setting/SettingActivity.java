@@ -2,6 +2,7 @@ package com.example.gp.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -14,7 +15,7 @@ import com.example.gp.data.UserData;
 import com.example.gp.data.database.UserDB;
 import com.example.gp.databinding.ActivitySettingBinding;
 
-public class SettingActivity extends BaseActivity {
+public class SettingActivity extends BaseActivity{
 
     private final String activityName = "Settings";
     private ActivitySettingBinding binding;
@@ -45,11 +46,8 @@ public class SettingActivity extends BaseActivity {
 
         // Get the user info
         String username = UserDB.getInstance().getUsername();
-        String avatarUUID = UserDB.getAvatarUUID();
-        int userAvatar = Integer.parseInt(avatarUUID);
 
         // initialize the user info layout
-        binding.ivSettingAvatar.setImageResource(userAvatar);
         binding.tvSettingNickname.setText(username);
 
     }
@@ -84,5 +82,24 @@ public class SettingActivity extends BaseActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+//    @Override
+//    public void onAvatarUUIDChanged(String newAvatarUUID) {
+//        int userAvatar = Integer.parseInt(newAvatarUUID);
+//        binding.ivSettingAvatar.setImageResource(userAvatar);
+//    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadAvatarData();
+    }
+
+    private void loadAvatarData() {
+        String avatarUUID = UserDB.getAvatarUUID();
+        int userAvatar = Integer.parseInt(avatarUUID);
+        Log.d("loadAvatarData", "loadAvatarData: "+ avatarUUID);
+        binding.ivSettingAvatar.setImageResource(userAvatar);
     }
 }
