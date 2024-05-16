@@ -125,10 +125,24 @@ public class PostRepository {
     }
 
 
-    private int numberChecker(int number) {
-        if (number < 0) {
-            return 0;
+//    private int numberChecker(int number) {
+//        if (number < 0) {
+//            return 0;
+//        }
+//        return Math.min(_allPosts.size(), number);
+//    }
+
+    public List<Post> getPostsByPage(int page, int pageSize) {
+        int index = page - 1;
+        return _allPosts.subList(index * pageSize, Math.min(_allPosts.size(), index * pageSize + pageSize));
+    }
+
+    public Post getPostById(String postId) {
+        for (Post post : _allPosts) {
+            if (post.getPostId().equals(postId)) {
+                return post;
+            }
         }
-        return Math.min(_allPosts.size(), number);
+        return null;
     }
 }

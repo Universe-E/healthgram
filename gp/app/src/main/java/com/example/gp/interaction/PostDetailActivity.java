@@ -60,10 +60,11 @@ public class PostDetailActivity extends BaseActivity {
 
         // Get post data from intent
         Intent intent = getIntent();
-//        String postId = intent.getStringExtra("postId");
+        String postId = intent.getStringExtra("postId");
 //        post = intent.getParcelableExtra("post");
-        position = intent.getIntExtra("position", 0);
-        post = POSTS_REPOSITORY.getAllPosts().get(position);
+//        position = intent.getIntExtra("position", 0);
+//        post = POSTS_REPOSITORY.getAllPosts().get(position);
+        post = POSTS_REPOSITORY.getPostById(postId);
 
         // Load corresponding post data from database
         loadPostData(true, post);

@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
@@ -42,7 +42,8 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
-    private final int POST_SIZE = 10;
+    private final int PAGE_SIZE = 10;
+    private int PAGE = 1;
     private boolean isRefreshing = false;
 
 
@@ -51,6 +52,8 @@ public class HomeFragment extends Fragment {
     private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
     Object thisActivity;
+    private Button prev_button;
+    private Button next_button;
 
 
     // show posts
@@ -68,11 +71,12 @@ public class HomeFragment extends Fragment {
         initializeSearchView(view);
         initializeRecyclerViews(view);
         initializeSwipeRefreshLayout(view);
+        initializePageButtons(view);
         setupAddNoteButton(view);
         postTree = new BTree();
 
         // load posts
-        Database.getNewPostsByTime(null, 20, this, "cbmAddInitialPosts");
+        Database.getNewPostsByTime(null, 2 * PAGE_SIZE, this, "cbmAddInitialPosts");
 
         postRepo.refreshPostMemory();
         postList = postRepo.getAllPosts();
@@ -88,7 +92,7 @@ public class HomeFragment extends Fragment {
         if (isSuccess) {
             List<Post> posts = (List<Post>) args;
             postRepo.addNewPosts(posts);
-            this.postList = postRepo.getAllPosts();
+            this.postList = postRepo.getPostsByPage(PAGE, PAGE_SIZE);
             showPostCards();
         } else {
             Log.e(TAG, "cbmAddInitialPosts: Failed to get new posts");
@@ -145,6 +149,44 @@ public class HomeFragment extends Fragment {
         Log.d("HomeFragment", "Posts loaded successfully");
     }
 
+    private void initializePageButtons(View view) {
+        prev_button = view.findViewById(R.id.btn_previous_page);
+        next_button = view.findViewById(R.id.btn_next_page);
+
+        prev_button.setOnClickListener(v -> {
+            prev_button.setEnabled(false);
+            if (PAGE == 1)
+                ToastUtil.showLong(getContext(), "This is the first page");
+            else {
+                this.postList = postRepo.getPostsByPage(--PAGE, PAGE_SIZE);
+                showPostCards();
+            }
+            prev_button.setEnabled(true);
+
+        });
+
+        next_button.setOnClickListener(v -> {
+            Log.d(TAG, "initializePageButtons: Next page");
+            next_button.setEnabled(false);
+            thisActivity = this;
+            Database.getPreviousPostsByTime(null, PAGE_SIZE, thisActivity, "cbmNextPage");
+        });
+    }
+
+    public void cbmNextPage(boolean isSuccess, Object args) {
+        if (isSuccess) {
+            Log.d(TAG, "cbmNextPage: Successfully get new posts");
+            List<Post> posts = (List<Post>) args;
+            postRepo.addPreviousPosts(posts);
+            this.postList = postRepo.getPostsByPage(++PAGE, PAGE_SIZE);
+            showPostCards();
+        } else {
+            Log.e(TAG, "cbmNextPage: Failed to get new posts");
+            ToastUtil.showLong(getContext(), (String) args);
+        }
+        next_button.setEnabled(true);
+    }
+
     private void initializeSearchView(View view) {
         View searchLayout = view.findViewById(R.id.search_layout);
         searchView = searchLayout.findViewById(R.id.search_view);
@@ -173,7 +215,7 @@ public class HomeFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Database.getNewPostsByTime(null, 20, thisActivity, "cbmAddRefreshedPosts");
+                Database.getNewPostsByTime(null, PAGE_SIZE, thisActivity, "cbmAddRefreshedPosts");
             }
         });
     }
@@ -195,11 +237,13 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void onPostClick(int position) {
+    private void onPostClick(String postId) {
         Intent intent = new Intent(getContext(), PostDetailActivity.class);
 //        intent.putExtra("postId", post.getPostId());
 //        intent.putExtra("post", post);
-        intent.putExtra("position", position);
+
+        // intent.putExtra("position", position);
+        intent.putExtra("postId", postId);
         startActivity(intent);
     }
 
