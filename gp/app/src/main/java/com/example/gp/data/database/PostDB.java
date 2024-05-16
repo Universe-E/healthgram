@@ -40,14 +40,29 @@ public class PostDB {
     private static final String POST_PATH = "";
     private static final PostRepository POSTS_REPOSITORY = PostRepository.getInstance();
 
-    // New APIs
-
+    /**
+     * Save post data to firebase firestore
+     *
+     * @param post       post object
+     * @param object     object that calls this method
+     * @param methodName method name that calls this method
+     */
     public static void savePostData(Post post, Object object, String methodName) {
         Log.d(TAG, "newSavePost: " + post.toString());
 
+        // Save image first
         FileDB.newSaveImage(post, object, methodName);
     }
 
+    /**
+     * Save post to firebase firestore
+     * Do Not Use This Method from front end
+     *
+     * @param isSuccessful
+     * @param result
+     * @param object
+     * @param methodName
+     */
     public static void savePost(boolean isSuccessful, Object result, Object object, String methodName) {
         Log.d(TAG, "newSavePost: " + isSuccessful);
         if (!isSuccessful) {
@@ -55,10 +70,13 @@ public class PostDB {
             return;
         }
 
+        // get user data
         UserDB userDB = UserDB.getInstance();
-
+        // get posts reference
         CollectionReference postsRef = getPostRef();
+        // get current user
         FirebaseUser fireUser = getFireUser();
+        // create post model
         Post post = (Post) result;
         PostModel postModel = new PostModel();
         postModel.setModelFromPost(post);
@@ -66,15 +84,14 @@ public class PostDB {
         postModel.setPostTimestamp(getTimestamp());
         postModel.setAuthorName(userDB.getUsername());
 
-        Log.d(TAG, "postModel: " + postModel.toString());
-
+        // get post id
         DocumentReference docRef = postsRef.document();
         postModel.setPostId(docRef.getId());
 
-        Log.d(TAG, "docRef: " + docRef);
-
+        // save post model to firebase firestore
         docRef.set(postModel)
                 .addOnSuccessListener(dRef -> {
+                    // create notification model
                     NotificationModel notificationModel = new NotificationModel();
                     notificationModel.setSenderId(userDB.getUserId());
                     notificationModel.setUsername(userDB.getUsername());
@@ -83,9 +100,9 @@ public class PostDB {
                     notificationModel.setTimestamp(getTimestamp());
                     notificationModel.setRead(false);
                     notificationModel.setNotificationId(docRef.getId());
+                    // Notify followers
                     notifyNewPostToFollowers(notificationModel, object, methodName);
 //                    MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
-                    Log.d(TAG, "DocumentSnapshot successfully written!");
                 })
                 .addOnFailureListener(e -> {
                     MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
@@ -93,9 +110,17 @@ public class PostDB {
                 });
     }
 
+    /**
+     * Delete post from firebase firestore
+     *
+     * @param postId     post id
+     * @param object     object that calls this method
+     * @param methodName method name that calls this method
+     */
     public static void deletePost(String postId, Object object, String methodName) {
         CollectionReference postsRef = getPostRef();
 
+        // Delete post from firebase firestore
         postsRef.document(postId)
                 .delete()
                 .addOnSuccessListener(aVoid -> {
@@ -107,6 +132,13 @@ public class PostDB {
                 });
     }
 
+    /**
+     * Get new posts by time
+     * @param timestamp Timestamp
+     * @param limit Integer
+     * @param object Object
+     * @param methodName String
+     */
     public static void GetNewPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
         timestamp = getTimestamp(timestamp);
         if (limit == null) {
