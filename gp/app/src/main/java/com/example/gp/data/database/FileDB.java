@@ -32,6 +32,13 @@ public class FileDB {
         return instance;
     }
 
+    /**
+     * Get image for post
+     *
+     * @param post       the post object
+     * @param object     the object that calls this method
+     * @param methodName the method name that calls this method
+     */
     public static void getImage(Post post, Object object, String methodName) {
         if (post.getImgUUID() == null) {
             MethodUtil.invokeMethod(object, methodName, true, post);
@@ -56,10 +63,10 @@ public class FileDB {
     /**
      * Get images from firebase storage
      *
-     * @param posts
-     * @param position
-     * @param object
-     * @param methodName
+     * @param posts      the list of posts
+     * @param position   the position of the post in the list
+     * @param object     the object that calls this method
+     * @param methodName the method name that calls this method
      */
     public static void getImages(List<Post> posts, int position, Object object, String methodName) {
         FileDB fileDB = getInstance();
@@ -132,7 +139,7 @@ public class FileDB {
     /**
      * Get a random uuid
      *
-     * @return
+     * @return a random uuid
      */
     private String getUUID() {
         return UUID.randomUUID().toString();
