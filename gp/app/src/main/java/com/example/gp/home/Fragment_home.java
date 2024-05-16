@@ -4,18 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.appcompat.widget.Toolbar;
-
 import com.example.gp.BaseActivity;
 import com.example.gp.R;
-import com.example.gp.data.database.UserDB;
-import com.example.gp.databinding.ActivitySettingBinding;
 import com.example.gp.setting.SettingActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
