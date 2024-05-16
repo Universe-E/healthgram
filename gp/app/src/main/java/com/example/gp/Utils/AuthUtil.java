@@ -46,22 +46,7 @@ public class AuthUtil {
         return isValidEmail(input);
     }
 
-//    @Nullable
-//    @Contract(pure = true)
-//    public static String getEmailByUsername(String username) {
-//        // Get email by username from the database
-//        return Database.UserDB.getEmailByUsername(username);
-//    }
 
-//    public static Task<Boolean> isUsernameTaken(String username) {
-//        // Check if the username is already in the database
-////        return Database.User.isUsernameExist(username);
-//    }
-
-//    public static Task<Boolean> isEmailTaken(String email) {
-//        // Check if the email is already in the database
-////        return Database.User.isEmailExist(email);
-//    }
 
     /********** END API **********/
 }

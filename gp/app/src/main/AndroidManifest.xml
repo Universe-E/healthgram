@@ -53,9 +53,6 @@
         <activity
             android:name=".interaction.PostDetailActivity"
             android:exported="false" />
-        <activity
-            android:name=".SimpleTestActivity"
-            android:exported="false" />
 
         <activity
             android:name=".setting.RequestActivity"
