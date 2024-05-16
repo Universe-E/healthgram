@@ -21,15 +21,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.Filter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.Transaction;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,9 +137,10 @@ public class PostDB {
 
     /**
      * Get new posts by time
-     * @param timestamp Timestamp
-     * @param limit Integer
-     * @param object Object
+     *
+     * @param timestamp  Timestamp
+     * @param limit      Integer
+     * @param object     Object
      * @param methodName String
      */
     public static void GetNewPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
@@ -214,9 +218,55 @@ public class PostDB {
                 });
     }
 
+    public static void likePost(String postId, Object object, String methodName) {
+        CollectionReference postsRef = getPostRef();
+
+        postsRef.document(postId)
+                .update("likeCount", FieldValue.increment(1))
+                .addOnSuccessListener(aVoid ->
+                    MethodUtil.invokeMethod(object, methodName, true, postId)
+                )
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing document", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    // Search
+
+    public static void getNewestFiftyPosts(String keyword, Object object, String methodName) {
+        CollectionReference postsRef = getPostRef();
+
+        postsRef.orderBy("postTimestamp", Query.Direction.DESCENDING)
+                .limit(50)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        Log.e(TAG, "Error getting documents: ", e);
+                        return;
+                    }
+                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    List<Post> posts = new ArrayList<>();
+                    documentSnapshots.forEach(documentSnapshot -> {
+                        PostModel postModel = documentSnapshot.toObject(PostModel.class);
+                        Post post = new Post();
+                        post.setFromModel(postModel);
+                        posts.add(post);
+                    });
+                    MethodUtil.invokeMethod(object, methodName, true, posts);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error getting documents: ", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
     // Private Utils
 
-    private static void query2postList(Task<QuerySnapshot> task, Object object, String methodName) {
+    private static void query2postList(Task<QuerySnapshot> task, Object object, String
+            methodName) {
         if (!task.isSuccessful()) {
             Exception e = task.getException();
             MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
@@ -242,7 +292,8 @@ public class PostDB {
         getViewers(posts, 0, object, methodName);
     }
 
-    private static void notifyNewPostToFollowers(NotificationModel notificationModel, Object object, String methodName) {
+    private static void notifyNewPostToFollowers(NotificationModel notificationModel, Object
+            object, String methodName) {
         CollectionReference usersRef = getUsersRef();
         UserDB userDB = UserDB.getInstance();
         Log.d(TAG, "NotificationModel: " + notificationModel.getSenderId());
@@ -278,7 +329,8 @@ public class PostDB {
                 });
     }
 
-    private static void getViewers(List<Post> posts, int position, Object object, String methodName) {
+    private static void getViewers(List<Post> posts, int position, Object object, String
+            methodName) {
         if (position >= posts.size()) {
             FileDB.getImages(posts, 0, object, methodName);
             return;

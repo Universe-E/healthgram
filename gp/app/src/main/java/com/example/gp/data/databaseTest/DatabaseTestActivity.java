@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.Post;
 import com.example.gp.data.Database;
+import com.example.gp.data.database.PostDB;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -15,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +24,10 @@ import android.widget.ImageView;
 
 import com.example.gp.R;
 import com.example.gp.databinding.ActivityDatabaseTestBinding;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -109,6 +113,11 @@ public class DatabaseTestActivity extends AppCompatActivity {
                     .document("1")
                     .set(Map.of("friendMap", Map.of(friend.getId(), friend)));
         });
+
+        Button button6 = binding.button6;
+        button6.setOnClickListener(listener -> {
+            Database.likePost("2XCQErLKawEjQaR0vCrv", null, null);
+        });
     }
 
     public void getUserPost(boolean isSuccessful, Object object) {
@@ -132,5 +141,15 @@ public class DatabaseTestActivity extends AppCompatActivity {
         Log.d(TAG, "uuid: " + post.getImgUUID());
     }
 
+    public void testSearch(boolean isSuccessful, Object object) {
+        Log.d(TAG, "testSearch: " + isSuccessful);
+        if (isSuccessful) {
+            Log.d(TAG, "object: " + object);
+            QuerySnapshot querySnapshot = (QuerySnapshot) object;
+            Log.d(TAG, "querySnapshot: " + querySnapshot);
+            List<DocumentSnapshot> documentSnapshots = querySnapshot.getDocuments();
+            Log.d(TAG, "documentSnapshots: " + documentSnapshots);
+        }
+    }
 
 }
