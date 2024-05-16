@@ -276,10 +276,10 @@ Parser class supports multiple grammars for different types of queries:
    <char> ::= any alphanumeric character | empty character
    ```
 
-2. Title Grammar:
+2. Title and User Grammar:
 
    ```
-   Copy code<title> ::= 'title:' + <name>
+   Copy code<title> ::= ('title:' | 'user') + <name>
    <name> ::= <char> + <char>
    <char> ::= any alphanumeric character | empty character
    ```
@@ -304,7 +304,7 @@ This grammar is designed to be simple and flexible to handle username formats, t
 Tokenizer:
 
 1. The Tokenizer class is used to break down the input text into a sequence of tokens.
-2. It recognizes five types of tokens: AT, NAME, TITLE, PUBLIC, and EOF.
+2. It recognizes five types of tokens: AT, NAME, TITLE, PUBLIC, USER and EOF.
 3. The tokenization process is implemented using specific rules that translate the current character to the defined token types.
 4. The advantages of this tokenizer design are:
    - Efficient: The tokenizer reads the input text only once, minimized the cost of time.
@@ -441,39 +441,66 @@ Privacy
 
 (i) Existing Code Smells (before May 1st, 2024):
 
-1. Code Smell 1:
-   - Relevant git commits, files, and line numbers:
-     - [git commit hash], [file path], [line numbers]
-     - ...
-2. Code Smell 2:
-   - Relevant git commits, files, and line numbers:
-     - [git commit hash], [file path], [line numbers]
-     - ...
-3. Code Smell 3: 
-   - Relevant git commits, files, and line numbers:
-     - [git commit hash], [file path], [line numbers]
-     - ...
-4. Code Smell 4: 
-   - Relevant git commits, files, and line numbers:
-     - [git commit hash], [file path], [line numbers]
-     - ...
+1. Code Smell 1: Data items is not formalized, not use method invocation in back-end modules, not integrated in firebase
+   - git commits: [2024-04-15 Add: data items, database management, BTree](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/08525fff05def26958ed3f36ed1391156fe4789a)
+   - files: 
+   - line numbers:
+
+
+
+2. Code Smell 2: User data is not formalized, some fields are invalid
+
+   - git commits: [2024-04-19 Added userData for Login.](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/e1f9ad2decdbe7b6a7ef717bd12d3b4acdaeb47b)
+
+   - files: 
+
+   - line numbers:
+
+     
+
+3. Code Smell 3: Signup page have problem to create account page
+
+   - git commits: [2024-04-20 Added signup layout.](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/89fec6216be93056623ecdffa8028a800ecbf223)
+   - files: 
+   - line numbers:
+
+   
+
+4. Code Smell 4: The app will crash after clicking on create account button
+
+   - git commits: [2024-04-20 Added onClick to create account button](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/0e98484e2aef746f5179994975cb9e63a1220af2)
+   - files: 
+   - line numbers:
+
+
 
 (ii) Corrections Made (after May 1st, 2024):
 
-1. Correction for Code Smell :
-   - Description of the correction: 
+1. Correction for Code Smell : Refactored UserDB and PostDB
+   - Description of the correction: Refactored UserDB and PostDB, use the reflection to invoke java method instead of calling directly
+   - Relevant git commits, files, and line numbers: 
+     
+     - git commit: [2024-05-05 Refactored UserDB and PostDB as standalone classes](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/af1385d7dfcd8573bbcd5221ad7c95601caf4448)
+     
+     - files: 
+     - line numbers:
+2. Correction for Code Smell : Fixed crash and redirect bugs in Create Account page
+   - Description of the correction: Fixed crash and redirect bugs in Create Account page, write a new logic to validate input
    - Relevant git commits, files, and line numbers:
-     - [git commit hash], [file path], [line numbers]
-     - ...
-2. Correction for Code Smell :
-   - Description of the correction: 
-   - Relevant git commits, files, and line numbers:
-     - [git commit hash], [file path], [line numbers]
-     - ...
+     - git commit: [2024-05-05 Debug: fixed signup problem, rewrite asynchronous validate methods](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/0192163c2750bf03df34cd50b4b43445627e28ed)
+     
+     - files: 
+     - line numbers:
 
 (iii) Detailed Description:
 
+In the period developing code framework before May 1st, 2024, the codebase suffered from several architectural and implementation problems. The data layer lacked proper structure,  data items are not formalized, the backend modules lacking integration with Firebase and proper use of method invocations. User data also had structural issues.
 
+From a user-facing perspective, the signup flow was problematic, with the create account page not functioning properly. Attempting to create a new account would lead to the application crashing.
+
+The correction includes significant refactoring efforts were undertaken after May 1st, 2024. The data layer was improved by rewriting the UserDB and PostDB components as self-contained classes. Java's reflection capabilities are now leveraged to invoke methods, promoting loose coupling and enhancing maintainability.
+
+The account creation process was also overhauled. The crashes and redirect bugs plaguing the create account page were resolved. The input validation logic was redesigned to utilize asynchronous validation methods, providing a smoother and more robust user experience.
 
 
 
@@ -485,8 +512,8 @@ Privacy
 *Here is an example:*
 
 - *Bug 1:*
-  - User can follow themselves, generally this should be banned
-  - Follow and unfollow functions are unavailable now
+  - Loading home pages costs several seconds
+  - Toasts keep popping up when clicking previous page and next page multiple times
 
 - *Bug 2:* 
   - After clicking share button, user cannot share to other users
@@ -496,9 +523,7 @@ Privacy
 - *Bug 3:* 
   - Cannot select texts in post and head text bar
   - All post images are randomly selected from resources
-  - User cannot share pictures in their posts
-  - User should enter user id to share with friends
-
+  
 - *Bug 4:* 
   - In a very rare situation, after logout, if user deliberately input the wrong password, the app may crash
   - If user deliberately input the wrong password several times, then input correct password, it will take seconds to response to the successful password authentication
@@ -560,10 +585,10 @@ Privacy
      - testTimeUtil_getTimestamp(): Tests the getTimestamp() method of the TimeUtil class
 6. Tests for Tokenizer
    - Code: TokenizerTest.java, covering the Tokenizer class
-   - Number of test cases: 9
+   - Number of test cases: 10
    - Code coverage: The tests cover various scenarios and edge cases for the nextToken() method of the Tokenizer class
    - Types of tests created and descriptions:
-     - Tests for different token types (AT, TITLE, PUBLIC, NAME)
+     - Tests for different token types
      - Tests for handling whitespace
      - Tests for handling empty input
      - Tests for handling multiple tokens in a single input string

@@ -11,7 +11,6 @@ public class MethodUtil {
     private static Method getMethod(Object obj, String methodName) {
         Method[] methods = obj.getClass().getMethods();
         for (Method method : methods) {
-            Log.d(TAG, "method name: " + method.getName());
             if (method.getName().equals(methodName)) {
                 return method;
             }
