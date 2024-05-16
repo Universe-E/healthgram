@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.preference.ListPreference;
 
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
@@ -31,13 +30,10 @@ import java.util.Objects;
 
 /**
  * This class represents the activity for displaying the details of a post.
+ * Author: Tianci Li
+ * {@code @Author} Han Bao, Yulong Chen
  */
-import kotlin.collections.builders.ListBuilder;
-
 public class PostDetailActivity extends BaseActivity {
-
-    public static final String EXTRA_POST = "extra_post";
-
     private ImageView ivAuthorAvatar;
     private Button btnFollow;
     private ImageView ivPostImage;
@@ -46,12 +42,14 @@ public class PostDetailActivity extends BaseActivity {
     private Button btnShare;
     private TextView tvAuthorName;
     private static final PostRepository POSTS_REPOSITORY = PostRepository.getInstance();
-
     private Post post;
     private ImageView ivLikePost;
     private TextView tvLikeAmount;
     private int likeCount;
 
+    /**
+     * Called when the activity is starting.
+     */
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +61,6 @@ public class PostDetailActivity extends BaseActivity {
         ivPostImage = findViewById(R.id.iv_post_detail_page_post_image);
         tvPostTitle = findViewById(R.id.tv_post_detail_page_post_title);
         tvPostContent = findViewById(R.id.tv_post_detail_page_post_content);
-        btnShare = findViewById(R.id.btn_post_detail_page_share);
         tvAuthorName = findViewById(R.id.tv_post_detail_page_author_username);
         ivLikePost = findViewById(R.id.iv_post_detail_like_post);
         tvLikeAmount = findViewById(R.id.tv_post_detail_like_amount);
@@ -96,6 +93,9 @@ public class PostDetailActivity extends BaseActivity {
     }
 
 
+    /**
+     * Show post data on the page
+     */
     @SuppressLint("SetTextI18n")
     private void showPostData() {
         if (post == null) {
@@ -124,19 +124,10 @@ public class PostDetailActivity extends BaseActivity {
 
         // Set post content: title, image, and content
         tvPostTitle.setText(post.getTitle());
-//        ivPostImage.setImageResource(R.mipmap.sample_avatar_1); // TODO1: Load post image
         if (post.getImg() != null) {
             ivPostImage.setImageBitmap(post.getImg());
         }
         tvPostContent.setText(post.getPostContent());
-
-        // Set share button click listener
-        btnShare.setOnClickListener(v -> {
-            Intent shareIntent = new Intent(this, SharePageActivity.class);
-            // TODO: Pass necessary data to ShareActivity
-            shareIntent.putExtra("postId", post.getPostId());
-            startActivity(shareIntent);
-        });
 
         // Set follow button click listener
         btnFollow.setOnClickListener(v -> {
@@ -182,9 +173,6 @@ public class PostDetailActivity extends BaseActivity {
     }
 
     private boolean isAuthorFollowed() {
-        // TODO: Implement this method
-//        UserData.
-//        return Objects.equals(this.post.getAuthorId(), UserData.);
         FriendsData friends = FriendsData.getInstance();
         return friends.getAllFriends().containsKey(this.post.getAuthorId());
     }
