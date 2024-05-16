@@ -14,7 +14,8 @@
         android:layout_marginBottom="100dp"
         android:layout_marginEnd="30dp"
         android:contentDescription="Add Note"
-        android:src="@drawable/baseline_add_circle_24" />
+        android:src="@drawable/baseline_add_circle_24"
+        app:backgroundTint="@color/theme_color" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_load_more"
@@ -24,7 +25,8 @@
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="30dp"
         android:contentDescription="Next Page"
-        android:src="@drawable/baseline_arrow_downward_24" />
+        android:src="@drawable/baseline_arrow_downward_24"
+        app:backgroundTint="@color/theme_color" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
