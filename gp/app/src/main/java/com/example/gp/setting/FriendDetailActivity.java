@@ -91,6 +91,12 @@ public class FriendDetailActivity extends BaseActivity implements CompoundButton
         }
     }
 
+    /**
+     * call back method
+     * show the blocking operation result
+     * @param isSuccess if the blocking operation is successful or not
+     * @param object not used here
+     */
     public void toastResult(boolean isSuccess, Object object){
         if (!isSuccess) {
             ToastUtil.show(this,"Block failed!");

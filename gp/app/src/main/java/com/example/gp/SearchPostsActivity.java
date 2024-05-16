@@ -143,6 +143,7 @@ public class SearchPostsActivity extends BaseActivity {
     private void onPostClick(String postId) {
         Intent intent = new Intent(this, PostDetailActivity.class);
         intent.putExtra("postId", postId);
+        intent.putExtra("getPost", true);
         startActivity(intent);
     }
 }

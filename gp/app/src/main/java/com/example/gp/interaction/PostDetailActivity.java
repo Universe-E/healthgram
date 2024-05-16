@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.ListPreference;
 
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
@@ -24,11 +25,14 @@ import com.example.gp.data.PostRepository;
 import com.example.gp.BaseActivity;
 import com.example.gp.data.database.UserDB;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
  * This class represents the activity for displaying the details of a post.
  */
+import kotlin.collections.builders.ListBuilder;
+
 public class PostDetailActivity extends BaseActivity {
 
     public static final String EXTRA_POST = "extra_post";
@@ -67,6 +71,11 @@ public class PostDetailActivity extends BaseActivity {
         // Get post data from intent
         Intent intent = getIntent();
         String postId = intent.getStringExtra("postId");
+        Boolean getPost = intent.getBooleanExtra("getPost", false);
+        if (getPost) {
+            Database.getPostById(postId, this, "loadPostData");
+            return;
+        }
         post = POSTS_REPOSITORY.getPostById(postId);
 
         // Load corresponding post data from database
@@ -143,7 +152,11 @@ public class PostDetailActivity extends BaseActivity {
     public void loadPostData(boolean isSuccess, Object object) {
         if (isSuccess) {
             // Store post data
-            post = (Post) object;
+            if (object instanceof Post) {
+                post = (Post) object;
+            } else {
+                post = ((List<Post>) object).get(0);
+            }
 
             // Show post data
             showPostData();
