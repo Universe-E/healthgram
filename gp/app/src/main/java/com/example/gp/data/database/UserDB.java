@@ -253,7 +253,7 @@ public class UserDB {
             signInWithEmail(input, password, object, methodName);
         } else {
 //            signInWithUsername(input, password, object, methodName);
-            newSignInWithUsername(input, password, object, methodName);
+            signInWithUsername(input, password, object, methodName);
         }
     }
 
@@ -709,7 +709,7 @@ public class UserDB {
      * @param object     object calls this function
      * @param methodName Callback return true if success, false and error message if fail
      */
-    private static void newSignInWithUsername(String username, String password, Object object, String methodName) {
+    private static void signInWithUsername(String username, String password, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
         usersRef.whereEqualTo("username", username)
                 .get()
@@ -741,6 +741,15 @@ public class UserDB {
                 });
     }
 
+    /**
+     * Create user account
+     *
+     * @param username   username
+     * @param email      email
+     * @param password   password
+     * @param object     object calls this function
+     * @param methodName Callback return true if success, false and error message if fail
+     */
     private static void fireAuthCreate(String username, String email, String password, Object object, String methodName) {
         FirebaseAuth mAuth = getFireAuth();
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -767,6 +776,13 @@ public class UserDB {
                 });
     }
 
+    /**
+     * Save user data to firebase
+     *
+     * @param userModel  User model
+     * @param object     object calls this function
+     * @param methodName Callback return true if success, false and error message if fail
+     */
     private static void newSaveUserData(UserModel userModel, Object object, String methodName) {
         CollectionReference databaseRef = getUsersRef();
         databaseRef.document(userModel.getUserId()).set(userModel)

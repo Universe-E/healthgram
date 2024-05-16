@@ -13,6 +13,12 @@ import java.util.Collections;
 import java.util.List;
 
 // a singleton to hold User data
+
+/**
+ * User data
+ *
+ * @author Han Bao
+ */
 public class UserData {
 
     private static final String TAG = "userData";
