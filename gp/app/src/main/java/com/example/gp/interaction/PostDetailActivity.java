@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.gp.Items.Friend;
 import com.example.gp.Items.FriendRequest;
 import com.example.gp.Items.Post;
+import com.example.gp.MainActivity;
 import com.example.gp.R;
 import com.example.gp.Utils.ToastUtil;
 import com.example.gp.data.Database;
@@ -65,7 +66,6 @@ public class PostDetailActivity extends BaseActivity {
         post = POSTS_REPOSITORY.getAllPosts().get(position);
 
         // Load corresponding post data from database
-//        Database.getPostByPostId(postId, this, "loadPostData");
         loadPostData(true, post);
 
     }
@@ -85,7 +85,7 @@ public class PostDetailActivity extends BaseActivity {
         // Set follow button text
         // if the author is myself, hide the follow button
         if (isAuthorMyself()) {
-            btnFollow.setVisibility(Button.GONE);
+            btnFollow.setText("Delete");
         } else {
             // if the author is already followed, set the button text to "Unfollow"
             // else set the button text to "Follow"
@@ -114,7 +114,12 @@ public class PostDetailActivity extends BaseActivity {
 
         // Set follow button click listener
         btnFollow.setOnClickListener(v -> {
-            if (isAuthorFollowed()) {
+            if (isAuthorMyself()) {
+                Database.deletePost(post.getPostId(), null, null);
+                postsData.deletePostAt(position);
+                startActivity(new Intent(this, MainActivity.class));
+                return;
+            } else if (isAuthorFollowed()) {
                 // Unfollow the author
                 // ...
                 Database.unfollow(post.getAuthorId(), null, null);

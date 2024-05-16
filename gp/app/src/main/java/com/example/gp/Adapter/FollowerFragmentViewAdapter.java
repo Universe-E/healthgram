@@ -1,5 +1,7 @@
 package com.example.gp.Adapter;
 
+import static com.example.gp.Utils.TimeUtil.convertTimestampToString;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,12 +43,27 @@ public class FollowerFragmentViewAdapter extends RecyclerView.Adapter<FollowerFr
     public void onBindViewHolder(@NonNull FollowerFragmentViewAdapter.ViewHolder holder, int position) {
         Notification notification = notifications.get(position);
 
-        holder.usernameTextView.setText(notification.getUserId());
-        holder.timeTextView.setText(notification.getDate());
-        holder.headlineTextView.setText(notification.getTitle());
+
+
+
+        // Set the view in the holder
+        holder.usernameTextView.setText(notification.getSenderName());
+
+        // check null value
+        if (notification.getTimestamp() != null) {
+            holder.timeTextView.setText(convertTimestampToString(notification.getTimestamp()));
+        } else {
+            holder.timeTextView.setText(""); // or set a default value
+        }
+
+        holder.headlineTextView.setText(notification.getMessage());
 
     }
 
+    public void updateFriends(List<Notification> notification) {
+        this.notifications = notification;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return notifications.size();

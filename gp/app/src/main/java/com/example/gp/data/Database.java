@@ -93,6 +93,10 @@ public class Database {
         UserDB.checkSignedIn(object, methodName);
     }
 
+    public static void changeAvatar(String avatarUUID, Object object, String methodName) {
+        UserDB.changeAvatar(avatarUUID, object, methodName);
+    }
+
     // Friend operations
 
     /**

@@ -43,12 +43,6 @@ public class UserTest {
         friendMap.put("f1",f1);
         friendMap.put("f2",f2);
 
-        Map<String, Post> postMap = new HashMap<>();
-        Post p1 = new Post("content1","title1",true);
-        Post p2 = new Post("content2","title2",false);
-        postMap.put("p1",p1);
-        postMap.put("p2",p2);
-
         Map<String, Notification> notificationMap = new HashMap<>();
         Notification n1 = new Notification("Vacation","go to Italy",currentDate, Notification.NotificationType.FOLLOW,"123");
         Notification n2 = new Notification("Vacation","go to Spain",currentDate, Notification.NotificationType.MENTION,"123");
@@ -56,7 +50,7 @@ public class UserTest {
         notificationMap.put("n2",n2);
 
         User user = new User("userId", "username", "user@example.com", "description",
-                "avatar", friendMap, postMap, notificationMap);
+                0, friendMap,  notificationMap);
 
         assertEquals("userId", user.getUserId());
         assertEquals("username", user.getUsername());

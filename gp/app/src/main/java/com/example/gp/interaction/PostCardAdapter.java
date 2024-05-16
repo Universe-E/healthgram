@@ -88,6 +88,9 @@ public class PostCardAdapter extends RecyclerView.Adapter<PostCardAdapter.PostVi
     }
     public void updatePosts(List<Post> userposts) {
 //        this.postList = userposts;
+        // TODO: what is this?
+        // postsData.clearPostsData();
+        // postsData.addNewPosts(userposts);
         notifyDataSetChanged();
     }
 

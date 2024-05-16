@@ -2,6 +2,8 @@ package com.example.gp.home.ui.notifications;
 
 import static com.example.gp.Items.NotificationFactory.createFriendNotification;
 
+import static com.example.gp.Utils.TimeUtil.convertTimestampToString;
+
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.gp.Adapter.FriendFragmentViewAdapter;
+import com.example.gp.Items.NotificationFactory;
 import com.example.gp.Utils.ToastUtil;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -51,12 +54,7 @@ public class FriendNotificationFragment extends Fragment {
         return view;
     }
 
-//    private List<Notification> loadNotifications() {
-//        notifications= new ArrayList<>();
-//        currentDate = DateFormat.format("yyyy-MM-dd", new Date());
-//        notifications.add(createFriendNotification("followed you","who followed you",currentDate, "Wallace"));
-//        return notifications;
-//    }
+
 
 
     public void updateUI(boolean isSuccess, Object object){
@@ -68,20 +66,43 @@ public class FriendNotificationFragment extends Fragment {
             }
         } else {
             if (object instanceof List) {
-                List<Notification> friendRequests = (List<Notification>) object;
+                List<Notification> allNotifications = (List<Notification>) object;
+                List<Notification> followNotifications = new ArrayList<>();
 
-                if (!friendRequests.isEmpty()) {
-                    notifications = friendRequests;  //Assign the new friend list to the friends variable
+                // filter type
+                for (Notification notification : allNotifications) {
+                    if (notification.getType() == Notification.NotificationType.FOLLOW) {
+                        followNotifications.add(notification);
+                    }
+                }
+
+                if (!followNotifications.isEmpty()) {
+                    notifications = followNotifications;
+
+
                     adapter.updateFriends(notifications);
                     Log.d("UpdateUI", "Friends updated, count: " + notifications.size());
 
                     // 打印 notifications 列表的内容
-                    Log.d("UpdateUI", "Notifications: " + notifications.toString());
+                    Log.d("UpdateUI", "Notifications:");
+                    for (Notification notification : notifications) {
+                        Log.d("UpdateUI", "Title: " + notification.getTitle());
+                        Log.d("UpdateUI", "Message: " + notification.getMessage());
+                        Log.d("UpdateUI", "Date: " + (convertTimestampToString(notification.getTimestamp()) ));
+                        Log.d("UpdateUI", "Type: " + notification.getType());
+                        Log.d("UpdateUI", "User ID: " + notification.getUserId());
+                        Log.d("UpdateUI", "Notification ID: " + notification.getNotificationId());
+                        Log.d("UpdateUI", "Is Read: " + notification.isRead());
+                        Log.d("UpdateUI", "User: " + notification.getSenderName());
+                        Log.d("UpdateUI", "---");
+                    }
                 } else {
-                    Log.d("UpdateUI", "Friends list is empty after update.");
+                    Log.d("UpdateUI", "No FOLLOW notifications found.");
+                    notifications.clear();
+                    adapter.updateFriends(notifications);
                 }
             } else {
-                ToastUtil.showLong(getContext(), "Incorrect data type received");
+//                ToastUtil.showLong(getContext(), "Incorrect data type received");
             }
         }
     }
@@ -90,8 +111,7 @@ public class FriendNotificationFragment extends Fragment {
     private void initializeRecyclerViews(View view) {
         recyclerView = view.findViewById(R.id.recycler_view_follow);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        // Initialization data
-//        notifications = loadNotifications(); // load data
+
         notifications= new ArrayList<>();
 
         adapter = new FriendFragmentViewAdapter(notifications);

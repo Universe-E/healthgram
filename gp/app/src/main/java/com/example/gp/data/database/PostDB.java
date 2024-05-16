@@ -12,6 +12,7 @@ import com.example.gp.Items.Post;
 import com.example.gp.Utils.MethodUtil;
 import com.example.gp.data.PostRepository;
 import com.example.gp.data.database.model.FriendModel;
+import com.example.gp.data.database.model.NotificationModel;
 import com.example.gp.data.database.model.PostModel;
 import com.example.gp.data.database.model.UserModel;
 import com.google.android.gms.tasks.Task;
@@ -20,10 +21,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Filter;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +75,16 @@ public class PostDB {
 
         docRef.set(postModel)
                 .addOnSuccessListener(dRef -> {
-                    MethodUtil.invokeMethod(object, methodName, true, post);
+                    NotificationModel notificationModel = new NotificationModel();
+                    notificationModel.setSenderId(userDB.getUserId());
+                    notificationModel.setUsername(userDB.getUsername());
+                    notificationModel.setType("post_update");
+                    notificationModel.setMessage("New post from " + userDB.getUsername());
+                    notificationModel.setTimestamp(getTimestamp());
+                    notificationModel.setRead(false);
+                    notificationModel.setNotificationId(docRef.getId());
+                    notifyNewPostToFollowers(notificationModel, object, methodName);
+//                    MethodUtil.invokeMethod(object, methodName, true, postModel.getPostId());
                     Log.d(TAG, "DocumentSnapshot successfully written!");
                 })
                 .addOnFailureListener(e -> {
@@ -192,6 +208,42 @@ public class PostDB {
         }
 
         getViewers(posts, 0, object, methodName);
+    }
+
+    private static void notifyNewPostToFollowers(NotificationModel notificationModel, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        UserDB userDB = UserDB.getInstance();
+        Log.d(TAG, "NotificationModel: " + notificationModel.getSenderId());
+        String query = "myFriends." + notificationModel.getSenderId() + ".userId";
+
+
+        usersRef.where(Filter.greaterThanOrEqualTo(query, notificationModel.getSenderId()))
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Exception e = task.getException();
+                        MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                        Log.e(TAG, "Error getting documents: ", e);
+                        return;
+                    }
+                    if (task.getResult() == null) {
+                        Log.d(TAG, "No followers");
+                        MethodUtil.invokeMethod(object, methodName, true, notificationModel.getNotificationId());
+                        return;
+                    }
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    WriteBatch batch = db.batch();
+                    List<DocumentSnapshot> documentSnapshots = task.getResult().getDocuments();
+                    Log.d(TAG, "documentSnapshots: " + documentSnapshots);
+                    for (DocumentSnapshot document : documentSnapshots) {
+                        Log.d(TAG, "document: " + document.toString());
+                        Map<String, Object> update = new HashMap<>();
+                        update.put("myNotifications", Map.of(notificationModel.getNotificationId(), notificationModel));
+                        batch.set(document.getReference(), update, SetOptions.merge());
+                    }
+                    batch.commit();
+                    MethodUtil.invokeMethod(object, methodName, true, notificationModel.getNotificationId());
+                });
     }
 
     private static void getViewers(List<Post> posts, int position, Object object, String methodName) {

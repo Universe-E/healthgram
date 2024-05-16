@@ -47,6 +47,7 @@ public class UserDB {
     private static UserDB instance;
     private static String userId;
     private static String email;
+    private static String avatarUUID;
     private static final FriendsData friendsData = FriendsData.getInstance();
 
     private UserDB() {
@@ -72,7 +73,7 @@ public class UserDB {
                     if (notificationMapList == null) {
                         String msg = "No notification";
                         Log.d(TAG, msg);
-                        MethodUtil.invokeMethod(object, methodName, false, msg);
+                        MethodUtil.invokeMethod(object, methodName, true, msg);
                         return;
                     }
                     List<Notification> notificationList = new ArrayList<>();
@@ -82,6 +83,24 @@ public class UserDB {
                     MethodUtil.invokeMethod(object, methodName, true, notificationList);
                     Log.d(TAG, "NotificationList: " + notificationList.toString());
                 });
+    }
+
+    public static void changeAvatar(String avatarUUID, Object object, String methodName) {
+        CollectionReference usersRef = getUsersRef();
+        usersRef.document(getCurrentUserId())
+                .update("avatarUUID", avatarUUID)
+                .addOnSuccessListener(aVoid -> {
+                    MethodUtil.invokeMethod(object, methodName, true, avatarUUID);
+                    UserDB.avatarUUID = avatarUUID;
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error writing NewTestUsers", e);
+                    MethodUtil.invokeMethod(object, methodName, false, e.getMessage());
+                });
+    }
+
+    public String getAvatarUUID() {
+        return avatarUUID;
     }
 
     private void setUserData(Object object, String methodName) {
@@ -98,14 +117,14 @@ public class UserDB {
                         return;
                     }
                     username = task.getResult().getString("username");
+                    avatarUUID = task.getResult().getString("avatarUUID");
                     Map<String, FriendModel> myFriends;
                     if (task.getResult().getData() == null) {
                         String msg = "No friend, friend data is null";
                         Log.d(TAG, msg);
                         MethodUtil.invokeMethod(object, methodName, false, msg);
                         return;
-                    }
-                    else {
+                    } else {
                         myFriends = (Map<String, FriendModel>) task.getResult().getData().get("myFriends");
                     }
                     if (myFriends != null) {
@@ -156,6 +175,7 @@ public class UserDB {
     public String getUserId() {
         return userId;
     }
+
 
     public void getUsernameById(String userId, Object object, String methodName) {
         setUsernameFromServer(userId, object, methodName);
@@ -464,11 +484,18 @@ public class UserDB {
 
     private static void setFollowNotification(String receiverId, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
+
         NotificationModel notificationModel = new NotificationModel();
         String msg = "New follower: " + username;
         DocumentReference documentReference = usersRef.document();
         notificationModel.setMessage(msg);
         notificationModel.setNotificationId(documentReference.getId());
+        notificationModel.setSenderId(getCurrentUserId());
+        notificationModel.setType("follow");
+        notificationModel.setRead(false);
+        notificationModel.setUsername(username);
+        notificationModel.setTimestamp(Timestamp.now());
+
         Map<String, Object> myNotifications = new HashMap<>();
         myNotifications.put("myNotifications", Map.of(documentReference.getId(), notificationModel));
 
@@ -485,9 +512,16 @@ public class UserDB {
 
     private static void setFriendReqNotification(FriendRequestModel friendRequestModel, Object object, String methodName) {
         CollectionReference usersRef = getUsersRef();
+
         NotificationModel notificationModel = friendRequestModel.notification();
         notificationModel.setNotificationId(friendRequestModel.getRequestId());
         notificationModel.setMessage(friendRequestModel.getSenderName() + " sent you a friend request");
+        notificationModel.setSenderId(getCurrentUserId());
+        notificationModel.setType("friend_request");
+        notificationModel.setRead(false);
+        notificationModel.setUsername(username);
+        notificationModel.setTimestamp(Timestamp.now());
+
         Map<String, Object> update = new HashMap<>();
         update.put("myNotifications", Map.of(friendRequestModel.getRequestId(), notificationModel));
 
@@ -565,9 +599,11 @@ public class UserDB {
                     }
                     FirebaseUser fireUser = getFireUser();
                     UserModel userModel = new UserModel();
+                    userModel.setAvatarUUID("1");
                     userModel.setUsername(username);
                     userModel.setEmail(email);
                     userModel.setUserId(fireUser.getUid());
+
                     UserDB userDB = getInstance();
 
                     newSaveUserData(userModel, object, methodName);

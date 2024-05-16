@@ -2,6 +2,7 @@ package com.example.gp.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -44,8 +45,16 @@ public class SettingActivity extends BaseActivity {
         binding.btnSettingMainQuit.setOnClickListener(this);
 
         // Get the user info
-        String username = UserDB.getInstance().getUsername();
-        int userAvatar = R.mipmap.sample_avatar_1;
+        UserDB userDB = UserDB.getInstance();
+        String username = userDB.getUsername();
+        String avatarUUID = userDB.getAvatarUUID();
+        int userAvatar = Integer.parseInt(avatarUUID);
+        Log.d("SettingActivity", "avatarUUID: " + avatarUUID);
+        if (userAvatar == 1) {
+            userAvatar = R.drawable.user_avatar;
+            Log.d("SettingActivity", "userAvatar: " + String.valueOf(userAvatar));
+            Database.changeAvatar(String.valueOf(userAvatar),null,null);
+        }
 
         // initialize the user info layout
         binding.ivSettingAvatar.setImageResource(userAvatar);
@@ -61,7 +70,8 @@ public class SettingActivity extends BaseActivity {
     public void onClick(View v) {
         super.onClick(v);
         if(v == binding.llSettingChangeAvatarLayout) {
-//            Intent intent = new Intent(this,ChangeAvatarActivity.class);
+            Intent intent = new Intent(this,ChangeAvatarActivity.class);
+            startActivity(intent);
         } else if(v == binding.llSettingNickNameLayout) {
 
         } else if(v == binding.llSettingChangePhoneNumberLayout) {

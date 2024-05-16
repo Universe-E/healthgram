@@ -18,15 +18,16 @@
         android:theme="@style/Theme.Gp"
         tools:targetApi="30">
         <activity
-            android:name=".DirectMessageActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:name=".setting.ChangeAvatarActivity"
             android:exported="false" />
+        <activity
+            android:name=".DirectMessageActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".home.ui.notifications.FriendNotificationFragment"
             android:exported="false" />
-        <activity
-            android:name=".home.ui.notifications.MentionNotificationFragment"
-            android:exported="false" />
+
         <activity
             android:name=".home.ui.notifications.FollowerNotificationFragment"
             android:exported="false" />

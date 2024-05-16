@@ -30,7 +30,6 @@ public class NotificationsFragment extends Fragment {
 
         NotificationsPagerAdapter adapter = new NotificationsPagerAdapter(this);
         adapter.addFragment(new FollowerNotificationFragment(), "Follow Updates");
-        adapter.addFragment(new MentionNotificationFragment(), "@ME");
         adapter.addFragment(new FriendNotificationFragment(), "Friend Requests");
 
         binding.viewPager.setAdapter(adapter);
