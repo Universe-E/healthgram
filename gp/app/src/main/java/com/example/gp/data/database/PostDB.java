@@ -145,7 +145,7 @@ public class PostDB {
      * @param object     Object
      * @param methodName String
      */
-    public static void GetNewPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
+    public static void getNewPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
         timestamp = getTimestamp(timestamp);
         if (limit == null) {
             limit = 9;
@@ -175,7 +175,7 @@ public class PostDB {
      * @param object     Object
      * @param methodName String
      */
-    public static void GetPreviousPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
+    public static void getPreviousPostsByTime(Timestamp timestamp, Integer limit, Object object, String methodName) {
         timestamp = getTimestamp(timestamp);
         if (limit == null) {
             limit = 9;
@@ -232,13 +232,14 @@ public class PostDB {
     }
 
     /**
+     * Set post public or private to firebase firestore
      *
-     * @param postId
-     * @param isPublic
-     * @param object
-     * @param methodName
+     * @param postId     postId
+     * @param isPublic   isPublic
+     * @param object     object
+     * @param methodName methodName
      */
-    public static void newSetPublic(String postId, Boolean isPublic, Object object, String methodName) {
+    public static void setPublic(String postId, Boolean isPublic, Object object, String methodName) {
         CollectionReference postsRef = getPostRef();
         postsRef.document(postId)
                 .update("public", isPublic)
@@ -251,6 +252,13 @@ public class PostDB {
                 });
     }
 
+    /**
+     * Set post like to firebase firestore
+     *
+     * @param postId     postId
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void likePost(String postId, Object object, String methodName) {
         CollectionReference postsRef = getPostRef();
 
@@ -267,6 +275,12 @@ public class PostDB {
 
     // Search
 
+    /**
+     * Get newest fifty posts for search
+     *
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void getNewestFiftyPosts(Object object, String methodName) {
         CollectionReference postsRef = getPostRef();
 
@@ -297,6 +311,13 @@ public class PostDB {
                 });
     }
 
+    /**
+     * Get posts by id
+     *
+     * @param postId     id of post
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     public static void getPostById(String postId, Object object, String methodName) {
         CollectionReference postsRef = getPostRef();
 
@@ -309,6 +330,13 @@ public class PostDB {
 
     // Private Utils
 
+    /**
+     * Query posts to list
+     *
+     * @param task       query task
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     private static void query2postList(Task<QuerySnapshot> task, Object object, String
             methodName) {
         if (!task.isSuccessful()) {
@@ -336,6 +364,13 @@ public class PostDB {
         getViewers(posts, 0, object, methodName);
     }
 
+    /**
+     * Notify followers for new post
+     *
+     * @param notificationModel notification model
+     * @param object            object calls this function
+     * @param methodName        method name for callback
+     */
     private static void notifyNewPostToFollowers(NotificationModel notificationModel, Object
             object, String methodName) {
         CollectionReference usersRef = getUsersRef();
@@ -373,6 +408,14 @@ public class PostDB {
                 });
     }
 
+    /**
+     * Get viewers of posts
+     *
+     * @param posts      list of posts
+     * @param position   position
+     * @param object     object calls this function
+     * @param methodName method name for callback
+     */
     private static void getViewers(List<Post> posts, int position, Object object, String
             methodName) {
         if (position >= posts.size()) {

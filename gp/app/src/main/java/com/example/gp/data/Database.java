@@ -67,7 +67,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void signUp(String username, String email, String password, Object object, String methodName) {
-        UserDB.newSignUp(username, email, password, object, methodName);
+        UserDB.signUp(username, email, password, object, methodName);
     }
 
     /**
@@ -124,7 +124,7 @@ public class Database {
      * @param methodName    Callback method name
      */
     public static void sendFriendRequestTo(FriendRequest friendRequest, Object object, String methodName) {
-        UserDB.newSendFriendRequestTo(friendRequest, object, methodName);
+        UserDB.sendFriendRequestTo(friendRequest, object, methodName);
     }
 
     /**
@@ -154,7 +154,7 @@ public class Database {
      * @param methodName Callback method name
      */
     public static void getFollowList(String nickname, Integer limit, Object object, String methodName) {
-        UserDB.newGetFollowList(nickname, limit, object, methodName);
+        UserDB.getFollowList(nickname, limit, object, methodName);
     }
 
     public static void processFriendRequest(FriendRequest friendRequest, Object object, String methodName) {
@@ -245,7 +245,7 @@ public class Database {
      * @param methodName The method name
      */
     public static void getNewPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
-        PostDB.GetNewPostsByTime(timestamp, limit, object, methodName);
+        PostDB.getNewPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**
@@ -257,7 +257,7 @@ public class Database {
      * @param methodName The method name
      */
     public static void getPreviousPostsByTime(Timestamp timestamp, int limit, Object object, String methodName) {
-        PostDB.GetPreviousPostsByTime(timestamp, limit, object, methodName);
+        PostDB.getPreviousPostsByTime(timestamp, limit, object, methodName);
     }
 
     /**
@@ -283,7 +283,7 @@ public class Database {
      * @param methodName The method name
      */
     public static void setPublic(String postId, Boolean isPublic, Object object, String methodName) {
-        PostDB.newSetPublic(postId, isPublic, object, methodName);
+        PostDB.setPublic(postId, isPublic, object, methodName);
     }
 
     /**
