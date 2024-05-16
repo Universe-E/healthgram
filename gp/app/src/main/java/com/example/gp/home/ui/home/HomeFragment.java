@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.gp.Items.Parser;
 import com.example.gp.R;
@@ -21,7 +21,7 @@ import com.example.gp.Utils.ToastUtil;
 import com.example.gp.Items.Post;
 import com.example.gp.data.BTree;
 import com.example.gp.data.Database;
-import com.example.gp.data.PostsData;
+import com.example.gp.data.PostRepository;
 import com.example.gp.interaction.NewPostActivity;
 import com.example.gp.interaction.PostCardAdapter;
 import com.example.gp.interaction.PostDetailActivity;
@@ -41,39 +41,60 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
+    private final int POST_SIZE = 10;
+    private boolean isRefreshing = false;
 
+
+    // skeleton
     private PostCardAdapter postCardAdapter;
     private SearchView searchView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+
+    // show posts
     private List<Post> postList;
-    private static final PostsData postsData = PostsData.getInstance();
-    // flag to get new post or old post
-    private static boolean getNewPost = true;
+    private static final PostRepository postRepo = PostRepository.getInstance();
 
-    //use BTree to store posts
-    private BTree postTree;
-
+    // search
+    private BTree postTree; // use BTree to store posts
     private OnBackPressedCallback onBackPressedCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // initialize all views, buttons
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        postTree = new BTree();
-
-        // Initialize the search view, recycler views, and add note button
         initializeSearchView(view);
         initializeRecyclerViews(view);
+        initializeSwipeRefreshLayout(view);
         setupAddNoteButton(view);
+        postTree = new BTree();
 
-        // Load post data from the database
-//        Timestamp timestamp = new Timestamp(new Date());
+        // load posts
+        Database.getNewPostsByTime(null, 20, this, "cbmAddRefreshedPosts");
 
-        // set the flag to true to get new post
-        getNewPost = true;
-        Database.getNewPostsByTime(null, 9, this, "loadPostCards");
+        postRepo.refreshPostMemory();
+        postList = postRepo.getAllPosts();
+        showPostCards();
 
-
+        // return
         return view;
+    }
+
+    public void cbmAddRefreshedPosts(boolean isSuccess, Object args) {
+
+        if (isSuccess) {
+            List<Post> posts = (List<Post>) args;
+            postRepo.addNewPosts(posts);
+            this.postList = postRepo.getAllPosts();
+            showPostCards();
+        }
+
+        if (posts == null) {
+            ToastUtil.showShortToast(getContext(), "No new posts");
+            return;
+        }
+        postList = posts;
+        showPostCards();
     }
 
     @Override
@@ -99,48 +120,34 @@ public class HomeFragment extends Fragment {
         onBackPressedCallback.remove();
     }
 
-    public void loadPostCards(boolean isSuccess, Object object) {
-        if (isSuccess) {
-            Log.d(TAG, "loadPostCards: ");
-            postList = (List<Post>) object;
-            for (Post post : postList) {
-                int postId = post.getPostId().hashCode();
-                postTree.add(postId, post);
-            }
-            // add posts to postsData
-            // check the flag to get post either new or old
-            if (getNewPost) {
-                postsData.addNewPosts(postList);
-            } else {
-                postsData.addPreviousPosts(postList);
-            }
+    /**
+     * simply show all posts in the postList
+     */
+    public void showPostCards() {
+        // show log
+        Log.d(TAG, "loadPostCards: ");
 
-            // renew the UI
-            ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
-            List<Post> posts = new ArrayList<>();
-            for (Integer key : keys) {
-                Post post = (Post) postTree.search(key);
-                if (post != null) {
-                    posts.add(post);
-                }
-            }
-//            postCardAdapter.setPostList(posts);
-            postCardAdapter.setPostList();
+        // get posts from postList
+        for (Post post : postList) {
+            int postId = post.getPostId().hashCode();
+            postTree.add(postId, post);
+        }
 
-
-            Log.d("HomeFragment", "Posts loaded successfully");
-        } else {
-            // handle failure
-            if (!(object instanceof String)) {
-                ToastUtil.showLong(getContext(), "Failed to load posts");
-                return;
-            }
-            String errorMessage = (String) object;
-            if (errorMessage.equals("There are no more new posts to load.")) {
-                ToastUtil.showLong(getContext(), errorMessage);
+        // renew the UI
+        ArrayList<Integer> keys = postTree.getKeys(postTree.mRootNode);
+        List<Post> posts = new ArrayList<>();
+        for (Integer key : keys) {
+            Post post = (Post) postTree.search(key);
+            if (post != null) {
+                posts.add(post);
             }
         }
+        postCardAdapter.setPostList(posts);
+
+        Log.d("HomeFragment", "Posts loaded successfully");
     }
+
+//    public void
 
     private void initializeSearchView(View view) {
         View searchLayout = view.findViewById(R.id.search_layout);
@@ -163,6 +170,19 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(postCardAdapter);
 
         postCardAdapter.setOnPostClickListener(this::onPostClick);
+    }
+
+    private void initializeSwipeRefreshLayout(View view) {
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                postRepo.refreshPostMemory();
+                postList = postRepo.getAllPosts();
+                showPostCards();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void onPostClick(int position) {
