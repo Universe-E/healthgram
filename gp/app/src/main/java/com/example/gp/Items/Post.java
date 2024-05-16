@@ -253,4 +253,8 @@ public class Post implements Parcelable {
         dest.writeParcelable(this.postTimestamp, flags);
         dest.writeStringList(this.viewers);
     }
+
+    public Timestamp getTimestamp() {
+        return postTimestamp;
+    }
 }

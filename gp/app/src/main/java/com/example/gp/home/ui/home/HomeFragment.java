@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment {
     private PostCardAdapter postCardAdapter;
     private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    Object thisActivity;
 
 
     // show posts
@@ -70,31 +71,27 @@ public class HomeFragment extends Fragment {
         postTree = new BTree();
 
         // load posts
-        Database.getNewPostsByTime(null, 20, this, "cbmAddRefreshedPosts");
+        Database.getNewPostsByTime(null, 20, this, "cbmAddInitialPosts");
 
         postRepo.refreshPostMemory();
         postList = postRepo.getAllPosts();
         showPostCards();
 
         // return
+        thisActivity = this;
         return view;
     }
 
-    public void cbmAddRefreshedPosts(boolean isSuccess, Object args) {
+    public void cbmAddInitialPosts(boolean isSuccess, Object args) {
 
         if (isSuccess) {
             List<Post> posts = (List<Post>) args;
             postRepo.addNewPosts(posts);
             this.postList = postRepo.getAllPosts();
             showPostCards();
+        } else {
+            Log.e(TAG, "cbmAddInitialPosts: Failed to get new posts");
         }
-
-        if (posts == null) {
-            ToastUtil.showShortToast(getContext(), "No new posts");
-            return;
-        }
-        postList = posts;
-        showPostCards();
     }
 
     @Override
@@ -147,8 +144,6 @@ public class HomeFragment extends Fragment {
         Log.d("HomeFragment", "Posts loaded successfully");
     }
 
-//    public void
-
     private void initializeSearchView(View view) {
         View searchLayout = view.findViewById(R.id.search_layout);
         searchView = searchLayout.findViewById(R.id.search_view);
@@ -172,17 +167,31 @@ public class HomeFragment extends Fragment {
         postCardAdapter.setOnPostClickListener(this::onPostClick);
     }
 
-    private void initializeSwipeRefreshLayout(View view) {
+    public void initializeSwipeRefreshLayout(View view) {
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                postRepo.refreshPostMemory();
-                postList = postRepo.getAllPosts();
-                showPostCards();
-                swipeRefreshLayout.setRefreshing(false);
+                Database.getNewPostsByTime(null, 20, thisActivity, "cbmAddRefreshedPosts");
             }
         });
+    }
+
+    public void cbmAddRefreshedPosts(boolean isSuccess, Object args) {
+
+        if (isSuccess) {
+            Log.d(TAG, "cbmAddRefreshedPosts: Successfully get new posts");
+            List<Post> posts = (List<Post>) args;
+            postRepo.addNewPosts(posts);
+            this.postList.clear();
+            this.postList = postRepo.getAllPosts();
+            showPostCards();
+            swipeRefreshLayout.setRefreshing(false);
+        } else {
+            Log.e(TAG, "cbmAddRefreshedPosts: Failed to get new posts");
+            ToastUtil.showLong(getContext(), (String) args);
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     private void onPostClick(int position) {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".home.ui.home.HomeFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,11 +16,11 @@
         android:contentDescription="Add Note"
         android:src="@drawable/baseline_add_circle_24" />
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="100dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post_container"
@@ -31,7 +31,7 @@
             app:spanCount="2"
             tools:listitem="@layout/item_post_card" />
 
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
         android:id="@+id/search_layout"
