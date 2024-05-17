@@ -10,10 +10,10 @@ The following markdown document is a checklist of items you **should** complete 
 ## Documents (all non-android files) located in a folder named `items`
 - [x] A conflict resolution protocol is documented and well-defined.
 - [x] All Team Meeting Minutes (at least 4, with links in the report). 
-- [ ] Create ONE video titled  `features.(mp4|mov)` that demonstrates each implemented feature (basic + custom features), in the same order as listed in the report (and a general overview too, is time permits). Max. 4 minutes.
+- [x] Create ONE video titled  `features.(mp4|mov)` that demonstrates each implemented feature (basic + custom features), in the same order as listed in the report (and a general overview too, is time permits). Max. 4 minutes.
 - [x] A working standalone **APK** that can be loaded and execute correctly on an AVD (see [demo video](https://gitlab.cecs.anu.edu.au/comp2100/student-resources/comp2100-lab-videos/-/blob/main/gp-resources/GPAPKGenerationGuide.mp4?ref_type=heads)).
-- [ ] **Report**: Completed the markdown report document titled [report.md](report.md).
-- [ ] **Statement of Originality**: All members have read and signed the [statement of originality](statement-of-originality.yml). Failure to do so will result in zero marks.
+- [x] **Report**: Completed the markdown report document titled [report.md](report.md).
+- [x] **Statement of Originality**: All members have read and signed the [statement of originality](statement-of-originality.yml). Failure to do so will result in zero marks.
 - [x] All external code, assets or help received outside the group is documented in the [statement of originality](statement-of-originality.yml) and relevant parts in the code.
 
 ## Report Checklist
@@ -21,16 +21,16 @@ We advise you to use the provided template when writing your report (it will hel
 Please remove all instructions and sample content (example reasonable parts such as headings) 
 in the templates for both report and meeting minutes before submitting.
 - [x] The UID, name and roles (team structure) of all group members.
-- [ ] A summary of individual contributions is well detailed by each member, with links to the key code contributions.
+- [x] A summary of individual contributions is well detailed by each member, with links to the key code contributions.
 - [x] A description of your application.
 - [x] Examples/use cases of your application.
 - [ ] A UML diagram of your application (e.g. class diagram).
-- [ ] A description of the application design (with a diagram if necessary).
-- [ ] A description of design decisions made in regard to the data structures, tokenizers, parsers, design patterns and any other items you feel are relevant.
-- [ ] A description of how your team addressed the surprise feature and any decisions your team had to make in the process.
-- [ ] All known bugs and errors are listed.
+- [x] A description of the application design (with a diagram if necessary).
+- [x] A description of design decisions made in regard to the data structures, tokenizers, parsers, design patterns and any other items you feel are relevant.
+- [x] A description of how your team addressed the surprise feature and any decisions your team had to make in the process.
+- [x] All known bugs and errors are listed.
 - [x] Details of tests provided such as the type, number and coverage.
-- [ ] Summary of all implemented features (categorised by overall feature and classified by their difficulty levels).
+- [x] Summary of all implemented features (categorised by overall feature and classified by their difficulty levels).
 
 
 ## Individual Reflections
