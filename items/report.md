@@ -80,7 +80,20 @@ Note that the core criteria of contribution is based on `code contribution` (the
 2. **u7752342, Han Bao**  I have 24% contribution, as follows: <br>
 
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - Feature
+	    - **Firebase Integration**:
+		    - \[FB-Auth]: [SignUp Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [SignUpBackend Part 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L753) [SignIn Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [SignIn Backend for Email](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L688), [SignIn Backend for Username](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L712), [SignOut](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L267)
+			- \[FB-Persist-extension]: [All the seter and getter in Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) that for easy references, and their detailed implements: [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads), [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
+		- **User Interactivity**
+			These are in the Firebase and happen in real time so that other user on other devices can receive the updates
+			- \[Interaction-Micro]: [Like backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L262)
+			- \[Interact-Follow]: [Follow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L376), [Unfollow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L402)
+			- \[Interact-Noti]: Backend: [Notifications](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads#L183), implementations: [Get 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L72), [Get 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L517), [Set 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Set 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L619), [Set 3](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L654), [Set 4](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374)
+        - **Privacy**
+	        Private posts are only visible for the OP's followings, so when user encounters a private post, they can send a request to OP to let they add the user as his following.
+			- \[Privacy-Request]: Backend: [Request](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Accept or Deny](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L588)
+			- \[Privacy-Visibility]: Backend: [Change visibility](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L242), [Make it visible for certain users](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L419)
+
     - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
     - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
 
@@ -88,9 +101,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - [What design patterns, data structures, did the involved member propose?]*
     - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
 
-  - **Others**: (only if significant and significantly different from an "average contribution") 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+    
+    
 
 3. **u7670173, Xingchen Zhang**  I have 19% contribution, as follows: <br>
 
@@ -98,25 +110,22 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - Feature
       - UI-Layout: [Fragment_home.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/Fragment_home.java)，[HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [HomeViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeViewModel.java), [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java)
       - Search: [SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java),[SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
-  - Notification: [NotificationsFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsFragment.java), [FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java),[NotificationsPagerAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/NotificationsPagerAdapter.java),[FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java),[FriendFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FriendFragmentViewAdapter.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java), [NotificationFactory.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java)
-    - Design Pattern
-      - 
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
-    
+      - Notification: [NotificationsFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsFragment.java), [FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java),[NotificationsPagerAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/NotificationsPagerAdapter.java),[FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java),[FriendFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FriendFragmentViewAdapter.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java), [NotificationFactory.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java)
+      
+      
   - **Code and App Design** 
+    
     - Design Pattern
       - Singleton Pattern
-  - Observer Pattern
     - Data Structures
       - Map
       - ArrayList
     - UI Design
       - Search Bar
-      - Home Page
+      - Home Page 
     
-  - **Others**: (only if significant and significantly different from an "average contribution") 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+    
+    
 
 4. **u7773219, Tianci Li**  I have 19% contribution, as follows: <br>
 
@@ -124,20 +133,25 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - Feature
       - User-Login: [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java), [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java)
       - DataStream: [HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [PostDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java)
-  - User-Interact: [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java), [SettingActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java)
+        - User-Interact: [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java), [SettingActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java)
       - Privacy Visiblity: [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
       - Privacy Block: [FriendDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/FriendDetailActivity.java)
       - LoadShowData: [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java ), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java), [Friend.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Friend.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+    - 
     
   - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
-
-  - **Others**: (only if significant and significantly different from an "average contribution") 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+    
+    - Design Pattern
+  - Singleton Pattern
+    - Data Structures
+      - Map
+      - ArrayList
+    - UI Design
+      - Search Bar
+      - Home Page 
+    
+    
+    
 
 5. **u7756137, Yulong Chen**  I have 19% contribution, as follows: <br>
 
@@ -148,18 +162,17 @@ Note that the core criteria of contribution is based on `code contribution` (the
   - Privacy-Request: [RequestAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/RequestAdapter.java), [RequestActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/RequestActivity.java)
       - Privacy Visiblity: [PostAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/PostAdapter.java), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
       - Privacy Block: [FriendDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/FriendDetailActivity.java)
-
 - **Code and App Design** 
-  - [What design patterns, data structures, did the involved member propose?]*
-  - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+     - Design Pattern
+       - Singleton Pattern
+     - Data Structures
+       - Map
+       - ArrayList
+     - UI Design
+       - Search Bar
+       - Home Page 
 
-- XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
 
-
-
-- **Others**: (only if significant and significantly different from an "average contribution") 
-  - XML: [navigation_bar](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/layout/top_navigation_bar.xml), [change_avatar](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/layout/activity_change_avatar.xml), [pressed_effect](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/drawable/button_pressed_effect.xml), [unpressed_background_black](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/drawable/button_unpressed_background_black.xml)
-  - Java: [BaseActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/BaseActivity.java), [ToastUtil](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/Utils/ToastUtil.java), [ChangeAvatarActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/ChangeAvatarActivity.java), [SettingActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java)
 
 
 
@@ -275,7 +288,7 @@ Here is a partial (short) example for the subsection `Data Structures`:*
    * *Reasons:*
      *  Ensure that only one instance of the Parser class is created, preventing multiple connections to Firebase and reducing redundant performance consumption.
       * Singleton Pattern helps maintain data consistency by ensuring all parts of the application use the same instance of the Database class.
-      
+     
    
 2. *Observer Pattern*
    * Objective: used for observe the change of status, and notify corresponding users by using notify methods
@@ -303,7 +316,17 @@ Here is a partial (short) example for the subsection `Data Structures`:*
    * *Reasons:*
      * State Pattern allows the application to alter its login status based on user's authentication, this will simplify the manage and control access to different features and resources.
      * The State Pattern makes code more readable and maintainable, and eliminates the need for complex conditional statements to handle different authentication.
-
+4. *Factory Pattern*
+   * *Objective: used for login and check the state of user.*
+   * Code Locations: 
+      * [Notification](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java?ref_type=heads)
+      * [NotificationFactory](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java?ref_type=heads)
+   * Code Usages:
+      * [createFollowNotification](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java?ref_type=heads#L17-19)
+      * [createFriendNotification](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java?ref_type=heads#L29-31)
+   * *Reasons:*
+     * Factory Pattern centralizes the creation logic of 'Notification' objects, ensuring consistency and reducing the risk of errors.
+     * The Factory Pattern allows easy modification and extension of the creation process without impacting the client code.
 <hr>
 
 ### Parser
