@@ -611,7 +611,7 @@ We also solved crashes in account creation, and redirect bugs in the create acco
   
     - In the "New Post" page, the Line "Who Can See This Post" is incomplete, it will be our future feature after the assessment.
     - After sending post, it may take times (several seconds) to load all the new posts, if the home page contains too many pictures
-    - In some cases, Post cannot save the authorid if user send their **first** post
+    - In some cases, Post cannot save the author name if user send their **first** post
   
   - Error
   
