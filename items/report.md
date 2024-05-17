@@ -98,11 +98,9 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - Feature
       - UI-Layout: [Fragment_home.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/Fragment_home.java)，[HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [HomeViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeViewModel.java), [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java)
       - Search: [SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java),[SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
-  - Notification: [NotificationsFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsFragment.java), [FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java),[NotificationsPagerAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/NotificationsPagerAdapter.java),[FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java),[FriendFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FriendFragmentViewAdapter.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java), [NotificationFactory.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java)
+      - Notification: [NotificationsFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsFragment.java), [FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java),[NotificationsPagerAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/NotificationsPagerAdapter.java),[FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java),[FriendFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FriendFragmentViewAdapter.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java), [NotificationFactory.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java)
     - Design Pattern
       - 
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
-    
   - **Code and App Design** 
     - Design Pattern
       - Singleton Pattern
@@ -112,7 +110,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
       - ArrayList
     - UI Design
       - Search Bar
-      - Home Page
+      - Home Page 
     
   - **Others**: (only if significant and significantly different from an "average contribution") 
     - [Report Writing?] [Slides preparation?]*
@@ -303,7 +301,17 @@ Here is a partial (short) example for the subsection `Data Structures`:*
    * *Reasons:*
      * State Pattern allows the application to alter its login status based on user's authentication, this will simplify the manage and control access to different features and resources.
      * The State Pattern makes code more readable and maintainable, and eliminates the need for complex conditional statements to handle different authentication.
-
+4. *Factory Pattern*
+   * *Objective: used for login and check the state of user.*
+   * Code Locations: 
+      * [Notification](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java?ref_type=heads)
+      * [NotificationFactory](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java?ref_type=heads)
+   * Code Usages:
+      * [createFollowNotification](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java?ref_type=heads#L17-19)
+      * [createFriendNotification](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java?ref_type=heads#L29-31)
+   * *Reasons:*
+     * Factory Pattern centralizes the creation logic of 'Notification' objects, ensuring consistency and reducing the risk of errors.
+     * The Factory Pattern allows easy modification and extension of the creation process without impacting the client code.
 <hr>
 
 ### Parser
