@@ -632,7 +632,7 @@ We also solved crashes in account creation, and redirect bugs in the create acco
   - Error
   
     - In a very rare situation, when user return to home page from other page, the page may crash because of the loading overflow
-  - In some situation, if user login from "Login" page or "Create Account" page, the home page may crash ,because of the loading overflow
+    - In some situation, if user login from "Login" page or "Create Account" page, the home page may crash ,because of the loading overflow
     
     
   
