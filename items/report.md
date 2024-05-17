@@ -37,13 +37,13 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 ## Team Members and Roles
 The key area(s) of responsibilities for each member
 
-| UID      |      Name      |                                              Role |
-| :------- | :------------: | ------------------------------------------------: |
-| u7693498 |   Zehua Kong   |         Data Profile Programming & Test and debug |
-| u7752342 |    Han Bao     |                              Back-end Programming |
-| u7670173 | Xingchen Zhang |                                 Android UI Design |
-| u7773219 |   Tianci Li    |                     Front-end Page Implementation |
-| u7756137 |  Yulong Chen   | Android UI Design & Front-end Page Implementation |
+| UID      |      Name      |                                                    Role |
+| :------- | :------------: | ------------------------------------------------------: |
+| u7693498 |   Zehua Kong   | Team leader & Data Profile Programming & Test and debug |
+| u7752342 |    Han Bao     |               Database Developer & Back-end Programming |
+| u7670173 | Xingchen Zhang |                           Developer & Android UI Design |
+| u7773219 |   Tianci Li    |               Developer & Front-end Page Implementation |
+| u7756137 |  Yulong Chen   |       Android UI Design & Front-end Page Implementation |
 
 
 ## Summary of Individual Contributions
@@ -68,7 +68,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
        - Feature
          - [Data-Profile]:  [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java?ref_type=heads), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java?ref_type=heads), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java?ref_type=heads)
          - \[Search-Filter]: [Fragment_home.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/Fragment_home.java), [SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
-     - \[FB-Auth]: [AuthUtil.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/AuthUtil.java?ref_type=heads), [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java)
+       - \[FB-Auth]: [AuthUtil.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/AuthUtil.java?ref_type=heads), [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java)
     - Tokenizer and Parser (see more in Tokenizers and Parsers)
       - [Tokenizer.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Tokenizer.java?ref_type=heads)
       - [Parser.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Parser.java?ref_type=heads)
@@ -632,7 +632,8 @@ We also solved crashes in account creation, and redirect bugs in the create acco
   - Error
   
     - In a very rare situation, when user return to home page from other page, the page may crash because of the loading overflow
-  
+  - In some situation, if user login from "Login" page or "Create Account" page, the home page may crash ,because of the loading overflow
+    
     
   
 - Send Post Page
@@ -646,7 +647,7 @@ We also solved crashes in account creation, and redirect bugs in the create acco
   - Error
   
     - In some situation, some picture from local storage cannot be updated, or may trigger crash, because we set the max size of picture to 5 MB
-    - In a very rare situation, the 
+    - In a very rare situation, if users send post multiple times in a short time, this page may crash and triggers app exit
   
     
   
@@ -655,7 +656,8 @@ We also solved crashes in account creation, and redirect bugs in the create acco
   - Bug
   
     - The button "Change nick name", "Change email", and "Change password" are incomplete, they will be our future features after the assessment.
-    - In the "Settings-Friend Request" page, After clicking "Accept"or "Reject", the request is not removed and still in this page 
+    - In the "Settings-Friend Request" page, After clicking "Accept" or "Reject", the request is not removed and still in this page
+    - If other user send multiple follow requests, the "Settings-Friend Request" page may receive duplicate messages
   
   - Error
   
@@ -670,9 +672,10 @@ We also solved crashes in account creation, and redirect bugs in the create acco
     - Top bar "Follow Updates" is incomplete, it should represent the new follow notifications, it will be our new feature
     - After handling Friend requests in "Settings-Friend Requests" page, the notification in top bar "Notifications-Friend Requests" page is not removed
     - No response when user click the corresponding "Friend Requests"
+    - If other user send multiple follow requests, the Notification page may receive duplicate messages
   - Error
     - In a very rare situation, after other user send follow requests to you, the page may crash
-    - 
+    - In some situation, user was followed multiple times in a short time, the page may crash
   
 - Firebase
 
@@ -698,6 +701,7 @@ We also solved crashes in account creation, and redirect bugs in the create acco
   - Bug
     - If user deliberately input the wrong password several times, the Toast on the bottom will keep on popping up
   - Error
+    - In a very rare situation, if the Android device just installed the app, the first Login Page is no response and may crash, after exit and enter the app again, the issue is solved
     - In a very rare situation, after user logout and redirect to Login Page, the app may crash
   
 - Create Account Page
