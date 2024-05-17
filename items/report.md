@@ -90,6 +90,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
   - Write reports, record videos
   
+  - Draw UML Diagram
+  
     
 
 2. **u7752342, Han Bao** I have 24% contribution, as follows:  
@@ -156,8 +158,6 @@ Note that the core criteria of contribution is based on `code contribution` (the
       - Observer Pattern: [setOnAvatarUUIDChangedListener](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L191-194)
         [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116), [addNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L85-93), [deleteNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L95-103), [notifyAvatarUUIDChanged()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L197-201)
     
-    - Draw UML Diagram
-      
       
     
   - **Code and App Design** 
@@ -240,7 +240,7 @@ Here is a map navigation application example
 
 ### Application UML
 
-![ClassDiagramExample](media/_examples/ClassDiagramExample.png) <br>
+![UML Diagram](UML.png) <br>
 *[Replace the above with a class diagram. You can look at how we have linked an image here as an example of how you can do it too.]*
 
 <hr>
