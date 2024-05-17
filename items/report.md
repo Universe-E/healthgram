@@ -63,24 +63,34 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
 
-1. **u7693498, Zehua Kong**  I have 19% contribution, as follows: <br>
+1. **u7693498, Zehua Kong**  I have 19% contribution, as follows: 
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
-
-  - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
-
-  - **Others**: (only if significant and significantly different from an "average contribution") 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+       - Feature
+         - [Data-Profile]:  [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java?ref_type=heads), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java?ref_type=heads), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java?ref_type=heads)
+         - \[Search-Filter]: [Fragment_home.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/Fragment_home.java), [SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
+     - \[FB-Auth]: [AuthUtil.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/AuthUtil.java?ref_type=heads), [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java)
+    - Tokenizer and Parser (see more in Tokenizers and Parsers)
+      - [Tokenizer.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Tokenizer.java?ref_type=heads)
+      - [Parser.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Parser.java?ref_type=heads)
+    - Tests
+      - [FriendTest.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/test/java/com/example/gp/FriendTest.java?ref_type=heads), [NotificationTest.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/test/java/com/example/gp/NotificationTest.java?ref_type=heads), [ParserTest.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/test/java/com/example/gp/ParserTest.java?ref_type=heads), [PostTest.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/test/java/com/example/gp/PostTest.java?ref_type=heads), [TokenizerTest.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/test/java/com/example/gp/TokenizerTest.java?ref_type=heads), [UserTest.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/test/java/com/example/gp/UserTest.java?ref_type=heads), [UtilTest.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/test/java/com/example/gp/UtilTest.java?ref_type=heads)
+- **Code and App Design**
+  - State Pattern
+    - [AuthUtil.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/AuthUtil.java?ref_type=heads), [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads) ,[signInWithEmail](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L688-702), [signInWithUsername](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L712-742) are used to authorize users, validate fields: name, email, and password
+  - Data Structure: 
+    - Implemented [BTree.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/BTree.java?ref_type=heads), used in [SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
+    - ArrayList
+    - Map
+  - Tests
+    - All UI tests are hold in my Android device, find and fix bugs
+    - Write back-end logic Tests for all data profiles, tokenizer and parser
+  - Write reports, record videos
 
 2. **u7752342, Han Bao** I have 24% contribution, as follows:  
 
 - **Code Contribution in the final App**
-    - Feature
+
+	    - Feature
 	- **Firebase Integration**:
 		- \[FB-Auth]: [SignUp Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [SignUpBackend Part 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L753) [SignIn Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [SignIn Backend for Email](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L688), [SignIn Backend for Username](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L712), [SignOut](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L267)
 		- \[FB-Persist-extension]: [All the setter and getter in Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) that for easy references, and their detailed implements: [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads), [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
@@ -88,12 +98,13 @@ Note that the core criteria of contribution is based on `code contribution` (the
 		These are in the Firebase and happen in real-time so that other users on other devices can receive the updates
 		- \[Interaction-Micro]: [Like backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L262)
 		- \[Interact-Follow]: [Follow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L376), [Unfollow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L402)
-		- \[Interact-Noti]: Backend: [Notifications](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads#L183), implementations: [Get 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L72), [Get 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L517), [Set 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Set 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L619), [Set 3](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L654), [Set 4](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374)
-   - **Privacy**
-	  Private posts are only visible to the OP's followings, so when a user encounters a private post, they can send a request to the OP to let them add the user as his following.
+  	- \[Interact-Noti]: Backend: [Notifications](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads#L183), implementations: [Get 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L72), [Get 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L517), [Set 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Set 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L619), [Set 3](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L654), [Set 4](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374)
+	 - **Privacy**
+	    Private posts are only visible to the OP's followings, so when a user encounters a private post, they can send a request to the OP to let them add the user as his following.
 	  - \[Privacy-Request]: Backend: [Request](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Accept or Deny](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L588)
 	  - \[Privacy-Visibility]: Backend: [Change visibility](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L242), [Make it visible for certain users](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L419)
 - **Code and App Design**
+	
 	- Singleton
 		- [UserDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L60), that is for Manage current user's info and status. As only one user and login on one device at a time, the instance that represents the user must be unique and can't coexist.
 		- [PostRepository](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/PostRepository.java?ref_type=heads), I firstly drafted it as PostsData, to simply hold the post retrieved from the firebase, and my team member Tianci, he found his UI was doing too much work regarding the data operations. Therefore he moved some code that deals with the post data into this class and renamed it PostRepository.
@@ -379,7 +390,7 @@ This grammar is designed to be simple and flexible to handle username formats, t
 Tokenizer:
 
 1. The Tokenizer class is used to break down the input text into a sequence of tokens.
-2. It recognizes five types of tokens: AT, NAME, TITLE, PUBLIC, USER and EOF.
+2. It recognizes five types of tokens: AT, NAME, TITLE, PUBLIC, and EOF.
 3. The tokenization process is implemented using specific rules that translate the current character to the defined token types.
 4. The advantages of this tokenizer design are:
    - Efficient: The tokenizer reads the input text only once, minimized the cost of time.
@@ -402,12 +413,15 @@ Parser:
 
 *[What other design decisions have you made which you feel are relevant? Feel free to separate these into their own subheadings.]*
 
-Han Bao:
-- I helped my teammates to debug a lot.
+- Zehua Kong:
+  - More validate algorithms can be added in the future version (strong password, phone number, verification code, etc.)
+  - After the assessment, we will further develop this project, use advanced databases and implemented other features, including local storage, direct message, share posts, security validations, etc.
+- Han Bao:
+  - I helped my teammates to debug a lot.
 
-- We separated the App into two parts Frontend (UI) and [Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) (Data), I'm in charge of the backend, specifically, the part that save and retrieve data from the firebase. And my teammate, Zehua, helps me to deal with the data, applying appropriate algorithms to them.
-- I used reflection to manage the asynchronism, which in the beginning we didn't take into consideration as we drafted read and write from local storage. Once we switched to Firebase, all our get functions can only return nulls. It was a mess, especially with the UI and interaction done, we need an easy way to adjust our app to remote access storage. Therefore I did some research and found reflection is a possible way. I came up with an idea and implemented [MethodUtil](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/MethodUtil.java?ref_type=heads), to allow my teammates to only cut and paste their code into a different form to receive the data properly. ([Example](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads#L55)). In this way, they don't even have to know that reflection is. However, it wasn't that easy. Problems related to reflections kept popping out. We spent a lot of time and energy to debug them. But at the end of the day I'm glad that we did it and made it -- despite the challenges, we finished 15+ features! We figured out all the already-known bugs' causes, only if we have more time, we believe we can deliver it in a better form.
-- The backend I wrote consists of [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads), an easy to read and implement Utility class for frontend to read and use. The underlying implements are separated into the [database](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database?ref_type=heads) package, and also uses Firestore's custom object functions using [models](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database/model?ref_type=heads) to swiftly change update the data structure on the go.
+  - We separated the App into two parts Frontend (UI) and [Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) (Data), I'm in charge of the backend, specifically, the part that save and retrieve data from the firebase. And my teammate, Zehua, helps me to deal with the data, applying appropriate algorithms to them.
+  - I used reflection to manage the asynchronism, which in the beginning we didn't take into consideration as we drafted read and write from local storage. Once we switched to Firebase, all our get functions can only return nulls. It was a mess, especially with the UI and interaction done, we need an easy way to adjust our app to remote access storage. Therefore I did some research and found reflection is a possible way. I came up with an idea and implemented [MethodUtil](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/MethodUtil.java?ref_type=heads), to allow my teammates to only cut and paste their code into a different form to receive the data properly. ([Example](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads#L55)). In this way, they don't even have to know that reflection is. However, it wasn't that easy. Problems related to reflections kept popping out. We spent a lot of time and energy to debug them. But at the end of the day I'm glad that we did it and made it -- despite the challenges, we finished 15+ features! We figured out all the already-known bugs' causes, only if we have more time, we believe we can deliver it in a better form.
+  - The backend I wrote consists of [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads), an easy to read and implement Utility class for frontend to read and use. The underlying implements are separated into the [database](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database?ref_type=heads) package, and also uses Firestore's custom object functions using [models](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database/model?ref_type=heads) to swiftly change update the data structure on the go.
 
 <hr>
 
@@ -524,8 +538,7 @@ Privacy
 
 1. Code Smell 1: Data items is not formalized, not use method invocation in back-end modules, not integrated in firebase
    - git commits: [2024-04-15 Add: data items, database management, BTree](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/08525fff05def26958ed3f36ed1391156fe4789a)
-   - files: 
-   - line numbers:
+   - files: [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java)
 
 
 
@@ -533,25 +546,21 @@ Privacy
 
    - git commits: [2024-04-19 Added userData for Login.](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/e1f9ad2decdbe7b6a7ef717bd12d3b4acdaeb47b)
 
-   - files: 
-
-   - line numbers:
+   - files: [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
 
      
 
 3. Code Smell 3: Signup page have problem to create account page
 
    - git commits: [2024-04-20 Added signup layout.](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/89fec6216be93056623ecdffa8028a800ecbf223)
-   - files: 
-   - line numbers:
-
+   - files: [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads) , [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java)
    
 
+   
 4. Code Smell 4: The app will crash after clicking on create account button
 
    - git commits: [2024-04-20 Added onClick to create account button](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/0e98484e2aef746f5179994975cb9e63a1220af2)
-   - files: 
-   - line numbers:
+   - files: [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java)
 
 
 
@@ -563,15 +572,17 @@ Privacy
      
      - git commit: [2024-05-05 Refactored UserDB and PostDB as standalone classes](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/af1385d7dfcd8573bbcd5221ad7c95601caf4448)
      
-     - files: 
-     - line numbers:
+     - files: [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
+     
+       
 2. Correction for Code Smell : Fixed crash and redirect bugs in Create Account page
    - Description of the correction: Fixed crash and redirect bugs in Create Account page, write a new logic to validate input
    - Relevant git commits, files, and line numbers:
      - git commit: [2024-05-05 Debug: fixed signup problem, rewrite asynchronous validate methods](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/commit/0192163c2750bf03df34cd50b4b43445627e28ed)
      
-     - files: 
-     - line numbers:
+     - files: [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java), [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java)
+     
+       
 
 (iii) Detailed Description:
 
@@ -665,9 +676,17 @@ We also solved crashes in account creation, and redirect bugs in the create acco
 - Login Page
 
   - Bug
-    - In some situation, if user deliberately input the wrong password several times, the Toast on the bottom will keep on popping up
+    - If user deliberately input the wrong password several times, the Toast on the bottom will keep on popping up
   - Error
-    - In a very rare situation, After user logout and redirect to Login Page, the app may crash
+    - In a very rare situation, after user logout and redirect to Login Page, the app may crash
+  
+- Create Account Page
+
+  - Bug
+    - If user deliberately input the existing email, the Toast on the bottom will keep on popping up
+    - Cannot scroll down the keyboard, user can only click "next" to enter the "repeat password"
+  - Error
+    - In a very rare situation, After user create account, the page will crash, it is because the home page is no response
 
 
 
@@ -772,4 +791,4 @@ This shall include an agreed procedure for situations including (but not limited
 - if a member fails to meet the initial plan and/or deadlines, we will decrease his contribution, generally this not happens in our team
 - if your group has issues, we will have on-site meeting, to solve issues as soon as possible
 - if a member gets sick, we will assign tasks to him and continue to proceed, generally this not happens in our team
-- 
+- If we have merge conflict, we will send direct message to each other, or have on-site meeting, to solve conflicts as soon as possible
