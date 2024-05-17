@@ -65,7 +65,7 @@ Healthgram is a social media application specifically designed for healthcare wo
 
 # UML Diagram
 
-![Search](./items/media/_examples/Search.png)
+![UML Diagram](./items/UML.png)
 
 # Change Log
 
@@ -293,11 +293,12 @@ Zehua Kong
 
 # TODO
 
-- Come up a TODO list for the whole project and assign specific tasks to team members.
+- More TODO details, see meeting1 - meeting4
 - More detail about back-end implementations
 
 # Notice
-## Third-party usage
+# Third-party usage
+
 - Amazon AWS
   - root user: Han
     - If you need access to AWS please feel free to contact me!
@@ -308,7 +309,7 @@ Zehua Kong
 - Material 3
   - Enrached UI
 
-# Questions
+### Questions - 2024-04-21
 
 - Can we use LiveData? or we need to implement our own Observer base class?
 
