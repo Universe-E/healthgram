@@ -77,32 +77,39 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
-2. **u7752342, Han Bao**  I have 24% contribution, as follows: <br>
+2. **u7752342, Han Bao** I have 24% contribution, as follows:  
+   
 
-  - **Code Contribution in the final App**
+- **Code Contribution in the final App**
+	
     - Feature
-	    - **Firebase Integration**:
+        - **Firebase Integration**:
 		    - \[FB-Auth]: [SignUp Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [SignUpBackend Part 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L753) [SignIn Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [SignIn Backend for Email](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L688), [SignIn Backend for Username](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L712), [SignOut](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L267)
-			- \[FB-Persist-extension]: [All the seter and getter in Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) that for easy references, and their detailed implements: [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads), [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
+    		- \[FB-Persist-extension]: [All the seter and getter in Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) that for easy references, and their detailed implements: [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads), [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
 		- **User Interactivity**
 			These are in the Firebase and happen in real time so that other user on other devices can receive the updates
 			- \[Interaction-Micro]: [Like backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L262)
 			- \[Interact-Follow]: [Follow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L376), [Unfollow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L402)
 			- \[Interact-Noti]: Backend: [Notifications](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads#L183), implementations: [Get 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L72), [Get 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L517), [Set 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Set 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L619), [Set 3](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L654), [Set 4](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374)
-        - **Privacy**
+	    - **Privacy**
 	        Private posts are only visible for the OP's followings, so when user encounters a private post, they can send a request to OP to let they add the user as his following.
 			- \[Privacy-Request]: Backend: [Request](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Accept or Deny](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L588)
-			- \[Privacy-Visibility]: Backend: [Change visibility](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L242), [Make it visible for certain users](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L419)
-
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
-
-  - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
-
+    		- \[Privacy-Visibility]: Backend: [Change visibility](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L242), [Make it visible for certain users](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L419)
+- **Code and App Design**
+  
+    - Singleton
+	    - [UserDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L60), that is for Manage current user's info and status. As only one user and login on one device at a time, the instance that represent the user must be unique and can't coexist.
+	    - [PostRepository](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/PostRepository.java?ref_type=heads), I firstly drafted it as PostsData, to simply hold the post retrieved from the firebase, and my team member Tianci, he found his UI was doing too much work regarding the data operations. Therefore he moved some code that deals with the post data into this class, and renamed it PostRepository.
+          
     
+- **Others**: (only if significant and significantly different from an "average contribution")
+  
+    - We separated the App into two part Frontend (UI) and [Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) (Data), I'm in charge of the backend, specifically, the part that save and retrieve data from the firebase. And my teammate, Zehua, helps me to deal with the data, applying appropriate algorithms to them.
+    - I used reflection to manage the asynchronism, which in the beginning we didn't take into consider as we drafted read and write from local storage. Once we switched to firebase, all our get functions can only return nulls. It was a mess, especially with the UI and interaction basically done, we need a easy way to adjust our app to remote access storages. Therefore I did some search and found reflection is a possible way. I came up with an idea and implemented [MethodUtil](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/MethodUtil.java?ref_type=heads), to allow my teammates to only cut and paste their code into a different form to receive the data properly. ([Example](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads#L55)). In this way, they don't even have to know that reflection is. However, it wasn't that easy. Problems related to reflections kept popping out. We spent a lot of time and energy to debug them. But at the end of the day I'm glade that we did it and made it -- despite the challenges, we finished 15+ features! And we figured out all the already-known bugs' causes, only if we got more time, we believe we can deliver it in a better form.
+    - The backend I wrote consists of [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads), a easy to read and implement Utility class for frontend to read and use. The underlying implements are separated into the [database](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database?ref_type=heads) package, and also uses firestore's custom object functions using [models](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database/model?ref_type=heads) to swiftly change update the data structure on the go.
     
+	
+	
 
 3. **u7670173, Xingchen Zhang**  I have 19% contribution, as follows: <br>
 
@@ -112,11 +119,11 @@ Note that the core criteria of contribution is based on `code contribution` (the
       - Search: [SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java),[SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
       - Notification: [NotificationsFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsFragment.java), [FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java),[NotificationsPagerAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/NotificationsPagerAdapter.java),[FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java),[FriendFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FriendFragmentViewAdapter.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java), [NotificationFactory.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java)
       
-      
+    
   - **Code and App Design** 
     
     - Design Pattern
-      - Singleton Pattern
+      - Singleton Pattern:  [fireAuthCreate](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L753-777), [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116), [notifyNewPostToFollowers](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374-409), [isAuthorMyself](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java?ref_type=heads#L179-183), [SettingActivity.onCreate](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java?ref_type=heads#L51),  [getFollowList](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L495), [isAuthorFollowed](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java?ref_type=heads#L175-178)
     - Data Structures
       - Map
       - ArrayList
@@ -137,7 +144,15 @@ Note that the core criteria of contribution is based on `code contribution` (the
       - Privacy Visiblity: [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
       - Privacy Block: [FriendDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/FriendDetailActivity.java)
       - LoadShowData: [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java ), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java), [Friend.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Friend.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java)
-    - 
+      
+    - Design Pattern
+    
+      - Singleton Pattern: [FriendsData.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/FriendsData.java?ref_type=heads#L21-26)
+        , [PostRepository.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/PostRepository.java?ref_type=heads#L31-36), [HomeFragment](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java?ref_type=heads#L59), [PostRepository](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java?ref_type=heads#L44)
+      - Observer Pattern: [setOnAvatarUUIDChangedListener](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L191-194)
+        [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116), [addNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L85-93), [deleteNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L95-103), [notifyAvatarUUIDChanged()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L197-201)
+    
+      
     
   - **Code and App Design** 
     
@@ -148,7 +163,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
       - ArrayList
     - UI Design
       - Search Bar
-      - Home Page 
+      - Privacy Page
     
     
     
@@ -159,20 +174,22 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - Feature
       - User-Login: [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java), [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java)
       - Interaction-Micro: [PostDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java)
-  - Privacy-Request: [RequestAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/RequestAdapter.java), [RequestActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/RequestActivity.java)
+        - Privacy-Request: [RequestAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/RequestAdapter.java), [RequestActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/RequestActivity.java)
       - Privacy Visiblity: [PostAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/PostAdapter.java), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
       - Privacy Block: [FriendDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/FriendDetailActivity.java)
 - **Code and App Design** 
      - Design Pattern
-       - Singleton Pattern
+       - Singleton Pattern: [getNewPostsByTime](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L148-168), [getPreviousPostsByTime](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L178-198), [SearchPostsActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java?ref_type=heads#L44), [HomeFragment](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java?ref_type=heads#L59), [PostRepository](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java?ref_type=heads#L44)
+       - Observer Pattern: [setOnAvatarUUIDChangedListener](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L191-194)
+         [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116), [addNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L85-93), [deleteNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L95-103), [notifyAvatarUUIDChanged()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L197-201)
      - Data Structures
        - Map
        - ArrayList
      - UI Design
-       - Search Bar
-       - Home Page 
-
-
+       - Privacy Page
+       - Home Page
+       - Setting Page
+       - Avatar Page
 
 
 
@@ -650,7 +667,12 @@ We also solved crashes in account creation, and redirect bugs in the create acco
     - In a very rare situation, if friends list contains too many elements, the friends page may crash
     - In some situation, if search bar contains some characters, the friends page may crash
 
-- If user deliberately input the wrong password several times, then input correct password, it will take seconds to response to the successful password authentication
+- Login Page
+
+  - Bug
+    - In some situation, if user deliberately input the wrong password several times, the Toast on the bottom will keep on popping up
+  - Error
+    - In a very rare situation, After user logout and redirect to Login Page, the app may crash
 
 
 
