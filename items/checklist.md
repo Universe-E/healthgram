@@ -24,7 +24,7 @@ in the templates for both report and meeting minutes before submitting.
 - [x] A summary of individual contributions is well detailed by each member, with links to the key code contributions.
 - [x] A description of your application.
 - [x] Examples/use cases of your application.
-- [ ] A UML diagram of your application (e.g. class diagram).
+- [x] A UML diagram of your application (e.g. class diagram).
 - [x] A description of the application design (with a diagram if necessary).
 - [x] A description of design decisions made in regard to the data structures, tokenizers, parsers, design patterns and any other items you feel are relevant.
 - [x] A description of how your team addressed the surprise feature and any decisions your team had to make in the process.
@@ -35,7 +35,7 @@ in the templates for both report and meeting minutes before submitting.
 
 ## Individual Reflections
 Please note that each member must complete their individual submissions for the following items on Wattle (same due date as the project submission).
-- [ ] All members have submitted their peer- and self-evaluation and individual reflection as instructed on Wattle.
+- [x] All members have submitted their peer- and self-evaluation and individual reflection as instructed on Wattle.
 
 ## Helpful (Optional)
 The following are some optional items that are conducive to your final marks. These are not necessary for your final submission but will assist in achieving a higher overall mark. Feel free to add additional items here for your own team to keep track of!
