@@ -21,8 +21,10 @@ declaration: >-
   I declare that everything I have submitted in this assignment is entirely our
   own work, with the following exceptions:
 
-
-
+code:
+  - comment: Use open-sourced B-Tree and make some modification based on it
+    url: https://gist.github.com/adderllyer/3bfa2d04200386b5664c
+    licence: [**Open-source licenses on GitHub**](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) grant users the freedom to use, modify, and distribute the code
 
 
 

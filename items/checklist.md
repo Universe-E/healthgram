@@ -14,13 +14,13 @@ The following markdown document is a checklist of items you **should** complete 
 - [x] A working standalone **APK** that can be loaded and execute correctly on an AVD (see [demo video](https://gitlab.cecs.anu.edu.au/comp2100/student-resources/comp2100-lab-videos/-/blob/main/gp-resources/GPAPKGenerationGuide.mp4?ref_type=heads)).
 - [ ] **Report**: Completed the markdown report document titled [report.md](report.md).
 - [x] **Statement of Originality**: All members have read and signed the [statement of originality](statement-of-originality.yml). Failure to do so will result in zero marks.
-- [ ] All external code, assets or help received outside the group is documented in the [statement of originality](statement-of-originality.yml) and relevant parts in the code.
+- [x] All external code, assets or help received outside the group is documented in the [statement of originality](statement-of-originality.yml) and relevant parts in the code.
 
 ## Report Checklist
 We advise you to use the provided template when writing your report (it will help you cover everything necessary).
 Please remove all instructions and sample content (example reasonable parts such as headings) 
 in the templates for both report and meeting minutes before submitting.
-- [ ] The UID, name and roles (team structure) of all group members.
+- [x] The UID, name and roles (team structure) of all group members.
 - [ ] A summary of individual contributions is well detailed by each member, with links to the key code contributions.
 - [x] A description of your application.
 - [x] Examples/use cases of your application.

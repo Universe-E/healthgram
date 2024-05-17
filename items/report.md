@@ -95,14 +95,25 @@ Note that the core criteria of contribution is based on `code contribution` (the
 3. **u7670173, Xingchen Zhang**  I have 19% contribution, as follows: <br>
 
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - Feature
+      - UI-Layout: [Fragment_home.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/Fragment_home.java)，[HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [HomeViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeViewModel.java), [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java)
+      - Search: [SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java),[SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
+  - Notification: [NotificationsFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsFragment.java), [FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java),[NotificationsPagerAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/NotificationsPagerAdapter.java),[FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java),[FriendFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FriendFragmentViewAdapter.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java), [NotificationFactory.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/NotificationFactory.java)
+    - Design Pattern
+      - 
     - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
-
+    
   - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
-
+    - Design Pattern
+      - Singleton Pattern
+  - Observer Pattern
+    - Data Structures
+      - Map
+      - ArrayList
+    - UI Design
+      - Search Bar
+      - Home Page
+    
   - **Others**: (only if significant and significantly different from an "average contribution") 
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
@@ -110,10 +121,16 @@ Note that the core criteria of contribution is based on `code contribution` (the
 4. **u7773219, Tianci Li**  I have 19% contribution, as follows: <br>
 
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - Feature
+      - User-Login: [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java), [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java)
+      - DataStream: [HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [PostDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java)
+  - User-Interact: [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java), [SettingActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java)
+      - Privacy Visiblity: [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
+      - Privacy Block: [FriendDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/FriendDetailActivity.java)
+      - LoadShowData: [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java ), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java), [Friend.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Friend.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java)
     - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
     - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
-
+    
   - **Code and App Design** 
     - [What design patterns, data structures, did the involved member propose?]*
     - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
@@ -125,17 +142,24 @@ Note that the core criteria of contribution is based on `code contribution` (the
 5. **u7756137, Yulong Chen**  I have 19% contribution, as follows: <br>
 
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+    - Feature
+      - User-Login: [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java), [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java)
+      - Interaction-Micro: [PostDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java)
+  - Privacy-Request: [RequestAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/RequestAdapter.java), [RequestActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/RequestActivity.java)
+      - Privacy Visiblity: [PostAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/PostAdapter.java), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
+      - Privacy Block: [FriendDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/FriendDetailActivity.java)
 
-  - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+- **Code and App Design** 
+  - [What design patterns, data structures, did the involved member propose?]*
+  - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
 
-  - **Others**: (only if significant and significantly different from an "average contribution") 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+- XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+
+
+
+- **Others**: (only if significant and significantly different from an "average contribution") 
+  - XML: [navigation_bar](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/layout/top_navigation_bar.xml), [change_avatar](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/layout/activity_change_avatar.xml), [pressed_effect](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/drawable/button_pressed_effect.xml), [unpressed_background_black](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/res/drawable/button_unpressed_background_black.xml)
+  - Java: [BaseActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/BaseActivity.java), [ToastUtil](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/Utils/ToastUtil.java), [ChangeAvatarActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/ChangeAvatarActivity.java), [SettingActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java)
 
 
 
@@ -193,9 +217,9 @@ This is an important section of your report and should include all technical dec
   - Choose **Map** and **ArrayList** to store posts and friend lists to allow fast search of friends and posts associated with a particular user. **Map** and **ArrayList** are useful for operations that require sequential access, such as displaying a user's timeline or list of followers. 
   - Choose **B-Tree** for temporary data storage is efficient for searching, since the return type is a list of results. 
 - **Design Patterns used:**
-  - **Singleton Pattern**: Useful to initialize instances (User and Post) from firebase, this design pattern is used in **Database.java**
+  - **Singleton Pattern**: Useful to initialize instances (User and Post) from firebase, avoid multiple initialized instances that may reduce the performance
   - **Observer Pattern**: Maintains a list of its observers, and notifies them of any state changes. In our application, the observers are **followers**, when user publishes their posts (not in privacy), all the other followers can receive **notifications** from this user.
-  - **Adaptor Pattern**: Provides a unified interface to a set of interfaces in a subsystem, in our case these classes with suffix "Util" , are all implemented in package **utils**. They provide methods to solve the incompatible problem, and convert the interface of one class to another interface so that front-end Android UI can work normally without modifying source code.
+  - **State Pattern**: Define a state to use based on user's authentication. They provide methods to solve the security and privacy problem, and connect the interface of one class to another interface so that front-end Android UI can work normally just using state mechanism (**authorize**), without modifying source code.
 
 *Please give clear and concise descriptions for each subsections of this part. It would be better to list all the concrete items for each subsection and give no more than `5` concise, crucial reasons of your design.
 
@@ -235,25 +259,47 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 *[What design patterns did your team utilise? Where and why?]*
 
 1. *Singleton Pattern*
-   * *Objective: used for initialize Parser
-   
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
-   
+   * Objective: used for initialize Parser
+   * Code Locations: 
+      * [UserDB.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L218-223)
+      * [FriendsData.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/FriendsData.java?ref_type=heads#L21-26)
+      * [PostRepository.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/PostRepository.java?ref_type=heads#L31-36)
+      * [Parser.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Parser.java?ref_type=heads#L16-21)
+      * [FileDB.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads#L30-35)
+   * Code usages:
+      *  [UserDB.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L218-223) processed in [fireAuthCreate](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L753-777), [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116), [notifyNewPostToFollowers](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374-409), [isAuthorMyself](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java?ref_type=heads#L179-183), [SettingActivity.onCreate](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java?ref_type=heads#L51)
+      * [FriendsData.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/FriendsData.java?ref_type=heads#L21-26) processed in [getFollowList](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L495), [isAuthorFollowed](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java?ref_type=heads#L175-178)
+      * [PostRepository.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/PostRepository.java?ref_type=heads#L31-36) processed in [getNewPostsByTime](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L148-168), [getPreviousPostsByTime](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L178-198), [SearchPostsActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java?ref_type=heads#L44), [HomeFragment](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java?ref_type=heads#L59), [PostRepository](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java?ref_type=heads#L44)
+      * [Parser.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Parser.java?ref_type=heads#L16-21) processed in [performSearch](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java?ref_type=heads#L79-142)
+      * [FileDB.getInstance()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads#L30-35) processed in [getImages](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads#L73-101), [newSaveImage](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads#L110-139)
    * *Reasons:*
-     
-      *  Ensure that only one instance of the Parser class is created, preventing multiple connections to Firebase and reducing redundant performance consumption.
+     *  Ensure that only one instance of the Parser class is created, preventing multiple connections to Firebase and reducing redundant performance consumption.
       * Singleton Pattern helps maintain data consistency by ensuring all parts of the application use the same instance of the Database class.
       
    
 2. *Observer Pattern*
-   * *Objective: used for initialize User and Post.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * Objective: used for observe the change of status, and notify corresponding users by using notify methods
+   * Code Locations: 
+     * [UserData.notifyObserver()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L34-39)
+     * [PostDB.notifyNewPostToFollowers()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374-409)
+     * [notifyAvatarUUIDChanged()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L197-201)
+   * Code Usages:
+     * [UserData.notifyObserver()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L34-39) processed in [addNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L85-93), [deleteNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L95-103)
+     * [PostDB.notifyNewPostToFollowers()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374-409) processed in [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116)
+     * [notifyAvatarUUIDChanged()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L197-201) processed in [setOnAvatarUUIDChangedListener](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L191-194)
    * *Reasons:*
      * Observer pattern provides a solution for handling notifications of users.
      * Observer pattern allows publishers and observers interact normally, making app more flexible and maintainable.
 3. *State Pattern*
    * *Objective: used for login and check the state of user.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * Code Locations: 
+     * [AuthUtil](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/AuthUtil.java?ref_type=heads)
+     * [Database.signIn()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads#L60-62)
+   * Code Usages:
+     * [AuthUtil](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/AuthUtil.java?ref_type=heads) processed in [SignUpActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads), [UserDB.signIn()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L250-258)
+     * [Database.signIn()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads#L60-62) processed in [UserDB.signIn()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L250-258), [signInWithEmail](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L688-702), [signInWithUsername](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L712-742)
+     * [PostDB.notifyNewPostToFollowers()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374-409) processed in [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116)
+     * [notifyAvatarUUIDChanged()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L197-201) processed in [setOnAvatarUUIDChangedListener](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L191-194)
    * *Reasons:*
      * State Pattern allows the application to alter its login status based on user's authentication, this will simplify the manage and control access to different features and resources.
      * The State Pattern makes code more readable and maintainable, and eliminates the need for complex conditional statements to handle different authentication.
@@ -371,7 +417,7 @@ Feature Category: UI Design And Testing<br>
 
 Greater Data Usage, Handling and Sophistication
 
-3. [Data-Formats] read data from json and xml formats
+3. [Data-Formats] read data from json and xml formats, as well as firebase
    * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
    * Link to the Firebase repo: ...
 
@@ -498,9 +544,9 @@ In the period developing code framework before May 1st, 2024, the codebase suffe
 
 From a user-facing perspective, the signup flow was problematic, with the create account page not functioning properly. Attempting to create a new account would lead to the application crashing.
 
-The correction includes significant refactoring efforts were undertaken after May 1st, 2024. The data layer was improved by rewriting the UserDB and PostDB components as self-contained classes. Java's reflection capabilities are now leveraged to invoke methods, promoting loose coupling and enhancing maintainability.
+The correction includes significant refactoring efforts were undertaken after May 1st, 2024. The data layer was improved by rewriting the UserDB and PostDB components as self-contained classes. Java's reflection capabilities are now available.
 
-The account creation process was also overhauled. The crashes and redirect bugs plaguing the create account page were resolved. The input validation logic was redesigned to utilize asynchronous validation methods, providing a smoother and more robust user experience.
+We also solved crashes in account creation, and redirect bugs in the create account page. The input validation logic was redesigned to utilize asynchronous validation methods.
 
 
 
@@ -509,24 +555,79 @@ The account creation process was also overhauled. The crashes and redirect bugs 
 *[Where are the known errors and bugs? What consequences might they lead to?]*
 *List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
 
-*Here is an example:*
 
-- *Bug 1:*
-  - Loading home pages costs several seconds
-  - Toasts keep popping up when clicking previous page and next page multiple times
 
-- *Bug 2:* 
-  - After clicking share button, user cannot share to other users
-  - Click Setting - Request will crash
-  - Cannot use change avatar, nickname, phone number, password, etc
-
-- *Bug 3:* 
-  - Cannot select texts in post and head text bar
-  - All post images are randomly selected from resources
+- Home Page
+  - Bug
   
-- *Bug 4:* 
-  - In a very rare situation, after logout, if user deliberately input the wrong password, the app may crash
-  - If user deliberately input the wrong password several times, then input correct password, it will take seconds to response to the successful password authentication
+    - Loading home pages may costs several seconds, if page contains pages with large pictures
+    - Toasts keep popping up when clicking previous page and next page multiple times
+  
+  - Error
+  
+    - In a very rare situation, when user return to home page from other page, the page may crash because of the loading overflow
+  
+    
+  
+- Send Post Page
+  
+  - Bug
+  
+    - In the "New Post" page, the Line "Who Can See This Post" is incomplete, it will be our future feature after the assessment.
+    - After sending post, it may take times (several seconds) to load all the new posts, if the home page contains too many pictures
+    - In some cases, Post cannot save the authorid if user send their **first** post
+  
+  - Error
+  
+    - In some situation, some picture from local storage cannot be updated, or may trigger crash, because we set the max size of picture to 5 MB
+    - In a very rare situation, the 
+  
+    
+  
+- Settings Page
+  
+  - Bug
+  
+    - The button "Change nick name", "Change email", and "Change password" are incomplete, they will be our future features after the assessment.
+    - In the "Settings-Friend Request" page, After clicking "Accept"or "Reject", the request is not removed and still in this page 
+  
+  - Error
+  
+    - In a very rare situation, after user clicking "Notifications-Change Avatar" or "Notifications-Friend Request", the page may crash, the possible reason may be the new user's avatar and friend request list is not initialized. 
+    - If a user have published too many posts, it will take time to load the "Settings-Post Visibility" Page, and may trigger the shutdown of firebase, because the daily read times in firebase is limited.
+  
+    
+  
+- Notifications Page
+  
+  - Bug
+    - Top bar "Follow Updates" is incomplete, it should represent the new follow notifications, it will be our new feature
+    - After handling Friend requests in "Settings-Friend Requests" page, the notification in top bar "Notifications-Friend Requests" page is not removed
+    - No response when user click the corresponding "Friend Requests"
+  - Error
+    - In a very rare situation, after other user send follow requests to you, the page may crash
+    - 
+  
+- Firebase
+
+  - Bug
+    - Firebase cannot response quickly since we set the database located in United States, far away from Australia
+    - The daily read times in firebase is limited, firebase may shutdown 
+  - Error
+    - In a test development, we use batch() to add multiple posts into firebase, the fire
+
+- Friends Page
+
+  - Bug
+    - The top search bar will cover the whole page
+    - After searching the result, user cannot return to the previous friend list page, unless user click other pages, and click "Friends" again
+    - The page will redirect to "Friend" page **Only** when click the avatar in the friend list, no response if click title or name
+    - "Direct Message" in "Friend" page is incomplete, it will be our future feature after assessment
+  - Error
+    - In a very rare situation, if friends list contains too many elements, the friends page may crash
+    - In some situation, if search bar contains some characters, the friends page may crash
+
+- If user deliberately input the wrong password several times, then input correct password, it will take seconds to response to the successful password authentication
 
 
 
@@ -628,6 +729,7 @@ The account creation process was also overhauled. The crashes and redirect bugs 
 (If you choose to make this an external document, link to it here)]*
 
 This shall include an agreed procedure for situations including (but not limited to):
-- e.g., if a member fails to meet the initial plan and/or deadlines
-- e.g., if your group has issues, how will your group reach consensus or solve the problem?
-- e.g., if a member gets sick, what is the solution? Alternatively, what is your plan to mitigate the impact of unforeseen incidents for this 6-to-8-week project? 
+- if a member fails to meet the initial plan and/or deadlines, we will decrease his contribution, generally this not happens in our team
+- if your group has issues, we will have on-site meeting, to solve issues as soon as possible
+- if a member gets sick, we will assign tasks to him and continue to proceed, generally this not happens in our team
+- 
