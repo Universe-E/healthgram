@@ -37,13 +37,13 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 ## Team Members and Roles
 The key area(s) of responsibilities for each member
 
-| UID      |      Name      |                          Role |
-| :------- | :------------: | ----------------------------: |
-| u7693498 |   Zehua Kong   |          Back-end Programming |
-| u7752342 |    Han Bao     |          Back-end Programming |
-| u7670173 | Xingchen Zhang |    Android UI Design and Test |
-| u7773219 |   Tianci Li    | Front-end Page Implementation |
-| u7756137 |  Yulong Chen   | Front-end Page Implementation |
+| UID      |      Name      |                                              Role |
+| :------- | :------------: | ------------------------------------------------: |
+| u7693498 |   Zehua Kong   |         Data Profile Programming & Test and debug |
+| u7752342 |    Han Bao     |                              Back-end Programming |
+| u7670173 | Xingchen Zhang |                                 Android UI Design |
+| u7773219 |   Tianci Li    |                     Front-end Page Implementation |
+| u7756137 |  Yulong Chen   | Android UI Design & Front-end Page Implementation |
 
 
 ## Summary of Individual Contributions
@@ -109,13 +109,14 @@ Note that the core criteria of contribution is based on `code contribution` (the
 	      - \[Privacy-Request]: Backend: [Request](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Accept or Deny](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L588)
 	      - \[Privacy-Visibility]: Backend: [Change visibility](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L242), [Make it visible for certain users](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L419)
 - **Code and App Design**
+	
 	- Singleton
 		- [UserDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L60), that is for Manage current user's info and status. As only one user and login on one device at a time, the instance that represents the user must be unique and can't coexist.
 		- [PostRepository](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/PostRepository.java?ref_type=heads), I firstly drafted it as PostsData, to simply hold the post retrieved from the firebase, and my team member Tianci, he found his UI was doing too much work regarding the data operations. Therefore he moved some code that deals with the post data into this class and renamed it PostRepository.
 	
 	
 
-3. **u7670173, Xingchen Zhang**  I have 19% contribution, as follows: <br>
+3. **u7670173, Xingchen Zhang**  I have 19% contribution, as follows: 
 
   - **Code Contribution in the final App**
     - Feature
@@ -138,7 +139,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
     
 
-4. **u7773219, Tianci Li**  I have 19% contribution, as follows: <br>
+4. **u7773219, Tianci Li**  I have 19% contribution, as follows: 
 
   - **Code Contribution in the final App**
     - Feature
@@ -156,6 +157,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
       - Observer Pattern: [setOnAvatarUUIDChangedListener](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L191-194)
         [savePost](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L71-116), [addNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L85-93), [deleteNote](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/UserData.java?ref_type=heads#L95-103), [notifyAvatarUUIDChanged()](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L197-201)
     
+    - Draw UML Diagram
+      
       
     
   - **Code and App Design** 
@@ -172,7 +175,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
     
     
 
-5. **u7756137, Yulong Chen**  I have 19% contribution, as follows: <br>
+5. **u7756137, Yulong Chen**  I have 19% contribution, as follows: 
 
   - **Code Contribution in the final App**
     - Feature
@@ -194,6 +197,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
        - Home Page
        - Setting Page
        - Avatar Page
+     - Prepare Powerpoint slides
 
 
 
@@ -201,35 +205,35 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *[What is your application, what does it do? Include photos or diagrams if necessary]*
 
-*Healthgram is a social media application specifically targeting healthcare workers and patients, it provides latest medicare posts for all users, give information and professional advice for special groups, such as medical treatments, recent progress on bio-sciences, and latest news on healthcare policies. You can also use this application to post your ideas on healthcare issues.*
+**Healthgram** is a social media application specifically targeting healthcare workers and patients, it provides latest medicare posts for all users, give information and professional advice for special groups, such as medical treatments, recent progress on bio-sciences, and latest news on healthcare policies. You can also use this application to post your ideas on healthcare issues.
 
 ### Application Use Cases and or Examples
 
 *[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
 
-A patient names Alice wants to know something about his illnesses, and see a public post by physician Bob on the Healthgram app
+A patient names Alice wants to know something about his illnesses, and see a public post by physician Bob on the **Healthgram** app
 
 1. Alice found that the medicare advice from Bob is useful
-2. The post is edited by Bob with the content is mainly about adjust your daily diet to keep away from diseases
-3. Alice followed doctor Bob, each time when Bob sends new posts, Alice will receive new notification from him
-4. Alice want to inquiry her conditions in privacy with Bob, she set some of her posts private, so that no other people can see these posts
-5. After Alice's illnesses were cured, she unfollowed doctor Bob, this operation will let her not to receive notification from doctor Bob
+2. The **post** is edited by Bob with the content is mainly about adjust your daily diet to keep away from diseases
+3. Alice **followed** doctor Bob, each time when Bob **sends new posts**, Alice will receive new notification from him
+4. Alice want to inquiry her conditions in privacy with Bob, she set some of her **posts** **private**, so that no other people can see these posts
+5. After Alice's illnesses were cured, she **unfollowed** doctor Bob, this operation will let her not to receive **notification** from doctor Bob
 
 Here is a map navigation application example
 
 *Targets Users: Patients*
 
-* Patients can use it to search for useful posts by keywords
-* Patients can add their own posts to share recent progress on their conditions
-* Patients can learn the knowledge from public posts
-* Patients can set visibility of posts to private to protect their privacy 
-* Patients can follow other patients, or doctors to trace their status
+* Patients can use it to **search** for useful posts **by keywords**
+* Patients can **add their own posts** to share recent progress on their conditions
+* Patients can learn the knowledge from **public posts**
+* Patients can **set visibility** of posts to private to protect their privacy 
+* Patients can **follow** other patients, or doctors to trace their status
 
 *Target Users: Doctors*
 
-* Doctors can publish professional suggestions
-* Doctors can follow other doctors and patients for better medical treatment inquiry
-* Doctors can set privacy status due to privacy protection
+* Doctors can **publish** professional **suggestions**
+* Doctors can **follow** other doctors and patients for better medical treatment inquiry
+* Doctors can **set privacy status** due to privacy protection
 
 *List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
 
@@ -263,26 +267,26 @@ This is an important section of your report and should include all technical dec
 
 *[What data structures did your team utilise? Where and why?]*
 
-Here is a partial (short) example for the subsection `Data Structures`:*
+Here is a partial (short) example for the subsection `Data Structures`:
 
 *I used the following data structures in my project:*
 
 1. ArrayList
-   * *Objective: used for storing users and posts for **Data-Profile** feature.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * Objective: used for storing users and posts for **LoadShowData**, **Data-Profile**, **Search-Filter**, feature.
+   * Code Locations: used in [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java ), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java), [Friend.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Friend.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java),[SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java), [SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java),  [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) , [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads), [HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
    * *Reasons:*
       * Provides dynamic resizing, allowing easy addition and removal of elements as needed for managing user posts
       * ArrayList offers random access elements, enabling efficient search and display specific posts
       * For the list of users, we got a list as the receiving parameter from firebase, and uses in searching matched users or posts when handling authentication or get id methods
 2. Map
-   * *Objective: used for storing followers and posts for **Interact-Noti** feature.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * Objective: used for storing followers and posts for **Interact-Micro**, **Interact-Follow**, **Interact-Noti**, **Privacy-Visibility** feature.
+   * Code Locations: used in [Post detail](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java), [PostDB link to back-end](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [Follow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads), [Unfollow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads), [FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java)[FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java), [RequestAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/RequestAdapter.java), [RequestActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/RequestActivity.java), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
    * * Map provides key-value pairs, where user data needs to be organized and accessed based on a specific key
      * In Hashmap, the time complexity of accessing specific key is O(1), for followers and posts,  we receive the map id (String) first, and search the corresponding follower and post in a high efficiency
      * Keys in map are unique, this feature prevents duplicate data when storing followers and posts by unique id
 3. B-Tree
-   * *Objective: used for storing temperary users and posts for **Search-Filter** feature.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+   * Objective: used for storing temperary users and posts for **Search-Filter**, **DataStream** feature.
+   * *Code Locations: defined in: [BTree.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/BTree.java?ref_type=heads), used in [SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java), [SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
    * * B-Tree provides efficient search and retrieval operations, we search results in database and stored temporarily in B-Tree structure
      * B-Tree maintains a balanced tree structure, for large data sets of users and posts, the balanced structure reduces the risk of performance degradation
      * B-Tree allows for range queries and partial key searches, making search filter working in a high efficiency
@@ -391,7 +395,7 @@ This grammar is designed to be simple and flexible to handle username formats, t
 
 *[Where do you use tokenisers and parsers? How are they built? What are the advantages of the designs?]*
 
-Tokenizer:
+**Tokenizer**:
 
 1. The Tokenizer class is used to break down the input text into a sequence of tokens.
 2. It recognizes five types of tokens: AT, NAME, TITLE, PUBLIC, and EOF.
@@ -400,7 +404,7 @@ Tokenizer:
    - Efficient: The tokenizer reads the input text only once, minimized the cost of time.
    - Understandable: The grammar is easy to understand and implement.
 
-Parser:
+**Parser**:
 
 1. The Parser class uses Tokenizer class to analyze the structure of the input text according to the defined grammars.
 2. Each method for different parsing tasks, such as handling name, title, and public status.
@@ -428,103 +432,116 @@ Parser:
   - The backend I wrote consists of [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads), an easy to read and implement Utility class for frontend to read and use. The underlying implements are separated into the [database](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database?ref_type=heads) package, and also uses Firestore's custom object functions using [models](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/tree/main/gp/app/src/main/java/com/example/gp/data/database/model?ref_type=heads) to swiftly change update the data structure on the go.
 
 <hr>
-
 ## Implemented Features
+
 *[What features have you implemented? where, how, and why?]* <br>
 *List all features you have completed in their separate categories with their featureId. THe features must be one of the basic/custom features, or an approved feature from Voice Four Feature.*
 
 ### Basic Features
-1. [LogIn]. User can login with their username and password (if account created)
-   * Code: [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
-   * Description of feature: ... <br>
-   * Description of your implementation: ... <br>
-2. [DataFiles]. Store user data, all info from users
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
-3. [LoadShowData]. Load and display data instances from firebase
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
-4. [DataStream]. Create Data by using methods in Database.java, and refresh data in firebase with the interaction of users
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
-5. [Search]. Search posts and users from app
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
+
+1. \[LogIn]. User can login with their username and password (if account created)
+
+   * Code: Frontend: [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java?ref_type=heads), [SignUpAcitivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads), Backend: [`signIn`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L250), [`signOut`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L267), [`checkSignedIn`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L290), [`signUp`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [`signInWithUsername`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L712), [`signInWithEmail`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L688), [`fireAuthCreate`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L753)
+
+   * Description and why: Using Firebase to let user to sign up with user name and email, and password. And allows user to sign in with either email or user name with password. Using Firebase is to ensure the best user experiences and also data security.
+
+     
+
+2. \[DataFiles]. use firebase to store user data, all info from users
+
+   * firebase: [GP24-S1](https://console.firebase.google.com/u/1/project/gp24-s1/overview)
+
+   * Code: [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java?ref_type=heads), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java?ref_type=heads), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java?ref_type=heads)
+
+   * Description: Store user, post, notification as objects in the firebase
+
+     
+
+3. \[LoadShowData]. Load and display data instances from firebase
+
+   * Code: [User.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/User.java ), [Post.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Post.java), [Friend.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Friend.java), [Notification.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/Notification.java), [RequestAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/RequestAdapter.java), [PostAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/PostAdapter.java)
+
+   * Description: After loading data, use adapter to provide interface to front-end modules, and show the data info on the screen
+
+     
+
+4. \[DataStream]. Create Data by using methods in Database.java, and refresh data in firebase with the interaction of users
+
+   * Code: [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L60), [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads), [BTree.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/BTree.java?ref_type=heads), [Fragment_home.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/Fragment_home.java)，[HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [HomeViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeViewModel.java)
+
+   * Description: Create data instances and feed to front-end modules so that Android users can interact
+
+     
+
+5. \[Search]. Search posts and users from app
+
+   - Code: [SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java),[SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java), [SearchPostsActivity](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java?ref_type=heads#L44), [performSearch](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java?ref_type=heads#L79-142)
+
+   - Description and why: Search can search through the titles and give any posts that their title contain the keyword. Implement search can enhance user experiences to allow them get what they want from the ocean of information.
+
+     
 
 ### Custom Features
-Feature Category: Search-related features<br>
-1. [Search-Filter] search with keywords, return a sorted and filtered list of results
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
 
+#### Search
 
+6. \[Search-Filter] search with keywords, return a sorted and filtered list of results
 
-Feature Category: UI Design And Testing<br>
+   * Code: [SearchActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchActivity.java), [SearchPostsActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SearchPostsActivity.java)
 
-2. [UI-Layout] suitable layout adjustments in the UI components when size of screen changes
+   * Description: Search in the database, then use tokenizer or default token (title) to filter search results, return at most 50 result posts
 
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
+     
 
-   
+#### UI Design And Testing
 
-Greater Data Usage, Handling and Sophistication
+7. \[UI-Layout] suitable layout adjustments in the UI components when size of screen changes
 
-3. [Data-Formats] read data from json and xml formats, as well as firebase
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
+   * Code: [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java), [SignUpActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java), [Fragment_home.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/Fragment_home.java)，[HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [HomeViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeViewModel.java), [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java), [SettingActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/SettingActivity.java), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java), [RequestActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/RequestActivity.java), [FriendDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/FriendDetailActivity.java)
 
-4. [Data-Profile] Profile page to present users with avatar as media file (avatar is jpg format)
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
+   * Description: UI provided to show all pages, we design the components by using existing Android UI tools
 
+     
 
+#### Greater Data Usage, Handling and Sophistication
 
-Feature Category: Firebase Integration <br>
-5. [FB-Auth] Implement authentication by firebase
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
+8. \[Data-Formats] Read data from json and xml formats, as well as firebase
+   * Code: [UserParser.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/UserParser.java?ref_type=heads), [MethodUtil.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/MethodUtil.java?ref_type=heads), [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L60), [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads), [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
+   * Description: [UserParser.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Items/UserParser.java?ref_type=heads) is used to load data from local json and xml format files, [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads), [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads) are used to provide firebase data load methods in our util class [MethodUtil.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Utils/MethodUtil.java?ref_type=heads)
 
-7. [FB-Persist] Firebase to persist all data used in app
+9. \[Data-Profile]: Create a Profile Page for any Entities
+   - Code: [Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) , [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads), [HomeFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/home/HomeFragment.java), [FriendFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/Friend/FriendFragment.java), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
+   - Description: Show data profiles, including all entities and corresponding instances: User, Post, Friends, etc.
 
-   * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-   * Link to the Firebase repo: ...
+#### Firebase Integration 
 
-   
+10. \[FB-Auth] Implement authentication by firebase
+    * Code: Frontend: [LoginActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/LoginActivity.java?ref_type=heads), [SignUpAcitivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/SignUpActivity.java?ref_type=heads), Backend: [`signIn`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L250), [`signOut`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L267), [`checkSignedIn`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L290), [`signUp`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L344), [`signInWithUsername`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L712), [`signInWithEmail`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L688), [`fireAuthCreate`](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L753)
+    * Description and why: Using Firebase to let user to sign up with user name and email, and password. And allows user to sign in with either email or user name with password. Using Firebase is to ensure the best user experiences and also data security.
+11. \[FB-Persist-extent] Firebase to persist all data used in app and show update in real-time to other users
+    - Code: [All the setter and getter in Database.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads) that for easy references, and their detailed implements: [UserDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads), [PostDB.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads), [FileDB](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/FileDB.java?ref_type=heads)
+    - Description and why: All the information that users generated is stored in the Firebase, and it is in real-time. To give user seamless experience during their use.
 
-Feature Category: User Interactivity
+#### User Interactivity
 
-7. [Interact-Follow] Firebase to persist all data used in app
+12. \[Interact-Micro]
+    - Code: [PostDetailActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/interaction/PostDetailActivity.java), [Like backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L262)
+    - Description and why: Users can like others and their own posts, to show support to author.
+13. \[Interact-Follow]
+    - Code: [Follow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L376), [Unfollow Backend](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L402), [FollowerFragmentViewAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/FollowerFragmentViewAdapter.java)
+    - Description and why: Users can follow who they are interested in, so they can get notified once their followings post new posts. And the one user follows can see their private post.
+14. \[Interact-Noti]
+    - Code: [Notifications](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/Database.java?ref_type=heads#L183), implementations: [Get 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L72), [Get 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L517), [Set 1](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Set 2](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L619), [Set 3](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L654), [Set 4](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L374), [NotificationsFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsFragment.java), [FollowerNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FollowerNotificationFragment.java),[FriendNotificationFragment.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/FriendNotificationFragment.java),[NotificationsViewModel.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/home/ui/notifications/NotificationsViewModel.java),[NotificationsPagerAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/Adapter/NotificationsPagerAdapter.java)
+    - Description and why: User can get notification like new followers, new post from their followings. This feature can ensure users won't miss anything they care about.
 
-   - Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
+#### Privacy
 
-   - Link to the Firebase repo: ...
-
-8. [Interact-Noti] Send notifications to all followers when user publish a new post
-
-   - Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-
-   - Link to the Firebase repo: ...
-
-
-
-Feature Category: User Interactivity
-
-9. [Privacy-Request] Send requests to view certain contents, in our case, non-public posts
-
-   - Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-
-   - Link to the Firebase repo: ...
-
-
-
-Privacy
-
-10. [Privacy-Visibility] We give privacy states: public, restricted, private
-
-    - Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-
-    - Link to the Firebase repo: ...
+14. \[Privacy-Request] Send requests to view certain contents, in our case, non-public posts
+    - Code: [Request](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L434), [Accept or Deny](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/UserDB.java?ref_type=heads#L588), [RequestAdapter.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/Adapter/RequestAdapter.java), [RequestActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/dev/gp/app/src/main/java/com/example/gp/setting/RequestActivity.java)
+    - Description and why: User can send friend request to other users, so that they can see their private posts. This feature ensures more privacy in the use of the app, for example, if one user have some health concern but don't want everyone to know about it, they can follow some doctors that have expertise in the field. So the doctors can see their posts and give advices.
+15. \[Privacy-Visibility] We give privacy states: public, restricted, private
+    - Code: [Change visibility](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L242), [Make it visible for certain users](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/data/database/PostDB.java?ref_type=heads#L419), [PostVisibilityActivity.java](https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1/-/blob/main/gp/app/src/main/java/com/example/gp/setting/PostVisibilityActivity.java)
+    - Description and why: User can set their posts private or public, if they don't want everyone to see some of his posts, he can make it private to his followings. This ensures user to have more control on their privacy.
 
 
 
@@ -695,8 +712,6 @@ We also solved crashes in account creation, and redirect bugs in the create acco
 
 
  <hr>
-
-
 ## Testing Summary
 
 *[What features have you tested? What is your testing coverage?]*
@@ -766,9 +781,7 @@ We also solved crashes in account creation, and redirect bugs in the create acco
      - Tests for the parseTitle() method with different inputs
      - Tests for the parsePublic() method with different inputs
 
-...
 
-<br> <hr>
 
 
 ## Team Management
@@ -776,14 +789,15 @@ We also solved crashes in account creation, and redirect bugs in the create acco
 ### Meetings Records
 * Link to the minutes of your meetings like above. There must be at least 4 team meetings.
   (each commited within 2 days after the meeting)
-* Your meetings should also have a reasonable date spanning across Week 6 to 11.*
+* Your meetings should also have a reasonable date spanning across Week 6 to 11.
 
 
 - *[Team Meeting 1](meeting1.md)*
 - *[Team Meeting 2](meeting2.md)*
 - *[Team Meeting 3](meeting3.md)*
 - *[Team Meeting 4](meeting4.md)*
-- ... (Add any descriptions if needed) ...
+
+  
 
 <hr>
 
