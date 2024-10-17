@@ -45,7 +45,7 @@ Healthgram is a social media application specifically designed for healthcare wo
 - Clone the repository:
 
 - ```
-  git clone https://gitlab.cecs.anu.edu.au/u7693498/gp-24s1
+  git clone https://github.com/Universe-E/healthgram.git
   ```
 
 - Open the project in Android Studio.
@@ -319,11 +319,11 @@ Zehua Kong
 
 # Team Members
 
-- Han Bao (u7752342)
-- Tianci Li (u7773219)
-- Xingchen Zhang (u7670173)
-- Yulong Chen (u7756137)
-- Zehua Kong (u7693498)
+- Han Bao
+- Tianci Li
+- Xingchen Zhang
+- Yulong Chen
+- Zehua Kong
 
 
 
